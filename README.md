@@ -10,7 +10,20 @@ of this repository (currently Python 3.8.5).
     conda create --name nlp-sandbox-evaluation python=3.8.5
     conda activate nlp-sandbox-evaluation
 
-Install the dependencies
+Install the project in *develop* mode. This command must be executed each time
+the content of *setup.py* is updated.
 
-    pip install -r requirements.txt
+    python setup.py develop --user
 
+Run the program
+
+    $ nlp-cli
+    Usage: nlp-cli [OPTIONS] COMMAND [ARGS]...
+
+    NLP Sandbox client
+
+    Options:
+    --help  Show this message and exit.
+
+    Commands:
+    evaluate  Evaluate the performance of a local prediction file
