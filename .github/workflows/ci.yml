@@ -17,6 +17,7 @@ jobs:
     - name: Lint Dockerfiles
       uses: docker://hadolint/hadolint:latest
       with:
+        entrypoint: hadolint
         args: Dockerfile
     - name: Lint with Flake8
       uses: docker://alpine/flake8:latest
