@@ -6,6 +6,29 @@
 
 Python client to interact with the NLP Sandbox
 
+## Usage
+
+### Create configuration
+
+1. Create the file that contains the future environment variables
+
+        cp .env.sample .env
+
+2. Update the configuration values in *.env*. Set the values of `SYNAPSE_USERNAME`
+   and `SYNAPSE_APIKEY` with the credentials of your Synapse account.
+
+3. Export the variables defined in .env to environment variables
+
+        export $(grep -v '^#' .env | xargs -d '\n')
+
+### Run the client using Docker
+
+    docker run --rm nlpsandbox/cli
+
+### Evaluate the performance of a local prediction file
+
+    docker run --rm nlpsandbox/cli evaluate
+
 ## Development
 
 Create a new conda environment using the Python version listed in the
