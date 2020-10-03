@@ -22,7 +22,8 @@ setuptools.setup(
     python_requires='>=3.6.*',
     install_requires=[
         'click>=7.1.2',
-        'jsonschema>=3.2.0'
+        'jsonschema>=3.2.0',
+        'synapseclient>=2.2.0'
     ],
 
     # metadata to display on PyPI
