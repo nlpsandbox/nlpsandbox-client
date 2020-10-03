@@ -1,6 +1,7 @@
 # NLP Sandbox Client
 
 [![GitHub Stars](https://img.shields.io/github/stars/data2health/nlp-sandbox-client.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-client/stargazers)
+[![Docker Pulls](https://img.shields.io/docker/pulls/nlpsandbox/cli.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/r/nlpsandbox/cli)
 [![GitHub CI](https://img.shields.io/github/workflow/status/data2health/nlp-sandbox-client/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-client)
 [![GitHub License](https://img.shields.io/github/license/data2health/nlp-sandbox-client.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-client/blob/main/LICENSE)
 
