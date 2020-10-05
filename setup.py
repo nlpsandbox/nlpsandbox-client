@@ -4,25 +4,25 @@ import setuptools
 
 setuptools.setup(
     # basic
-    name='nlp-sandbox-evaluation',
+    name='nlp-sandbox-client',
     version='0.1.0',
     # packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     # py_modules=['hello'],
     # scripts=['bin/nlp-evaluate'],
 
     packages=[
-        'cli',
-        'evaluate'
+        'nlpsandboxclient'
     ],
     entry_points={
-        'console_scripts': ['nlp-cli=cli.__main__:cli']
+        'console_scripts': ['nlp-cli=nlpsandboxclient.__main__:cli']
     },
 
     # requirements
     python_requires='>=3.6.*',
     install_requires=[
         'click>=7.1.2',
-        'jsonschema>=3.2.0'
+        'jsonschema>=3.2.0',
+        'synapseclient>=2.2.0'
     ],
 
     # metadata to display on PyPI
@@ -34,8 +34,8 @@ setuptools.setup(
     author_email='thomas.schaffter@sagebionetworks.org',
     license='Apache',
     project_urls={
-        "Source Code": "https://github.com/data2health/nlp-sandbox-evaluation",
-        "Bug Tracker": "https://github.com/data2health/nlp-sandbox-evaluation/issues",
+        "Source Code": "https://github.com/data2health/nlp-sandbox-client",
+        "Bug Tracker": "https://github.com/data2health/nlp-sandbox-client/issues",
     },
     classifiers=[
         'Development Status :: 1 - Planning',

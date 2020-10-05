@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 import click
-from evaluate import evaluation
+from nlpsandboxclient.evaluation import evaluation
+from nlpsandboxclient.user import user as user_
 
 
 @click.group()
@@ -18,6 +19,13 @@ def evaluate(pred_filepath, gold_filepath):
     """Evaluate the performance of a local prediction file"""
     e = evaluation.Evaluation()
     e.run()
+
+
+@cli.command()
+def user():
+    """Get and set user information"""
+    u = user_.User()
+    u.run()
 
 
 if __name__ == "__main__":

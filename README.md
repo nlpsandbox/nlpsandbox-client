@@ -41,7 +41,8 @@ Create a new conda environment using the Python version listed in the
 Install the project in *develop* mode. This command must be executed each time
 the content of *setup.py* is updated.
 
-    python setup.py develop --user
+<!-- currently not working: python setup.py develop --user -->
+    pip install -e .
 
 Run the program
 
