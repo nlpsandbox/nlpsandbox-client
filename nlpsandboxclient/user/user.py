@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from synapseclient import client
+# from synapseclient import client
 
 
 class User:
