@@ -1,0 +1,20 @@
+{
+    "date_annotations": [
+        {
+            "noteId": 0,
+            "start": 20,
+            "length": 10,
+            "text": "11/21/2019",
+            "dateFormat": "MM/DD/YYYY"
+        },
+        {
+            "noteId": 1,
+            "start": 45,
+            "length": 10,
+            "text": "12/25/2020",
+            "dateFormat": "MM/DD/YYYY"
+        }
+    ],
+    "person_name_annotations": [],
+    "physical_location_annotations": []
+}
