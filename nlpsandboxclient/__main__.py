@@ -19,7 +19,16 @@ from nlpsandboxclient.cli import evaluation
 #     main()
 
 
-cli = click.CommandCollection(sources=[community.cli_tools, evaluation.cli_evaluation])
+# cli = click.CommandCollection(sources=[community.cli_tools, evaluation.cli_evaluation])
+
+@click.group()
+def main():
+    """Demo"""
+
+def cli():
+    main.add_command(community.cli_tools)
+    main.add_command(evaluation.cli_evaluation)
+    main()
 
 if __name__ == '__main__':
     cli()

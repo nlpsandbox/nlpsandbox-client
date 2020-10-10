@@ -1,7 +1,7 @@
 import click
 
 # Command Group
-@click.group()
+@click.group(name='evaluation')
 def cli_evaluation():
     """Tool related commands"""
     pass
