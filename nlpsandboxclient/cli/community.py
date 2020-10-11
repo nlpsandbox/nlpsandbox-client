@@ -1,20 +1,21 @@
+#!/usr/bin/env python3
+
 import click
+import synapseclient
+
 
 # Command Group
-@click.group(name='tools')
-def cli_tools():
-    """Tool related commands"""
-    pass
+@click.group(name='community')
+def cli():
+    """Community related commands"""
 
-@cli_tools.command(name='install', help='test install')
-@click.option('--test1', default='1', help='test option')
-def install_cmd(test1):
-    click.echo('Hello world')
 
-@cli_tools.command(name='search', help='test search')
-@click.option('--test1', default='1', help='test option')
-def search_cmd(test1):
-    click.echo('Hello world')
+@cli.command()
+def get_num_users():
+    syn = synapseclient.login()
+    res = syn.restGET("/teamMembers/count/3413388")
+    print(res)
+
 
 if __name__ == '__main__':
-    cli_tools()
+    cli()
