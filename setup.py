@@ -5,7 +5,7 @@ import setuptools
 setuptools.setup(
     # basic
     name='nlp-sandbox-client',
-    version='0.1.0',
+    version='0.1.1',
     # packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     # py_modules=['hello'],
     # scripts=['bin/nlp-evaluate'],
