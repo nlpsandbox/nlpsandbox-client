@@ -13,6 +13,20 @@
             "length": 10,
             "text": "12/25/2020",
             "dateFormat": "MM/DD/YYYY"
+        },
+        {
+            "noteId": 2,
+            "start": 45,
+            "length": 8,
+            "text": "12/25/20",
+            "dateFormat": "MM/DD/YYYY"
+        },
+        {
+            "noteId": 3,
+            "start": 42,
+            "length": 14,
+            "text": "This Wednesday",
+            "dateFormat": "D"
         }
     ],
     "person_name_annotations": [],
