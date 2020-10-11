@@ -26,7 +26,7 @@ setuptools.setup(
     ],
 
     # metadata to display on PyPI
-    description='Evaluate the performance of NLP Sandbox Tools',
+    description='Python client for the NLP Sandbox',
     long_description="TBA",
     long_description_content_type="text/markdown",
     url='https://www.synapse.org/nlp_sandbox',
@@ -34,8 +34,8 @@ setuptools.setup(
     author_email='thomas.schaffter@sagebionetworks.org',
     license='Apache',
     project_urls={
-        "Source Code": "https://github.com/data2health/nlp-sandbox-client",
-        "Bug Tracker": "https://github.com/data2health/nlp-sandbox-client/issues",
+        "Source Code": "https://github.com/Sage-Bionetworks/nlp-sandbox-client",
+        "Bug Tracker": "https://github.com/Sage-Bionetworks/nlp-sandbox-client/issues",
     },
     classifiers=[
         'Development Status :: 1 - Planning',
