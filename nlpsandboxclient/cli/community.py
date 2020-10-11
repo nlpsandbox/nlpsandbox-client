@@ -12,6 +12,7 @@ def cli():
 
 @cli.command()
 def get_num_users():
+    """Gets the number of NLP Sandbox users"""
     syn = synapseclient.login()
     res = syn.restGET("/teamMembers/count/3413388")
     print(res)
