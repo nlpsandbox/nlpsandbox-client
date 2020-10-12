@@ -24,12 +24,16 @@ class NlpClient:
         self._requests_session = requests.Session()
 
     def get_clinical_notes(self):
-        clinical_notes = self.rest_get("/notes")
-        return clinical_notes
+        """Returns all clinical notes"""
+        return self.rest_get("/notes")
 
     def get_clinical_note(self, noteid=None):
-        clinical_note = self.rest_get(f"/notes/{noteid}")
-        return clinical_note
+        """Returns the clinical note for a given ID"""
+        return self.rest_get(f"/notes/{noteid}")
+
+    def get_health(self):
+        """Get the health of the API"""
+        return self.rest_get("/health")
 
     def rest_get(self, uri, endpoint=None, headers=None):
         """Sends a HTTP GET request"""
