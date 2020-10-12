@@ -35,6 +35,10 @@ class NlpClient:
         """Get the health of the API"""
         return self.rest_get("/health")
 
+    def get_dates(self):
+        """Get all date annotations"""
+        return self.rest_get("/annotations/dates")
+
     def rest_get(self, uri, endpoint=None):
         """Sends a HTTP GET request"""
         response = self._rest_call('get', uri, None, endpoint)
