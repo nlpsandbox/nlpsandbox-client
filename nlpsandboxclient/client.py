@@ -35,28 +35,25 @@ class NlpClient:
         """Get the health of the API"""
         return self.rest_get("/health")
 
-    def rest_get(self, uri, endpoint=None, headers=None):
+    def rest_get(self, uri, endpoint=None):
         """Sends a HTTP GET request"""
-        response = self._rest_call('get', uri, None, endpoint, headers)
+        response = self._rest_call('get', uri, None, endpoint)
         return _return_rest_body(response)
 
-    def _rest_call(self, method, uri, data, endpoint, headers):
+    def _rest_call(self, method, uri, data, endpoint):
         """Sends HTTP requests"""
-        uri, headers = self._build_uri_and_headers(uri, endpoint=endpoint,
-                                                   headers=headers)
+        uri = self._build_uri(uri, endpoint=endpoint)
         requests_method_fn = getattr(self._requests_session, method)
-        response = requests_method_fn(uri, data=data, headers=headers)
+        response = requests_method_fn(uri, data=data)
         return response
 
-    def _build_uri_and_headers(self, uri, endpoint=None, headers=None):
+    def _build_uri(self, uri, endpoint=None):
         """Returns a tuple of the URI and headers to request with."""
         if endpoint is None:
             endpoint = self.data_node_endpoint
-
         # Check to see if the URI is incomplete (i.e. a Synapse URL)
         # In that case, append a Synapse endpoint to the URI
         parsed_url = urllib.parse.urlparse(uri)
         if parsed_url.netloc == '':
             uri = endpoint + uri
-
-        return uri, headers
+        return uri
