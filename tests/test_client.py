@@ -65,6 +65,16 @@ class TestClient:
                                               endpoint="http://endpoint")
             request_get.assert_called_once_with("/foo", data=None)
 
+    def test_rest_get(self):
+        """Test rest call"""
+        with patch.object(self.nlp, "_rest_call",
+                          return_value="/foo") as rest_call, \
+             patch.object(client, "_return_rest_body") as return_body:
+            self.nlp.rest_get("/foo", endpoint="http://endpoint")
+            rest_call.assert_called_once_with("get", "/foo", None,
+                                              "http://endpoint")
+            return_body.assert_called_once_with("/foo")
+
 
 def test__return_rest_body_text():
     """Test return of text"""
