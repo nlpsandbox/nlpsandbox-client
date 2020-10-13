@@ -53,11 +53,11 @@ class NlpClient:
         return response
 
     def _build_uri(self, uri, endpoint=None):
-        """Returns a tuple of the URI and headers to request with."""
+        """Returns a URI to request with."""
         if endpoint is None:
             endpoint = self.data_node_endpoint
-        # Check to see if the URI is incomplete (i.e. a Synapse URL)
-        # In that case, append a Synapse endpoint to the URI
+        # Check to see if the URI is incomplete
+        # In that case, append a endpoint to the URI
         parsed_url = urllib.parse.urlparse(uri)
         if parsed_url.netloc == '':
             uri = endpoint + uri

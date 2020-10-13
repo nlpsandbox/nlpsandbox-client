@@ -37,6 +37,22 @@ class TestClient:
             self.nlp.get_dates()
             rest_get.assert_called_once_with("/annotations/dates")
 
+    def test__build_uri_nonet(self):
+        """Tests building of URI no net"""
+        uri = self.nlp._build_uri("/foo")
+        assert uri == f"{self.data_node_endpoint}/foo"
+
+    def test__build_uri_net(self):
+        """Tests building of URI network in text"""
+        text = "http://google.com/foo"
+        uri = self.nlp._build_uri(text)
+        assert uri == text
+
+    def test__build_uri_endpoint(self):
+        """Tests building of URI to specify endpoint"""
+        uri = self.nlp._build_uri("/foo", endpoint="test")
+        assert uri == "test/foo"
+
 
 def test__return_rest_body_text():
     """Test return of text"""
