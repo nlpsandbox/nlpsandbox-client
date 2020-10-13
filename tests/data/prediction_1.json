@@ -13,8 +13,80 @@
             "length": 10,
             "text": "12/25/2020",
             "dateFormat": "MM/DD/YYYY"
+        },
+        {
+            "noteId": 2,
+            "start": 45,
+            "length": 8,
+            "text": "12/25/20",
+            "dateFormat": "MM/DD/YYYY"
+        },
+        {
+            "noteId": 3,
+            "start": 42,
+            "length": 14,
+            "text": "This Wednesday",
+            "dateFormat": "D"
         }
     ],
-    "person_name_annotations": [],
-    "physical_location_annotations": []
+    "person_name_annotations": [
+      {
+          "noteId": 0,
+          "start": 20,
+          "length": 8,
+          "text": "Dr.Smith",
+          "person_type": "doctor"
+      },
+      {
+          "noteId": 1,
+          "start": 45,
+          "length": 9,
+          "text": "Jon Smith",
+          "person_type": "patient"
+      },
+      {
+          "noteId": 3,
+          "start": 22,
+          "length": 8,
+          "text": "Smith Ke",
+          "person_type": "patient"
+      },
+      {
+          "noteId": 2,
+          "start": 25,
+          "length": 3,
+          "text": "Jon",
+          "person_type": "patient"
+      }
+    ],
+    "physical_location_annotations": [
+      {
+          "noteId": 0,
+          "start": 40,
+          "length": 7,
+          "text": "Seattle",
+          "address_type": "city"
+      },
+      {
+          "noteId": 1,
+          "start": 98,
+          "length": 2,
+          "text": "WA",
+          "address_type": "state"
+      },
+      {
+          "noteId": 3,
+          "start": 22,
+          "length": 2,
+          "text": "UW",
+          "address_type": "organization"
+      },
+      {
+          "noteId": 4,
+          "start": 25,
+          "length": 5,
+          "text": "David",
+          "address_type": "organization"
+      }
+    ]
 }
