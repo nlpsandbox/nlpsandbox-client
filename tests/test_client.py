@@ -1,5 +1,4 @@
 """Test client functions"""
-import requests
 from unittest.mock import Mock, patch
 
 from nlpsandboxclient import client
