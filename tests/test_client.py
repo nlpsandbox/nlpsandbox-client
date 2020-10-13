@@ -1,4 +1,5 @@
 """Test client functions"""
+import requests
 from unittest.mock import Mock, patch
 
 from nlpsandboxclient import client
@@ -52,6 +53,17 @@ class TestClient:
         """Tests building of URI to specify endpoint"""
         uri = self.nlp._build_uri("/foo", endpoint="test")
         assert uri == "test/foo"
+
+    def test__rest_call(self):
+        """Test rest call"""
+        with patch.object(self.nlp, "_build_uri",
+                          return_value="/foo") as build_uri, \
+             patch.object(self.nlp._requests_session,
+                          "get") as request_get:
+            self.nlp._rest_call("get", "/foo", None, "http://endpoint")
+            build_uri.assert_called_once_with("/foo",
+                                              endpoint="http://endpoint")
+            request_get.assert_called_once_with("/foo", data=None)
 
 
 def test__return_rest_body_text():
