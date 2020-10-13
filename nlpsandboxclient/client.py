@@ -12,7 +12,8 @@ def _return_rest_body(response):
     'content-type' of the response.
     """
     content_type = response.headers.get('content-type', None)
-    if content_type.lower().strip().startswith('application/json'):
+    if content_type is not None and content_type.lower().strip().startswith(
+            'application/json'):
         return response.json()
     return response.text
 

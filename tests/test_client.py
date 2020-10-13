@@ -1,6 +1,7 @@
 """Test client functions"""
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
+from nlpsandboxclient import client
 from nlpsandboxclient.client import NlpClient
 
 
@@ -35,3 +36,25 @@ class TestClient:
         with patch.object(self.nlp, "rest_get") as rest_get:
             self.nlp.get_dates()
             rest_get.assert_called_once_with("/annotations/dates")
+
+
+def test__return_rest_body_text():
+    """Test return of text"""
+    response = Mock()
+    response.headers = {"content-type": None}
+    text = "testing text me"
+    response.text = text
+    returned = client._return_rest_body(response)
+    assert returned == text
+
+
+def test__return_rest_body_json():
+    """Test return of text"""
+    response = Mock()
+    response.headers = {"content-type": "Application/json "}
+    expected = {"bar": "foo"}
+    with patch.object(response, "json",
+                      return_value=expected) as response_json:
+        returned = client._return_rest_body(response)
+        response_json.assert_called_once()
+        assert returned == expected
