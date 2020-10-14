@@ -8,8 +8,10 @@
 import json
 import re
 
+
 # take as input the location of
 class Evaluation:
+    """Evaluate the different types"""
     gs_dict_seq = dict()
     sys_dict_seq = dict()
     gs_dict_token = dict()
@@ -28,6 +30,8 @@ class Evaluation:
         elif evaluation_type == "address":
             self.annotation = "address_type"
             self.col = "physical_location_annotations"
+        else:
+            raise ValueError("Wrong evaluation type.  Only accepts date, person, or address")
 
     def convert_dict(self, sys_file, gs_file):
         with open(gs_file) as f:
@@ -182,7 +186,6 @@ class Evaluation:
                     (key in sys_dict.keys() and not self.strict_cond(key, sys_dict, gs_dict)):
                 fn = fn + 1
         self.print_out(tp, fp, fn, "token", "strict")
-
 
     def print_out(self, tp, fp, fn, type_up, type_lower):
         # precision (P): TP / (TP + FP)
