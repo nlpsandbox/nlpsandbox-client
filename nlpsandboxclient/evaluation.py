@@ -220,13 +220,13 @@ class DateEvaluation(Evaluation):
     col = "date_annotations"
 
 
-class NameEvaluation(Evaluation):
+class PersonNameEvaluation(Evaluation):
     evaluation_type = "person"
     annotation = "person_type"
     col = "person_name_annotations"
 
 
-class AddressEvaluation(Evaluation):
+class PhysicalAddressEvaluation(Evaluation):
     evaluation_type = "address"
     annotation = "address_type"
     col = "physical_location_annotations"
