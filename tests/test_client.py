@@ -10,7 +10,7 @@ class TestClient:
 
     def setup_method(self):
         """Method called once per method"""
-        self.data_node_endpoint = "http://0.0.0.0:8080/api/v1"
+        self.data_node_endpoint = client.DATA_NODE_ENDPOINT
         self.nlp = NlpClient(data_node_endpoint=self.data_node_endpoint)
 
     def test_get_clinical_notes(self):
