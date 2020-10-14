@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 # Author: Yao Yan
 # Description: This script is used to evaluate the annotation by participants with
 # gold standards, we will conduct the annotation based on subcategory: date, person name,
@@ -76,7 +75,7 @@ class Evaluation(metaclass=ABCMeta):
                 json_dict[data_loc] = date_list
         return json_dict
 
-    def eval(self):
+    def eval(self, output_dir):
         self.eval_category_instance()
         self.eval_category_token()
         final_address_eval = dict()
@@ -96,11 +95,9 @@ class Evaluation(metaclass=ABCMeta):
         #       }
 
         # output json file
-        '''
-        json_object = json.dumps(final_address_eval, indent = 4)
-        with open("eval.json", "w") as outfile:
+        json_object = json.dumps(final_address_eval, indent=4)
+        with open(f"{output_dir}/eval.json", "w") as outfile:
             outfile.write(json_object)
-        '''
         # calculate true positive
 
         # instance based_eval
