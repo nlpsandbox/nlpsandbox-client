@@ -102,6 +102,8 @@ class DateEvaluation(object):
         # calculate true positive
 
         # instance based_eval
+        return final_date_eval
+
     # strict: length match, relax: length match +/- 2
     def eval_category_instance(self):
         sys_dict = self.sys_dict_seq
@@ -611,22 +613,3 @@ class AddressEvaluation(object):
                 address_type = {"metric": key,
                                 "value": eval_dict[key]}
                 self.address_type_list.append(address_type)
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='import input and goldstandard for comparison')
-    parser.add_argument('--input', help='add input files')
-    parser.add_argument('--gs', help='add goldstandard files')
-    args = parser.parse_args()
-    # Running the date eval module
-    de = DateEvaluation()
-    de.convert_dict(args.input, args.gs)
-    de.eval()
-    # Running the person name eval module
-    pe = NameEvaluation()
-    pe.convert_dict(args.input, args.gs)
-    pe.eval()
-    # Running the address eval module
-    ae = AddressEvaluation()
-    ae.convert_dict(args.input, args.gs)
-    ae.eval()

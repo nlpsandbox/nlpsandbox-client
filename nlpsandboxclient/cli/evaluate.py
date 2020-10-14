@@ -16,8 +16,17 @@ def cli():
               type=click.Path(exists=True), required=True)
 def evaluate_prediction(pred_filepath, gold_filepath):
     """Evaluate the performance of a local prediction file"""
-    e = evaluation.Evaluation()
-    e.run()
+    date_e = evaluation.DateEvaluation()
+    date_e.convert_dict(pred_filepath, gold_filepath)
+    date_e_results = date_e.eval()
+    # Running the person name eval module
+    name_e = evaluation.NameEvaluation()
+    name_e.convert_dict(pred_filepath, gold_filepath)
+    name_e_results = name_e.eval()
+    # Running the address eval module
+    address_e = evaluation.AddressEvaluation()
+    address_e.convert_dict(pred_filepath, gold_filepath)
+    address_e_results = address_e.eval()
 
 
 # @cli_evaluation.command(name='search2', help='test search')
