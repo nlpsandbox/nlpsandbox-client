@@ -146,13 +146,13 @@ class Evaluation:
         fp = 0
         fn = 0
         for key in sys_dict.keys():
-            if key in gs_dict.keys() and self.date_format_cond(key, sys_dict, gs_dict):
+            if key in gs_dict.keys() and self.format_cond(key, sys_dict, gs_dict):
                 tp = tp + 1
             else:
                 fp = fp + 1
         for key in gs_dict.keys():
             if key not in sys_dict.keys() or \
-                    (key in sys_dict.keys() and not self.date_format_cond(key, sys_dict, gs_dict)):
+                    (key in sys_dict.keys() and not self.format_cond(key, sys_dict, gs_dict)):
                 fn = fn + 1
         self.print_out(tp, fp, fn, self.evaluation_type, "strict")
 
@@ -162,7 +162,7 @@ class Evaluation:
     def strict_cond(self, key, sys_dict, gs_dict):
         return abs(sys_dict[key][2]-gs_dict[key][2]) == 0
 
-    def date_format_cond(self, key, sys_dict, gs_dict):
+    def format_cond(self, key, sys_dict, gs_dict):
         return (sys_dict[key][1] == gs_dict[key][1]) and abs(sys_dict[key][2] - gs_dict[key][2]) == 0
 
     def eval_category_token(self):
