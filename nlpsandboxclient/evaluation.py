@@ -18,6 +18,9 @@ class Evaluation(metaclass=ABCMeta):
     sys_dict_token = dict()
     loc_list = list()
     type_list = list()
+    evaluation_type = None
+    annotation = None
+    col = None
 
     def __init__(self):
         pass
