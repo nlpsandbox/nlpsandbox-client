@@ -33,7 +33,7 @@ def get_clinical_notes(output):
 
 
 @cli.command()
-@click.argument('noteid', help='Clinical note ID', type=int)
+@click.argument('noteid', help='Clinical note ID', type=click.INT)
 @click.option('--output', help='Output filepath', type=click.Path())
 def get_clinical_note(noteid, output):
     """Gets all the clinical notes"""
