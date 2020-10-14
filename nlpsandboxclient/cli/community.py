@@ -33,10 +33,10 @@ def get_clinical_notes(output):
 
 
 @cli.command()
-@click.argument('noteid', help='Clinical note ID', type=click.INT)
+@click.argument('noteid', type=click.INT)
 @click.option('--output', help='Output filepath', type=click.Path())
 def get_clinical_note(noteid, output):
-    """Gets all the clinical notes"""
+    """Gets clinical note of NOTEID"""
     nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
     clinical_note = nlp.get_clinical_note(noteid)
     utils.stdout_or_json(clinical_note, output)
