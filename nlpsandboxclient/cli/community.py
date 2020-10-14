@@ -42,5 +42,19 @@ def get_clinical_note(noteid, output):
     utils.stdout_or_json(clinical_note, output)
 
 
+@cli.command()
+def get_health():
+    """Gets health of the API"""
+    nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
+    print(nlp.get_health())
+
+
+@cli.command()
+def get_dates():
+    """Get all date annotations"""
+    nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
+    print(nlp.get_dates())
+
+
 if __name__ == '__main__':
     cli()
