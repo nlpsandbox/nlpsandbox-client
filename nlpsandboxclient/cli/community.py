@@ -26,8 +26,8 @@ def get_num_users():
 @click.option('--output', help='Output filepath', type=click.Path())
 def get_clinical_notes(output):
     """Gets all the clinical notes"""
-    Nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
-    clinical_notes = Nlp.get_clinical_notes()
+    nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
+    clinical_notes = nlp.get_clinical_notes()
     # Stdout or store to json
     if output is None:
         print(clinical_notes)
