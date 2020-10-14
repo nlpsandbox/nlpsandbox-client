@@ -4,13 +4,13 @@
 # Description: This script is used to evaluate the annotation by participants with
 # gold standards, we will conduct the annotation based on subcategory: date, person name,
 # physical address
-
+from abc import ABCMeta
 import json
 import re
 
 
 # take as input the location of
-class Evaluation:
+class Evaluation(metaclass=ABCMeta):
     """Evaluate the different types"""
     gs_dict_seq = dict()
     sys_dict_seq = dict()
