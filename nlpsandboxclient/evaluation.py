@@ -19,19 +19,8 @@ class Evaluation:
     loc_list = list()
     type_list = list()
 
-    def __init__(self, evaluation_type):
-        self.evaluation_type = evaluation_type
-        if evaluation_type == "date":
-            self.annotation = "dateFormat"
-            self.col = "date_annotations"
-        elif evaluation_type == "person":
-            self.annotation = "person_type"
-            self.col = "person_name_annotations"
-        elif evaluation_type == "address":
-            self.annotation = "address_type"
-            self.col = "physical_location_annotations"
-        else:
-            raise ValueError("Wrong evaluation type.  Only accepts date, person, or address")
+    def __init__(self):
+        pass
 
     def convert_dict(self, sys_file, gs_file):
         with open(gs_file) as f:
@@ -223,3 +212,21 @@ class Evaluation:
                 type_map = {"metric": key,
                             "value": eval_dict[key]}
                 self.type_list.append(type_map)
+
+
+class DateEvaluation(Evaluation):
+    evaluation_type = "date"
+    annotation = "dateFormat"
+    col = "date_annotations"
+
+
+class NameEvaluation(Evaluation):
+    evaluation_type = "person"
+    annotation = "person_type"
+    col = "person_name_annotations"
+
+
+class AddressEvaluation(Evaluation):
+    evaluation_type = "address"
+    annotation = "address_type"
+    col = "physical_location_annotations"
