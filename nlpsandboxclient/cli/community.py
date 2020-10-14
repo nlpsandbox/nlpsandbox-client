@@ -23,7 +23,7 @@ def get_num_users():
 
 
 @cli.command()
-@click.option('--output', help='Output filepath', type=click.Path())
+@click.option('--output', help='Output json filepath', type=click.Path())
 def get_clinical_notes(output):
     """Gets all the clinical notes"""
     nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
@@ -34,7 +34,7 @@ def get_clinical_notes(output):
 
 @cli.command()
 @click.argument('noteid', type=click.INT)
-@click.option('--output', help='Output filepath', type=click.Path())
+@click.option('--output', help='Output json filepath', type=click.Path())
 def get_clinical_note(noteid, output):
     """Gets clinical note of NOTEID"""
     nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
@@ -50,10 +50,12 @@ def get_health():
 
 
 @cli.command()
-def get_dates():
+@click.option('--output', help='Output json filepath', type=click.Path())
+def get_dates(output):
     """Get all date annotations"""
     nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
-    print(nlp.get_dates())
+    dates = nlp.get_dates()
+    utils.stdout_or_json(dates, output)
 
 
 if __name__ == '__main__':
