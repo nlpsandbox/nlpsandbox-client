@@ -27,6 +27,7 @@ def evaluate_prediction(pred_filepath, gold_filepath):
     address_e = evaluation.AddressEvaluation()
     address_e.convert_dict(pred_filepath, gold_filepath)
     address_e_results = address_e.eval()
+    _ = (date_e_results, name_e_results, address_e_results)
 
 
 # @cli_evaluation.command(name='search2', help='test search')

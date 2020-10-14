@@ -6,7 +6,6 @@
 # physical address
 
 import json
-import argparse
 import re
 
 # take as input the location of
@@ -304,6 +303,8 @@ class NameEvaluation(object):
         # calculate true positive
 
         # instance based_eval
+        return final_address_eval
+
     # strict: length match, relax: length match +/- 2
     def eval_category_instance(self):
         sys_dict = self.sys_dict_seq
@@ -504,6 +505,8 @@ class AddressEvaluation(object):
         # calculate true positive
 
         # instance based_eval
+        return final_address_eval
+
     # strict: length match, relax: length match +/- 2
     def eval_category_instance(self):
         sys_dict = self.sys_dict_seq
