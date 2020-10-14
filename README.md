@@ -56,3 +56,9 @@ Run the program
 
     Commands:
     evaluate  Evaluate the performance of a local prediction file
+
+## Tests
+
+```
+nlp-cli evaluate prediction --pred_filepath tests/data/prediction_1.json --gold_filepath tests/data/goldstandard_1.json
+```
