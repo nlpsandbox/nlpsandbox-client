@@ -4,7 +4,7 @@ import json
 import click
 import synapseclient
 
-from nlpsandboxclient import client
+from nlpsandboxclient import client, utils
 from nlpsandboxclient.client import NlpClient
 
 
@@ -29,11 +29,17 @@ def get_clinical_notes(output):
     nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
     clinical_notes = nlp.get_clinical_notes()
     # Stdout or store to json
-    if output is None:
-        print(clinical_notes)
-    else:
-        with open(output, 'w') as json_o:
-            json.dump(clinical_notes, json_o)
+    utils.stdout_or_json(clinical_notes, output)
+
+
+@cli.command()
+@click.option('--noteid', help='Clinical note ID', type=int)
+@click.option('--output', help='Output filepath', type=click.Path())
+def get_clinical_note(noteid, output):
+    """Gets all the clinical notes"""
+    nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
+    clinical_note = nlp.get_clinical_note(noteid)
+    utils.stdout_or_json(clinical_note, output)
 
 
 if __name__ == '__main__':
