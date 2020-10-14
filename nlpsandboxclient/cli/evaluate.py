@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import click
-from nlpsandboxclient.evaluation import evaluation
+from nlpsandboxclient import evaluation
 
 
 @click.group(name='evaluate')
