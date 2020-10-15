@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import setuptools
 
 setuptools.setup(
@@ -10,11 +9,9 @@ setuptools.setup(
     # py_modules=['hello'],
     # scripts=['bin/nlp-evaluate'],
 
-    packages=[
-        'nlpsandboxclient'
-    ],
+    packages=setuptools.find_packages(),
     entry_points={
-        'console_scripts': ['nlp-cli=nlpsandboxclient.__main__:main']
+        'console_scripts': ['nlp-cli=nlpsandboxclient.__main__:entrypoint']
     },
 
     # requirements

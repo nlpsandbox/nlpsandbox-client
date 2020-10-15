@@ -54,7 +54,3 @@ def get_dates(output):
     nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
     dates = nlp.get_dates()
     utils.stdout_or_json(dates, output)
-
-
-if __name__ == '__main__':
-    cli()

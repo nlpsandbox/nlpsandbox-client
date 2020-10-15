@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
+import click
 
-from nlpsandboxclient.cli import cli
-
-
-def main():
-    cli.entrypoint()
+from .cli import community, evaluate
 
 
-if __name__ == '__main__':
-    main()
+@click.group()
+def cli():
+    """NLP Sandbox Client"""
+
+
+def entrypoint():
+    cli.add_command(community.cli)
+    cli.add_command(evaluate.cli)
+    cli()
