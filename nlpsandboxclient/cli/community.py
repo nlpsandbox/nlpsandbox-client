@@ -22,9 +22,12 @@ def get_num_users():
 
 @cli.command()
 @click.option('--output', help='Output json filepath', type=click.Path())
-def get_clinical_notes(output):
+@click.option('--data_endpoint', help='Data endpoint')
+def get_clinical_notes(output, data_endpoint):
     """Gets all the clinical notes"""
-    nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
+    data_endpoint = (data_endpoint if data_endpoint is not None
+                     else client.DATA_NODE_ENDPOINT)
+    nlp = NlpClient(data_node_endpoint=data_endpoint)
     clinical_notes = nlp.get_clinical_notes()
     # Stdout or store to json
     utils.stdout_or_json(clinical_notes, output)
@@ -33,25 +36,34 @@ def get_clinical_notes(output):
 @cli.command()
 @click.argument('noteid', type=click.INT)
 @click.option('--output', help='Output json filepath', type=click.Path())
-def get_clinical_note(noteid, output):
+@click.option('--data_endpoint', help='Data endpoint')
+def get_clinical_note(noteid, output, data_endpoint):
     """Gets clinical note of NOTEID"""
-    nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
+    data_endpoint = (data_endpoint if data_endpoint is not None
+                     else client.DATA_NODE_ENDPOINT)
+    nlp = NlpClient(data_node_endpoint=data_endpoint)
     clinical_note = nlp.get_clinical_note(noteid)
     utils.stdout_or_json(clinical_note, output)
 
 
 @cli.command()
-def get_health():
+@click.option('--data_endpoint', help='Data endpoint')
+def get_health(data_endpoint):
     """Gets health of the API"""
-    nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
+    data_endpoint = (data_endpoint if data_endpoint is not None
+                     else client.DATA_NODE_ENDPOINT)
+    nlp = NlpClient(data_node_endpoint=data_endpoint)
     print(nlp.get_health())
 
 
 @cli.command()
 @click.option('--output', help='Output json filepath', type=click.Path())
-def get_dates(output):
+@click.option('--data_endpoint', help='Data endpoint.')
+def get_dates(output, data_endpoint):
     """Get all date annotations"""
-    nlp = NlpClient(data_node_endpoint=client.DATA_NODE_ENDPOINT)
+    data_endpoint = (data_endpoint if data_endpoint is not None
+                     else client.DATA_NODE_ENDPOINT)
+    nlp = NlpClient(data_node_endpoint=data_endpoint)
     dates = nlp.get_dates()
     utils.stdout_or_json(dates, output)
 
