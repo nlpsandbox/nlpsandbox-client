@@ -36,3 +36,7 @@ def evaluate_prediction(pred_filepath, gold_filepath, output_directory):
 # @click.option('--test1', default='1', help='test option')
 # def search_cmd(test1):
 #     click.echo('Hello world')
+
+
+if __name__ == '__main__':
+    cli()
