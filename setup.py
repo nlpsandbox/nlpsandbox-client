@@ -11,7 +11,7 @@ setuptools.setup(
 
     packages=setuptools.find_packages(),
     entry_points={
-        'console_scripts': ['nlp-cli=nlpsandboxclient.__main__:entrypoint']
+        'console_scripts': ['nlp-cli=nlpsandboxclient.cli.__main__:main']
     },
 
     # requirements
