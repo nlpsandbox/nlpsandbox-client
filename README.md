@@ -9,26 +9,23 @@ Python client to interact with the NLP Sandbox
 
 ## Usage
 
-### Create configuration
+### Set your credentials
 
-1. Create the file that contains the future environment variables
+You need to set your NLP Sandbox credentials as environment variables to use the
+NLP Sandbox client.
 
-        cp .env.sample .env
+    export NLP_USERNAME="changeme"
+    export NLP_API_TOKEN="changeme"
 
-2. Update the configuration values in *.env*. Set the values of `SYNAPSE_USERNAME`
-   and `SYNAPSE_APIKEY` with the credentials of your Synapse account.
-
-3. Export the variables defined in .env to environment variables
-
-        export $(grep -v '^#' .env | xargs -d '\n')
+Currently, the value of `NLP_USERNAME` and `NLP_API_TOKEN` must be set to the
+values of your Synapse username and API Key.
 
 ### Run the client using Docker
 
-    docker run --rm nlpsandbox/cli
+Once the environment variables `NLP_USERNAME` and `NLP_API_TOKEN` have been set,
+try running the command below to show the help page of the client.
 
-### Evaluate the performance of a local prediction file
-
-    docker run --rm nlpsandbox/cli evaluate
+    docker run --rm -e NLP_USERNAME -e NLP_API_TOKEN nlpsandbox/cli
 
 ## Development
 
