@@ -3,6 +3,8 @@ import urllib.parse
 
 import requests
 
+from . import exceptions
+
 # Default data node endpoint is localhost
 DATA_NODE_HOST = "http://0.0.0.0:8080/api/v1"
 
@@ -50,6 +52,7 @@ class NlpClient:
         uri = self._build_uri(uri, endpoint=endpoint)
         requests_method_fn = getattr(self._requests_session, method)
         response = requests_method_fn(uri, data=data)
+        exceptions._raise_for_status(response)
         return response
 
     def _build_uri(self, uri, endpoint=None):
