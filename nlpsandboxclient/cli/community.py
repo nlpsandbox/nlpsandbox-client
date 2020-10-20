@@ -22,12 +22,14 @@ def get_num_users():
 
 @cli.command()
 @click.option('--output', help='Output json filepath', type=click.Path())
-@click.option('--data_endpoint', help='Data endpoint')
-def get_clinical_notes(output, data_endpoint):
+@click.option('--data_node_host',
+              help='Data node host.  If not specified, uses '
+                   'http://0.0.0.0:8080/api/v1')
+def get_clinical_notes(output, data_node_host):
     """Gets all the clinical notes"""
-    data_endpoint = (data_endpoint if data_endpoint is not None
-                     else client.DATA_NODE_ENDPOINT)
-    nlp = NlpClient(data_node_endpoint=data_endpoint)
+    data_node_host = (data_node_host if data_node_host is not None
+                      else client.DATA_NODE_HOST)
+    nlp = NlpClient(data_node_host=data_node_host)
     clinical_notes = nlp.get_clinical_notes()
     # Stdout or store to json
     utils.stdout_or_json(clinical_notes, output)
@@ -36,34 +38,40 @@ def get_clinical_notes(output, data_endpoint):
 @cli.command()
 @click.argument('noteid', type=click.INT)
 @click.option('--output', help='Output json filepath', type=click.Path())
-@click.option('--data_endpoint', help='Data endpoint')
-def get_clinical_note(noteid, output, data_endpoint):
+@click.option('--data_node_host',
+              help='Data node host.  If not specified, uses '
+                   'http://0.0.0.0:8080/api/v1')
+def get_clinical_note(noteid, output, data_node_host):
     """Gets clinical note of NOTEID"""
-    data_endpoint = (data_endpoint if data_endpoint is not None
-                     else client.DATA_NODE_ENDPOINT)
-    nlp = NlpClient(data_node_endpoint=data_endpoint)
+    data_node_host = (data_node_host if data_node_host is not None
+                      else client.DATA_NODE_HOST)
+    nlp = NlpClient(data_node_host=data_node_host)
     clinical_note = nlp.get_clinical_note(noteid)
     utils.stdout_or_json(clinical_note, output)
 
 
 @cli.command()
-@click.option('--data_endpoint', help='Data endpoint')
-def get_health(data_endpoint):
+@click.option('--data_node_host',
+              help='Data node host.  If not specified, uses '
+                   'http://0.0.0.0:8080/api/v1')
+def get_health(data_node_host):
     """Gets health of the API"""
-    data_endpoint = (data_endpoint if data_endpoint is not None
-                     else client.DATA_NODE_ENDPOINT)
-    nlp = NlpClient(data_node_endpoint=data_endpoint)
+    data_node_host = (data_node_host if data_node_host is not None
+                      else client.DATA_NODE_HOST)
+    nlp = NlpClient(data_node_host=data_node_host)
     print(nlp.get_health())
 
 
 @cli.command()
 @click.option('--output', help='Output json filepath', type=click.Path())
-@click.option('--data_endpoint', help='Data endpoint.')
-def get_dates(output, data_endpoint):
+@click.option('--data_node_host',
+              help='Data node host.  If not specified, uses '
+                   'http://0.0.0.0:8080/api/v1')
+def get_dates(output, data_node_host):
     """Get all date annotations"""
-    data_endpoint = (data_endpoint if data_endpoint is not None
-                     else client.DATA_NODE_ENDPOINT)
-    nlp = NlpClient(data_node_endpoint=data_endpoint)
+    data_node_host = (data_node_host if data_node_host is not None
+                      else client.DATA_NODE_HOST)
+    nlp = NlpClient(data_node_host=data_node_host)
     dates = nlp.get_dates()
     utils.stdout_or_json(dates, output)
 
