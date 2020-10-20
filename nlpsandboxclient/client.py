@@ -6,7 +6,7 @@ import requests
 from . import exceptions
 
 # Default data node endpoint is localhost
-DATA_NODE_ENDPOINT = "http://0.0.0.0:8080/api/v1"
+DATA_NODE_HOST = "http://0.0.0.0:8080/api/v1"
 
 
 def _return_rest_body(response):
@@ -22,8 +22,8 @@ def _return_rest_body(response):
 
 class NlpClient:
     """Nlp client to interact with data node"""
-    def __init__(self, data_node_endpoint=None):
-        self.data_node_endpoint = data_node_endpoint
+    def __init__(self, data_node_host=None):
+        self.data_node_host = data_node_host
         self._requests_session = requests.Session()
 
     def get_clinical_notes(self):
@@ -58,7 +58,7 @@ class NlpClient:
     def _build_uri(self, uri, endpoint=None):
         """Returns a URI to request with."""
         if endpoint is None:
-            endpoint = self.data_node_endpoint
+            endpoint = self.data_node_host
         # Check to see if the URI is incomplete
         # In that case, append a endpoint to the URI
         parsed_url = urllib.parse.urlparse(uri)
