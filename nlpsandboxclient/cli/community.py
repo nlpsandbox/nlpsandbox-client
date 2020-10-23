@@ -23,7 +23,7 @@ def get_num_users():
 @cli.command()
 @click.option('--output', help='Output json filepath', type=click.Path())
 @click.option('--data_node_host',
-              help='Data node host.  If not specified, uses '
+              help='Data node host. If not specified, uses '
                    'http://0.0.0.0:8080/api/v1')
 def get_clinical_notes(output, data_node_host):
     """Gets all the clinical notes"""
