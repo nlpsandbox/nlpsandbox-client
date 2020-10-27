@@ -21,26 +21,14 @@ def _return_rest_body(response):
 
 
 class NlpClient:
-    """Nlp client to interact with data node"""
-    def __init__(self, data_node_host=None):
-        self.data_node_host = data_node_host
+    """Nlp base client that does generic rest calls"""
+    def __init__(self, host=None):
+        self.host = host
         self._requests_session = requests.Session()
-
-    def get_clinical_notes(self):
-        """Returns all clinical notes"""
-        return self.rest_get("/notes")
-
-    def get_clinical_note(self, noteid=None):
-        """Returns the clinical note for a given ID"""
-        return self.rest_get(f"/notes/{noteid}")
 
     def get_health(self):
         """Get the health of the API"""
         return self.rest_get("/health")
-
-    def get_dates(self):
-        """Get all date annotations"""
-        return self.rest_get("/annotations/dates")
 
     def rest_get(self, uri, endpoint=None):
         """Sends a HTTP GET request"""
@@ -58,10 +46,26 @@ class NlpClient:
     def _build_uri(self, uri, endpoint=None):
         """Returns a URI to request with."""
         if endpoint is None:
-            endpoint = self.data_node_host
+            endpoint = self.host
         # Check to see if the URI is incomplete
         # In that case, append a endpoint to the URI
         parsed_url = urllib.parse.urlparse(uri)
         if parsed_url.netloc == '':
             uri = endpoint + uri
         return uri
+
+
+class DataNodeClient(NlpClient):
+    """Nlp client to interact with data node"""
+
+    def get_clinical_notes(self):
+        """Returns all clinical notes"""
+        return self.rest_get("/notes")
+
+    def get_clinical_note(self, noteid=None):
+        """Returns the clinical note for a given ID"""
+        return self.rest_get(f"/notes/{noteid}")
+
+    def get_dates(self):
+        """Get all date annotations"""
+        return self.rest_get("/annotations/dates")
