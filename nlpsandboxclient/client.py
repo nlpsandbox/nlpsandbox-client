@@ -54,6 +54,7 @@ class NlpClient:
             uri = endpoint + uri
         return uri
 
+
 class DataNodeClient(NlpClient):
     """Nlp client to interact with data node"""
 

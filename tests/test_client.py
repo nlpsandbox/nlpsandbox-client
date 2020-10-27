@@ -2,7 +2,7 @@
 from unittest.mock import Mock, patch
 
 from nlpsandboxclient import client
-from nlpsandboxclient.client import DataNodeClient
+from nlpsandboxclient.client import NlpClient, DataNodeClient
 
 
 class TestClient:
@@ -11,6 +11,7 @@ class TestClient:
     def setup_method(self):
         """Method called once per method"""
         self.host = client.DATA_NODE_HOST
+        self.nlpclient = NlpClient(host=self.host)
         self.nlp = DataNodeClient(host=self.host)
 
     def test_get_clinical_notes(self):
@@ -27,8 +28,8 @@ class TestClient:
 
     def test_get_health(self):
         """Test get health"""
-        with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_health()
+        with patch.object(self.nlpclient, "rest_get") as rest_get:
+            self.nlpclient.get_health()
             rest_get.assert_called_once_with("/health")
 
     def test_get_dates(self):
@@ -39,38 +40,39 @@ class TestClient:
 
     def test__build_uri_nonet(self):
         """Tests building of URI no net"""
-        uri = self.nlp._build_uri("/foo")
+        uri = self.nlpclient._build_uri("/foo")
         assert uri == f"{self.host}/foo"
 
     def test__build_uri_net(self):
         """Tests building of URI network in text"""
         text = "http://google.com/foo"
-        uri = self.nlp._build_uri(text)
+        uri = self.nlpclient._build_uri(text)
         assert uri == text
 
     def test__build_uri_endpoint(self):
         """Tests building of URI to specify endpoint"""
-        uri = self.nlp._build_uri("/foo", endpoint="test")
+        uri = self.nlpclient._build_uri("/foo", endpoint="test")
         assert uri == "test/foo"
 
     def test__rest_call(self):
         """Test rest call"""
-        with patch.object(self.nlp, "_build_uri",
+        with patch.object(self.nlpclient, "_build_uri",
                           return_value="/foo") as build_uri, \
-             patch.object(self.nlp._requests_session,
+             patch.object(self.nlpclient._requests_session,
                           "get") as request_get:
-            self.nlp._rest_call("get", "/foo", None, "http://endpoint")
+            self.nlpclient._rest_call("get", "/foo", None, "http://endpoint")
             build_uri.assert_called_once_with("/foo",
                                               endpoint="http://endpoint")
             request_get.assert_called_once_with("/foo", data=None)
 
     def test_rest_get(self):
         """Test rest get"""
-        with patch.object(self.nlp, "_rest_call",
+        with patch.object(self.nlpclient, "_rest_call",
                           return_value="/foo") as rest_call, \
              patch.object(client, "_return_rest_body",
                           return_value='temp') as return_body:
-            returned = self.nlp.rest_get("/foo", endpoint="http://endpoint")
+            returned = self.nlpclient.rest_get("/foo",
+                                               endpoint="http://endpoint")
             rest_call.assert_called_once_with("get", "/foo", None,
                                               "http://endpoint")
             return_body.assert_called_once_with("/foo")
