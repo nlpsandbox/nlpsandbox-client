@@ -3,7 +3,7 @@ import click
 import synapseclient
 
 from nlpsandboxclient import client, utils
-from nlpsandboxclient.client import NlpClient
+from nlpsandboxclient.client import DataNodeClient
 
 
 # Command Group
@@ -29,7 +29,7 @@ def get_clinical_notes(output, data_node_host):
     """Gets all the clinical notes"""
     data_node_host = (data_node_host if data_node_host is not None
                       else client.DATA_NODE_HOST)
-    nlp = NlpClient(data_node_host=data_node_host)
+    nlp = DataNodeClient(host=data_node_host)
     clinical_notes = nlp.get_clinical_notes()
     # Stdout or store to json
     utils.stdout_or_json(clinical_notes, output)
@@ -45,7 +45,7 @@ def get_clinical_note(noteid, output, data_node_host):
     """Gets clinical note of NOTEID"""
     data_node_host = (data_node_host if data_node_host is not None
                       else client.DATA_NODE_HOST)
-    nlp = NlpClient(data_node_host=data_node_host)
+    nlp = DataNodeClient(host=data_node_host)
     clinical_note = nlp.get_clinical_note(noteid)
     utils.stdout_or_json(clinical_note, output)
 
@@ -58,7 +58,7 @@ def get_health(data_node_host):
     """Gets health of the API"""
     data_node_host = (data_node_host if data_node_host is not None
                       else client.DATA_NODE_HOST)
-    nlp = NlpClient(data_node_host=data_node_host)
+    nlp = DataNodeClient(host=data_node_host)
     print(nlp.get_health())
 
 
@@ -71,7 +71,7 @@ def get_dates(output, data_node_host):
     """Get all date annotations"""
     data_node_host = (data_node_host if data_node_host is not None
                       else client.DATA_NODE_HOST)
-    nlp = NlpClient(data_node_host=data_node_host)
+    nlp = DataNodeClient(host=data_node_host)
     dates = nlp.get_dates()
     utils.stdout_or_json(dates, output)
 
