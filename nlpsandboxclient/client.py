@@ -32,12 +32,14 @@ class NlpClient:
 
     def get_ui(self):
         """Get the ui of the API"""
-        return self.rest_get("/ui")
+        return self.rest_get("/ui", return_body=False)
 
-    def rest_get(self, uri, endpoint=None):
+    def rest_get(self, uri, endpoint=None, return_body=True):
         """Sends a HTTP GET request"""
         response = self._rest_call('get', uri, None, endpoint)
-        return _return_rest_body(response)
+        if return_body:
+            return _return_rest_body(response)
+        return response
 
     def _rest_call(self, method, uri, data, endpoint):
         """Sends HTTP requests"""
