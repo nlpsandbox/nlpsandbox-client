@@ -2,12 +2,14 @@
 
 from jsonschema import Draft7Validator
 
+from .client import NlpClient
 
-class NlpToolClient:
+
+class NlpToolClient(NlpClient):
     """Client for developed Nlp Tools"""
-    def __init__(self, tool_type=None, tool_host=None):
-        self._tool_type = tool_type
-        self._tool_host = tool_host
+    def __init__(self, tool_type, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.tool_type = tool_type
 
     def validate(self):
         """Validate schema"""
