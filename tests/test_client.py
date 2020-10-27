@@ -2,7 +2,7 @@
 from unittest.mock import Mock, patch
 
 from nlpsandboxclient import client
-from nlpsandboxclient.client import NlpClient
+from nlpsandboxclient.client import DataNodeClient
 
 
 class TestClient:
@@ -10,8 +10,8 @@ class TestClient:
 
     def setup_method(self):
         """Method called once per method"""
-        self.data_node_host = client.DATA_NODE_HOST
-        self.nlp = NlpClient(data_node_host=self.data_node_host)
+        self.host = client.DATA_NODE_HOST
+        self.nlp = DataNodeClient(host=self.host)
 
     def test_get_clinical_notes(self):
         """Test getting clinical notes"""
@@ -40,7 +40,7 @@ class TestClient:
     def test__build_uri_nonet(self):
         """Tests building of URI no net"""
         uri = self.nlp._build_uri("/foo")
-        assert uri == f"{self.data_node_host}/foo"
+        assert uri == f"{self.host}/foo"
 
     def test__build_uri_net(self):
         """Tests building of URI network in text"""
