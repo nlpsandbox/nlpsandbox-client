@@ -10,6 +10,7 @@ from . import exceptions
 # add this as default for now
 DATA_NODE_ENDPOINT = "http://10.23.55.45:8080/api/v1"
 
+
 def _return_rest_body(response):
     """Returns either a dictionary or a string depending on the
     'content-type' of the response.

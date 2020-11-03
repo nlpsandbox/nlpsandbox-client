@@ -24,10 +24,10 @@ class NlpToolClient(NlpClient):
             raise ValueError("/health endpoint not configured")
         # Fake schema
         schema = {
-            "type" : "object",
-            "properties" : {
-                "price" : {"type" : "number"},
-                "name" : {"type" : "string"},
+            "type": "object",
+            "properties": {
+                "price": {"type": "number"},
+                "name": {"type": "string"},
             },
         }
         data = self.get_tool()
