@@ -6,7 +6,9 @@ import requests
 from . import exceptions
 
 # Default data node endpoint is localhost
-DATA_NODE_HOST = "http://0.0.0.0:8080/api/v1"
+# DATA_NODE_HOST = "http://0.0.0.0:8080/api/v1"
+# add this as default for now
+DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
 
 
 def _return_rest_body(response):
@@ -30,10 +32,16 @@ class NlpClient:
         """Get the health of the API"""
         return self.rest_get("/health")
 
-    def rest_get(self, uri, endpoint=None):
+    def get_ui(self, return_body=False):
+        """Get the ui of the API"""
+        return self.rest_get("/ui", return_body=return_body)
+
+    def rest_get(self, uri, endpoint=None, return_body=True):
         """Sends a HTTP GET request"""
         response = self._rest_call('get', uri, None, endpoint)
-        return _return_rest_body(response)
+        if return_body:
+            return _return_rest_body(response)
+        return response
 
     def _rest_call(self, method, uri, data, endpoint):
         """Sends HTTP requests"""
