@@ -8,7 +8,7 @@ from . import exceptions
 # Default data node endpoint is localhost
 # DATA_NODE_HOST = "http://0.0.0.0:8080/api/v1"
 # add this as default for now
-DATA_NODE_ENDPOINT = "http://10.23.55.45:8080/api/v1"
+DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
 
 
 def _return_rest_body(response):
