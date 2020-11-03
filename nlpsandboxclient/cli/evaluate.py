@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-
 import click
-from nlpsandboxclient import evaluation
+from nlpsandboxclient import evaluation, utils
 
 
 @click.group(name='evaluate')
@@ -14,22 +13,26 @@ def cli():
               type=click.Path(exists=True), required=True)
 @click.option('--gold_filepath', help='Gold standard filepath',
               type=click.Path(exists=True), required=True)
-@click.option('--output_directory', help='Scoring json output filepath ',
-              type=click.Path(exists=True), required=True)
-def evaluate_prediction(pred_filepath, gold_filepath, output_directory):
+@click.option('--output', help='Specify output json path',
+              type=click.Path())
+@click.option('--eval_type', help='Type of evaluation.',
+              type=click.Choice(['date', 'person', 'address'],
+                                case_sensitive=False))
+def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
     """Evaluate the performance of a local prediction file"""
-    date_e = evaluation.DateEvaluation()
-    date_e.convert_dict(pred_filepath, gold_filepath)
-    date_e_results = date_e.eval(output_directory)
-    # Running the person name eval module
-    name_e = evaluation.PersonNameEvaluation()
-    name_e.convert_dict(pred_filepath, gold_filepath)
-    name_e_results = name_e.eval(output_directory)
-    # Running the address eval module
-    address_e = evaluation.PhysicalAddressEvaluation()
-    address_e.convert_dict(pred_filepath, gold_filepath)
-    address_e_results = address_e.eval(output_directory)
-    _ = (date_e_results, name_e_results, address_e_results)
+    eval_mapping = {
+        "date": evaluation.DateEvaluation,
+        "person": evaluation.PersonNameEvaluation,
+        "address": evaluation.PhysicalAddressEvaluation
+    }
+    evaluator = eval_mapping[eval_type]()
+
+    evaluator.convert_dict(pred_filepath, gold_filepath)
+    results = evaluator.eval()
+    utils.stdout_or_json(results, output)
+    # json_object = json.dumps(results, indent=4)
+    # with open(output, "w") as outfile:
+    #     outfile.write(json_object)
 
 
 # @cli_evaluation.command(name='search2', help='test search')
