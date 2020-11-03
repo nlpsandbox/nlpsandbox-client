@@ -30,7 +30,14 @@ class Evaluation(metaclass=ABCMeta):
             gs = gs[self.col]
         with open(sys_file) as f:
             sys = json.load(f)
-            sys = sys[self.col]
+            # Reformat to current evaluation script standards
+            if isinstance(sys, dict):
+                sys = sys[self.col]
+            else:
+                for info in sys:
+                    info[self.annotation] = info['format']
+                    del info['format']
+
         self.sys_dict_seq = self.json_dict_seq(sys)
         self.gs_dict_seq = self.json_dict_seq(gs)
         # print(self.sys_dict_seq)
@@ -75,7 +82,7 @@ class Evaluation(metaclass=ABCMeta):
                 json_dict[data_loc] = date_list
         return json_dict
 
-    def eval(self, output_dir):
+    def eval(self):
         self.eval_category_instance()
         self.eval_category_token()
         final_address_eval = dict()
@@ -94,10 +101,6 @@ class Evaluation(metaclass=ABCMeta):
         #       "value" (double): 0.89
         #       }
 
-        # output json file
-        json_object = json.dumps(final_address_eval, indent=4)
-        with open(f"{output_dir}/eval.json", "w") as outfile:
-            outfile.write(json_object)
         # calculate true positive
 
         # instance based_eval
