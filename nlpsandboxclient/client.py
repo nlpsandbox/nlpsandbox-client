@@ -33,9 +33,9 @@ class NlpClient:
         """Get the health of the API"""
         return self.rest_get("/service")
 
-    # def get_ui(self, return_body=False):
-    #     """Get the ui of the API"""
-    #     return self.rest_get("/ui", return_body=return_body)
+    def get_ui(self, return_body=False):
+        """Get the ui of the API"""
+        return self.rest_get("/ui", return_body=return_body)
 
     def rest_get(self, uri, endpoint=None, return_body=True):
         """Sends a HTTP GET request"""

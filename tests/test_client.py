@@ -14,29 +14,41 @@ class TestClient:
         self.nlpclient = NlpClient(host=self.host)
         self.nlp = DataNodeClient(host=self.host)
 
-    def test_get_clinical_notes(self):
-        """Test getting clinical notes"""
-        with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_clinical_notes()
-            rest_get.assert_called_once_with("/notes")
+    # def test_get_clinical_notes(self):
+    #     """Test getting clinical notes"""
+    #     with patch.object(self.nlp, "rest_get") as rest_get:
+    #         self.nlp.get_clinical_notes()
+    #         rest_get.assert_called_once_with("/notes")
 
-    def test_get_clinical_note(self):
-        """Test getting clinical note"""
-        with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_clinical_note("12345")
-            rest_get.assert_called_once_with("/notes/12345")
+    # def test_get_clinical_note(self):
+    #     """Test getting clinical note"""
+    #     with patch.object(self.nlp, "rest_get") as rest_get:
+    #         self.nlp.get_clinical_note("12345")
+    #         rest_get.assert_called_once_with("/notes/12345")
 
-    def test_get_health(self):
+    def test_get_service(self):
         """Test get health"""
         with patch.object(self.nlpclient, "rest_get") as rest_get:
-            self.nlpclient.get_health()
-            rest_get.assert_called_once_with("/health")
+            self.nlpclient.get_service()
+            rest_get.assert_called_once_with("/service")
 
-    def test_get_dates(self):
-        """Test get dates"""
+    def test_get_ui(self):
+        """Test get health"""
+        with patch.object(self.nlpclient, "rest_get") as rest_get:
+            self.nlpclient.get_ui()
+            rest_get.assert_called_once_with("/ui", return_body=False)
+
+    def test_get_datasets(self):
+        """Test get health"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_dates()
-            rest_get.assert_called_once_with("/annotations/dates")
+            self.nlp.get_datasets()
+            rest_get.assert_called_once_with("/datasets")
+
+    def test_get_dataset(self):
+        """Test get health"""
+        with patch.object(self.nlp, "rest_get") as rest_get:
+            self.nlp.get_dataset(datasetid="foo")
+            rest_get.assert_called_once_with("/datasets/foo")
 
     def test__build_uri_nonet(self):
         """Tests building of URI no net"""
