@@ -51,7 +51,7 @@ class NlpClient:
             uri = utils._limit_and_offset(uri, limit=limit, offset=offset)
             page = self.rest_get(uri)
             next_results = page['links']['next']
-            offset += 1
+            offset += limit
             yield page
 
     def _rest_call(self, method, uri, data, endpoint):
