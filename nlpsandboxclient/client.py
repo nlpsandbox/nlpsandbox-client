@@ -2,6 +2,7 @@
 import urllib.parse
 
 import requests
+from synapseclient.core import utils
 
 from . import exceptions
 
@@ -28,13 +29,13 @@ class NlpClient:
         self.host = host
         self._requests_session = requests.Session()
 
-    def get_health(self):
+    def get_service(self):
         """Get the health of the API"""
-        return self.rest_get("/health")
+        return self.rest_get("/service")
 
-    def get_ui(self, return_body=False):
-        """Get the ui of the API"""
-        return self.rest_get("/ui", return_body=return_body)
+    # def get_ui(self, return_body=False):
+    #     """Get the ui of the API"""
+    #     return self.rest_get("/ui", return_body=return_body)
 
     def rest_get(self, uri, endpoint=None, return_body=True):
         """Sends a HTTP GET request"""
@@ -42,6 +43,16 @@ class NlpClient:
         if return_body:
             return _return_rest_body(response)
         return response
+
+    def rest_get_paginated(self, uri, limit=10, offset=0):
+        """Get pagniated rest call"""
+        next_results = True
+        while next_results:
+            uri = utils._limit_and_offset(uri, limit=limit, offset=offset)
+            page = self.rest_get(uri)
+            next_results = page['links']['next']
+            offset += 1
+            yield page
 
     def _rest_call(self, method, uri, data, endpoint):
         """Sends HTTP requests"""
@@ -66,13 +77,47 @@ class NlpClient:
 class DataNodeClient(NlpClient):
     """Nlp client to interact with data node"""
 
-    def get_clinical_notes(self):
-        """Returns all clinical notes"""
-        return self.rest_get("/notes")
+    # def get_clinical_notes(self):
+    #     """Returns all clinical notes"""
+    #     return self.rest_get("/notes")
 
-    def get_clinical_note(self, noteid=None):
+    def get_datasets(self):
+        """Returns all datasets"""
+        return self.rest_get("/datasets")
+
+    def get_dataset(self, datasetid=None):
+        """Returns a dataset"""
+        return self.rest_get(f"/datasets/{datasetid}")
+
+    def get_annotation_stores(self, datasetid=None):
+        """Returns the annotation stores for a dataset"""
+        return self.rest_get(f"/datasets/{datasetid}/annotationStore")
+
+    def get_annotation_store(self, datasetid=None, storeid=None):
+        """Returns a annotation store for a specific annotation store id"""
+        return self.rest_get(
+            f"/datasets/{datasetid}/annotationStore/{storeid}"
+        )
+
+    def get_fhir_stores(self, datasetid):
+        """Returns the fhir stores for a dataset"""
+        return self.rest_get(f"/datasets/{datasetid}/fhirStores")
+
+    def get_fhir_store(self, datasetid, storeid):
+        """Returns the fhir store for a specific fhir store id"""
+        return self.rest_get(f"/datasets/{datasetid}/fhirStores/{storeid}")
+
+    def get_clinical_notes(self, datasetid, storeid):
         """Returns the clinical note for a given ID"""
-        return self.rest_get(f"/notes/{noteid}")
+        return self.rest_get_paginated(
+            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note"
+        )
+
+    def get_clinical_note(self, datasetid, storeid, noteid):
+        """Returns the clinical note for a given ID"""
+        return self.rest_get(
+            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note/{noteid}"
+        )
 
     def get_dates(self):
         """Get all date annotations"""
