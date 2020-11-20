@@ -81,7 +81,7 @@ class DataNodeClient(NlpClient):
 
     def get_datasets(self):
         """Returns all datasets"""
-        return self.rest_get("/datasets")
+        return self.rest_get_paginated("/datasets")
 
     def get_dataset(self, datasetid=None):
         """Returns a dataset"""
@@ -89,7 +89,9 @@ class DataNodeClient(NlpClient):
 
     def get_annotation_stores(self, datasetid=None):
         """Returns the annotation stores for a dataset"""
-        return self.rest_get(f"/datasets/{datasetid}/annotationStore")
+        return self.rest_get_paginated(
+            f"/datasets/{datasetid}/annotationStore"
+        )
 
     def get_annotation_store(self, datasetid=None, storeid=None):
         """Returns a annotation store for a specific annotation store id"""
