@@ -25,8 +25,7 @@ def get_num_users():
 @click.option('--data_node_host',
               help='Data node host. If not specified, uses '
                    'http://0.0.0.0:8080/api/v1')
-@click.option('--datasetid',
-              help='Dataset id')
+@click.option('--datasetid', help='Dataset id')
 def get_clinical_notes(output, data_node_host, datasetid):
     """Gets all the clinical notes"""
     data_node_host = (data_node_host if data_node_host is not None
