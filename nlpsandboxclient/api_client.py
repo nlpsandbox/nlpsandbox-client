@@ -46,12 +46,10 @@ class NlpClient:
 
     def rest_get_paginated(self, uri, limit=10, offset=0):
         """Get pagniated rest call"""
-        next_results = True
-        while next_results:
-            uri = utils._limit_and_offset(uri, limit=limit, offset=offset)
-            page = self.rest_get(uri)
-            next_results = page['links']['next']
-            offset += limit
+        new_uri = utils._limit_and_offset(uri, limit=limit, offset=offset)
+        while new_uri:
+            page = self.rest_get(new_uri)
+            new_uri = page['links']['next']
             yield page
 
     def _rest_call(self, method, uri, data, endpoint):
@@ -118,7 +116,3 @@ class DataNodeClient(NlpClient):
         return self.rest_get(
             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note/{noteid}"
         )
-
-    def get_dates(self):
-        """Get all date annotations"""
-        return self.rest_get("/annotations/dates")
