@@ -99,6 +99,19 @@ class DataNodeClient(NlpClient):
             f"/datasets/{datasetid}/annotationStore/{storeid}"
         )
 
+    def get_annotations(self, datasetid=None, storeid=None):
+        """Returns the annotation for a annotation store"""
+        return self.rest_get_paginated(
+            f"/datasets/{datasetid}/annotationStore/{storeid}/annotations"
+        )
+
+    def get_annotation(self, datasetid=None, storeid=None, annotationid=None):
+        """Returns an annotation for a specific annotation id"""
+        return self.rest_get(
+            f"/datasets/{datasetid}/annotationStore/{storeid}/"
+            f"annotations/{annotationid}"
+        )
+
     def get_fhir_stores(self, datasetid):
         """Returns the fhir stores for a dataset"""
         return self.rest_get(f"/datasets/{datasetid}/fhirStores")
