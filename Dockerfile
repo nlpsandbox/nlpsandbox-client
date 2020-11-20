@@ -16,7 +16,7 @@ COPY . ${APP_DIR}
 
 # Install client dependencies
 WORKDIR ${APP_DIR}
-RUN pip install .
+RUN pip install --no-cache-dir .
 
 # Drop privileges
 USER ${APP_USER}
