@@ -45,7 +45,7 @@ class TestClient:
 
     def test_get_datasets(self):
         """Test get datasets"""
-        with patch.object(self.nlp, "rest_get") as rest_get:
+        with patch.object(self.nlp, "rest_get_paginated") as rest_get:
             self.nlp.get_datasets()
             rest_get.assert_called_once_with("/datasets")
 
@@ -57,7 +57,7 @@ class TestClient:
 
     def test_get_annotation_stores(self):
         """Test get annotation stores"""
-        with patch.object(self.nlp, "rest_get") as rest_get:
+        with patch.object(self.nlp, "rest_get_paginated") as rest_get:
             self.nlp.get_annotation_stores(datasetid="foo")
             rest_get.assert_called_once_with("/datasets/foo/annotationStore")
 
@@ -114,7 +114,7 @@ class TestClient:
         """Test rest get"""
         with patch.object(self.nlpclient, "_rest_call",
                           return_value="/foo") as rest_call, \
-             patch.object(client, "_return_rest_body",
+             patch.object(api_client, "_return_rest_body",
                           return_value='temp') as return_body:
             returned = self.nlpclient.rest_get("/foo",
                                                endpoint="http://endpoint")
@@ -130,7 +130,7 @@ def test__return_rest_body_text():
     response.headers = {"content-type": None}
     text = "testing text me"
     response.text = text
-    returned = client._return_rest_body(response)
+    returned = api_client._return_rest_body(response)
     assert returned == text
 
 
@@ -141,6 +141,6 @@ def test__return_rest_body_json():
     expected = {"bar": "foo"}
     with patch.object(response, "json",
                       return_value=expected) as response_json:
-        returned = client._return_rest_body(response)
+        returned = api_client._return_rest_body(response)
         response_json.assert_called_once()
         assert returned == expected
