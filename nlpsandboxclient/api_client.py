@@ -79,55 +79,67 @@ class DataNodeClient(NlpClient):
     #     """Returns all clinical notes"""
     #     return self.rest_get("/notes")
 
-    def get_datasets(self):
-        """Returns all datasets"""
+    def list_datasets(self):
+        """Lists all datasets"""
         return self.rest_get_paginated("/datasets")
 
     def get_dataset(self, datasetid=None):
-        """Returns a dataset"""
+        """Get a dataset"""
         return self.rest_get(f"/datasets/{datasetid}")
 
-    def get_annotation_stores(self, datasetid=None):
-        """Returns the annotation stores for a dataset"""
+    def list_annotation_stores(self, datasetid=None):
+        """List the annotation stores for a dataset"""
         return self.rest_get_paginated(
             f"/datasets/{datasetid}/annotationStore"
         )
 
     def get_annotation_store(self, datasetid=None, storeid=None):
-        """Returns a annotation store for a specific annotation store id"""
+        """Get an annotation store"""
         return self.rest_get(
             f"/datasets/{datasetid}/annotationStore/{storeid}"
         )
 
-    def get_annotations(self, datasetid=None, storeid=None):
-        """Returns the annotation for a annotation store"""
+    def list_annotations(self, datasetid=None, storeid=None):
+        """List the annotations for an annotation store"""
         return self.rest_get_paginated(
             f"/datasets/{datasetid}/annotationStore/{storeid}/annotations"
         )
 
     def get_annotation(self, datasetid=None, storeid=None, annotationid=None):
-        """Returns an annotation for a specific annotation id"""
+        """Get an annotation"""
         return self.rest_get(
             f"/datasets/{datasetid}/annotationStore/{storeid}/"
             f"annotations/{annotationid}"
         )
 
-    def get_fhir_stores(self, datasetid):
-        """Returns the fhir stores for a dataset"""
+    def list_fhir_stores(self, datasetid):
+        """List the FHIR stores in a dataset"""
         return self.rest_get(f"/datasets/{datasetid}/fhirStores")
 
     def get_fhir_store(self, datasetid, storeid):
-        """Returns the fhir store for a specific fhir store id"""
+        """Get a FHIR store"""
         return self.rest_get(f"/datasets/{datasetid}/fhirStores/{storeid}")
 
-    def get_clinical_notes(self, datasetid, storeid):
-        """Returns the clinical note for a given ID"""
+    def list_clinical_notes(self, datasetid, storeid):
+        """List clinical notes in a FHIR store"""
         return self.rest_get_paginated(
             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note"
         )
 
     def get_clinical_note(self, datasetid, storeid, noteid):
-        """Returns the clinical note for a given ID"""
+        """Get a clinical note"""
+        return self.rest_get(
+            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note/{noteid}"
+        )
+
+    def list_patients(self, datasetid, storeid):
+        """Lists the patients in a FHIR store"""
+        return self.rest_get_paginated(
+            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note"
+        )
+
+    def get_patient(self, datasetid, storeid, noteid):
+        """Get a FHIR patient"""
         return self.rest_get(
             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note/{noteid}"
         )

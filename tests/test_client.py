@@ -14,10 +14,10 @@ class TestClient:
         self.nlpclient = NlpClient(host=self.host)
         self.nlp = DataNodeClient(host=self.host)
 
-    def test_get_clinical_notes(self):
+    def test_list_clinical_notes(self):
         """Test getting clinical notes"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            self.nlp.get_clinical_notes(datasetid="foo", storeid="doo")
+            self.nlp.list_clinical_notes(datasetid="foo", storeid="doo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo/fhir/Note"
             )
@@ -43,10 +43,10 @@ class TestClient:
             self.nlpclient.get_ui()
             rest_get.assert_called_once_with("/ui", return_body=False)
 
-    def test_get_datasets(self):
+    def test_list_datasets(self):
         """Test get datasets"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            self.nlp.get_datasets()
+            self.nlp.list_datasets()
             rest_get.assert_called_once_with("/datasets")
 
     def test_get_dataset(self):
@@ -55,10 +55,10 @@ class TestClient:
             self.nlp.get_dataset(datasetid="foo")
             rest_get.assert_called_once_with("/datasets/foo")
 
-    def test_get_annotation_stores(self):
+    def test_list_annotation_stores(self):
         """Test get annotation stores"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            self.nlp.get_annotation_stores(datasetid="foo")
+            self.nlp.list_annotation_stores(datasetid="foo")
             rest_get.assert_called_once_with("/datasets/foo/annotationStore")
 
     def test_get_annotation_store(self):
@@ -69,10 +69,10 @@ class TestClient:
                 "/datasets/foo/annotationStore/doo"
             )
 
-    def test_get_fhir_stores(self):
+    def test_list_fhir_stores(self):
         """Test get fhir stores"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_fhir_stores(datasetid="foo")
+            self.nlp.list_fhir_stores(datasetid="foo")
             rest_get.assert_called_once_with("/datasets/foo/fhirStores")
 
     def test_get_fhir_store(self):
