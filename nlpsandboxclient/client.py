@@ -2,7 +2,7 @@
 from .api_client import DataNodeClient
 
 
-def get_clinical_notes(host, datasetid):
+def get_dataset_clinical_notes(host, datasetid):
     """Get all clinical notes for a dataset"""
     # host = "http://10.23.55.45:8080/api/v1"
     nlp = DataNodeClient(host=host)
