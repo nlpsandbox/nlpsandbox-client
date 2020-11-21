@@ -147,6 +147,13 @@ class DataNodeClient(NlpClient):
         """Get a FHIR store"""
         return self.rest_get(f"/datasets/{datasetid}/fhirStores/{storeid}")
 
+    def create_fhir_store(self, datasetid, storeid):
+        """Create a FHIR store"""
+        return self.rest_post(
+            f"/datasets/{datasetid}/fhirStores?fhirStoreId={storeid}",
+            body=json.dumps({})
+        )
+
     def list_clinical_notes(self, datasetid, storeid):
         """List clinical notes in a FHIR store"""
         return self.rest_get_paginated(
@@ -159,14 +166,29 @@ class DataNodeClient(NlpClient):
             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note/{noteid}"
         )
 
+    def create_clinical_note(self, datasetid, storeid, note):
+        """Create a clinical note"""
+        return self.rest_post(
+            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note",
+            body=json.dumps(note)
+        )
+
     def list_patients(self, datasetid, storeid):
         """Lists the patients in a FHIR store"""
         return self.rest_get_paginated(
-            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note"
+            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Patient"
         )
 
-    def get_patient(self, datasetid, storeid, noteid):
+    def get_patient(self, datasetid, storeid, patientid):
         """Get a FHIR patient"""
         return self.rest_get(
-            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note/{noteid}"
+            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/"
+            f"Patient/{patientid}"
+        )
+
+    def create_patient(self, datasetid, storeid, patient):
+        """Create a FHIR patient"""
+        return self.rest_post(
+            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Patient",
+            body=json.dumps(patient)
         )
