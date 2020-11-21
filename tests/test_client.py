@@ -108,7 +108,8 @@ class TestClient:
             self.nlpclient._rest_call("get", "/foo", None, "http://endpoint")
             build_uri.assert_called_once_with("/foo",
                                               endpoint="http://endpoint")
-            request_get.assert_called_once_with("/foo", data=None)
+            request_get.assert_called_once_with("/foo", data=None,
+                                                headers=None)
 
     def test_rest_get(self):
         """Test rest get"""
