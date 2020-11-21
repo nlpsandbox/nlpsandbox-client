@@ -1,4 +1,5 @@
 """NLP client object"""
+import json
 import urllib.parse
 
 import requests
@@ -44,6 +45,16 @@ class NlpClient:
             return _return_rest_body(response)
         return response
 
+    def rest_post(self, uri, body, endpoint=None):
+        """
+        Sends an HTTP POST request.
+        """
+        response = self._rest_call(
+            'post', uri, body, endpoint,
+            headers={'Content-Type': 'application/json'}
+        )
+        return _return_rest_body(response)
+
     def rest_get_paginated(self, uri, limit=10, offset=0):
         """Get pagniated rest call"""
         new_uri = utils._limit_and_offset(uri, limit=limit, offset=offset)
@@ -52,11 +63,11 @@ class NlpClient:
             new_uri = page['links']['next']
             yield page
 
-    def _rest_call(self, method, uri, data, endpoint):
+    def _rest_call(self, method, uri, data, endpoint, headers=None):
         """Sends HTTP requests"""
         uri = self._build_uri(uri, endpoint=endpoint)
         requests_method_fn = getattr(self._requests_session, method)
-        response = requests_method_fn(uri, data=data)
+        response = requests_method_fn(uri, data=data, headers=headers)
         exceptions._raise_for_status(response)
         return response
 
@@ -75,10 +86,6 @@ class NlpClient:
 class DataNodeClient(NlpClient):
     """Nlp client to interact with data node"""
 
-    # def get_clinical_notes(self):
-    #     """Returns all clinical notes"""
-    #     return self.rest_get("/notes")
-
     def list_datasets(self):
         """Lists all datasets"""
         return self.rest_get_paginated("/datasets")
@@ -86,6 +93,11 @@ class DataNodeClient(NlpClient):
     def get_dataset(self, datasetid=None):
         """Get a dataset"""
         return self.rest_get(f"/datasets/{datasetid}")
+
+    def create_dataset(self, datasetid=None):
+        """Get a dataset"""
+        return self.rest_post(f"/datasets?datasetId={datasetid}",
+                              body=json.dumps({}))
 
     def list_annotation_stores(self, datasetid=None):
         """List the annotation stores for a dataset"""
