@@ -95,7 +95,7 @@ class DataNodeClient(NlpClient):
         return self.rest_get(f"/datasets/{datasetid}")
 
     def create_dataset(self, datasetid=None):
-        """Get a dataset"""
+        """Create a dataset"""
         return self.rest_post(f"/datasets?datasetId={datasetid}",
                               body=json.dumps({}))
 
@@ -111,6 +111,14 @@ class DataNodeClient(NlpClient):
             f"/datasets/{datasetid}/annotationStore/{storeid}"
         )
 
+    def create_annotation_store(self, datasetid=None, storeid=None):
+        """Create an annotation store"""
+        return self.rest_post(
+            f"/datasets/{datasetid}/annotationStore?"
+            f"annotationStoreId={storeid}",
+            body=json.dumps({})
+        )
+
     def list_annotations(self, datasetid=None, storeid=None):
         """List the annotations for an annotation store"""
         return self.rest_get_paginated(
@@ -122,6 +130,13 @@ class DataNodeClient(NlpClient):
         return self.rest_get(
             f"/datasets/{datasetid}/annotationStore/{storeid}/"
             f"annotations/{annotationid}"
+        )
+
+    def create_annotation(self, datasetid, storeid, annotation):
+        """Create an annotation"""
+        return self.rest_post(
+            f"/datasets/{datasetid}/annotationStore/{storeid}/annotations",
+            body=json.dumps(annotation)
         )
 
     def list_fhir_stores(self, datasetid):
