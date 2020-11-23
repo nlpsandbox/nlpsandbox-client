@@ -99,23 +99,6 @@ class TestDataNodeApiClient:
         self.host = api_client.DATA_NODE_HOST
         self.nlp = DataNodeApiClient(host=self.host)
 
-    def test_list_clinical_notes(self):
-        """Test getting clinical notes"""
-        with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            self.nlp.list_clinical_notes(datasetid="foo", fhir_storeid="doo")
-            rest_get.assert_called_once_with(
-                "/datasets/foo/fhirStores/doo/fhir/Note"
-            )
-
-    def test_get_clinical_note(self):
-        """Test getting clinical note"""
-        with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_clinical_note(datasetid="foo", fhir_storeid="doo",
-                                       noteid="boo")
-            rest_get.assert_called_once_with(
-                "/datasets/foo/fhirStores/doo/fhir/Note/boo"
-            )
-
     def test_list_datasets(self):
         """Test get datasets"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
@@ -127,6 +110,13 @@ class TestDataNodeApiClient:
         with patch.object(self.nlp, "rest_get") as rest_get:
             self.nlp.get_dataset(datasetid="foo")
             rest_get.assert_called_once_with("/datasets/foo")
+
+    def test_create_dataset(self):
+        """Test get dataset"""
+        with patch.object(self.nlp, "rest_post") as rest_post:
+            self.nlp.create_dataset(datasetid="foo")
+            rest_post.assert_called_once_with("/datasets?datasetId=foo",
+                                              body='{}')
 
     def test_list_annotation_stores(self):
         """Test get annotation stores"""
@@ -157,6 +147,22 @@ class TestDataNodeApiClient:
                 "/datasets/foo/fhirStores/doo"
             )
 
+    def test_list_clinical_notes(self):
+        """Test getting clinical notes"""
+        with patch.object(self.nlp, "rest_get_paginated") as rest_get:
+            self.nlp.list_clinical_notes(datasetid="foo", fhir_storeid="doo")
+            rest_get.assert_called_once_with(
+                "/datasets/foo/fhirStores/doo/fhir/Note"
+            )
+
+    def test_get_clinical_note(self):
+        """Test getting clinical note"""
+        with patch.object(self.nlp, "rest_get") as rest_get:
+            self.nlp.get_clinical_note(datasetid="foo", fhir_storeid="doo",
+                                       noteid="boo")
+            rest_get.assert_called_once_with(
+                "/datasets/foo/fhirStores/doo/fhir/Note/boo"
+            )
 
 def test__return_rest_body_text():
     """Test return of text"""
