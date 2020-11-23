@@ -27,6 +27,8 @@ def _return_rest_body(response):
 class NlpApiClient:
     """Nlp base client that does generic rest calls"""
     def __init__(self, host=None):
+        if host is None:
+            host = DATA_NODE_HOST
         self.host = host
         self._requests_session = requests.Session()
 
@@ -84,7 +86,7 @@ class NlpApiClient:
 
 
 class DataNodeApiClient(NlpApiClient):
-    """Nlp client to interact with data node"""
+    """Nlp Data node API client to interact with data node"""
 
     def list_datasets(self):
         """Lists all datasets"""
