@@ -103,57 +103,64 @@ class DataNodeClient:
         """List the FHIR stores in a dataset"""
         match = get_inputs_from_name(datasetname, "datasets/(.*)")
         fhir_stores=  self.client.list_fhir_stores(datasetid=match.group(1))
-        extract_name(fhir_stores, "fhirStores")
+        return extract_name(fhir_stores, "fhirStores")
 
-#     def get_fhir_store(self, datasetid, storeid):
-#         """Get a FHIR store"""
-#         return self.rest_get(f"/datasets/{datasetid}/fhirStores/{storeid}")
+    def create_fhir_store(self, datasetname, fhirstoreid):
+        """Create a FHIR store"""
+        match = get_inputs_from_name(datasetname, "datasets/(.*)")
+        return self.client.create_fhir_store(datasetid=match.group(1),
+                                             storeid=fhirstoreid)
 
-#     def create_fhir_store(self, datasetid, storeid):
-#         """Create a FHIR store"""
-#         return self.rest_post(
-#             f"/datasets/{datasetid}/fhirStores?fhirStoreId={storeid}",
-#             body=json.dumps({})
-#         )
+    def list_clinical_notes(self, fhirstore_name):
+        """List clinical notes in a FHIR store"""
+        match = get_inputs_from_name(fhirstore_name,
+                                     "datasets/(.*)/fhirStores/(.*)$")
+        notes = self.client.list_clinical_notes(datasetid=match.group(1),
+                                                storeid=match.group(2))
+        for note in notes:
+            yield note['notes']
 
-#     def list_clinical_notes(self, datasetid, storeid):
-#         """List clinical notes in a FHIR store"""
-#         return self.rest_get_paginated(
-#             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note"
-#         )
+    def get_clinical_note(self, fhirstore_name, noteid):
+        """Get a clinical note"""
+        match = get_inputs_from_name(fhirstore_name,
+                                     "datasets/(.*)/fhirStores/(.*)$")
+        return self.client.get_clinical_note(datasetid=match.group(1),
+                                             storeid=match.group(2),
+                                             noteid=noteid)
 
-#     def get_clinical_note(self, datasetid, storeid, noteid):
-#         """Get a clinical note"""
-#         return self.rest_get(
-#             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note/{noteid}"
-#         )
+    def create_clinical_note(self, fhirstore_name, noteid):
+        """Create a clinical note"""
+        match = get_inputs_from_name(fhirstore_name,
+                                     "datasets/(.*)/fhirStores/(.*)$")
+        return self.client.create_clinical_note(datasetid=match.group(1),
+                                                storeid=match.group(2),
+                                                note=noteid)
 
-#     def create_clinical_note(self, datasetid, storeid, note):
-#         """Create a clinical note"""
-#         return self.rest_post(
-#             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note",
-#             body=json.dumps(note)
-#         )
+    def list_patients(self, fhirstore_name):
+        """Lists the patients in a FHIR store"""
+        match = get_inputs_from_name(fhirstore_name,
+                                     "datasets/(.*)/fhirStores/(.*)$")
+        patients =  self.client.list_patients(datasetid=match.group(1),
+                                              storeid=match.group(2))
+        for patient in patients:
+            yield patient['patients']
 
-#     def list_patients(self, datasetid, storeid):
-#         """Lists the patients in a FHIR store"""
-#         return self.rest_get_paginated(
-#             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Patient"
-#         )
+    def get_patient(self, fhirstore_name, patientid):
+        """Get a FHIR patient"""
+        match = get_inputs_from_name(fhirstore_name,
+                                     "datasets/(.*)/fhirStores/(.*)$")
+        return self.client.get_patient(datasetid=match.group(1),
+                                       storeid=match.group(2),
+                                       patientid=patientid)
 
-#     def get_patient(self, datasetid, storeid, patientid):
-#         """Get a FHIR patient"""
-#         return self.rest_get(
-#             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/"
-#             f"Patient/{patientid}"
-#         )
+    def create_patient(self, fhirstore_name, patientid):
+        """Create a FHIR patient"""
+        match = get_inputs_from_name(fhirstore_name,
+                                     "datasets/(.*)/fhirStores/(.*)$")
+        return self.client.create_patient(datasetid=match.group(1),
+                                          storeid=match.group(2),
+                                          patient=patientid)
 
-#     def create_patient(self, datasetid, storeid, patient):
-#         """Create a FHIR patient"""
-#         return self.rest_post(
-#             f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Patient",
-#             body=json.dumps(patient)
-#         )
 
 def get_dataset_clinical_notes(host, datasetid):
     """Get all clinical notes for a dataset"""
