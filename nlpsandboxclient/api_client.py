@@ -24,7 +24,7 @@ def _return_rest_body(response):
     return response.text
 
 
-class NlpClient:
+class NlpApiClient:
     """Nlp base client that does generic rest calls"""
     def __init__(self, host=None):
         self.host = host
@@ -83,7 +83,7 @@ class NlpClient:
         return uri
 
 
-class DataNodeClient(NlpClient):
+class DataNodeApiClient(NlpApiClient):
     """Nlp client to interact with data node"""
 
     def list_datasets(self):

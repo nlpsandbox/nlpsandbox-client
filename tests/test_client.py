@@ -2,7 +2,7 @@
 from unittest.mock import Mock, patch
 
 from nlpsandboxclient import api_client
-from nlpsandboxclient.api_client import NlpClient, DataNodeClient
+from nlpsandboxclient.api_client import NlpApiClient, DataNodeApiClient
 
 
 class TestClient:
@@ -11,8 +11,8 @@ class TestClient:
     def setup_method(self):
         """Method called once per method"""
         self.host = api_client.DATA_NODE_HOST
-        self.nlpclient = NlpClient(host=self.host)
-        self.nlp = DataNodeClient(host=self.host)
+        self.nlpclient = NlpApiClient(host=self.host)
+        self.nlp = DataNodeApiClient(host=self.host)
 
     def test_list_clinical_notes(self):
         """Test getting clinical notes"""
