@@ -26,7 +26,7 @@ def _return_rest_body(response):
 
 class NlpApiClient:
     """Nlp base client that does generic rest calls"""
-    def __init__(self, host=None):
+    def __init__(self, host: str = None):
         self.host = host
         self._requests_session = requests.Session()
 
@@ -34,21 +34,20 @@ class NlpApiClient:
         """Get the health of the API"""
         return self.rest_get("/service")
 
-    def get_ui(self, return_body=False):
+    def get_ui(self, return_body: bool = False):
         """Get the ui of the API"""
         return self.rest_get("/ui", return_body=return_body)
 
-    def rest_get(self, uri, endpoint=None, return_body=True):
+    def rest_get(self, uri: str, endpoint: str = None,
+                 return_body: bool = True):
         """Sends a HTTP GET request"""
         response = self._rest_call('get', uri, None, endpoint)
         if return_body:
             return _return_rest_body(response)
         return response
 
-    def rest_post(self, uri, body, endpoint=None):
-        """
-        Sends an HTTP POST request.
-        """
+    def rest_post(self, uri: str, body: str, endpoint: str = None):
+        """Sends an HTTP POST request."""
         response = self._rest_call(
             'post', uri, body, endpoint,
             headers={'Content-Type': 'application/json'}

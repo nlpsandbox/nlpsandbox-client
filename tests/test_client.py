@@ -66,6 +66,17 @@ class TestApiClient:
             return_body.assert_called_once_with("/foo")
             assert returned == "temp"
 
+    def test_rest_get_paginated(self):
+        """Test rest get"""
+        returned = {"links": {"next": ""}}
+        with patch.object(self.nlpclient, "rest_get",
+                          return_value=returned) as rest_call:
+            results = list(self.nlpclient.rest_get_paginated("/foo/bar",
+                                                             limit=4,
+                                                             offset=4))
+            rest_call.assert_called_once_with("/foo/bar?limit=4&offset=4")
+            assert [returned] == results
+
     def test_rest_post(self):
         """Test rest get"""
         with patch.object(self.nlpclient, "_rest_call",
