@@ -141,7 +141,7 @@ class DataNodeApiClient(NlpApiClient):
 
     def list_fhir_stores(self, datasetid):
         """List the FHIR stores in a dataset"""
-        return self.rest_get(f"/datasets/{datasetid}/fhirStores")
+        return self.rest_get_paginated(f"/datasets/{datasetid}/fhirStores")
 
     def get_fhir_store(self, datasetid, storeid):
         """Get a FHIR store"""
