@@ -66,6 +66,20 @@ class TestApiClient:
             return_body.assert_called_once_with("/foo")
             assert returned == "temp"
 
+    def test_rest_post(self):
+        """Test rest get"""
+        with patch.object(self.nlpclient, "_rest_call",
+                          return_value="/foo") as rest_call, \
+             patch.object(api_client, "_return_rest_body",
+                          return_value='temp') as return_body:
+            returned = self.nlpclient.rest_post("/foo", {"test": "me"},
+                                                endpoint="http://endpoint")
+            rest_call.assert_called_once_with(
+                "post", "/foo", {"test": "me"}, "http://endpoint",
+                headers={'Content-Type': 'application/json'})
+            return_body.assert_called_once_with("/foo")
+            assert returned == "temp"
+
 
 class TestDataNodeApiClient:
     """Test client class"""
