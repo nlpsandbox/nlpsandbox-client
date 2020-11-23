@@ -71,7 +71,7 @@ class TestClient:
 
     def test_list_fhir_stores(self):
         """Test get fhir stores"""
-        with patch.object(self.nlp, "rest_get") as rest_get:
+        with patch.object(self.nlp, "rest_get_paginated") as rest_get:
             self.nlp.list_fhir_stores(datasetid="foo")
             rest_get.assert_called_once_with("/datasets/foo/fhirStores")
 
