@@ -17,7 +17,7 @@ class TestClient:
     def test_list_clinical_notes(self):
         """Test getting clinical notes"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            self.nlp.list_clinical_notes(datasetid="foo", storeid="doo")
+            self.nlp.list_clinical_notes(datasetid="foo", fhir_storeid="doo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo/fhir/Note"
             )
@@ -25,7 +25,7 @@ class TestClient:
     def test_get_clinical_note(self):
         """Test getting clinical note"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_clinical_note(datasetid="foo", storeid="doo",
+            self.nlp.get_clinical_note(datasetid="foo", fhir_storeid="doo",
                                        noteid="boo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo/fhir/Note/boo"
@@ -64,7 +64,8 @@ class TestClient:
     def test_get_annotation_store(self):
         """Test get annotation store"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_annotation_store(datasetid="foo", storeid="doo")
+            self.nlp.get_annotation_store(datasetid="foo",
+                                          annotation_storeid="doo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/annotationStore/doo"
             )
@@ -78,7 +79,7 @@ class TestClient:
     def test_get_fhir_store(self):
         """Test get fhir store"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_fhir_store(datasetid="foo", storeid="doo")
+            self.nlp.get_fhir_store(datasetid="foo", fhir_storeid="doo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo"
             )
