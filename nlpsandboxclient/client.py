@@ -87,16 +87,23 @@ class DataNodeClient:
             annotationid=match.group(3)
         )
 
-#     def create_annotation(self, datasetid, storeid, annotation):
-#         """Create an annotation"""
-#         return self.rest_post(
-#             f"/datasets/{datasetid}/annotationStore/{storeid}/annotations",
-#             body=json.dumps(annotation)
-#         )
+    def create_annotation(self, annotation_store_name, annotationid):
+        """Create an annotation"""
+        match = get_inputs_from_name(
+            annotation_store_name,
+            "datasets/(.*)/annotationStore/(.*)$"
+        )
+        return self.client.create_annotation(
+            datasetid=match.group(1),
+            storeid=match.group(2),
+            annotation=annotationid
+        )
 
-#     def list_fhir_stores(self, datasetid):
-#         """List the FHIR stores in a dataset"""
-#         return self.rest_get(f"/datasets/{datasetid}/fhirStores")
+    def list_fhir_stores(self, datasetname):
+        """List the FHIR stores in a dataset"""
+        match = get_inputs_from_name(datasetname, "datasets/(.*)")
+        fhir_stores=  self.client.list_fhir_stores(datasetid=match.group(1))
+        extract_name(fhir_stores, "fhirStores")
 
 #     def get_fhir_store(self, datasetid, storeid):
 #         """Get a FHIR store"""
