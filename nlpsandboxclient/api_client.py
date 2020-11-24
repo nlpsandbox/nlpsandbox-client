@@ -1,4 +1,7 @@
-"""NLP client object"""
+"""
+NLP SDK client.  For developers only - interfaces with the API and
+does not assume user behavior for how functions would be used.
+"""
 import json
 import urllib.parse
 
@@ -7,9 +10,7 @@ from synapseclient.core import utils
 
 from . import exceptions
 
-# Default data node endpoint is localhost
-# DATA_NODE_HOST = "http://0.0.0.0:8080/api/v1"
-# add this as default for now
+# Default data node endpoint
 DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
 
 
