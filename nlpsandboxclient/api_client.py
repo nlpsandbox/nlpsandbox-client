@@ -196,7 +196,7 @@ class DataNodeApiClient(NlpApiClient):
         )
 
     def create_patient(self, datasetid: str, fhir_storeid: str,
-                      patient: dict):
+                       patient: dict):
         """Create a FHIR patient"""
         return self.rest_post(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Patient",

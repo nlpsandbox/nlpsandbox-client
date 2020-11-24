@@ -164,6 +164,7 @@ class TestDataNodeApiClient:
                 "/datasets/foo/fhirStores/doo/fhir/Note/boo"
             )
 
+
 def test__return_rest_body_text():
     """Test return of text"""
     response = Mock()
