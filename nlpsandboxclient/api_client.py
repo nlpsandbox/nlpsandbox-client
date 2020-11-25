@@ -102,20 +102,20 @@ class DataNodeApiClient(NlpApiClient):
     def list_annotation_stores(self, datasetid: str):
         """List the annotation stores for a dataset"""
         return self.rest_get_paginated(
-            f"/datasets/{datasetid}/annotationStore"
+            f"/datasets/{datasetid}/annotationStores"
         )
 
     def get_annotation_store(self, datasetid: str, annotation_storeid: str):
         """Get an annotation store"""
         return self.rest_get(
-            f"/datasets/{datasetid}/annotationStore/{annotation_storeid}"
+            f"/datasets/{datasetid}/annotationStores/{annotation_storeid}"
         )
 
     def create_annotation_store(self, datasetid: str,
                                 annotation_storeid: str):
         """Create an annotation store"""
         return self.rest_post(
-            f"/datasets/{datasetid}/annotationStore?"
+            f"/datasets/{datasetid}/annotationStores?"
             f"annotationStoreId={annotation_storeid}",
             body=json.dumps({})
         )
@@ -123,7 +123,7 @@ class DataNodeApiClient(NlpApiClient):
     def list_annotations(self, datasetid: str, annotation_storeid: str):
         """List the annotations for an annotation store"""
         return self.rest_get_paginated(
-            f"/datasets/{datasetid}/annotationStore/"
+            f"/datasets/{datasetid}/annotationStores/"
             f"{annotation_storeid}/annotations"
         )
 
@@ -131,7 +131,7 @@ class DataNodeApiClient(NlpApiClient):
                        annotationid: str):
         """Get an annotation"""
         return self.rest_get(
-            f"/datasets/{datasetid}/annotationStore/{annotation_storeid}/"
+            f"/datasets/{datasetid}/annotationStores/{annotation_storeid}/"
             f"annotations/{annotationid}"
         )
 
