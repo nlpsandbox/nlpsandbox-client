@@ -10,7 +10,6 @@ import requests
 from synapseclient import core
 
 from . import exceptions
-from . import utils
 from .datanode.models import (Annotation, AnnotationStore, Dataset,
                               FhirStore, Note, Patient)
 
@@ -188,7 +187,9 @@ class DataNodeApiClient(NlpApiClient):
 
     def list_fhir_stores(self, datasetid: str):
         """List the FHIR stores in a dataset"""
-        fhir_stores = self.rest_get_paginated(f"/datasets/{datasetid}/fhirStores")
+        fhir_stores = self.rest_get_paginated(
+            f"/datasets/{datasetid}/fhirStores"
+        )
         for fhir_store in fhir_stores:
             yield FhirStore(datasetid=datasetid,
                             id=os.path.basename(fhir_store['name']),

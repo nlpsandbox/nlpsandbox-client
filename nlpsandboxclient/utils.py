@@ -1,6 +1,5 @@
 """Utility functions"""
 import json
-import re
 
 
 def stdout_or_json(json_dict: dict, output: str):
