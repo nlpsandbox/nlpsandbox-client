@@ -1,4 +1,7 @@
-"""NLP client object"""
+"""
+NLP SDK client.  For developers only - interfaces with the API and
+does not assume user behavior for how functions would be used.
+"""
 import json
 import urllib.parse
 
@@ -7,9 +10,7 @@ from synapseclient.core import utils
 
 from . import exceptions
 
-# Default data node endpoint is localhost
-# DATA_NODE_HOST = "http://0.0.0.0:8080/api/v1"
-# add this as default for now
+# Default data node endpoint
 DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
 
 
@@ -26,7 +27,7 @@ def _return_rest_body(response):
 
 class NlpApiClient:
     """Nlp base client that does generic rest calls"""
-    def __init__(self, host=None):
+    def __init__(self, host: str = None):
         if host is None:
             host = DATA_NODE_HOST
         self.host = host
@@ -36,21 +37,20 @@ class NlpApiClient:
         """Get the health of the API"""
         return self.rest_get("/service")
 
-    def get_ui(self, return_body=False):
+    def get_ui(self, return_body: bool = False):
         """Get the ui of the API"""
         return self.rest_get("/ui", return_body=return_body)
 
-    def rest_get(self, uri, endpoint=None, return_body=True):
+    def rest_get(self, uri: str, endpoint: str = None,
+                 return_body: bool = True):
         """Sends a HTTP GET request"""
         response = self._rest_call('get', uri, None, endpoint)
         if return_body:
             return _return_rest_body(response)
         return response
 
-    def rest_post(self, uri, body, endpoint=None):
-        """
-        Sends an HTTP POST request.
-        """
+    def rest_post(self, uri: str, body: str, endpoint: str = None):
+        """Sends an HTTP POST request."""
         response = self._rest_call(
             'post', uri, body, endpoint,
             headers={'Content-Type': 'application/json'}
@@ -92,105 +92,116 @@ class DataNodeApiClient(NlpApiClient):
         """Lists all datasets"""
         return self.rest_get_paginated("/datasets")
 
-    def get_dataset(self, datasetid=None):
+    def get_dataset(self, datasetid: str):
         """Get a dataset"""
         return self.rest_get(f"/datasets/{datasetid}")
 
-    def create_dataset(self, datasetid=None):
+    def create_dataset(self, datasetid: str):
         """Create a dataset"""
         return self.rest_post(f"/datasets?datasetId={datasetid}",
                               body=json.dumps({}))
 
-    def list_annotation_stores(self, datasetid=None):
+    def list_annotation_stores(self, datasetid: str):
         """List the annotation stores for a dataset"""
         return self.rest_get_paginated(
             f"/datasets/{datasetid}/annotationStore"
         )
 
-    def get_annotation_store(self, datasetid=None, storeid=None):
+    def get_annotation_store(self, datasetid: str, annotation_storeid: str):
         """Get an annotation store"""
         return self.rest_get(
-            f"/datasets/{datasetid}/annotationStore/{storeid}"
+            f"/datasets/{datasetid}/annotationStore/{annotation_storeid}"
         )
 
-    def create_annotation_store(self, datasetid=None, storeid=None):
+    def create_annotation_store(self, datasetid: str,
+                                annotation_storeid: str):
         """Create an annotation store"""
         return self.rest_post(
             f"/datasets/{datasetid}/annotationStore?"
-            f"annotationStoreId={storeid}",
+            f"annotationStoreId={annotation_storeid}",
             body=json.dumps({})
         )
 
-    def list_annotations(self, datasetid=None, storeid=None):
+    def list_annotations(self, datasetid: str, annotation_storeid: str):
         """List the annotations for an annotation store"""
         return self.rest_get_paginated(
-            f"/datasets/{datasetid}/annotationStore/{storeid}/annotations"
+            f"/datasets/{datasetid}/annotationStore/"
+            f"{annotation_storeid}/annotations"
         )
 
-    def get_annotation(self, datasetid=None, storeid=None, annotationid=None):
+    def get_annotation(self, datasetid: str, annotation_storeid: str,
+                       annotationid: str):
         """Get an annotation"""
         return self.rest_get(
-            f"/datasets/{datasetid}/annotationStore/{storeid}/"
+            f"/datasets/{datasetid}/annotationStore/{annotation_storeid}/"
             f"annotations/{annotationid}"
         )
 
-    def create_annotation(self, datasetid, storeid, annotation):
+    def create_annotation(self, datasetid: str, annotation_storeid: str,
+                          annotation: dict):
         """Create an annotation"""
         return self.rest_post(
-            f"/datasets/{datasetid}/annotationStore/{storeid}/annotations",
+            f"/datasets/{datasetid}/annotationStore/"
+            f"{annotation_storeid}/annotations",
             body=json.dumps(annotation)
         )
 
-    def list_fhir_stores(self, datasetid):
+    def list_fhir_stores(self, datasetid: str):
         """List the FHIR stores in a dataset"""
         return self.rest_get_paginated(f"/datasets/{datasetid}/fhirStores")
 
-    def get_fhir_store(self, datasetid, storeid):
+    def get_fhir_store(self, datasetid: str, fhir_storeid: str):
         """Get a FHIR store"""
-        return self.rest_get(f"/datasets/{datasetid}/fhirStores/{storeid}")
+        return self.rest_get(
+            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}"
+        )
 
-    def create_fhir_store(self, datasetid, storeid):
+    def create_fhir_store(self, datasetid: str, fhir_storeid: str):
         """Create a FHIR store"""
         return self.rest_post(
-            f"/datasets/{datasetid}/fhirStores?fhirStoreId={storeid}",
+            f"/datasets/{datasetid}/fhirStores?fhirStoreId={fhir_storeid}",
             body=json.dumps({})
         )
 
-    def list_clinical_notes(self, datasetid, storeid):
+    def list_clinical_notes(self, datasetid: str, fhir_storeid: str):
         """List clinical notes in a FHIR store"""
         return self.rest_get_paginated(
-            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note"
+            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Note"
         )
 
-    def get_clinical_note(self, datasetid, storeid, noteid):
+    def get_clinical_note(self, datasetid: str, fhir_storeid: str,
+                          noteid: str):
         """Get a clinical note"""
         return self.rest_get(
-            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note/{noteid}"
+            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/"
+            f"Note/{noteid}"
         )
 
-    def create_clinical_note(self, datasetid, storeid, note):
+    def create_clinical_note(self, datasetid: str, fhir_storeid: str,
+                             note: dict):
         """Create a clinical note"""
         return self.rest_post(
-            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Note",
+            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Note",
             body=json.dumps(note)
         )
 
-    def list_patients(self, datasetid, storeid):
+    def list_patients(self, datasetid: str, fhir_storeid: str):
         """Lists the patients in a FHIR store"""
         return self.rest_get_paginated(
-            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Patient"
+            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Patient"
         )
 
-    def get_patient(self, datasetid, storeid, patientid):
+    def get_patient(self, datasetid: str, fhir_storeid: str, patientid: str):
         """Get a FHIR patient"""
         return self.rest_get(
-            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/"
+            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/"
             f"Patient/{patientid}"
         )
 
-    def create_patient(self, datasetid, storeid, patient):
+    def create_patient(self, datasetid: str, fhir_storeid: str,
+                       patient: dict):
         """Create a FHIR patient"""
         return self.rest_post(
-            f"/datasets/{datasetid}/fhirStores/{storeid}/fhir/Patient",
+            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Patient",
             body=json.dumps(patient)
         )
