@@ -34,8 +34,9 @@ class DataNodeClient:
                                 annotation_storeid=None):
         """Create an annotation store"""
         match = utils.get_inputs_from_name(datasetname, "datasets/(.*)")
-        return self.client.create_annotation_store(datasetid=match.group(1),
-                                                   storeid=annotation_storeid)
+        return self.client.create_annotation_store(
+            datasetid=match.group(1), annotation_storeid=annotation_storeid
+        )
 
     def list_annotations(self, annotation_store_name=None):
         """List the annotations for an annotation store"""
@@ -44,7 +45,7 @@ class DataNodeClient:
             "datasets/(.*)/annotationStore/(.*)$"
         )
         annotations = self.client.list_annotations(
-            datasetid=match.group(1), storeid=match.group(2)
+            datasetid=match.group(1), annotation_storeid=match.group(2)
         )
         for annotation in annotations:
             for annot in annotation['annotations']:
@@ -57,11 +58,11 @@ class DataNodeClient:
             "datasets/(.*)/annotationStore/(.*)/annotations/(.*)$"
         )
         return self.client.get_annotation(
-            datasetid=match.group(1), storeid=match.group(2),
+            datasetid=match.group(1), annotation_storeid=match.group(2),
             annotationid=match.group(3)
         )
 
-    def create_annotation(self, annotation_store_name, annotationid):
+    def create_annotation(self, annotation_store_name, annotation):
         """Create an annotation"""
         match = utils.get_inputs_from_name(
             annotation_store_name,
@@ -69,8 +70,8 @@ class DataNodeClient:
         )
         return self.client.create_annotation(
             datasetid=match.group(1),
-            storeid=match.group(2),
-            annotation=annotationid
+            annotation_storeid=match.group(2),
+            annotation=annotation
         )
 
     def list_fhir_stores(self, datasetname):
@@ -83,14 +84,14 @@ class DataNodeClient:
         """Create a FHIR store"""
         match = utils.get_inputs_from_name(datasetname, "datasets/(.*)")
         return self.client.create_fhir_store(datasetid=match.group(1),
-                                             storeid=fhirstoreid)
+                                             fhir_storeid=fhirstoreid)
 
     def list_clinical_notes(self, fhirstore_name):
         """List clinical notes in a FHIR store"""
         match = utils.get_inputs_from_name(fhirstore_name,
                                            "datasets/(.*)/fhirStores/(.*)$")
         notes = self.client.list_clinical_notes(datasetid=match.group(1),
-                                                storeid=match.group(2))
+                                                fhir_storeid=match.group(2))
         for note in notes:
             yield note['notes']
 
@@ -99,7 +100,7 @@ class DataNodeClient:
         match = utils.get_inputs_from_name(fhirstore_name,
                                            "datasets/(.*)/fhirStores/(.*)$")
         return self.client.get_clinical_note(datasetid=match.group(1),
-                                             storeid=match.group(2),
+                                             fhir_storeid=match.group(2),
                                              noteid=noteid)
 
     def create_clinical_note(self, fhirstore_name, noteid):
@@ -107,7 +108,7 @@ class DataNodeClient:
         match = utils.get_inputs_from_name(fhirstore_name,
                                            "datasets/(.*)/fhirStores/(.*)$")
         return self.client.create_clinical_note(datasetid=match.group(1),
-                                                storeid=match.group(2),
+                                                fhir_storeid=match.group(2),
                                                 note=noteid)
 
     def list_patients(self, fhirstore_name):
@@ -115,7 +116,7 @@ class DataNodeClient:
         match = utils.get_inputs_from_name(fhirstore_name,
                                            "datasets/(.*)/fhirStores/(.*)$")
         patients =  self.client.list_patients(datasetid=match.group(1),
-                                              storeid=match.group(2))
+                                              fhir_storeid=match.group(2))
         for patient in patients:
             yield patient['patients']
 
@@ -124,7 +125,7 @@ class DataNodeClient:
         match = utils.get_inputs_from_name(fhirstore_name,
                                            "datasets/(.*)/fhirStores/(.*)$")
         return self.client.get_patient(datasetid=match.group(1),
-                                       storeid=match.group(2),
+                                       fhir_storeid=match.group(2),
                                        patientid=patientid)
 
     def create_patient(self, fhirstore_name, patientid):
@@ -132,27 +133,19 @@ class DataNodeClient:
         match = utils.get_inputs_from_name(fhirstore_name,
                                            "datasets/(.*)/fhirStores/(.*)$")
         return self.client.create_patient(datasetid=match.group(1),
-                                          storeid=match.group(2),
+                                          fhir_storeid=match.group(2),
                                           patient=patientid)
 
 
 def get_clinical_notes(dataset_name, host=api_client.DATA_NODE_HOST):
     """Get all clinical notes for a dataset"""
     nlp = DataNodeClient(host=host)
-    fhir_stores = nlp.list_fhir_stores(datasetname=dataset_name)
-    print(fhir_stores)
-    fhir_store_ids = []
-    for fhir_store_info in fhir_stores:
-        for fhir_store in fhir_store_info['fhirStores']:
-            fhir_store_ids.append(fhir_store['name'].split("/")[3])
-
+    fhirstores = nlp.list_fhir_stores(datasetname=dataset_name)
     all_notes = []
     # Obtain all clinical notes for all fhir stores in a dataset
-    for fhir_store_id in fhir_store_ids:
-        clinical_notes = nlp.list_clinical_notes(datasetid=datasetid,
-                                                 fhir_storeid=fhir_store_id)
+    for fhirstore_name in fhirstores:
+        clinical_notes = nlp.list_clinical_notes(fhirstore_name)
         # Obtain all clinical notes
         for note in clinical_notes:
-            all_notes.extend(note['notes'])
-
+            all_notes.extend(note)
     return all_notes

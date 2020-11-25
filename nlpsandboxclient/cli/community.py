@@ -29,7 +29,7 @@ def get_clinical_notes(output, data_node_host, datasetid):
     """Gets all the clinical notes"""
     data_node_host = (data_node_host if data_node_host is not None
                       else DATA_NODE_HOST)
-    clinical_notes = client.get_clinical_notes(datasetid=datasetid,
+    clinical_notes = client.get_clinical_notes(dataset_name=datasetid,
                                                host=data_node_host)
     # Stdout or store to json
     utils.stdout_or_json(clinical_notes, output)
