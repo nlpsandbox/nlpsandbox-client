@@ -139,7 +139,7 @@ class DataNodeApiClient(NlpApiClient):
                           annotation: dict):
         """Create an annotation"""
         return self.rest_post(
-            f"/datasets/{datasetid}/annotationStore/"
+            f"/datasets/{datasetid}/annotationStores/"
             f"{annotation_storeid}/annotations",
             body=json.dumps(annotation)
         )
