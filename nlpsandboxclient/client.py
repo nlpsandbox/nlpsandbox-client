@@ -73,7 +73,7 @@ class DataNodeClient:
     def list_fhir_stores(self, datasetname: str):
         """List the FHIR stores in a dataset"""
         match = utils.get_inputs_from_name(datasetname, "datasets/(.*)")
-        fhir_stores=  self.client.list_fhir_stores(datasetid=match.group(1))
+        fhir_stores = self.client.list_fhir_stores(datasetid=match.group(1))
         return utils.extract_name(fhir_stores, "fhirStores")
 
     def create_fhir_store(self, datasetname: str, fhirstoreid: str):
@@ -111,8 +111,8 @@ class DataNodeClient:
         """Lists the patients in a FHIR store"""
         match = utils.get_inputs_from_name(fhirstore_name,
                                            "datasets/(.*)/fhirStores/(.*)$")
-        patients =  self.client.list_patients(datasetid=match.group(1),
-                                              fhir_storeid=match.group(2))
+        patients = self.client.list_patients(datasetid=match.group(1),
+                                             fhir_storeid=match.group(2))
         for patient in patients:
             yield patient['patients']
 
