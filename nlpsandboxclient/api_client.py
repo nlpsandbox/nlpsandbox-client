@@ -105,9 +105,9 @@ class DataNodeApiClient(NlpApiClient):
         """Lists all datasets"""
         datasets = self.rest_get_paginated("/datasets")
         for dataset in datasets:
-            match = utils.get_inputs_from_name(dataset['name'],
-                                               "datasets/(.*)")
-            yield Dataset(id=match.group(1), **dataset)
+            # The id of the dataset is found in datasets/{datasetId}
+            # Which is the basename
+            yield Dataset(id=os.path.basename(dataset['name']), **dataset)
 
     def get_dataset(self, datasetid: str):
         """Get a dataset"""
@@ -126,12 +126,8 @@ class DataNodeApiClient(NlpApiClient):
             f"/datasets/{datasetid}/annotationStores"
         )
         for store in annotation_stores:
-            match = utils.get_inputs_from_name(
-                store['name'], "datasets/(.*)/annotationStores/(.*)$"
-            )
-            # TODO; can you os.path.basename
-            yield AnnotationStore(datasetid=match.group(1),
-                                  id=match.group(2),
+            yield AnnotationStore(datasetid=datasetid,
+                                  id=os.path.basename(store['name']),
                                   **store)
 
     def get_annotation_store(self, datasetid: str, annotation_storeid: str):
@@ -160,13 +156,9 @@ class DataNodeApiClient(NlpApiClient):
             f"{annotation_storeid}/annotations"
         )
         for annotation in annotations:
-            match = utils.get_inputs_from_name(
-                annotation['name'],
-                "datasets/(.*)/annotationStores/(.*)/annotations/(.*)"
-            )
-            yield Annotation(datasetid=match.group(1),
-                             annotation_storeid=match.group(2),
-                             id=match.group(3),
+            yield Annotation(datasetid=datasetid,
+                             annotation_storeid=annotation_storeid,
+                             id=os.path.basename(annotation['name']),
                              **annotation)
 
     def get_annotation(self, datasetid: str, annotation_storeid: str,
@@ -189,26 +181,17 @@ class DataNodeApiClient(NlpApiClient):
             f"{annotation_storeid}/annotations",
             body=json.dumps(annotation)
         )
-        match = utils.get_inputs_from_name(
-            annotation['name'],
-            "datasets/(.*)/annotationStores/(.*)/annotations/(.*)"
-        )
-        return Annotation(datasetid=match.group(1),
-                          annotation_storeid=match.group(2),
-                          id=match.group(3),
+        return Annotation(datasetid=datasetid,
+                          annotation_storeid=annotation_storeid,
+                          id=os.path.basename(annotation['name']),
                           **annotation)
 
     def list_fhir_stores(self, datasetid: str):
         """List the FHIR stores in a dataset"""
         fhir_stores = self.rest_get_paginated(f"/datasets/{datasetid}/fhirStores")
         for fhir_store in fhir_stores:
-            match = utils.get_inputs_from_name(
-                fhir_store['name'],
-                "datasets/(.*)/fhirStores/(.*)"
-            )
-            # TODO: Use os.path.basename
-            yield FhirStore(datasetid=match.group(1),
-                            id=match.group(2),
+            yield FhirStore(datasetid=datasetid,
+                            id=os.path.basename(fhir_store['name']),
                             **fhir_store)
 
     def get_fhir_store(self, datasetid: str, fhir_storeid: str):
