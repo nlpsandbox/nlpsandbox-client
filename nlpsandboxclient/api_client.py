@@ -9,7 +9,7 @@ import urllib.parse
 import requests
 from synapseclient import core
 
-from . import exceptions
+from . import utils
 from .datanode.models import (Annotation, AnnotationStore, Dataset,
                               FhirStore, Note, Patient)
 
@@ -81,7 +81,7 @@ class NlpApiClient:
         uri = self._build_uri(uri, endpoint=endpoint)
         requests_method_fn = getattr(self._requests_session, method)
         response = requests_method_fn(uri, data=data, headers=headers)
-        exceptions._raise_for_status(response)
+        utils._raise_for_status(response)
         return response
 
     def _build_uri(self, uri, endpoint=None):
