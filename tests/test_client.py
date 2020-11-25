@@ -122,7 +122,7 @@ class TestDataNodeApiClient:
         """Test get annotation stores"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
             self.nlp.list_annotation_stores(datasetid="foo")
-            rest_get.assert_called_once_with("/datasets/foo/annotationStore")
+            rest_get.assert_called_once_with("/datasets/foo/annotationStores")
 
     def test_get_annotation_store(self):
         """Test get annotation store"""
@@ -130,7 +130,7 @@ class TestDataNodeApiClient:
             self.nlp.get_annotation_store(datasetid="foo",
                                           annotation_storeid="doo")
             rest_get.assert_called_once_with(
-                "/datasets/foo/annotationStore/doo"
+                "/datasets/foo/annotationStores/doo"
             )
 
     def test_list_fhir_stores(self):
