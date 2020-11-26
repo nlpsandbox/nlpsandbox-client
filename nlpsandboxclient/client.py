@@ -11,7 +11,7 @@ def get_clinical_notes(host, datasetid):
     # Obtain all clinical notes for all fhir stores in a dataset
     for fhir_store in fhir_stores:
         clinical_notes = nlp.list_clinical_notes(
-            datasetid=fhir_store.datasetid, fhir_storeid=fhir_store.id
+            datasetid=datasetid, fhir_storeid=fhir_store.id
         )
         # Obtain all clinical notes
         for note in clinical_notes:
@@ -19,7 +19,7 @@ def get_clinical_notes(host, datasetid):
                 "id": note.id,
                 "noteType": note.note_type,
                 "patientId": note.patientid,
-                "text": note.text
+                "text": note.text,
+                "name": f"dataset/{datasetid}/fhirStores/{fhir_store.id}/fhir/Note/{note.id}"
             })
-
     return all_notes
