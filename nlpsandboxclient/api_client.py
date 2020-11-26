@@ -55,8 +55,7 @@ class NlpApiClient:
     def rest_post(self, uri: str, body: str, endpoint: str = None):
         """Sends an HTTP POST request."""
         response = self._rest_call(
-            'post', uri, body, endpoint,
-            headers={'Content-Type': 'application/json'}
+            'post', uri, body, endpoint
         )
         return _return_rest_body(response)
 
@@ -80,7 +79,7 @@ class NlpApiClient:
         """Sends HTTP requests"""
         uri = self._build_uri(uri, endpoint=endpoint)
         requests_method_fn = getattr(self._requests_session, method)
-        response = requests_method_fn(uri, data=data, headers=headers)
+        response = requests_method_fn(uri, json=data, headers=headers)
         utils._raise_for_status(response)
         return response
 
@@ -116,7 +115,7 @@ class DataNodeApiClient(NlpApiClient):
     def create_dataset(self, datasetid: str):
         """Create a dataset"""
         dataset = self.rest_post(f"/datasets?datasetId={datasetid}",
-                                 body=json.dumps({}))
+                                 body={})
         return Dataset(id=datasetid, **dataset)
 
     def list_annotation_stores(self, datasetid: str):
@@ -143,7 +142,7 @@ class DataNodeApiClient(NlpApiClient):
         store = self.rest_post(
             f"/datasets/{datasetid}/annotationStores?"
             f"annotationStoreId={annotation_storeid}",
-            body=json.dumps({})
+            body={}
         )
         return AnnotationStore(datasetid=datasetid, id=annotation_storeid,
                                **store)
@@ -178,7 +177,7 @@ class DataNodeApiClient(NlpApiClient):
         annotation = self.rest_post(
             f"/datasets/{datasetid}/annotationStores/"
             f"{annotation_storeid}/annotations",
-            body=json.dumps(annotation)
+            body=annotation
         )
         return Annotation(datasetid=datasetid,
                           annotation_storeid=annotation_storeid,
@@ -207,7 +206,7 @@ class DataNodeApiClient(NlpApiClient):
         """Create a FHIR store"""
         fhir_store = self.rest_post(
             f"/datasets/{datasetid}/fhirStores?fhirStoreId={fhir_storeid}",
-            body=json.dumps({})
+            body={}
         )
         return FhirStore(datasetid=datasetid, id=fhir_storeid,
                          **fhir_store)
@@ -240,7 +239,7 @@ class DataNodeApiClient(NlpApiClient):
         """
         note_body = self.rest_post(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Note",
-            body=json.dumps(note)
+            body=note
         )
         return Note(datasetid=datasetid, fhir_storeid=fhir_storeid,
                     **note_body)
@@ -268,7 +267,7 @@ class DataNodeApiClient(NlpApiClient):
         """Create a FHIR patient"""
         patient = self.rest_post(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Patient",
-            body=json.dumps(patient)
+            body=patient
         )
         return Patient(datasetid=datasetid, fhir_storeid=fhir_storeid,
                        **patient)
