@@ -20,6 +20,6 @@ def get_clinical_notes(host, datasetid):
                 "noteType": note.note_type,
                 "patientId": note.patientid,
                 "text": note.text,
-                "name": f"dataset/{datasetid}/fhirStores/{fhir_store.id}/fhir/Note/{note.id}"
+                "note_name": f"dataset/{datasetid}/fhirStores/{fhir_store.id}/fhir/Note/{note.id}"
             })
     return all_notes
