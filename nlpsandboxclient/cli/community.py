@@ -35,6 +35,23 @@ def get_clinical_notes(output, data_node_host, datasetid):
     utils.stdout_or_json(clinical_notes, output)
 
 
+@cli.command()
+@click.option('--data_node_host',
+              help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
+@click.option('--dataset_id', help='Dataset id')
+@click.option('--annotation_store_id', help='Dataset id')
+@click.option('--annotation_json', help='Json file with annotations to store',
+              type=click.Path(exists=True))
+def store_annotations(output, data_node_host, datasetid):
+    """Gets all the clinical notes"""
+    data_node_host = (data_node_host if data_node_host is not None
+                      else DATA_NODE_HOST)
+    clinical_notes = client.store_annotation(host=data_node_host,
+                                             datasetid=datasetid)
+    # Stdout or store to json
+    utils.stdout_or_json(clinical_notes, output)
+
+
 # @cli.command()
 # @click.argument('noteid', type=click.INT)
 # @click.option('--output', help='Output json filepath', type=click.Path())

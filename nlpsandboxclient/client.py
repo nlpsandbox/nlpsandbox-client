@@ -1,7 +1,8 @@
 """NLP client object"""
-from typing import List
+from typing import Iterator, List, Union
 
 from .api_client import DataNodeApiClient
+from .datanode.models import Annotation, AnnotationStore
 
 
 def get_clinical_notes(host: str, datasetid: str) -> List[dict]:
@@ -25,3 +26,20 @@ def get_clinical_notes(host: str, datasetid: str) -> List[dict]:
                 "note_name": f"dataset/{datasetid}/fhirStores/{fhir_store.id}/fhir/Note/{note.id}"
             })
     return all_notes
+
+
+def store_annotation(host: str,
+                     annotation_store: AnnotationStore,
+                     annotations: Union[dict, List[dict]]) -> Iterator[Annotation]:
+    """Store annotation"""
+    nlp = DataNodeApiClient(host=host)
+    if isinstance(annotations, dict):
+        annotations = [annotations]
+    for one_annot in annotations:
+        annotation_obj = nlp.create_annotation(
+            datasetid=annotation_store.datasetid,
+            annotation_storeid=annotation_store.id,
+            annotation=one_annot
+        )
+        yield annotation_obj
+
