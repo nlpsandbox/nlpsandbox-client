@@ -61,14 +61,14 @@ class NlpApiClient:
 
     def rest_get_paginated(self, uri, limit=10, offset=0):
         """Get pagniated rest call"""
-        new_uri = core.utils._limit_and_offset(uri, limit=limit, offset=offset)
-        while new_uri:
-            page = self.rest_get(new_uri)
-            new_uri = page['links']['next']
+        page_uri = core.utils._limit_and_offset(uri, limit=limit,
+                                                offset=offset)
+        while page_uri:
+            page = self.rest_get(page_uri)
+            page_uri = page['links']['next']
             # Make sure to only return the list of resources
-            page.pop("limit")
-            page.pop("links")
-            page.pop("offset")
+            for key in ['limit', 'links', 'offset']:
+                page.pop(key)
             # This will yield the list of resources
             # 'dict_keys' object is not subscriptable
             resouces = page.pop(list(page.keys())[0])
