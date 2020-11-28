@@ -214,8 +214,7 @@ class DataNodeApiClient(NlpApiClient):
         return FhirStore(datasetid=datasetid, id=fhir_storeid,
                          **fhir_store)
 
-    def list_clinical_notes(self, datasetid: str,
-                            fhir_storeid: str) -> Iterator[Note]:
+    def list_notes(self, datasetid: str, fhir_storeid: str) -> Iterator[Note]:
         """List clinical notes in a FHIR store"""
         notes = self.rest_get_paginated(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Note"
@@ -223,8 +222,8 @@ class DataNodeApiClient(NlpApiClient):
         for note in notes:
             yield Note(datasetid=datasetid, fhir_storeid=fhir_storeid, **note)
 
-    def get_clinical_note(self, datasetid: str, fhir_storeid: str,
-                          noteid: str) -> Note:
+    def get_note(self, datasetid: str, fhir_storeid: str,
+                 noteid: str) -> Note:
         """Get a clinical note"""
         note = self.rest_get(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/"
@@ -232,8 +231,8 @@ class DataNodeApiClient(NlpApiClient):
         )
         return Note(datasetid=datasetid, fhir_storeid=fhir_storeid, **note)
 
-    def create_clinical_note(self, datasetid: str, fhir_storeid: str,
-                             note: dict) -> Note:
+    def create_note(self, datasetid: str, fhir_storeid: str,
+                    note: dict) -> Note:
         """Create a clinical note
 
         Args:

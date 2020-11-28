@@ -149,7 +149,7 @@ class TestDataNodeApiClient:
                 "/datasets/foo/fhirStores/doo"
             )
 
-    def test_list_clinical_notes(self):
+    def test_list_notes(self):
         """Test getting clinical notes"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
             list(self.nlp.list_clinical_notes(datasetid="foo",
@@ -158,7 +158,7 @@ class TestDataNodeApiClient:
                 "/datasets/foo/fhirStores/doo/fhir/Note"
             )
 
-    def test_get_clinical_note(self):
+    def test_get_note(self):
         """Test getting clinical note"""
         with patch.object(self.nlp, "rest_get") as rest_get:
             self.nlp.get_clinical_note(datasetid="foo", fhir_storeid="doo",
