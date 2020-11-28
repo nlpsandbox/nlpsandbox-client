@@ -1,6 +1,9 @@
 """Models for the data node"""
+
+
 # Define models
 class Model:
+    """Base model class"""
     def __init__(self, **kwargs):
         self.kwargs = kwargs
 
@@ -18,18 +21,19 @@ class Model:
 
 
 class Dataset(Model):
+    """Dataset model"""
     pass
 
 
 class AnnotationStore(Model):
-
+    """AnnotationStore model"""
     @property
     def datasetid(self):
         return self.kwargs.get("datasetid")
 
 
 class Annotation(Model):
-
+    """Annotation model"""
     @property
     def datasetid(self):
         return self.kwargs.get("datasetid")
@@ -54,14 +58,17 @@ class Annotation(Model):
     def text_physical_address_annotations(self):
         return self.kwargs.get("textPhysicalAddressAnnotations")
 
-    
+
 class FhirStore(Model):
+    """FhirStore model"""
+
     @property
     def datasetid(self):
         return self.kwargs.get("datasetid")
 
 
 class Note(Model):
+    """Clinical note model"""
     @property
     def datasetid(self):
         return self.kwargs.get("datasetid")
@@ -84,6 +91,7 @@ class Note(Model):
 
 
 class Patient(Model):
+    """Patient model"""
     @property
     def datasetid(self):
         return self.kwargs.get("datasetid")
