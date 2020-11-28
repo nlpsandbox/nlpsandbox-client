@@ -24,13 +24,13 @@ def get_num_users():
 @click.option('--output', help='Output json filepath', type=click.Path())
 @click.option('--data_node_host',
               help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
-@click.option('--datasetid', help='Dataset id')
-def get_clinical_notes(output, data_node_host, datasetid):
+@click.option('--dataset_id', help='Dataset id')
+def get_clinical_notes(output, data_node_host, dataset_id):
     """Gets all the clinical notes"""
     data_node_host = (data_node_host if data_node_host is not None
                       else DATA_NODE_HOST)
     clinical_notes = client.get_clinical_notes(host=data_node_host,
-                                               datasetid=datasetid)
+                                               dataset_id=dataset_id)
     # Stdout or store to json
     utils.stdout_or_json(clinical_notes, output)
 

@@ -19,7 +19,7 @@ def get_clinical_notes(host: str, dataset_id: str) -> List[dict]:
             all_notes.append({
                 "id": note.id,
                 "noteType": note.note_type,
-                "patientId": note.patientid,
+                "patientId": note.patient_id,
                 "text": note.text,
                 "note_name": f"dataset/{dataset_id}/fhirStores/{fhir_store.id}/fhir/Note/{note.id}"
             })
