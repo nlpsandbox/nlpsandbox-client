@@ -12,9 +12,8 @@ def get_clinical_notes(host: str, dataset_id: str) -> List[dict]:
     all_notes = []
     # Obtain all clinical notes for all fhir stores in a dataset
     for fhir_store in fhir_stores:
-        clinical_notes = nlp.list_clinical_notes(
-            dataset_id=dataset_id, fhir_store_id=fhir_store.id
-        )
+        clinical_notes = nlp.list_notes(datasetid=datasetid,
+                                        fhir_storeid=fhir_store.id)
         # Obtain all clinical notes
         for note in clinical_notes:
             all_notes.append({
