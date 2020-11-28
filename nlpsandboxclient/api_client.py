@@ -2,8 +2,8 @@
 NLP SDK client.  For developers only - interfaces with the API and
 does not assume user behavior for how functions would be used.
 """
-import json
 import os
+from typing import Iterator
 import urllib.parse
 
 import requests
@@ -99,7 +99,7 @@ class NlpApiClient:
 class DataNodeApiClient(NlpApiClient):
     """Nlp client to interact with data node"""
 
-    def list_datasets(self):
+    def list_datasets(self) -> Iterator[Dataset]:
         """Lists all datasets"""
         datasets = self.rest_get_paginated("/datasets")
         for dataset in datasets:
@@ -107,18 +107,19 @@ class DataNodeApiClient(NlpApiClient):
             # Which is the basename
             yield Dataset(id=os.path.basename(dataset['name']), **dataset)
 
-    def get_dataset(self, datasetid: str):
+    def get_dataset(self, datasetid: str) -> Dataset:
         """Get a dataset"""
         dataset = self.rest_get(f"/datasets/{datasetid}")
         return Dataset(id=datasetid, **dataset)
 
-    def create_dataset(self, datasetid: str):
+    def create_dataset(self, datasetid: str) -> Dataset:
         """Create a dataset"""
         dataset = self.rest_post(f"/datasets?datasetId={datasetid}",
                                  body={})
         return Dataset(id=datasetid, **dataset)
 
-    def list_annotation_stores(self, datasetid: str):
+    def list_annotation_stores(self,
+                               datasetid: str) -> Iterator[AnnotationStore]:
         """List the annotation stores for a dataset"""
         annotation_stores = self.rest_get_paginated(
             f"/datasets/{datasetid}/annotationStores"
@@ -128,7 +129,8 @@ class DataNodeApiClient(NlpApiClient):
                                   id=os.path.basename(store['name']),
                                   **store)
 
-    def get_annotation_store(self, datasetid: str, annotation_storeid: str):
+    def get_annotation_store(self, datasetid: str,
+                             annotation_storeid: str) -> AnnotationStore:
         """Get an annotation store"""
         store = self.rest_get(
             f"/datasets/{datasetid}/annotationStores/{annotation_storeid}"
@@ -137,7 +139,7 @@ class DataNodeApiClient(NlpApiClient):
                                **store)
 
     def create_annotation_store(self, datasetid: str,
-                                annotation_storeid: str):
+                                annotation_storeid: str) -> AnnotationStore:
         """Create an annotation store"""
         store = self.rest_post(
             f"/datasets/{datasetid}/annotationStores?"
@@ -147,7 +149,8 @@ class DataNodeApiClient(NlpApiClient):
         return AnnotationStore(datasetid=datasetid, id=annotation_storeid,
                                **store)
 
-    def list_annotations(self, datasetid: str, annotation_storeid: str):
+    def list_annotations(self, datasetid: str,
+                         annotation_storeid: str) -> Iterator[Annotation]:
         """List the annotations for an annotation store"""
         annotations = self.rest_get_paginated(
             f"/datasets/{datasetid}/annotationStores/"
@@ -160,7 +163,7 @@ class DataNodeApiClient(NlpApiClient):
                              **annotation)
 
     def get_annotation(self, datasetid: str, annotation_storeid: str,
-                       annotationid: str):
+                       annotationid: str) -> Annotation:
         """Get an annotation"""
         annotation = self.rest_get(
             f"/datasets/{datasetid}/annotationStores/{annotation_storeid}/"
@@ -172,7 +175,7 @@ class DataNodeApiClient(NlpApiClient):
                           **annotation)
 
     def create_annotation(self, datasetid: str, annotation_storeid: str,
-                          annotation: dict):
+                          annotation: dict) -> Annotation:
         """Create an annotation"""
         annotation = self.rest_post(
             f"/datasets/{datasetid}/annotationStores/"
@@ -184,7 +187,7 @@ class DataNodeApiClient(NlpApiClient):
                           id=os.path.basename(annotation['name']),
                           **annotation)
 
-    def list_fhir_stores(self, datasetid: str):
+    def list_fhir_stores(self, datasetid: str) -> Iterator[FhirStore]:
         """List the FHIR stores in a dataset"""
         fhir_stores = self.rest_get_paginated(
             f"/datasets/{datasetid}/fhirStores"
@@ -194,7 +197,7 @@ class DataNodeApiClient(NlpApiClient):
                             id=os.path.basename(fhir_store['name']),
                             **fhir_store)
 
-    def get_fhir_store(self, datasetid: str, fhir_storeid: str):
+    def get_fhir_store(self, datasetid: str, fhir_storeid: str) -> FhirStore:
         """Get a FHIR store"""
         fhir_store = self.rest_get(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}"
@@ -202,7 +205,8 @@ class DataNodeApiClient(NlpApiClient):
         return FhirStore(datasetid=datasetid, id=fhir_storeid,
                          **fhir_store)
 
-    def create_fhir_store(self, datasetid: str, fhir_storeid: str):
+    def create_fhir_store(self, datasetid: str,
+                          fhir_storeid: str) -> FhirStore:
         """Create a FHIR store"""
         fhir_store = self.rest_post(
             f"/datasets/{datasetid}/fhirStores?fhirStoreId={fhir_storeid}",
@@ -211,7 +215,8 @@ class DataNodeApiClient(NlpApiClient):
         return FhirStore(datasetid=datasetid, id=fhir_storeid,
                          **fhir_store)
 
-    def list_clinical_notes(self, datasetid: str, fhir_storeid: str):
+    def list_clinical_notes(self, datasetid: str,
+                            fhir_storeid: str) -> Iterator[Note]:
         """List clinical notes in a FHIR store"""
         notes = self.rest_get_paginated(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Note"
@@ -220,7 +225,7 @@ class DataNodeApiClient(NlpApiClient):
             yield Note(datasetid=datasetid, fhir_storeid=fhir_storeid, **note)
 
     def get_clinical_note(self, datasetid: str, fhir_storeid: str,
-                          noteid: str):
+                          noteid: str) -> Note:
         """Get a clinical note"""
         note = self.rest_get(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/"
@@ -229,7 +234,7 @@ class DataNodeApiClient(NlpApiClient):
         return Note(datasetid=datasetid, fhir_storeid=fhir_storeid, **note)
 
     def create_clinical_note(self, datasetid: str, fhir_storeid: str,
-                             note: dict):
+                             note: dict) -> Note:
         """Create a clinical note
 
         Args:
@@ -244,7 +249,8 @@ class DataNodeApiClient(NlpApiClient):
         return Note(datasetid=datasetid, fhir_storeid=fhir_storeid,
                     **note_body)
 
-    def list_patients(self, datasetid: str, fhir_storeid: str):
+    def list_patients(self, datasetid: str,
+                      fhir_storeid: str) -> Iterator[Patient]:
         """Lists the patients in a FHIR store"""
         patients = self.rest_get_paginated(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Patient"
@@ -253,7 +259,8 @@ class DataNodeApiClient(NlpApiClient):
             yield Patient(datasetid=datasetid, fhir_storeid=fhir_storeid,
                           **patient)
 
-    def get_patient(self, datasetid: str, fhir_storeid: str, patientid: str):
+    def get_patient(self, datasetid: str, fhir_storeid: str,
+                    patientid: str) -> Patient:
         """Get a FHIR patient"""
         patient = self.rest_get(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/"
@@ -263,7 +270,7 @@ class DataNodeApiClient(NlpApiClient):
                        **patient)
 
     def create_patient(self, datasetid: str, fhir_storeid: str,
-                       patient: dict):
+                       patient: dict) -> Patient:
         """Create a FHIR patient"""
         patient = self.rest_post(
             f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Patient",
