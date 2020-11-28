@@ -1,8 +1,10 @@
 """NLP client object"""
+from typing import List
+
 from .api_client import DataNodeApiClient
 
 
-def get_clinical_notes(host: str, datasetid: str) -> dict:
+def get_clinical_notes(host: str, datasetid: str) -> List[dict]:
     """Get all clinical notes for a dataset"""
     nlp = DataNodeApiClient(host=host)
     fhir_stores = nlp.list_fhir_stores(datasetid=datasetid)
