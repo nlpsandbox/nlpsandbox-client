@@ -95,7 +95,6 @@ class NlpApiClient:
         return uri
 
 
-
 class DataNodeApiClient(NlpApiClient):
     """Nlp client to interact with data node"""
 
