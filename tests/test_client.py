@@ -152,8 +152,8 @@ class TestDataNodeApiClient:
     def test_list_notes(self):
         """Test getting clinical notes"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            list(self.nlp.list_clinical_notes(datasetid="foo",
-                                              fhir_storeid="doo"))
+            list(self.nlp.list_notes(datasetid="foo",
+                                     fhir_storeid="doo"))
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo/fhir/Note"
             )
@@ -161,8 +161,8 @@ class TestDataNodeApiClient:
     def test_get_note(self):
         """Test getting clinical note"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_clinical_note(datasetid="foo", fhir_storeid="doo",
-                                       noteid="boo")
+            self.nlp.get_note(datasetid="foo", fhir_storeid="doo",
+                              noteid="boo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo/fhir/Note/boo"
             )
