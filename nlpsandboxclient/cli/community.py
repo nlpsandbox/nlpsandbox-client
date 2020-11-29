@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
+import json
+
 import click
 import synapseclient
 
 from nlpsandboxclient import client, utils
 from nlpsandboxclient.api_client import DATA_NODE_HOST
-
+from nlpsandboxclient.datanode.models import AnnotationStore
 
 # Command Group
 @click.group(name='community')
@@ -42,14 +44,25 @@ def get_clinical_notes(output, data_node_host, datasetid):
 @click.option('--annotation_store_id', help='Dataset id')
 @click.option('--annotation_json', help='Json file with annotations to store',
               type=click.Path(exists=True))
-def store_annotations(output, data_node_host, datasetid):
+def store_annotations(data_node_host, dataset_id, annotation_store_id,
+                      annotation_json):
     """Gets all the clinical notes"""
     data_node_host = (data_node_host if data_node_host is not None
                       else DATA_NODE_HOST)
-    clinical_notes = client.store_annotation(host=data_node_host,
-                                             datasetid=datasetid)
-    # Stdout or store to json
-    utils.stdout_or_json(clinical_notes, output)
+    with open(annotation_json, "r") as annot_f:
+        annotations = json.load(annot_f)
+    # If only one annotation is passed in, turn it into a list
+    if isinstance(annotations, dict):
+        annotations = [annotations]
+    # Create annotation store object
+    annotation_store = AnnotationStore(dataset_id=dataset_id,
+                                       id=annotation_store_id)
+    for annotation in annotations:
+        client.store_annotation(
+            host=data_node_host,
+            annotation_store=annotation_store,
+            annotation=annotation
+        )
 
 
 # @cli.command()

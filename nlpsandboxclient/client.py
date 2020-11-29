@@ -30,16 +30,12 @@ def get_clinical_notes(host: str, datasetid: str) -> List[dict]:
 
 def store_annotation(host: str,
                      annotation_store: AnnotationStore,
-                     annotations: Union[dict, List[dict]]) -> Iterator[Annotation]:
+                     annotation: dict) -> Annotation:
     """Store annotation"""
     nlp = DataNodeApiClient(host=host)
-    if isinstance(annotations, dict):
-        annotations = [annotations]
-    for one_annot in annotations:
-        annotation_obj = nlp.create_annotation(
-            datasetid=annotation_store.datasetid,
-            annotation_storeid=annotation_store.id,
-            annotation=one_annot
-        )
-        yield annotation_obj
-
+    annotation_obj = nlp.create_annotation(
+        datasetid=annotation_store.datasetid,
+        annotation_storeid=annotation_store.id,
+        annotation=annotation
+    )
+    return annotation_obj
