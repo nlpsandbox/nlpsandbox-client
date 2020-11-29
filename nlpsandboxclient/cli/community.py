@@ -8,6 +8,7 @@ from nlpsandboxclient import client, utils
 from nlpsandboxclient.api_client import DATA_NODE_HOST
 from nlpsandboxclient.datanode.models import AnnotationStore
 
+
 # Command Group
 @click.group(name='community')
 def cli():

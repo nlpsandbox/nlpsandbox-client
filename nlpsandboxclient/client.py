@@ -1,5 +1,5 @@
 """NLP client object"""
-from typing import Iterator, List, Union
+from typing import List
 
 from .api_client import DataNodeApiClient
 from .datanode.models import Annotation, AnnotationStore
