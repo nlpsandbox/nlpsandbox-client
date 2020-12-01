@@ -5,6 +5,7 @@
    :maxdepth: 2
 
    python/api_client
+   python/client
 
 .. toctree::
    :caption: Command-Line Client
