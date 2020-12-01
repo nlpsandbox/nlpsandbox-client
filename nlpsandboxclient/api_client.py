@@ -402,7 +402,7 @@ class DataNodeApiClient(NlpApiClient):
             dataset_id: Dataset Id
             fhir_store_id: Fhir Store Id
 
-        Yields:
+        Returns:
             Fhir Store
 
         Examples:
@@ -422,7 +422,24 @@ class DataNodeApiClient(NlpApiClient):
 
     def create_fhir_store(self, dataset_id: str,
                           fhir_store_id: str) -> FhirStore:
-        """Create a FHIR store"""
+        """Create a FHIR store
+
+        Args:
+            dataset_id: Dataset Id
+            fhir_store_id: Fhir Store Id
+
+        Returns:
+            Fhir Store
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> fhir_stores = nlp.create_fhir_store(
+            >>>     dataset_id="awesome-dataset",
+            >>>     fhir_store_id="my-fhir-store"
+            >>> )
+            >>> fhir_stores.id
+            my-fhir-store
+        """
         fhir_store = self.rest_post(
             f"/datasets/{dataset_id}/fhirStores?fhirStoreId={fhir_store_id}",
             body={}
@@ -430,17 +447,54 @@ class DataNodeApiClient(NlpApiClient):
         return FhirStore(dataset_id=dataset_id, id=fhir_store_id,
                          **fhir_store)
 
-    def list_notes(self, dataset_id: str, fhir_store_id: str) -> Iterator[Note]:
-        """List clinical notes in a FHIR store"""
+    def list_notes(self, dataset_id: str,
+                   fhir_store_id: str) -> Iterator[Note]:
+        """List clinical notes in a FHIR store
+
+        Args:
+            dataset_id: Dataset Id
+            fhir_store_id: Fhir Store Id
+
+        Yields:
+            Clinical notes
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> notes = nlp.list_notes(
+            >>>     dataset_id="awesome-dataset",
+            >>>     fhir_store_id="my-fhir-store"
+            >>> )
+        """
         notes = self.rest_get_paginated(
             f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note"
         )
         for note in notes:
-            yield Note(dataset_id=dataset_id, fhir_store_id=fhir_store_id, **note)
+            yield Note(dataset_id=dataset_id, fhir_store_id=fhir_store_id,
+                       **note)
 
     def get_note(self, dataset_id: str, fhir_store_id: str,
                  note_id: str) -> Note:
-        """Get a clinical note"""
+        """Get a clinical note
+
+        Args:
+            dataset_id: Dataset Id
+            fhir_store_id: Fhir Store Id
+            note_id: Clinical note Id
+
+        Returns:
+            Clinical note
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> note = nlp.get_note(
+            >>>     dataset_id="awesome-dataset",
+            >>>     fhir_store_id="my-fhir-store",
+            >>>     note_id="my-note"
+            >>> )
+            >>> note.id
+            my-note
+
+        """
         note = self.rest_get(
             f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/"
             f"Note/{note_id}"
@@ -455,6 +509,24 @@ class DataNodeApiClient(NlpApiClient):
             dataset_id: Dataset id
             fhir_store_id: FHIR store id
             note: Note request body
+
+        Returns:
+            Clinical note
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> example_note = {
+            >>>     "noteType": "loinc:LP29684-5",
+            >>>     "patientId": "507f1f77bcf86cd799439011",
+            >>>     "text": "This is the content of a clinical note."
+            >>> }
+            >>> note = nlp.create_note(
+            >>>     dataset_id="awesome-dataset",
+            >>>     fhir_store_id="my-fhir-store",
+            >>>     note=example_note
+            >>> )
+            >>> note.id
+            my-note
         """
         note_body = self.rest_post(
             f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note",
