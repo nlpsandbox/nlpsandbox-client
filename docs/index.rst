@@ -11,7 +11,7 @@
    :caption: Command-Line Client
    :maxdepth: 2
 
-   client/overview
+   cli/overview
 
 .. toctree::
    :caption: About
