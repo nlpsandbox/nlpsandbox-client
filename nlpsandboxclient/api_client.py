@@ -373,7 +373,20 @@ class DataNodeApiClient(NlpApiClient):
                           **annotation)
 
     def list_fhir_stores(self, dataset_id: str) -> Iterator[FhirStore]:
-        """List the FHIR stores in a dataset"""
+        """List the FHIR stores in a dataset
+
+        Args:
+            dataset_id: Dataset Id
+
+        Yields:
+            Fhir Store
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> fhir_stores = nlp.list_fhir_stores(
+            >>>     dataset_id="awesome-dataset",
+            >>> )
+        """
         fhir_stores = self.rest_get_paginated(
             f"/datasets/{dataset_id}/fhirStores"
         )
@@ -383,7 +396,24 @@ class DataNodeApiClient(NlpApiClient):
                             **fhir_store)
 
     def get_fhir_store(self, dataset_id: str, fhir_store_id: str) -> FhirStore:
-        """Get a FHIR store"""
+        """Get a FHIR store
+
+        Args:
+            dataset_id: Dataset Id
+            fhir_store_id: Fhir Store Id
+
+        Yields:
+            Fhir Store
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> fhir_stores = nlp.get_fhir_store(
+            >>>     dataset_id="awesome-dataset",
+            >>>     fhir_store_id="my-fhir-store"
+            >>> )
+            >>> fhir_stores.id
+            my-fhir-store
+        """
         fhir_store = self.rest_get(
             f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}"
         )
