@@ -4,7 +4,7 @@ import setuptools
 setuptools.setup(
     # basic
     name='nlpsandbox-client',
-    version='0.1.1',
+    version='0.2.0',
     # packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     # py_modules=['hello'],
     # scripts=['bin/nlp-evaluate'],
@@ -23,19 +23,19 @@ setuptools.setup(
     ],
 
     # metadata to display on PyPI
-    description='Python client for the NLP Sandbox',
+    description='NLP Sandbox Client Library for Python',
     long_description="TBA",
     long_description_content_type="text/markdown",
-    url='https://www.synapse.org/nlp_sandbox',
+    url='https://github.com/nlpsandbox',
     author='The NLP Sandbox Team',
     author_email='thomas.schaffter@sagebionetworks.org',
     license='Apache',
     project_urls={
-        "Source Code": "https://github.com/Sage-Bionetworks/nlp-sandbox-client",
-        "Bug Tracker": "https://github.com/Sage-Bionetworks/nlp-sandbox-client/issues",
+        "Source Code": "https://github.com/nlpsandbox/nlpsandbox-client",
+        "Bug Tracker": "https://github.com/nlpsandbox/nlpsandbox-client/issues",
     },
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 2 - Pre-Alpha',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
