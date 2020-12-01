@@ -28,19 +28,19 @@ class Dataset(Model):
 class AnnotationStore(Model):
     """AnnotationStore model"""
     @property
-    def datasetid(self):
-        return self.kwargs.get("datasetid")
+    def dataset_id(self):
+        return self.kwargs.get("dataset_id")
 
 
 class Annotation(Model):
     """Annotation model"""
     @property
-    def datasetid(self):
-        return self.kwargs.get("datasetid")
+    def dataset_id(self):
+        return self.kwargs.get("dataset_id")
 
     @property
     def annotation_store_id(self):
-        return self.kwargs.get("annotation_storeid")
+        return self.kwargs.get("annotation_store_id")
 
     @property
     def annotation_source(self):
@@ -63,26 +63,26 @@ class FhirStore(Model):
     """FhirStore model"""
 
     @property
-    def datasetid(self):
-        return self.kwargs.get("datasetid")
+    def dataset_id(self):
+        return self.kwargs.get("dataset_id")
 
 
 class Note(Model):
     """Clinical note model"""
     @property
-    def datasetid(self):
-        return self.kwargs.get("datasetid")
+    def dataset_id(self):
+        return self.kwargs.get("dataset_id")
 
     @property
-    def fhir_storeid(self):
-        return self.kwargs.get("fhir_storeid")
+    def fhir_store_id(self):
+        return self.kwargs.get("fhir_store_id")
 
     @property
     def note_type(self):
         return self.kwargs.get("noteType")
 
     @property
-    def patientid(self):
+    def patient_id(self):
         return self.kwargs.get("patientId")
 
     @property
@@ -93,12 +93,12 @@ class Note(Model):
 class Patient(Model):
     """Patient model"""
     @property
-    def datasetid(self):
-        return self.kwargs.get("datasetid")
+    def dataset_id(self):
+        return self.kwargs.get("dataset_id")
 
     @property
-    def fhir_storeid(self):
-        return self.kwargs.get("fhir_storeid")
+    def fhir_store_id(self):
+        return self.kwargs.get("fhir_store_id")
 
     @property
     def gender(self):
