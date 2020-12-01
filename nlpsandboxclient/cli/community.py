@@ -47,7 +47,7 @@ def get_clinical_notes(output, data_node_host, dataset_id):
               type=click.Path(exists=True))
 def store_annotations(data_node_host, dataset_id, annotation_store_id,
                       annotation_json):
-    """Gets all the clinical notes"""
+    """Store annotations"""
     data_node_host = (data_node_host if data_node_host is not None
                       else DATA_NODE_HOST)
     with open(annotation_json, "r") as annot_f:
