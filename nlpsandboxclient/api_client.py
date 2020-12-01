@@ -59,7 +59,8 @@ class NlpApiClient:
 
         Examples:
             >>> nlp = NlpApiClient()
-            nlp.get_service()
+            >>> nlp.get_service()
+
         """
         return self.rest_get("/service")
 
@@ -74,7 +75,7 @@ class NlpApiClient:
 
         Examples:
             >>> nlp = NlpApiClient()
-            nlp.get_ui()
+            >>> nlp.get_ui()
         """
         return self.rest_get("/ui", return_body=return_body)
 
@@ -92,7 +93,7 @@ class NlpApiClient:
 
         Examples:
             >>> nlp = NlpApiClient()
-            nlp.get_ui()
+            >>> nlp.get_ui()
         """
         response = self._rest_call('get', uri, None, endpoint)
         if return_body:
@@ -153,7 +154,8 @@ class DataNodeApiClient(NlpApiClient):
 
         Examples:
             >>> nlp = DataNodeApiClient()
-            nlp.list_datasets()
+            >>> list(nlp.list_datasets())
+            [Dataset]
         """
         datasets = self.rest_get_paginated("/datasets")
         for dataset in datasets:
@@ -172,8 +174,9 @@ class DataNodeApiClient(NlpApiClient):
 
         Examples:
             >>> nlp = DataNodeApiClient()
-            dataset = nlp.get_dataset(dataset_id="awesome-dataset")
-            dataset.id
+            >>> dataset = nlp.get_dataset(dataset_id="awesome-dataset")
+            >>> dataset.id
+            awesome-dataset
         """
         dataset = self.rest_get(f"/datasets/{dataset_id}")
         return Dataset(id=dataset_id, **dataset)
@@ -189,8 +192,9 @@ class DataNodeApiClient(NlpApiClient):
 
         Examples:
             >>> nlp = DataNodeApiClient()
-            dataset = nlp.create_dataset(dataset_id="awesome-dataset")
-            dataset.id
+            >>> dataset = nlp.create_dataset(dataset_id="awesome-dataset")
+            >>> dataset.id
+            awesome-dataset
         """
         dataset = self.rest_post(f"/datasets?datasetId={dataset_id}",
                                  body={})
@@ -208,9 +212,9 @@ class DataNodeApiClient(NlpApiClient):
 
         Examples:
             >>> nlp = DataNodeApiClient()
-            annotation_stores = nlp.list_annotation_stores(
-                dataset_id="awesome-dataset"
-            )
+            >>> annotation_stores = nlp.list_annotation_stores(
+            >>>     dataset_id="awesome-dataset"
+            >>> )
         """
         annotation_stores = self.rest_get_paginated(
             f"/datasets/{dataset_id}/annotationStores"
@@ -233,11 +237,12 @@ class DataNodeApiClient(NlpApiClient):
 
         Examples:
             >>> nlp = DataNodeApiClient()
-            annotation_stores = nlp.get_annotation_store(
-                dataset_id="awesome-dataset",
-                annotation_store_id="annotation-store"
-            )
-            annotation_stores.id
+            >>> annotation_stores = nlp.get_annotation_store(
+            >>>     dataset_id="awesome-dataset",
+            >>>     annotation_store_id="annotation-store"
+            >>> )
+            >>> annotation_stores.id
+            annotation-store
         """
         store = self.rest_get(
             f"/datasets/{dataset_id}/annotationStores/{annotation_store_id}"

@@ -20,7 +20,15 @@ def get_clinical_notes(host: str, dataset_id: str) -> List[dict]:
 
     Examples:
         >>> notes = get_clinical_notes(host="0.0.0.0/api/v1",
-                                       dataset_id="awesome-dataset")
+        >>>                            dataset_id="awesome-dataset")
+        >>> notes[0]
+        {
+            "id": "noteid",
+            "noteType": "",
+            "patientId": "patient_id",
+            "text": "Example text",
+            "note_name": "dataset/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid"
+        }
     """
     nlp = DataNodeApiClient(host=host)
     fhir_stores = nlp.list_fhir_stores(dataset_id=dataset_id)
