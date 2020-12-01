@@ -64,33 +64,33 @@ def store_annotation(host: str, annotation_store: AnnotationStore,
 
     Examples:
         >>> annotation_store = AnnotationStore(dataset_id="awesome-dataset",
-                                               id="annotation-store-store")
-        example_annotation = {
-            "annotationSource": {
-                "resourceSource": {
-                    "name": "name"
-                }
-            },
-            "textDateAnnotations": [
-                {
-                    "dateFormat": "MM/DD/YYYY",
-                    "length": 10,
-                    "start": 42,
-                    "text": "10/26/2020"
-                },
-                {
-                    "dateFormat": "MM/DD/YYYY",
-                    "length": 10,
-                    "start": 42,
-                    "text": "10/26/2020"
-                }
-            ],
-            "textPersonNameAnnotations": [],
-            "textPhysicalAddressAnnotations": []
-        }
-        annotation = store_annotation(host="0.0.0.0/api/v1",
-                                      annotation_store=annotation_store,
-                                      annotation=example_annotation)
+        >>>                                    id="annotation-store-store")
+        >>> example_annotation = {
+        >>>     "annotationSource": {
+        >>>         "resourceSource": {
+        >>>             "name": "name"
+        >>>         }
+        >>>     },
+        >>>     "textDateAnnotations": [
+        >>>         {
+        >>>             "dateFormat": "MM/DD/YYYY",
+        >>>             "length": 10,
+        >>>             "start": 42,
+        >>>             "text": "10/26/2020"
+        >>>         },
+        >>>         {
+        >>>             "dateFormat": "MM/DD/YYYY",
+        >>>             "length": 10,
+        >>>             "start": 42,
+        >>>             "text": "10/26/2020"
+        >>>         }
+        >>>     ],
+        >>>     "textPersonNameAnnotations": [],
+        >>>     "textPhysicalAddressAnnotations": []
+        >>> }
+        >>> annotation = store_annotation(host="0.0.0.0/api/v1",
+        >>>                               annotation_store=annotation_store,
+        >>>                               annotation=example_annotation)
 
     """
     nlp = DataNodeApiClient(host=host)
