@@ -30,13 +30,7 @@ class Evaluation(metaclass=ABCMeta):
             gs = gs[self.col]
         with open(sys_file) as f:
             sys = json.load(f)
-            # Reformat to current evaluation script standards
-            if isinstance(sys, dict):
-                sys = sys[self.col]
-            else:
-                for info in sys:
-                    info[self.annotation] = info['format']
-                    del info['format']
+            sys = sys[self.col]
 
         self.sys_dict_seq = self.json_dict_seq(sys)
         self.gs_dict_seq = self.json_dict_seq(gs)

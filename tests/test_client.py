@@ -43,14 +43,15 @@ class TestApiClient:
 
     def test__rest_call(self):
         """Test rest call"""
+        response = Mock(status_code=200)
         with patch.object(self.nlpclient, "_build_uri",
                           return_value="/foo") as build_uri, \
              patch.object(self.nlpclient._requests_session,
-                          "get") as request_get:
+                          "get", return_value=response) as request_get:
             self.nlpclient._rest_call("get", "/foo", None, "http://endpoint")
             build_uri.assert_called_once_with("/foo",
                                               endpoint="http://endpoint")
-            request_get.assert_called_once_with("/foo", data=None,
+            request_get.assert_called_once_with("/foo", json=None,
                                                 headers=None)
 
     def test_rest_get(self):
@@ -68,14 +69,15 @@ class TestApiClient:
 
     def test_rest_get_paginated(self):
         """Test rest get"""
-        returned = {"links": {"next": ""}}
+        returned = {"links": {"next": ""}, "limit": 0, "offset": 0,
+                    "testing": ["list", "of", "items"]}
         with patch.object(self.nlpclient, "rest_get",
                           return_value=returned) as rest_call:
             results = list(self.nlpclient.rest_get_paginated("/foo/bar",
                                                              limit=4,
                                                              offset=4))
             rest_call.assert_called_once_with("/foo/bar?limit=4&offset=4")
-            assert [returned] == results
+            assert ["list", "of", "items"] == results
 
     def test_rest_post(self):
         """Test rest get"""
@@ -86,8 +88,8 @@ class TestApiClient:
             returned = self.nlpclient.rest_post("/foo", {"test": "me"},
                                                 endpoint="http://endpoint")
             rest_call.assert_called_once_with(
-                "post", "/foo", {"test": "me"}, "http://endpoint",
-                headers={'Content-Type': 'application/json'})
+                "post", "/foo", {"test": "me"}, "http://endpoint"
+            )
             return_body.assert_called_once_with("/foo")
             assert returned == "temp"
 
@@ -102,7 +104,7 @@ class TestDataNodeApiClient:
     def test_list_datasets(self):
         """Test get datasets"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            self.nlp.list_datasets()
+            list(self.nlp.list_datasets())
             rest_get.assert_called_once_with("/datasets")
 
     def test_get_dataset(self):
@@ -116,12 +118,12 @@ class TestDataNodeApiClient:
         with patch.object(self.nlp, "rest_post") as rest_post:
             self.nlp.create_dataset(datasetid="foo")
             rest_post.assert_called_once_with("/datasets?datasetId=foo",
-                                              body='{}')
+                                              body={})
 
     def test_list_annotation_stores(self):
         """Test get annotation stores"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            self.nlp.list_annotation_stores(datasetid="foo")
+            list(self.nlp.list_annotation_stores(datasetid="foo"))
             rest_get.assert_called_once_with("/datasets/foo/annotationStores")
 
     def test_get_annotation_store(self):
@@ -136,7 +138,7 @@ class TestDataNodeApiClient:
     def test_list_fhir_stores(self):
         """Test get fhir stores"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            self.nlp.list_fhir_stores(datasetid="foo")
+            list(self.nlp.list_fhir_stores(datasetid="foo"))
             rest_get.assert_called_once_with("/datasets/foo/fhirStores")
 
     def test_get_fhir_store(self):
@@ -147,19 +149,20 @@ class TestDataNodeApiClient:
                 "/datasets/foo/fhirStores/doo"
             )
 
-    def test_list_clinical_notes(self):
+    def test_list_notes(self):
         """Test getting clinical notes"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            self.nlp.list_clinical_notes(datasetid="foo", fhir_storeid="doo")
+            list(self.nlp.list_notes(datasetid="foo",
+                                     fhir_storeid="doo"))
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo/fhir/Note"
             )
 
-    def test_get_clinical_note(self):
+    def test_get_note(self):
         """Test getting clinical note"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_clinical_note(datasetid="foo", fhir_storeid="doo",
-                                       noteid="boo")
+            self.nlp.get_note(datasetid="foo", fhir_storeid="doo",
+                              noteid="boo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo/fhir/Note/boo"
             )
