@@ -1,6 +1,24 @@
 """
 NLP SDK client.  For developers only - interfaces with the API and
-does not assume user behavior for how functions would be used.
+does not assume user behavior for how functions would be used. Here
+are some examples on how to use this client.
+
+    >>> from nlpsandboxclient.api_client import DataNodeApiClient
+    nlp = DataNodeApiClient()
+
+    # Create a new dataset
+    new_dataset = nlp.create_dataset(dataset_id="my-dataset")
+
+    # Create an annotation store
+    annotation_store = nlp.create_annotation_store(
+        datasetid=annotation_store.datasetid,
+        annotation_storeid="my-annotation-store"
+    )
+
+    # List annotation stores
+    annotation_stores = list(nlp.list_annotation_stores(
+        datasetid=new_dataset.id
+    ))
 """
 import os
 from typing import Iterator
@@ -36,17 +54,49 @@ class NlpApiClient:
         self.host = host
         self._requests_session = requests.Session()
 
-    def get_service(self):
-        """Get the health of the API"""
+    def get_service(self) -> dict:
+        """Get the health of the API
+
+        Examples:
+            >>> nlp = NlpApiClient()
+            nlp.get_service()
+
+        Returns:
+            Service response
+        """
         return self.rest_get("/service")
 
     def get_ui(self, return_body: bool = False):
-        """Get the ui of the API"""
+        """Get the ui of the API
+
+        Args:
+            return_body: Returns the response body. Default is False.
+
+        Returns:
+            Response object
+
+        Examples:
+            >>> nlp = NlpApiClient()
+            nlp.get_ui()
+        """
         return self.rest_get("/ui", return_body=return_body)
 
     def rest_get(self, uri: str, endpoint: str = None,
                  return_body: bool = True):
-        """Sends a HTTP GET request"""
+        """Sends a HTTP GET request
+
+        Args:
+            uri: Service path
+            endpoint: Service endpoint
+            return_body: Returns the response body. Default is True.
+
+        Returns:
+            Response object or body
+
+        Examples:
+            >>> nlp = NlpApiClient()
+            nlp.get_ui()
+        """
         response = self._rest_call('get', uri, None, endpoint)
         if return_body:
             return _return_rest_body(response)
@@ -99,7 +149,15 @@ class DataNodeApiClient(NlpApiClient):
     """Nlp client to interact with data node"""
 
     def list_datasets(self) -> Iterator[Dataset]:
-        """Lists all datasets"""
+        """Lists all datasets
+
+        Yields:
+            Data node Dataset
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            nlp.list_datasets()
+        """
         datasets = self.rest_get_paginated("/datasets")
         for dataset in datasets:
             # The id of the dataset is found in datasets/{datasetId}
@@ -107,19 +165,56 @@ class DataNodeApiClient(NlpApiClient):
             yield Dataset(id=os.path.basename(dataset['name']), **dataset)
 
     def get_dataset(self, datasetid: str) -> Dataset:
-        """Get a dataset"""
+        """Get a dataset
+
+        Args:
+            dataset_id: Dataset Id
+
+        Returns:
+            Data node Dataset
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            dataset = nlp.get_dataset(dataset_id="awesome-dataset")
+            dataset.id
+        """
         dataset = self.rest_get(f"/datasets/{datasetid}")
         return Dataset(id=datasetid, **dataset)
 
     def create_dataset(self, datasetid: str) -> Dataset:
-        """Create a dataset"""
+        """Create a dataset
+
+        Args:
+            dataset_id: Dataset Id
+
+        Returns:
+            Data node Dataset
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            dataset = nlp.create_dataset(dataset_id="awesome-dataset")
+            dataset.id
+        """
         dataset = self.rest_post(f"/datasets?datasetId={datasetid}",
                                  body={})
         return Dataset(id=datasetid, **dataset)
 
     def list_annotation_stores(self,
                                datasetid: str) -> Iterator[AnnotationStore]:
-        """List the annotation stores for a dataset"""
+        """List the annotation stores for a dataset
+
+        Args:
+            dataset_id: Dataset Id
+
+        Yield:
+            Data node annotation stores
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            annotation_stores = nlp.list_annotation_stores(
+                dataset_id="awesome-dataset"
+            )
+        """
         annotation_stores = self.rest_get_paginated(
             f"/datasets/{datasetid}/annotationStores"
         )
@@ -130,7 +225,23 @@ class DataNodeApiClient(NlpApiClient):
 
     def get_annotation_store(self, datasetid: str,
                              annotation_storeid: str) -> AnnotationStore:
-        """Get an annotation store"""
+        """Get an annotation store
+
+        Args:
+            dataset_id: Dataset Id
+            annotation_store_id: annotation store id
+
+        Returns:
+            Data node annotation store
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            annotation_stores = nlp.get_annotation_store(
+                dataset_id="awesome-dataset",
+                annotation_store_id="annotation-store"
+            )
+            annotation_stores.id
+        """
         store = self.rest_get(
             f"/datasets/{datasetid}/annotationStores/{annotation_storeid}"
         )
