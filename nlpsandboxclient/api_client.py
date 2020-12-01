@@ -240,11 +240,11 @@ class DataNodeApiClient(NlpApiClient):
 
         Examples:
             >>> nlp = DataNodeApiClient()
-            >>> annotation_stores = nlp.get_annotation_store(
+            >>> annotation_store = nlp.get_annotation_store(
             >>>     dataset_id="awesome-dataset",
             >>>     annotation_store_id="annotation-store"
             >>> )
-            >>> annotation_stores.id
+            >>> annotation_store.id
             annotation-store
         """
         store = self.rest_get(
@@ -255,7 +255,24 @@ class DataNodeApiClient(NlpApiClient):
 
     def create_annotation_store(self, dataset_id: str,
                                 annotation_store_id: str) -> AnnotationStore:
-        """Create an annotation store"""
+        """Create an annotation store
+
+        Args:
+            dataset_id: Dataset Id
+            annotation_store_id: annotation store id
+
+        Returns:
+            Data node annotation store
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> annotation_store = nlp.create_annotation_store(
+            >>>     dataset_id="awesome-dataset",
+            >>>     annotation_store_id="my-annotation-store"
+            >>> )
+            >>> annotation_store.id
+            my-annotation-store
+        """
         store = self.rest_post(
             f"/datasets/{dataset_id}/annotationStores?"
             f"annotationStoreId={annotation_store_id}",
@@ -266,7 +283,22 @@ class DataNodeApiClient(NlpApiClient):
 
     def list_annotations(self, dataset_id: str,
                          annotation_store_id: str) -> Iterator[Annotation]:
-        """List the annotations for an annotation store"""
+        """List the annotations for an annotation store
+
+        Args:
+            dataset_id: Dataset Id
+            annotation_store_id: Annotation store id
+
+        Returns:
+            Data node annotations
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> annotations = nlp.list_annotations(
+            >>>     dataset_id="awesome-dataset",
+            >>>     annotation_store_id="my-annotation-store"
+            >>> )
+        """
         annotations = self.rest_get_paginated(
             f"/datasets/{dataset_id}/annotationStores/"
             f"{annotation_store_id}/annotations"
@@ -279,7 +311,26 @@ class DataNodeApiClient(NlpApiClient):
 
     def get_annotation(self, dataset_id: str, annotation_store_id: str,
                        annotation_id: str) -> Annotation:
-        """Get an annotation"""
+        """Get an annotation
+
+        Args:
+            dataset_id: Dataset Id
+            annotation_store_id: Annotation store id
+            annotation_id: Annotation id
+
+        Returns:
+            Data node Annotation
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> annotations = nlp.get_annotation(
+            >>>     dataset_id="awesome-dataset",
+            >>>     annotation_store_id="my-annotation-store"
+            >>>     annotation_id="my-id"
+            >>> )
+            >>> annotations.id
+            my-id
+        """
         annotation = self.rest_get(
             f"/datasets/{dataset_id}/annotationStores/{annotation_store_id}/"
             f"annotations/{annotation_id}"
@@ -291,7 +342,26 @@ class DataNodeApiClient(NlpApiClient):
 
     def create_annotation(self, dataset_id: str, annotation_store_id: str,
                           annotation: dict) -> Annotation:
-        """Create an annotation"""
+        """Create an annotation
+
+        Args:
+            dataset_id: Dataset Id
+            annotation_store_id: Annotation store id
+            annotation_id: Annotation id
+
+        Returns:
+            Data node Annotation
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> annotations = nlp.create_annotation(
+            >>>     dataset_id="awesome-dataset",
+            >>>     annotation_store_id="my-annotation-store"
+            >>>     annotation_id="my-id"
+            >>> )
+            >>> annotations.id
+            my-id
+        """
         annotation = self.rest_post(
             f"/datasets/{dataset_id}/annotationStores/"
             f"{annotation_store_id}/annotations",
