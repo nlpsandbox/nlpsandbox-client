@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     # basic
-    name='nlp-sandbox-client',
+    name='nlpsandbox-client',
     version='0.1.1',
     # packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     # py_modules=['hello'],
