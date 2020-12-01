@@ -537,7 +537,22 @@ class DataNodeApiClient(NlpApiClient):
 
     def list_patients(self, dataset_id: str,
                       fhir_store_id: str) -> Iterator[Patient]:
-        """Lists the patients in a FHIR store"""
+        """Lists the patients in a FHIR store
+
+        Args:
+            dataset_id: Dataset id
+            fhir_store_id: FHIR store id
+
+        Yields:
+            Fhir Patient
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> patients = nlp.list_patients(
+            >>>     dataset_id="awesome-dataset",
+            >>>     fhir_store_id="my-fhir-store",
+            >>> )
+        """
         patients = self.rest_get_paginated(
             f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Patient"
         )
@@ -547,7 +562,26 @@ class DataNodeApiClient(NlpApiClient):
 
     def get_patient(self, dataset_id: str, fhir_store_id: str,
                     patient_id: str) -> Patient:
-        """Get a FHIR patient"""
+        """Get a FHIR patient
+
+        Args:
+            dataset_id: Dataset id
+            fhir_store_id: FHIR store id
+            patient_id: Patient Id
+
+        Returns:
+            Fhir Patient
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> patient = nlp.get_patient(
+            >>>     dataset_id="awesome-dataset",
+            >>>     fhir_store_id="my-fhir-store",
+            >>>     patient_id="my-patient"
+            >>> )
+            >>> patient.id
+            my-patient
+        """
         patient = self.rest_get(
             f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/"
             f"Patient/{patient_id}"
@@ -557,7 +591,30 @@ class DataNodeApiClient(NlpApiClient):
 
     def create_patient(self, dataset_id: str, fhir_store_id: str,
                        patient: dict) -> Patient:
-        """Create a FHIR patient"""
+        """Create a FHIR patient
+
+        Args:
+            dataset_id: Dataset id
+            fhir_store_id: FHIR store id
+            patient: Patient request body
+
+        Returns:
+            Fhir Patient
+
+        Examples:
+            >>> nlp = DataNodeApiClient()
+            >>> example_patient = {
+            >>>     "gender": "male",
+            >>>     "identifier": "identifier"
+            >>> }
+            >>> patient = nlp.create_patient(
+            >>>     dataset_id="awesome-dataset",
+            >>>     fhir_store_id="my-fhir-store",
+            >>>     patient=example_patient
+            >>> )
+            >>> patient.id
+            my-patient
+        """
         patient = self.rest_post(
             f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Patient",
             body=patient
