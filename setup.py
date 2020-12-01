@@ -35,7 +35,7 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/Sage-Bionetworks/nlp-sandbox-client/issues",
     },
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 2 - Pre-Alpha',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
