@@ -29,11 +29,51 @@ def get_clinical_notes(host: str, dataset_id: str) -> List[dict]:
 
 def store_annotation(host: str, annotation_store: AnnotationStore,
                      annotation: dict) -> Annotation:
-    """Store annotation"""
+    """Store annotation
+
+    Args:
+        host: Data node host IP.
+        annotation_store: AnnotationStore object
+        annotation: Annotation dict
+
+    Returns:
+        Data node Annotation object
+
+    Examples:
+        >>> annotation_store = AnnotationStore(dataset_id="awesome-dataset",
+                                               id="annotation-store-store")
+        example_annotation = {
+            "annotationSource": {
+                "resourceSource": {
+                    "name": "name"
+                }
+            },
+            "textDateAnnotations": [
+                {
+                    "dateFormat": "MM/DD/YYYY",
+                    "length": 10,
+                    "start": 42,
+                    "text": "10/26/2020"
+                },
+                {
+                    "dateFormat": "MM/DD/YYYY",
+                    "length": 10,
+                    "start": 42,
+                    "text": "10/26/2020"
+                }
+            ],
+            "textPersonNameAnnotations": [],
+            "textPhysicalAddressAnnotations": []
+        }
+        annotation = store_annotation(host="0.0.0.0/api/v1",
+                                      annotation_store=annotation_store,
+                                      annotation=example_annotation)
+
+    """
     nlp = DataNodeApiClient(host=host)
     annotation_obj = nlp.create_annotation(
-        datasetid=annotation_store.datasetid,
-        annotation_storeid=annotation_store.id,
+        dataset_id=annotation_store.datasetid,
+        annotation_store_id=annotation_store.id,
         annotation=annotation
     )
     return annotation_obj
