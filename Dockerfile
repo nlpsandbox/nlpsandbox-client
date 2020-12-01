@@ -1,6 +1,5 @@
-FROM python:3.8.5-slim-buster
+FROM python:3.8.6-slim-buster
 
-ENV PIP_NO_CACHE_DIR=off
 ENV APP_USER=app
 ENV APP_DIR=/opt/app
 
