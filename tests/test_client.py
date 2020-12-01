@@ -110,27 +110,27 @@ class TestDataNodeApiClient:
     def test_get_dataset(self):
         """Test get dataset"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_dataset(datasetid="foo")
+            self.nlp.get_dataset(dataset_id="foo")
             rest_get.assert_called_once_with("/datasets/foo")
 
     def test_create_dataset(self):
         """Test get dataset"""
         with patch.object(self.nlp, "rest_post") as rest_post:
-            self.nlp.create_dataset(datasetid="foo")
-            rest_post.assert_called_once_with("/datasets?datasetId=foo",
+            self.nlp.create_dataset(dataset_id="foo")
+            rest_post.assert_called_once_with("/datasets?dataset_id=foo",
                                               body={})
 
     def test_list_annotation_stores(self):
         """Test get annotation stores"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            list(self.nlp.list_annotation_stores(datasetid="foo"))
+            list(self.nlp.list_annotation_stores(dataset_id="foo"))
             rest_get.assert_called_once_with("/datasets/foo/annotationStores")
 
     def test_get_annotation_store(self):
         """Test get annotation store"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_annotation_store(datasetid="foo",
-                                          annotation_storeid="doo")
+            self.nlp.get_annotation_store(dataset_id="foo",
+                                          annotation_store_id="doo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/annotationStores/doo"
             )
@@ -138,31 +138,31 @@ class TestDataNodeApiClient:
     def test_list_fhir_stores(self):
         """Test get fhir stores"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            list(self.nlp.list_fhir_stores(datasetid="foo"))
+            list(self.nlp.list_fhir_stores(dataset_id="foo"))
             rest_get.assert_called_once_with("/datasets/foo/fhirStores")
 
     def test_get_fhir_store(self):
         """Test get fhir store"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_fhir_store(datasetid="foo", fhir_storeid="doo")
+            self.nlp.get_fhir_store(dataset_id="foo", fhir_store_id="doo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo"
             )
 
-    def test_list_clinical_notes(self):
+    def test_list_notes(self):
         """Test getting clinical notes"""
         with patch.object(self.nlp, "rest_get_paginated") as rest_get:
-            list(self.nlp.list_clinical_notes(datasetid="foo",
-                                              fhir_storeid="doo"))
+            list(self.nlp.list_notes(dataset_id="foo",
+                                     fhir_store_id="doo"))
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo/fhir/Note"
             )
 
-    def test_get_clinical_note(self):
+    def test_get_note(self):
         """Test getting clinical note"""
         with patch.object(self.nlp, "rest_get") as rest_get:
-            self.nlp.get_clinical_note(datasetid="foo", fhir_storeid="doo",
-                                       noteid="boo")
+            self.nlp.get_note(dataset_id="foo", fhir_store_id="doo",
+                              note_id="boo")
             rest_get.assert_called_once_with(
                 "/datasets/foo/fhirStores/doo/fhir/Note/boo"
             )
