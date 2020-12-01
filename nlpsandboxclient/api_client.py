@@ -157,11 +157,11 @@ class DataNodeApiClient(NlpApiClient):
         """
         datasets = self.rest_get_paginated("/datasets")
         for dataset in datasets:
-            # The id of the dataset is found in datasets/{datasetId}
+            # The id of the dataset is found in datasets/{dataset_id}
             # Which is the basename
             yield Dataset(id=os.path.basename(dataset['name']), **dataset)
 
-    def get_dataset(self, datasetid: str) -> Dataset:
+    def get_dataset(self, dataset_id: str) -> Dataset:
         """Get a dataset
 
         Args:
@@ -175,10 +175,10 @@ class DataNodeApiClient(NlpApiClient):
             dataset = nlp.get_dataset(dataset_id="awesome-dataset")
             dataset.id
         """
-        dataset = self.rest_get(f"/datasets/{datasetid}")
-        return Dataset(id=datasetid, **dataset)
+        dataset = self.rest_get(f"/datasets/{dataset_id}")
+        return Dataset(id=dataset_id, **dataset)
 
-    def create_dataset(self, datasetid: str) -> Dataset:
+    def create_dataset(self, dataset_id: str) -> Dataset:
         """Create a dataset
 
         Args:
@@ -192,12 +192,12 @@ class DataNodeApiClient(NlpApiClient):
             dataset = nlp.create_dataset(dataset_id="awesome-dataset")
             dataset.id
         """
-        dataset = self.rest_post(f"/datasets?datasetId={datasetid}",
+        dataset = self.rest_post(f"/datasets?datasetId={dataset_id}",
                                  body={})
-        return Dataset(id=datasetid, **dataset)
+        return Dataset(id=dataset_id, **dataset)
 
     def list_annotation_stores(self,
-                               datasetid: str) -> Iterator[AnnotationStore]:
+                               dataset_id: str) -> Iterator[AnnotationStore]:
         """List the annotation stores for a dataset
 
         Args:
@@ -213,15 +213,15 @@ class DataNodeApiClient(NlpApiClient):
             )
         """
         annotation_stores = self.rest_get_paginated(
-            f"/datasets/{datasetid}/annotationStores"
+            f"/datasets/{dataset_id}/annotationStores"
         )
         for store in annotation_stores:
-            yield AnnotationStore(datasetid=datasetid,
+            yield AnnotationStore(dataset_id=dataset_id,
                                   id=os.path.basename(store['name']),
                                   **store)
 
-    def get_annotation_store(self, datasetid: str,
-                             annotation_storeid: str) -> AnnotationStore:
+    def get_annotation_store(self, dataset_id: str,
+                             annotation_store_id: str) -> AnnotationStore:
         """Get an annotation store
 
         Args:
@@ -240,147 +240,147 @@ class DataNodeApiClient(NlpApiClient):
             annotation_stores.id
         """
         store = self.rest_get(
-            f"/datasets/{datasetid}/annotationStores/{annotation_storeid}"
+            f"/datasets/{dataset_id}/annotationStores/{annotation_store_id}"
         )
-        return AnnotationStore(datasetid=datasetid, id=annotation_storeid,
+        return AnnotationStore(dataset_id=dataset_id, id=annotation_store_id,
                                **store)
 
-    def create_annotation_store(self, datasetid: str,
-                                annotation_storeid: str) -> AnnotationStore:
+    def create_annotation_store(self, dataset_id: str,
+                                annotation_store_id: str) -> AnnotationStore:
         """Create an annotation store"""
         store = self.rest_post(
-            f"/datasets/{datasetid}/annotationStores?"
-            f"annotationStoreId={annotation_storeid}",
+            f"/datasets/{dataset_id}/annotationStores?"
+            f"annotationStoreId={annotation_store_id}",
             body={}
         )
-        return AnnotationStore(datasetid=datasetid, id=annotation_storeid,
+        return AnnotationStore(dataset_id=dataset_id, id=annotation_store_id,
                                **store)
 
-    def list_annotations(self, datasetid: str,
-                         annotation_storeid: str) -> Iterator[Annotation]:
+    def list_annotations(self, dataset_id: str,
+                         annotation_store_id: str) -> Iterator[Annotation]:
         """List the annotations for an annotation store"""
         annotations = self.rest_get_paginated(
-            f"/datasets/{datasetid}/annotationStores/"
-            f"{annotation_storeid}/annotations"
+            f"/datasets/{dataset_id}/annotationStores/"
+            f"{annotation_store_id}/annotations"
         )
         for annotation in annotations:
-            yield Annotation(datasetid=datasetid,
-                             annotation_storeid=annotation_storeid,
+            yield Annotation(dataset_id=dataset_id,
+                             annotation_store_id=annotation_store_id,
                              id=os.path.basename(annotation['name']),
                              **annotation)
 
-    def get_annotation(self, datasetid: str, annotation_storeid: str,
-                       annotationid: str) -> Annotation:
+    def get_annotation(self, dataset_id: str, annotation_store_id: str,
+                       annotation_id: str) -> Annotation:
         """Get an annotation"""
         annotation = self.rest_get(
-            f"/datasets/{datasetid}/annotationStores/{annotation_storeid}/"
-            f"annotations/{annotationid}"
+            f"/datasets/{dataset_id}/annotationStores/{annotation_store_id}/"
+            f"annotations/{annotation_id}"
         )
-        return Annotation(datasetid=datasetid,
-                          annotation_storeid=annotation_storeid,
-                          id=annotationid,
+        return Annotation(dataset_id=dataset_id,
+                          annotation_store_id=annotation_store_id,
+                          id=annotation_id,
                           **annotation)
 
-    def create_annotation(self, datasetid: str, annotation_storeid: str,
+    def create_annotation(self, dataset_id: str, annotation_store_id: str,
                           annotation: dict) -> Annotation:
         """Create an annotation"""
         annotation = self.rest_post(
-            f"/datasets/{datasetid}/annotationStores/"
-            f"{annotation_storeid}/annotations",
+            f"/datasets/{dataset_id}/annotationStores/"
+            f"{annotation_store_id}/annotations",
             body=annotation
         )
-        return Annotation(datasetid=datasetid,
-                          annotation_storeid=annotation_storeid,
+        return Annotation(dataset_id=dataset_id,
+                          annotation_store_id=annotation_store_id,
                           id=os.path.basename(annotation['name']),
                           **annotation)
 
-    def list_fhir_stores(self, datasetid: str) -> Iterator[FhirStore]:
+    def list_fhir_stores(self, dataset_id: str) -> Iterator[FhirStore]:
         """List the FHIR stores in a dataset"""
         fhir_stores = self.rest_get_paginated(
-            f"/datasets/{datasetid}/fhirStores"
+            f"/datasets/{dataset_id}/fhirStores"
         )
         for fhir_store in fhir_stores:
-            yield FhirStore(datasetid=datasetid,
+            yield FhirStore(dataset_id=dataset_id,
                             id=os.path.basename(fhir_store['name']),
                             **fhir_store)
 
-    def get_fhir_store(self, datasetid: str, fhir_storeid: str) -> FhirStore:
+    def get_fhir_store(self, dataset_id: str, fhir_store_id: str) -> FhirStore:
         """Get a FHIR store"""
         fhir_store = self.rest_get(
-            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}"
+            f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}"
         )
-        return FhirStore(datasetid=datasetid, id=fhir_storeid,
+        return FhirStore(dataset_id=dataset_id, id=fhir_store_id,
                          **fhir_store)
 
-    def create_fhir_store(self, datasetid: str,
-                          fhir_storeid: str) -> FhirStore:
+    def create_fhir_store(self, dataset_id: str,
+                          fhir_store_id: str) -> FhirStore:
         """Create a FHIR store"""
         fhir_store = self.rest_post(
-            f"/datasets/{datasetid}/fhirStores?fhirStoreId={fhir_storeid}",
+            f"/datasets/{dataset_id}/fhirStores?fhirStoreId={fhir_store_id}",
             body={}
         )
-        return FhirStore(datasetid=datasetid, id=fhir_storeid,
+        return FhirStore(dataset_id=dataset_id, id=fhir_store_id,
                          **fhir_store)
 
-    def list_notes(self, datasetid: str, fhir_storeid: str) -> Iterator[Note]:
+    def list_notes(self, dataset_id: str, fhir_store_id: str) -> Iterator[Note]:
         """List clinical notes in a FHIR store"""
         notes = self.rest_get_paginated(
-            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Note"
+            f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note"
         )
         for note in notes:
-            yield Note(datasetid=datasetid, fhir_storeid=fhir_storeid, **note)
+            yield Note(dataset_id=dataset_id, fhir_store_id=fhir_store_id, **note)
 
-    def get_note(self, datasetid: str, fhir_storeid: str,
-                 noteid: str) -> Note:
+    def get_note(self, dataset_id: str, fhir_store_id: str,
+                 note_id: str) -> Note:
         """Get a clinical note"""
         note = self.rest_get(
-            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/"
-            f"Note/{noteid}"
+            f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/"
+            f"Note/{note_id}"
         )
-        return Note(datasetid=datasetid, fhir_storeid=fhir_storeid, **note)
+        return Note(dataset_id=dataset_id, fhir_store_id=fhir_store_id, **note)
 
-    def create_note(self, datasetid: str, fhir_storeid: str,
+    def create_note(self, dataset_id: str, fhir_store_id: str,
                     note: dict) -> Note:
         """Create a clinical note
 
         Args:
-            datasetid: Dataset id
-            fhir_storeid: FHIR store id
+            dataset_id: Dataset id
+            fhir_store_id: FHIR store id
             note: Note request body
         """
         note_body = self.rest_post(
-            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Note",
+            f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note",
             body=note
         )
-        return Note(datasetid=datasetid, fhir_storeid=fhir_storeid,
+        return Note(dataset_id=dataset_id, fhir_store_id=fhir_store_id,
                     **note_body)
 
-    def list_patients(self, datasetid: str,
-                      fhir_storeid: str) -> Iterator[Patient]:
+    def list_patients(self, dataset_id: str,
+                      fhir_store_id: str) -> Iterator[Patient]:
         """Lists the patients in a FHIR store"""
         patients = self.rest_get_paginated(
-            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Patient"
+            f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Patient"
         )
         for patient in patients:
-            yield Patient(datasetid=datasetid, fhir_storeid=fhir_storeid,
+            yield Patient(dataset_id=dataset_id, fhir_store_id=fhir_store_id,
                           **patient)
 
-    def get_patient(self, datasetid: str, fhir_storeid: str,
-                    patientid: str) -> Patient:
+    def get_patient(self, dataset_id: str, fhir_store_id: str,
+                    patient_id: str) -> Patient:
         """Get a FHIR patient"""
         patient = self.rest_get(
-            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/"
-            f"Patient/{patientid}"
+            f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/"
+            f"Patient/{patient_id}"
         )
-        return Patient(datasetid=datasetid, fhir_storeid=fhir_storeid,
+        return Patient(dataset_id=dataset_id, fhir_store_id=fhir_store_id,
                        **patient)
 
-    def create_patient(self, datasetid: str, fhir_storeid: str,
+    def create_patient(self, dataset_id: str, fhir_store_id: str,
                        patient: dict) -> Patient:
         """Create a FHIR patient"""
         patient = self.rest_post(
-            f"/datasets/{datasetid}/fhirStores/{fhir_storeid}/fhir/Patient",
+            f"/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Patient",
             body=patient
         )
-        return Patient(datasetid=datasetid, fhir_storeid=fhir_storeid,
+        return Patient(dataset_id=dataset_id, fhir_store_id=fhir_store_id,
                        **patient)
