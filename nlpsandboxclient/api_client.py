@@ -5,16 +5,13 @@ are some examples on how to use this client.
 
     >>> from nlpsandboxclient.api_client import DataNodeApiClient
     nlp = DataNodeApiClient()
-
     # Create a new dataset
     new_dataset = nlp.create_dataset(dataset_id="my-dataset")
-
     # Create an annotation store
     annotation_store = nlp.create_annotation_store(
         datasetid=annotation_store.datasetid,
         annotation_storeid="my-annotation-store"
     )
-
     # List annotation stores
     annotation_stores = list(nlp.list_annotation_stores(
         datasetid=new_dataset.id
@@ -57,12 +54,12 @@ class NlpApiClient:
     def get_service(self) -> dict:
         """Get the health of the API
 
+        Returns:
+            Service response
+
         Examples:
             >>> nlp = NlpApiClient()
             nlp.get_service()
-
-        Returns:
-            Service response
         """
         return self.rest_get("/service")
 
