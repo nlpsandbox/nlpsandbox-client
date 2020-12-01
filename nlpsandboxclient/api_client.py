@@ -4,18 +4,21 @@ does not assume user behavior for how functions would be used. Here
 are some examples on how to use this client.
 
     >>> from nlpsandboxclient.api_client import DataNodeApiClient
-    nlp = DataNodeApiClient()
-    # Create a new dataset
-    new_dataset = nlp.create_dataset(dataset_id="my-dataset")
-    # Create an annotation store
-    annotation_store = nlp.create_annotation_store(
-        datasetid=annotation_store.datasetid,
-        annotation_storeid="my-annotation-store"
-    )
-    # List annotation stores
-    annotation_stores = list(nlp.list_annotation_stores(
-        datasetid=new_dataset.id
-    ))
+    >>> nlp = DataNodeApiClient()
+
+    >>> # Create a new dataset
+    >>> new_dataset = nlp.create_dataset(dataset_id="my-dataset")
+
+    >>> # Create an annotation store
+    >>> annotation_store = nlp.create_annotation_store(
+    >>>     datasetid=annotation_store.datasetid,
+    >>>     annotation_storeid="my-annotation-store"
+    >>> )
+
+    >>> # List annotation stores
+    >>> annotation_stores = list(nlp.list_annotation_stores(
+    >>>     datasetid=new_dataset.id
+    >>> ))
 """
 import os
 from typing import Iterator
