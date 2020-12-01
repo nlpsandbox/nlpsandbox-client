@@ -28,8 +28,7 @@ def get_clinical_notes(host: str, datasetid: str) -> List[dict]:
     return all_notes
 
 
-def store_annotation(host: str,
-                     annotation_store: AnnotationStore,
+def store_annotation(host: str, annotation_store: AnnotationStore,
                      annotation: dict) -> Annotation:
     """Store annotation"""
     nlp = DataNodeApiClient(host=host)
