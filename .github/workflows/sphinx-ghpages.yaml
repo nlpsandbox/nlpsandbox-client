@@ -2,7 +2,7 @@ name: "Pull Request Docs Check"
 on: 
   push:
     branches:
-      - develop
+      - documentation
 jobs:
   docs:
     runs-on: ubuntu-latest
