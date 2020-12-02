@@ -11,6 +11,9 @@ on:
       - '*.*.*'
   pull_request:
 
+env:
+  docker_repository: nlpsandbox/cli
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -44,15 +47,16 @@ jobs:
     - name: Test with pytest
       run: |
         pytest tests/
+
   pypi:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python 3.7
+      - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
-          python-version: 3.7
+          python-version: 3.8
       - name: Create a source distribution
         run: python setup.py sdist
       - name: Publish package to PyPI
@@ -69,7 +73,7 @@ jobs:
     - name: Prepare
       id: prep
       run: |
-        DOCKER_IMAGE=nlpsandbox/cli
+        DOCKER_IMAGE=${{ env.docker_repository }}
         VERSION=noop
         PUSH=false
         if [ "${{ github.event_name }}" = "schedule" ]; then
@@ -92,8 +96,8 @@ jobs:
           MAJOR=${MINOR%.*}
           TAGS="$TAGS,${DOCKER_IMAGE}:${MINOR},${DOCKER_IMAGE}:${MAJOR},${DOCKER_IMAGE}:latest"
           PUSH=true
-        elif [ "${{ github.event_name }}" = "push" ]; then
-          TAGS="$TAGS,${DOCKER_IMAGE}:sha-${GITHUB_SHA::8}"
+        # elif [ "${{ github.event_name }}" = "push" ]; then
+        #   TAGS="$TAGS,${DOCKER_IMAGE}:sha-${GITHUB_SHA::8}"
         fi
         echo ::set-output name=version::${VERSION}
         echo ::set-output name=tags::${TAGS}
@@ -114,7 +118,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: Dockerfile
+        file: ./Dockerfile
         platforms: linux/amd64
         push: ${{ steps.prep.outputs.push }}
         tags: ${{ steps.prep.outputs.tags }}
@@ -124,3 +128,10 @@ jobs:
           org.opencontainers.image.version=${{ steps.prep.outputs.version }}
           org.opencontainers.image.revision=${{ github.sha }}
           org.opencontainers.image.licenses=${{ github.event.repository.license.name }}
+    - name: Docker Hub Description
+      if: steps.prep.outputs.push == 'true'
+      uses: peter-evans/dockerhub-description@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        repository: ${{ env.docker_repository }}
