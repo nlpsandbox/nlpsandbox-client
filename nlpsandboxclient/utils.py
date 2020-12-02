@@ -10,7 +10,7 @@ def _raise_for_status(response):
     Catches and wraps NLP HTTP errors with appropriate text.
     """
     if response.status_code not in [200, 201, 202]:
-        raise HTTPError(response.json()['title'], response)
+        raise HTTPError(response.json()['detail'], response)
 
 
 def stdout_or_json(json_dict: dict, output: str):
