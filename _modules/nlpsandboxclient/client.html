@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nlpsandboxclient.client &mdash; nlpsandboxclient 0.1.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> nlpsandboxclient
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Python Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python/api_client.html">Data Node Api Client Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/client.html">NLP Client</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Command-Line Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cli/overview.html">Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nlpsandboxclient</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>nlpsandboxclient.client</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for nlpsandboxclient.client</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">NLP data node client - This module has convenience functions to interact</span>
+<span class="sd">with the DataNodeApiClient.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">.api_client</span> <span class="kn">import</span> <span class="n">DataNodeApiClient</span>
+<span class="kn">from</span> <span class="nn">.datanode.models</span> <span class="kn">import</span> <span class="n">Annotation</span><span class="p">,</span> <span class="n">AnnotationStore</span>
+
+
+<div class="viewcode-block" id="get_clinical_notes"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.get_clinical_notes">[docs]</a><span class="k">def</span> <span class="nf">get_clinical_notes</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Get all clinical notes for a dataset</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        host: Data node host IP.</span>
+<span class="sd">        dataset_id: Dataset id</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list of clinical notes.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; notes = get_clinical_notes(host=&quot;0.0.0.0/api/v1&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                            dataset_id=&quot;awesome-dataset&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; notes[0]</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;id&quot;: &quot;noteid&quot;,</span>
+<span class="sd">            &quot;noteType&quot;: &quot;&quot;,</span>
+<span class="sd">            &quot;patientId&quot;: &quot;patient_id&quot;,</span>
+<span class="sd">            &quot;text&quot;: &quot;Example text&quot;,</span>
+<span class="sd">            &quot;note_name&quot;: &quot;dataset/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid&quot;</span>
+<span class="sd">        }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">fhir_stores</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">list_fhir_stores</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">)</span>
+
+    <span class="n">all_notes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Obtain all clinical notes for all fhir stores in a dataset</span>
+    <span class="k">for</span> <span class="n">fhir_store</span> <span class="ow">in</span> <span class="n">fhir_stores</span><span class="p">:</span>
+        <span class="n">clinical_notes</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">list_notes</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span>
+                                        <span class="n">fhir_store_id</span><span class="o">=</span><span class="n">fhir_store</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="c1"># Obtain all clinical notes</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">clinical_notes</span><span class="p">:</span>
+            <span class="n">all_notes</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="s2">&quot;noteType&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">note_type</span><span class="p">,</span>
+                <span class="s2">&quot;patientId&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">patient_id</span><span class="p">,</span>
+                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                <span class="s2">&quot;note_name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;dataset/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store.id}</span><span class="s2">/fhir/Note/</span><span class="si">{note.id}</span><span class="s2">&quot;</span>
+            <span class="p">})</span>
+    <span class="k">return</span> <span class="n">all_notes</span></div>
+
+
+<div class="viewcode-block" id="store_annotation"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.store_annotation">[docs]</a><span class="k">def</span> <span class="nf">store_annotation</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">annotation_store</span><span class="p">:</span> <span class="n">AnnotationStore</span><span class="p">,</span>
+                     <span class="n">annotation</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Annotation</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Store annotation</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        host: Data node host IP.</span>
+<span class="sd">        annotation_store: AnnotationStore object</span>
+<span class="sd">        annotation: Annotation dict</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data node Annotation object</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; annotation_store = AnnotationStore(dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                                    id=&quot;annotation-store-store&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; example_annotation = {</span>
+<span class="sd">        &gt;&gt;&gt;     &quot;annotationSource&quot;: {</span>
+<span class="sd">        &gt;&gt;&gt;         &quot;resourceSource&quot;: {</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;name&quot;: &quot;name&quot;</span>
+<span class="sd">        &gt;&gt;&gt;         }</span>
+<span class="sd">        &gt;&gt;&gt;     },</span>
+<span class="sd">        &gt;&gt;&gt;     &quot;textDateAnnotations&quot;: [</span>
+<span class="sd">        &gt;&gt;&gt;         {</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;dateFormat&quot;: &quot;MM/DD/YYYY&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;length&quot;: 10,</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;start&quot;: 42,</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;text&quot;: &quot;10/26/2020&quot;</span>
+<span class="sd">        &gt;&gt;&gt;         },</span>
+<span class="sd">        &gt;&gt;&gt;         {</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;dateFormat&quot;: &quot;MM/DD/YYYY&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;length&quot;: 10,</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;start&quot;: 42,</span>
+<span class="sd">        &gt;&gt;&gt;             &quot;text&quot;: &quot;10/26/2020&quot;</span>
+<span class="sd">        &gt;&gt;&gt;         }</span>
+<span class="sd">        &gt;&gt;&gt;     ],</span>
+<span class="sd">        &gt;&gt;&gt;     &quot;textPersonNameAnnotations&quot;: [],</span>
+<span class="sd">        &gt;&gt;&gt;     &quot;textPhysicalAddressAnnotations&quot;: []</span>
+<span class="sd">        &gt;&gt;&gt; }</span>
+<span class="sd">        &gt;&gt;&gt; annotation = store_annotation(host=&quot;0.0.0.0/api/v1&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                               annotation_store=annotation_store,</span>
+<span class="sd">        &gt;&gt;&gt;                               annotation=example_annotation)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">annotation_obj</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">create_annotation</span><span class="p">(</span>
+        <span class="n">dataset_id</span><span class="o">=</span><span class="n">annotation_store</span><span class="o">.</span><span class="n">datasetid</span><span class="p">,</span>
+        <span class="n">annotation_store_id</span><span class="o">=</span><span class="n">annotation_store</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="n">annotation</span><span class="o">=</span><span class="n">annotation</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">annotation_obj</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Sage Bionetworks
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

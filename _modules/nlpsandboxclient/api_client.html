@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nlpsandboxclient.api_client &mdash; nlpsandboxclient 0.1.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> nlpsandboxclient
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Python Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python/api_client.html">Data Node Api Client Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/client.html">NLP Client</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Command-Line Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cli/overview.html">Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/authors.html">Authors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nlpsandboxclient</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>nlpsandboxclient.api_client</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for nlpsandboxclient.api_client</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">NLP SDK client.  For developers only - interfaces with the API and</span>
+<span class="sd">does not assume user behavior for how functions would be used. Here</span>
+<span class="sd">are some examples on how to use this client.</span>
+
+<span class="sd">    &gt;&gt;&gt; from nlpsandboxclient.api_client import DataNodeApiClient</span>
+<span class="sd">    &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+
+<span class="sd">    &gt;&gt;&gt; # Create a new dataset</span>
+<span class="sd">    &gt;&gt;&gt; new_dataset = nlp.create_dataset(dataset_id=&quot;my-dataset&quot;)</span>
+
+<span class="sd">    &gt;&gt;&gt; # Create an annotation store</span>
+<span class="sd">    &gt;&gt;&gt; annotation_store = nlp.create_annotation_store(</span>
+<span class="sd">    &gt;&gt;&gt;     datasetid=annotation_store.datasetid,</span>
+<span class="sd">    &gt;&gt;&gt;     annotation_storeid=&quot;my-annotation-store&quot;</span>
+<span class="sd">    &gt;&gt;&gt; )</span>
+
+<span class="sd">    &gt;&gt;&gt; # List annotation stores</span>
+<span class="sd">    &gt;&gt;&gt; annotation_stores = list(nlp.list_annotation_stores(</span>
+<span class="sd">    &gt;&gt;&gt;     datasetid=new_dataset.id</span>
+<span class="sd">    &gt;&gt;&gt; ))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterator</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">synapseclient</span> <span class="kn">import</span> <span class="n">core</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">.datanode.models</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Annotation</span><span class="p">,</span> <span class="n">AnnotationStore</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span>
+                              <span class="n">FhirStore</span><span class="p">,</span> <span class="n">Note</span><span class="p">,</span> <span class="n">Patient</span><span class="p">)</span>
+
+<span class="c1"># Default data node endpoint</span>
+<span class="n">DATA_NODE_HOST</span> <span class="o">=</span> <span class="s2">&quot;http://10.23.55.45:8080/api/v1&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">_return_rest_body</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns either a dictionary or a string depending on the</span>
+<span class="sd">    &#39;content-type&#39; of the response.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">content_type</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content-type&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">content_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">content_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span>
+            <span class="s1">&#39;application/json&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+
+<div class="viewcode-block" id="NlpApiClient"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.NlpApiClient">[docs]</a><span class="k">class</span> <span class="nc">NlpApiClient</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Nlp base client that does generic rest calls&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">host</span> <span class="o">=</span> <span class="n">DATA_NODE_HOST</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_requests_session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<div class="viewcode-block" id="NlpApiClient.get_service"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.NlpApiClient.get_service">[docs]</a>    <span class="k">def</span> <span class="nf">get_service</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the health of the API</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Service response</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = NlpApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; nlp.get_service()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get</span><span class="p">(</span><span class="s2">&quot;/service&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NlpApiClient.get_ui"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.NlpApiClient.get_ui">[docs]</a>    <span class="k">def</span> <span class="nf">get_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">return_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the ui of the API</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            return_body: Returns the response body. Default is False.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Response object</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = NlpApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; nlp.get_ui()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get</span><span class="p">(</span><span class="s2">&quot;/ui&quot;</span><span class="p">,</span> <span class="n">return_body</span><span class="o">=</span><span class="n">return_body</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NlpApiClient.rest_get"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.NlpApiClient.rest_get">[docs]</a>    <span class="k">def</span> <span class="nf">rest_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">return_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sends a HTTP GET request</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            uri: Service path</span>
+<span class="sd">            endpoint: Service endpoint</span>
+<span class="sd">            return_body: Returns the response body. Default is True.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Response object or body</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = NlpApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; nlp.get_ui()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rest_call</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">return_body</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_return_rest_body</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="NlpApiClient.rest_post"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.NlpApiClient.rest_post">[docs]</a>    <span class="k">def</span> <span class="nf">rest_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sends an HTTP POST request.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rest_call</span><span class="p">(</span>
+            <span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">endpoint</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">_return_rest_body</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NlpApiClient.rest_get_paginated"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.NlpApiClient.rest_get_paginated">[docs]</a>    <span class="k">def</span> <span class="nf">rest_get_paginated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get pagniated rest call&quot;&quot;&quot;</span>
+        <span class="n">page_uri</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">_limit_and_offset</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span>
+                                                <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">page_uri</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get</span><span class="p">(</span><span class="n">page_uri</span><span class="p">)</span>
+            <span class="n">page_uri</span> <span class="o">=</span> <span class="n">page</span><span class="p">[</span><span class="s1">&#39;links&#39;</span><span class="p">][</span><span class="s1">&#39;next&#39;</span><span class="p">]</span>
+            <span class="c1"># Make sure to only return the list of resources</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">,</span> <span class="s1">&#39;links&#39;</span><span class="p">,</span> <span class="s1">&#39;offset&#39;</span><span class="p">]:</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="c1"># This will yield the list of resources</span>
+            <span class="c1"># &#39;dict_keys&#39; object is not subscriptable</span>
+            <span class="n">resouces</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">resource</span> <span class="ow">in</span> <span class="n">resouces</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">resource</span></div>
+
+    <span class="k">def</span> <span class="nf">_rest_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sends HTTP requests&quot;&quot;&quot;</span>
+        <span class="n">uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">)</span>
+        <span class="n">requests_method_fn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_requests_session</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests_method_fn</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">_raise_for_status</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">def</span> <span class="nf">_build_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a URI to request with.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">endpoint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">endpoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span>
+        <span class="c1"># Check to see if the URI is incomplete</span>
+        <span class="c1"># In that case, append a endpoint to the URI</span>
+        <span class="n">parsed_url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parsed_url</span><span class="o">.</span><span class="n">netloc</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">uri</span> <span class="o">=</span> <span class="n">endpoint</span> <span class="o">+</span> <span class="n">uri</span>
+        <span class="k">return</span> <span class="n">uri</span></div>
+
+
+<div class="viewcode-block" id="DataNodeApiClient"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient">[docs]</a><span class="k">class</span> <span class="nc">DataNodeApiClient</span><span class="p">(</span><span class="n">NlpApiClient</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Nlp client to interact with data node&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DataNodeApiClient.list_datasets"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.list_datasets">[docs]</a>    <span class="k">def</span> <span class="nf">list_datasets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Dataset</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Lists all datasets</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            Data node Dataset</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; list(nlp.list_datasets())</span>
+<span class="sd">            [Dataset]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">datasets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get_paginated</span><span class="p">(</span><span class="s2">&quot;/datasets&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
+            <span class="c1"># The id of the dataset is found in datasets/{dataset_id}</span>
+            <span class="c1"># Which is the basename</span>
+            <span class="k">yield</span> <span class="n">Dataset</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]),</span> <span class="o">**</span><span class="n">dataset</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.get_dataset"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.get_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">get_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get a dataset</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data node Dataset</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; dataset = nlp.get_dataset(dataset_id=&quot;awesome-dataset&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; dataset.id</span>
+<span class="sd">            awesome-dataset</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Dataset</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="o">**</span><span class="n">dataset</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.create_dataset"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.create_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">create_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create a dataset</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data node Dataset</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; dataset = nlp.create_dataset(dataset_id=&quot;awesome-dataset&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; dataset.id</span>
+<span class="sd">            awesome-dataset</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/datasets?datasetId=</span><span class="si">{dataset_id}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                 <span class="n">body</span><span class="o">=</span><span class="p">{})</span>
+        <span class="k">return</span> <span class="n">Dataset</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="o">**</span><span class="n">dataset</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.list_annotation_stores"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.list_annotation_stores">[docs]</a>    <span class="k">def</span> <span class="nf">list_annotation_stores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">AnnotationStore</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;List the annotation stores for a dataset</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+
+<span class="sd">        Yield:</span>
+<span class="sd">            Data node annotation stores</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; annotation_stores = nlp.list_annotation_stores(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">annotation_stores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get_paginated</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/annotationStores&quot;</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">store</span> <span class="ow">in</span> <span class="n">annotation_stores</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">AnnotationStore</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span>
+                                  <span class="nb">id</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">store</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]),</span>
+                                  <span class="o">**</span><span class="n">store</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.get_annotation_store"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.get_annotation_store">[docs]</a>    <span class="k">def</span> <span class="nf">get_annotation_store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                             <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnnotationStore</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get an annotation store</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+<span class="sd">            annotation_store_id: annotation store id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data node annotation store</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; annotation_store = nlp.get_annotation_store(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     annotation_store_id=&quot;annotation-store&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; annotation_store.id</span>
+<span class="sd">            annotation-store</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">store</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/annotationStores/</span><span class="si">{annotation_store_id}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">AnnotationStore</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">annotation_store_id</span><span class="p">,</span>
+                               <span class="o">**</span><span class="n">store</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.create_annotation_store"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.create_annotation_store">[docs]</a>    <span class="k">def</span> <span class="nf">create_annotation_store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                                <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnnotationStore</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create an annotation store</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+<span class="sd">            annotation_store_id: annotation store id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data node annotation store</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; annotation_store = nlp.create_annotation_store(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     annotation_store_id=&quot;my-annotation-store&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; annotation_store.id</span>
+<span class="sd">            my-annotation-store</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">store</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_post</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/annotationStores?&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;annotationStoreId=</span><span class="si">{annotation_store_id}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="p">{}</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">AnnotationStore</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">annotation_store_id</span><span class="p">,</span>
+                               <span class="o">**</span><span class="n">store</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.list_annotations"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.list_annotations">[docs]</a>    <span class="k">def</span> <span class="nf">list_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Annotation</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;List the annotations for an annotation store</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+<span class="sd">            annotation_store_id: Annotation store id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data node annotations</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; annotations = nlp.list_annotations(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     annotation_store_id=&quot;my-annotation-store&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">annotations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get_paginated</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/annotationStores/&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{annotation_store_id}</span><span class="s2">/annotations&quot;</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">Annotation</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span>
+                             <span class="n">annotation_store_id</span><span class="o">=</span><span class="n">annotation_store_id</span><span class="p">,</span>
+                             <span class="nb">id</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">annotation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]),</span>
+                             <span class="o">**</span><span class="n">annotation</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.get_annotation"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.get_annotation">[docs]</a>    <span class="k">def</span> <span class="nf">get_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                       <span class="n">annotation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Annotation</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get an annotation</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+<span class="sd">            annotation_store_id: Annotation store id</span>
+<span class="sd">            annotation_id: Annotation id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data node Annotation</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; annotations = nlp.get_annotation(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     annotation_store_id=&quot;my-annotation-store&quot;</span>
+<span class="sd">            &gt;&gt;&gt;     annotation_id=&quot;my-id&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; annotations.id</span>
+<span class="sd">            my-id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">annotation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/annotationStores/</span><span class="si">{annotation_store_id}</span><span class="s2">/&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;annotations/</span><span class="si">{annotation_id}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Annotation</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span>
+                          <span class="n">annotation_store_id</span><span class="o">=</span><span class="n">annotation_store_id</span><span class="p">,</span>
+                          <span class="nb">id</span><span class="o">=</span><span class="n">annotation_id</span><span class="p">,</span>
+                          <span class="o">**</span><span class="n">annotation</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.create_annotation"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.create_annotation">[docs]</a>    <span class="k">def</span> <span class="nf">create_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                          <span class="n">annotation</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Annotation</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create an annotation</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+<span class="sd">            annotation_store_id: Annotation store id</span>
+<span class="sd">            annotation_id: Annotation id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Data node Annotation</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; annotations = nlp.create_annotation(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     annotation_store_id=&quot;my-annotation-store&quot;</span>
+<span class="sd">            &gt;&gt;&gt;     annotation_id=&quot;my-id&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; annotations.id</span>
+<span class="sd">            my-id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">annotation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_post</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/annotationStores/&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{annotation_store_id}</span><span class="s2">/annotations&quot;</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="n">annotation</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Annotation</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span>
+                          <span class="n">annotation_store_id</span><span class="o">=</span><span class="n">annotation_store_id</span><span class="p">,</span>
+                          <span class="nb">id</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">annotation</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]),</span>
+                          <span class="o">**</span><span class="n">annotation</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.list_fhir_stores"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.list_fhir_stores">[docs]</a>    <span class="k">def</span> <span class="nf">list_fhir_stores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">FhirStore</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;List the FHIR stores in a dataset</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            Fhir Store</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; fhir_stores = nlp.list_fhir_stores(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fhir_stores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get_paginated</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores&quot;</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">fhir_store</span> <span class="ow">in</span> <span class="n">fhir_stores</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">FhirStore</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span>
+                            <span class="nb">id</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fhir_store</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]),</span>
+                            <span class="o">**</span><span class="n">fhir_store</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.get_fhir_store"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.get_fhir_store">[docs]</a>    <span class="k">def</span> <span class="nf">get_fhir_store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FhirStore</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get a FHIR store</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+<span class="sd">            fhir_store_id: Fhir Store Id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Fhir Store</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; fhir_stores = nlp.get_fhir_store(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     fhir_store_id=&quot;my-fhir-store&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; fhir_stores.id</span>
+<span class="sd">            my-fhir-store</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fhir_store</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">FhirStore</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">fhir_store_id</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">fhir_store</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.create_fhir_store"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.create_fhir_store">[docs]</a>    <span class="k">def</span> <span class="nf">create_fhir_store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                          <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FhirStore</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create a FHIR store</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+<span class="sd">            fhir_store_id: Fhir Store Id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Fhir Store</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; fhir_stores = nlp.create_fhir_store(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     fhir_store_id=&quot;my-fhir-store&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; fhir_stores.id</span>
+<span class="sd">            my-fhir-store</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fhir_store</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_post</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores?fhirStoreId=</span><span class="si">{fhir_store_id}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="p">{}</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">FhirStore</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">fhir_store_id</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">fhir_store</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.list_notes"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.list_notes">[docs]</a>    <span class="k">def</span> <span class="nf">list_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Note</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;List clinical notes in a FHIR store</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+<span class="sd">            fhir_store_id: Fhir Store Id</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            Clinical notes</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; notes = nlp.list_notes(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     fhir_store_id=&quot;my-fhir-store&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get_paginated</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/Note&quot;</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">Note</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="o">=</span><span class="n">fhir_store_id</span><span class="p">,</span>
+                       <span class="o">**</span><span class="n">note</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.get_note"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.get_note">[docs]</a>    <span class="k">def</span> <span class="nf">get_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">note_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Note</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get a clinical note</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset Id</span>
+<span class="sd">            fhir_store_id: Fhir Store Id</span>
+<span class="sd">            note_id: Clinical note Id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Clinical note</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; note = nlp.get_note(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     fhir_store_id=&quot;my-fhir-store&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     note_id=&quot;my-note&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; note.id</span>
+<span class="sd">            my-note</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">note</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Note/</span><span class="si">{note_id}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Note</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="o">=</span><span class="n">fhir_store_id</span><span class="p">,</span> <span class="o">**</span><span class="n">note</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.create_note"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.create_note">[docs]</a>    <span class="k">def</span> <span class="nf">create_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="n">note</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Note</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create a clinical note</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset id</span>
+<span class="sd">            fhir_store_id: FHIR store id</span>
+<span class="sd">            note: Note request body</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Clinical note</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; example_note = {</span>
+<span class="sd">            &gt;&gt;&gt;     &quot;noteType&quot;: &quot;loinc:LP29684-5&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     &quot;patientId&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     &quot;text&quot;: &quot;This is the content of a clinical note.&quot;</span>
+<span class="sd">            &gt;&gt;&gt; }</span>
+<span class="sd">            &gt;&gt;&gt; note = nlp.create_note(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     fhir_store_id=&quot;my-fhir-store&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     note=example_note</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; note.id</span>
+<span class="sd">            my-note</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">note_body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_post</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/Note&quot;</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="n">note</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Note</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="o">=</span><span class="n">fhir_store_id</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">note_body</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.list_patients"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.list_patients">[docs]</a>    <span class="k">def</span> <span class="nf">list_patients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                      <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Patient</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Lists the patients in a FHIR store</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset id</span>
+<span class="sd">            fhir_store_id: FHIR store id</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            Fhir Patient</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; patients = nlp.list_patients(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     fhir_store_id=&quot;my-fhir-store&quot;,</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">patients</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get_paginated</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/Patient&quot;</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">patient</span> <span class="ow">in</span> <span class="n">patients</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">Patient</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="o">=</span><span class="n">fhir_store_id</span><span class="p">,</span>
+                          <span class="o">**</span><span class="n">patient</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.get_patient"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.get_patient">[docs]</a>    <span class="k">def</span> <span class="nf">get_patient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="n">patient_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Patient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get a FHIR patient</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset id</span>
+<span class="sd">            fhir_store_id: FHIR store id</span>
+<span class="sd">            patient_id: Patient Id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Fhir Patient</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; patient = nlp.get_patient(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     fhir_store_id=&quot;my-fhir-store&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     patient_id=&quot;my-patient&quot;</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; patient.id</span>
+<span class="sd">            my-patient</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">patient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_get</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Patient/</span><span class="si">{patient_id}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Patient</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="o">=</span><span class="n">fhir_store_id</span><span class="p">,</span>
+                       <span class="o">**</span><span class="n">patient</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataNodeApiClient.create_patient"><a class="viewcode-back" href="../../python/api_client.html#nlpsandboxclient.api_client.DataNodeApiClient.create_patient">[docs]</a>    <span class="k">def</span> <span class="nf">create_patient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                       <span class="n">patient</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Patient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create a FHIR patient</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_id: Dataset id</span>
+<span class="sd">            fhir_store_id: FHIR store id</span>
+<span class="sd">            patient: Patient request body</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Fhir Patient</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; nlp = DataNodeApiClient()</span>
+<span class="sd">            &gt;&gt;&gt; example_patient = {</span>
+<span class="sd">            &gt;&gt;&gt;     &quot;gender&quot;: &quot;male&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     &quot;identifier&quot;: &quot;identifier&quot;</span>
+<span class="sd">            &gt;&gt;&gt; }</span>
+<span class="sd">            &gt;&gt;&gt; patient = nlp.create_patient(</span>
+<span class="sd">            &gt;&gt;&gt;     dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     fhir_store_id=&quot;my-fhir-store&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;     patient=example_patient</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+<span class="sd">            &gt;&gt;&gt; patient.id</span>
+<span class="sd">            my-patient</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">patient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_post</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;/datasets/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/Patient&quot;</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="n">patient</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Patient</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="o">=</span><span class="n">fhir_store_id</span><span class="p">,</span>
+                       <span class="o">**</span><span class="n">patient</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Sage Bionetworks
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

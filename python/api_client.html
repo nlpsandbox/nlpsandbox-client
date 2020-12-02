@@ -1,0 +1,793 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Node Api Client Service &mdash; nlpsandboxclient 0.1.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="NLP Client" href="client.html" />
+    <link rel="prev" title="nlpsandboxclient" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> nlpsandboxclient
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Python Client</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Node Api Client Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client.html">NLP Client</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Command-Line Client</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cli/overview.html">Overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/authors.html">Authors</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nlpsandboxclient</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Data Node Api Client Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/api_client.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-nlpsandboxclient.api_client">
+<span id="data-node-api-client-service"></span><h1>Data Node Api Client Service<a class="headerlink" href="#module-nlpsandboxclient.api_client" title="Permalink to this headline">¶</a></h1>
+<p>NLP SDK client.  For developers only - interfaces with the API and
+does not assume user behavior for how functions would be used. Here
+are some examples on how to use this client.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nlpsandboxclient.api_client</span> <span class="kn">import</span> <span class="n">DataNodeApiClient</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a new dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_dataset</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;my-dataset&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create an annotation store</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_store</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">create_annotation_store</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">datasetid</span><span class="o">=</span><span class="n">annotation_store</span><span class="o">.</span><span class="n">datasetid</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_storeid</span><span class="o">=</span><span class="s2">&quot;my-annotation-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># List annotation stores</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_stores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">list_annotation_stores</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">datasetid</span><span class="o">=</span><span class="n">new_dataset</span><span class="o">.</span><span class="n">id</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient">
+<em class="property">class </em><code class="sig-prename descclassname">nlpsandboxclient.api_client.</code><code class="sig-name descname">DataNodeApiClient</code><span class="sig-paren">(</span><em class="sig-param">host: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nlpsandboxclient.api_client.NlpApiClient" title="nlpsandboxclient.api_client.NlpApiClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">nlpsandboxclient.api_client.NlpApiClient</span></code></a></p>
+<p>Nlp client to interact with data node</p>
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.create_annotation">
+<code class="sig-name descname">create_annotation</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em>, <em class="sig-param">annotation: dict</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.Annotation<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.create_annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.create_annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an annotation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>annotation_store_id</strong> – Annotation store id</p></li>
+<li><p><strong>annotation_id</strong> – Annotation id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data node Annotation</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">create_annotation</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_store_id</span><span class="o">=</span><span class="s2">&quot;my-annotation-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_id</span><span class="o">=</span><span class="s2">&quot;my-id&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span><span class="o">.</span><span class="n">id</span>
+<span class="go">my-id</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.create_annotation_store">
+<code class="sig-name descname">create_annotation_store</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.AnnotationStore<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.create_annotation_store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.create_annotation_store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an annotation store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>annotation_store_id</strong> – annotation store id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data node annotation store</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_store</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">create_annotation_store</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_store_id</span><span class="o">=</span><span class="s2">&quot;my-annotation-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_store</span><span class="o">.</span><span class="n">id</span>
+<span class="go">my-annotation-store</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.create_dataset">
+<code class="sig-name descname">create_dataset</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.Dataset<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.create_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.create_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset_id</strong> – Dataset Id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data node Dataset</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span>
+<span class="go">awesome-dataset</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.create_fhir_store">
+<code class="sig-name descname">create_fhir_store</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.FhirStore<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.create_fhir_store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.create_fhir_store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a FHIR store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>fhir_store_id</strong> – Fhir Store Id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Fhir Store</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fhir_stores</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">create_fhir_store</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;my-fhir-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fhir_stores</span><span class="o">.</span><span class="n">id</span>
+<span class="go">my-fhir-store</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.create_note">
+<code class="sig-name descname">create_note</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em>, <em class="sig-param">note: dict</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.Note<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.create_note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.create_note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a clinical note</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset id</p></li>
+<li><p><strong>fhir_store_id</strong> – FHIR store id</p></li>
+<li><p><strong>note</strong> – Note request body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Clinical note</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example_note</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;noteType&quot;</span><span class="p">:</span> <span class="s2">&quot;loinc:LP29684-5&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;patientId&quot;</span><span class="p">:</span> <span class="s2">&quot;507f1f77bcf86cd799439011&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;This is the content of a clinical note.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">create_note</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;my-fhir-store&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">note</span><span class="o">=</span><span class="n">example_note</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">id</span>
+<span class="go">my-note</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.create_patient">
+<code class="sig-name descname">create_patient</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em>, <em class="sig-param">patient: dict</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.Patient<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.create_patient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.create_patient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a FHIR patient</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset id</p></li>
+<li><p><strong>fhir_store_id</strong> – FHIR store id</p></li>
+<li><p><strong>patient</strong> – Patient request body</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Fhir Patient</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example_patient</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;male&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;identifier&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patient</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">create_patient</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;my-fhir-store&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">patient</span><span class="o">=</span><span class="n">example_patient</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patient</span><span class="o">.</span><span class="n">id</span>
+<span class="go">my-patient</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.get_annotation">
+<code class="sig-name descname">get_annotation</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em>, <em class="sig-param">annotation_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.Annotation<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.get_annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.get_annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an annotation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>annotation_store_id</strong> – Annotation store id</p></li>
+<li><p><strong>annotation_id</strong> – Annotation id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data node Annotation</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">get_annotation</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_store_id</span><span class="o">=</span><span class="s2">&quot;my-annotation-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_id</span><span class="o">=</span><span class="s2">&quot;my-id&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span><span class="o">.</span><span class="n">id</span>
+<span class="go">my-id</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.get_annotation_store">
+<code class="sig-name descname">get_annotation_store</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.AnnotationStore<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.get_annotation_store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.get_annotation_store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an annotation store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>annotation_store_id</strong> – annotation store id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data node annotation store</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_store</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">get_annotation_store</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_store_id</span><span class="o">=</span><span class="s2">&quot;annotation-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_store</span><span class="o">.</span><span class="n">id</span>
+<span class="go">annotation-store</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.get_dataset">
+<code class="sig-name descname">get_dataset</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.Dataset<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.get_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.get_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset_id</strong> – Dataset Id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data node Dataset</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset</span><span class="o">.</span><span class="n">id</span>
+<span class="go">awesome-dataset</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.get_fhir_store">
+<code class="sig-name descname">get_fhir_store</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.FhirStore<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.get_fhir_store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.get_fhir_store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a FHIR store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>fhir_store_id</strong> – Fhir Store Id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Fhir Store</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fhir_stores</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">get_fhir_store</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;my-fhir-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fhir_stores</span><span class="o">.</span><span class="n">id</span>
+<span class="go">my-fhir-store</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.get_note">
+<code class="sig-name descname">get_note</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em>, <em class="sig-param">note_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.Note<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.get_note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.get_note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a clinical note</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>fhir_store_id</strong> – Fhir Store Id</p></li>
+<li><p><strong>note_id</strong> – Clinical note Id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Clinical note</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">get_note</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;my-fhir-store&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">note_id</span><span class="o">=</span><span class="s2">&quot;my-note&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">note</span><span class="o">.</span><span class="n">id</span>
+<span class="go">my-note</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.get_patient">
+<code class="sig-name descname">get_patient</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em>, <em class="sig-param">patient_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxclient.datanode.models.Patient<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.get_patient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.get_patient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a FHIR patient</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset id</p></li>
+<li><p><strong>fhir_store_id</strong> – FHIR store id</p></li>
+<li><p><strong>patient_id</strong> – Patient Id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Fhir Patient</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patient</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">get_patient</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;my-fhir-store&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">patient_id</span><span class="o">=</span><span class="s2">&quot;my-patient&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patient</span><span class="o">.</span><span class="n">id</span>
+<span class="go">my-patient</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.list_annotation_stores">
+<code class="sig-name descname">list_annotation_stores</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em><span class="sig-paren">)</span> &#x2192; Iterator[nlpsandboxclient.datanode.models.AnnotationStore]<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.list_annotation_stores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.list_annotation_stores" title="Permalink to this definition">¶</a></dt>
+<dd><p>List the annotation stores for a dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset_id</strong> – Dataset Id</p>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p>Data node annotation stores</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotation_stores</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">list_annotation_stores</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.list_annotations">
+<code class="sig-name descname">list_annotations</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em><span class="sig-paren">)</span> &#x2192; Iterator[nlpsandboxclient.datanode.models.Annotation]<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.list_annotations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.list_annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>List the annotations for an annotation store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>annotation_store_id</strong> – Annotation store id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data node annotations</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">list_annotations</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_store_id</span><span class="o">=</span><span class="s2">&quot;my-annotation-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.list_datasets">
+<code class="sig-name descname">list_datasets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Iterator[nlpsandboxclient.datanode.models.Dataset]<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.list_datasets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.list_datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists all datasets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields</dt>
+<dd class="field-odd"><p>Data node Dataset</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">())</span>
+<span class="go">[Dataset]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.list_fhir_stores">
+<code class="sig-name descname">list_fhir_stores</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em><span class="sig-paren">)</span> &#x2192; Iterator[nlpsandboxclient.datanode.models.FhirStore]<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.list_fhir_stores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.list_fhir_stores" title="Permalink to this definition">¶</a></dt>
+<dd><p>List the FHIR stores in a dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset_id</strong> – Dataset Id</p>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p>Fhir Store</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fhir_stores</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">list_fhir_stores</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.list_notes">
+<code class="sig-name descname">list_notes</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em><span class="sig-paren">)</span> &#x2192; Iterator[nlpsandboxclient.datanode.models.Note]<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.list_notes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.list_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List clinical notes in a FHIR store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>fhir_store_id</strong> – Fhir Store Id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p>Clinical notes</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">list_notes</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;my-fhir-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.DataNodeApiClient.list_patients">
+<code class="sig-name descname">list_patients</code><span class="sig-paren">(</span><em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em><span class="sig-paren">)</span> &#x2192; Iterator[nlpsandboxclient.datanode.models.Patient]<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#DataNodeApiClient.list_patients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.DataNodeApiClient.list_patients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists the patients in a FHIR store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_id</strong> – Dataset id</p></li>
+<li><p><strong>fhir_store_id</strong> – FHIR store id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p>Fhir Patient</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">DataNodeApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patients</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">list_patients</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;my-fhir-store&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nlpsandboxclient.api_client.NlpApiClient">
+<em class="property">class </em><code class="sig-prename descclassname">nlpsandboxclient.api_client.</code><code class="sig-name descname">NlpApiClient</code><span class="sig-paren">(</span><em class="sig-param">host: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#NlpApiClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.NlpApiClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Nlp base client that does generic rest calls</p>
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.NlpApiClient.get_service">
+<code class="sig-name descname">get_service</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#NlpApiClient.get_service"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.NlpApiClient.get_service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the health of the API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Service response</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">NlpApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span><span class="o">.</span><span class="n">get_service</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.NlpApiClient.get_ui">
+<code class="sig-name descname">get_ui</code><span class="sig-paren">(</span><em class="sig-param">return_body: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#NlpApiClient.get_ui"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.NlpApiClient.get_ui" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the ui of the API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>return_body</strong> – Returns the response body. Default is False.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Response object</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">NlpApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span><span class="o">.</span><span class="n">get_ui</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.NlpApiClient.rest_get">
+<code class="sig-name descname">rest_get</code><span class="sig-paren">(</span><em class="sig-param">uri: str</em>, <em class="sig-param">endpoint: str = None</em>, <em class="sig-param">return_body: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#NlpApiClient.rest_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.NlpApiClient.rest_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a HTTP GET request</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uri</strong> – Service path</p></li>
+<li><p><strong>endpoint</strong> – Service endpoint</p></li>
+<li><p><strong>return_body</strong> – Returns the response body. Default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Response object or body</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span> <span class="o">=</span> <span class="n">NlpApiClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlp</span><span class="o">.</span><span class="n">get_ui</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.NlpApiClient.rest_get_paginated">
+<code class="sig-name descname">rest_get_paginated</code><span class="sig-paren">(</span><em class="sig-param">uri</em>, <em class="sig-param">limit=10</em>, <em class="sig-param">offset=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#NlpApiClient.rest_get_paginated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.NlpApiClient.rest_get_paginated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pagniated rest call</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.api_client.NlpApiClient.rest_post">
+<code class="sig-name descname">rest_post</code><span class="sig-paren">(</span><em class="sig-param">uri: str</em>, <em class="sig-param">body: str</em>, <em class="sig-param">endpoint: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/api_client.html#NlpApiClient.rest_post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.api_client.NlpApiClient.rest_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an HTTP POST request.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Sage Bionetworks
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
