@@ -117,7 +117,7 @@ class TestDataNodeApiClient:
         """Test get dataset"""
         with patch.object(self.nlp, "rest_post") as rest_post:
             self.nlp.create_dataset(dataset_id="foo")
-            rest_post.assert_called_once_with("/datasets?dataset_id=foo",
+            rest_post.assert_called_once_with("/datasets?datasetId=foo",
                                               body={})
 
     def test_list_annotation_stores(self):
