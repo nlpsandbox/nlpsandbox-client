@@ -118,7 +118,7 @@ class DataNodeApiClient(NlpApiClient):
 
     def create_dataset(self, dataset_id: str) -> Dataset:
         """Create a dataset"""
-        dataset = self.rest_post(f"/datasets?dataset_id={dataset_id}",
+        dataset = self.rest_post(f"/datasets?datasetId={dataset_id}",
                                  body={})
         return Dataset(id=dataset_id, **dataset)
 
