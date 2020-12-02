@@ -10,8 +10,13 @@ import requests
 from synapseclient import core
 
 from . import utils
-from .datanode.models import (Annotation, AnnotationStore, Dataset,
-                              FhirStore, Note, Patient)
+from .data_node_models.annotations import Annotation
+from .data_node_models.annotation_stores import AnnotationStore
+from .data_node_models.datasets import Dataset
+from .data_node_models.fhir_stores import FhirStore
+from .data_node_models.notes import Note
+from .data_node_models.patients import Patient
+
 
 # Default data node endpoint
 DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
