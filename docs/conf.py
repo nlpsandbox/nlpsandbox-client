@@ -90,7 +90,7 @@ html_logo = ''
 # documentation.
 #
 html_theme_options = {
-    'logo_only': True,
+    'logo_only': False,
     'prev_next_buttons_location': None
 }
 
