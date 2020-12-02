@@ -1,4 +1,5 @@
 """Annotation"""
+from .base import Model
 
 
 class Annotation(Model):

@@ -1,4 +1,5 @@
 """FHIR store"""
+from .base import Model
 
 
 class FhirStore(Model):

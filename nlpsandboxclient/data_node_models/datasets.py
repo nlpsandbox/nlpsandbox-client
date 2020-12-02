@@ -1,4 +1,5 @@
 """Dataset"""
+from .base import Model
 
 
 class Dataset(Model):

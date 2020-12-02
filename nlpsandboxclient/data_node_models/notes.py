@@ -1,4 +1,5 @@
 """FHIR Clinical note"""
+from .base import Model
 
 
 class Note(Model):
