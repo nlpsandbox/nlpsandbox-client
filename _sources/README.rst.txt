@@ -17,7 +17,7 @@ To install from pypi:
 
 .. code:: console
 
-    $ pip install nlp-sandbox-client
+    $ pip install nlpsandbox-client
 
 To install from the source:
 
