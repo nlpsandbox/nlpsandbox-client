@@ -28,21 +28,13 @@ def _return_rest_body(response):
     return response.text
 
 
-class NlpApiClient:
-    """Nlp base client that does generic rest calls"""
+class ApiClient:
+    """API client that does generic rest calls"""
     def __init__(self, host: str = None):
         if host is None:
             host = DATA_NODE_HOST
         self.host = host
         self._requests_session = requests.Session()
-
-    def get_service(self):
-        """Get the health of the API"""
-        return self.rest_get("/service")
-
-    def get_ui(self, return_body: bool = False):
-        """Get the ui of the API"""
-        return self.rest_get("/ui", return_body=return_body)
 
     def rest_get(self, uri: str, endpoint: str = None,
                  return_body: bool = True):
@@ -95,8 +87,16 @@ class NlpApiClient:
         return uri
 
 
-class DataNodeApiClient(NlpApiClient):
+class DataNodeClient(ApiClient):
     """Nlp client to interact with data node"""
+
+    def get_service(self):
+        """Get the health of the API"""
+        return self.rest_get("/service")
+
+    def get_ui(self, return_body: bool = False):
+        """Get the ui of the API"""
+        return self.rest_get("/ui", return_body=return_body)
 
     def list_datasets(self) -> Iterator[Dataset]:
         """Lists all datasets"""

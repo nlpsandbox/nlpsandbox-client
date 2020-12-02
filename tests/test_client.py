@@ -2,7 +2,7 @@
 from unittest.mock import Mock, patch
 
 from nlpsandboxclient import api_client
-from nlpsandboxclient.api_client import NlpApiClient, DataNodeApiClient
+from nlpsandboxclient.api_client import ApiClient, DataNodeClient
 
 
 class TestApiClient:
@@ -11,44 +11,32 @@ class TestApiClient:
     def setup_method(self):
         """Method called once per method"""
         self.host = api_client.DATA_NODE_HOST
-        self.nlpclient = NlpApiClient(host=self.host)
-
-    def test_get_service(self):
-        """Test get service"""
-        with patch.object(self.nlpclient, "rest_get") as rest_get:
-            self.nlpclient.get_service()
-            rest_get.assert_called_once_with("/service")
-
-    def test_get_ui(self):
-        """Test get ui"""
-        with patch.object(self.nlpclient, "rest_get") as rest_get:
-            self.nlpclient.get_ui()
-            rest_get.assert_called_once_with("/ui", return_body=False)
+        self.apiclient = ApiClient(host=self.host)
 
     def test__build_uri_nonet(self):
         """Tests building of URI no net"""
-        uri = self.nlpclient._build_uri("/foo")
+        uri = self.apiclient._build_uri("/foo")
         assert uri == f"{self.host}/foo"
 
     def test__build_uri_net(self):
         """Tests building of URI network in text"""
         text = "http://google.com/foo"
-        uri = self.nlpclient._build_uri(text)
+        uri = self.apiclient._build_uri(text)
         assert uri == text
 
     def test__build_uri_endpoint(self):
         """Tests building of URI to specify endpoint"""
-        uri = self.nlpclient._build_uri("/foo", endpoint="test")
+        uri = self.apiclient._build_uri("/foo", endpoint="test")
         assert uri == "test/foo"
 
     def test__rest_call(self):
         """Test rest call"""
         response = Mock(status_code=200)
-        with patch.object(self.nlpclient, "_build_uri",
+        with patch.object(self.apiclient, "_build_uri",
                           return_value="/foo") as build_uri, \
-             patch.object(self.nlpclient._requests_session,
+             patch.object(self.apiclient._requests_session,
                           "get", return_value=response) as request_get:
-            self.nlpclient._rest_call("get", "/foo", None, "http://endpoint")
+            self.apiclient._rest_call("get", "/foo", None, "http://endpoint")
             build_uri.assert_called_once_with("/foo",
                                               endpoint="http://endpoint")
             request_get.assert_called_once_with("/foo", json=None,
@@ -56,11 +44,11 @@ class TestApiClient:
 
     def test_rest_get(self):
         """Test rest get"""
-        with patch.object(self.nlpclient, "_rest_call",
+        with patch.object(self.apiclient, "_rest_call",
                           return_value="/foo") as rest_call, \
              patch.object(api_client, "_return_rest_body",
                           return_value='temp') as return_body:
-            returned = self.nlpclient.rest_get("/foo",
+            returned = self.apiclient.rest_get("/foo",
                                                endpoint="http://endpoint")
             rest_call.assert_called_once_with("get", "/foo", None,
                                               "http://endpoint")
@@ -71,9 +59,9 @@ class TestApiClient:
         """Test rest get"""
         returned = {"links": {"next": ""}, "limit": 0, "offset": 0,
                     "testing": ["list", "of", "items"]}
-        with patch.object(self.nlpclient, "rest_get",
+        with patch.object(self.apiclient, "rest_get",
                           return_value=returned) as rest_call:
-            results = list(self.nlpclient.rest_get_paginated("/foo/bar",
+            results = list(self.apiclient.rest_get_paginated("/foo/bar",
                                                              limit=4,
                                                              offset=4))
             rest_call.assert_called_once_with("/foo/bar?limit=4&offset=4")
@@ -81,11 +69,11 @@ class TestApiClient:
 
     def test_rest_post(self):
         """Test rest get"""
-        with patch.object(self.nlpclient, "_rest_call",
+        with patch.object(self.apiclient, "_rest_call",
                           return_value="/foo") as rest_call, \
              patch.object(api_client, "_return_rest_body",
                           return_value='temp') as return_body:
-            returned = self.nlpclient.rest_post("/foo", {"test": "me"},
+            returned = self.apiclient.rest_post("/foo", {"test": "me"},
                                                 endpoint="http://endpoint")
             rest_call.assert_called_once_with(
                 "post", "/foo", {"test": "me"}, "http://endpoint"
@@ -99,7 +87,19 @@ class TestDataNodeApiClient:
     def setup_method(self):
         """Method called once per method"""
         self.host = api_client.DATA_NODE_HOST
-        self.nlp = DataNodeApiClient(host=self.host)
+        self.nlp = DataNodeClient(host=self.host)
+
+    def test_get_service(self):
+        """Test get service"""
+        with patch.object(self.nlp, "rest_get") as rest_get:
+            self.nlp.get_service()
+            rest_get.assert_called_once_with("/service")
+
+    def test_get_ui(self):
+        """Test get ui"""
+        with patch.object(self.nlp, "rest_get") as rest_get:
+            self.nlp.get_ui()
+            rest_get.assert_called_once_with("/ui", return_body=False)
 
     def test_list_datasets(self):
         """Test get datasets"""
