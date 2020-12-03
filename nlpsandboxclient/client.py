@@ -32,18 +32,25 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
     """
     configuration = datanodeclient.Configuration(host=host)
     all_notes = []
+    offset=0
+    limit=10
     with datanodeclient.ApiClient(configuration) as api_client:
         note_api = datanodeclient.NoteApi(api_client)
         # Obtain all clinical notes
-        notes = note_api.list_notes(dataset_id, fhir_store_id)
-        for note in notes.notes:
-            all_notes.append({
-                "id": note.id,
-                "noteType": note.note_type,
-                "patientId": note.patient_id,
-                "text": note.text,
-                "note_name": f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note.id}"
-            })
+        next_page = True
+        while next_page:
+            notes = note_api.list_notes(dataset_id, fhir_store_id,
+                                        offset=offset, limit=limit)
+            for note in notes.notes:
+                all_notes.append({
+                    "id": note.id,
+                    "noteType": note.note_type,
+                    "patientId": note.patient_id,
+                    "text": note.text,
+                    "note_name": f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note.id}"
+                })
+            next_page = notes.links.next
+            offset += limit
     return all_notes
 
 
