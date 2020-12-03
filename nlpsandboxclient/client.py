@@ -19,9 +19,9 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
         list of clinical notes.
 
     Examples:
-        >>> notes = get_clinical_notes(host="0.0.0.0/api/v1",
-        >>>                            dataset_id="awesome-dataset",
-        >>>                            fhir_store_id="awesome-fhir-store")
+        >>> notes = get_notes(host="0.0.0.0/api/v1",
+        >>>                   dataset_id="awesome-dataset",
+        >>>                   fhir_store_id="awesome-fhir-store")
         >>> notes[0]
         {
             "id": "noteid",
@@ -36,23 +36,17 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
     )
     all_notes = []
     with datanodeclient.ApiClient(configuration) as api_client:
-        fhir_store_api = datanodeclient.FhirStoreApi(api_client)
         note_api = datanodeclient.NoteApi(api_client)
-
-        fhir_stores = fhir_store_api.list_fhir_stores(dataset_id)
-        for fhir_store in fhir_stores.fhir_stores:
-            fhir_store_id = os.path.basename(fhir_store.name)
-            # Obtain all clinical notes for all fhir stores in a dataset
-            notes = note_api.list_notes(dataset_id, fhir_store_id)
-
-            for note in notes.notes:
-                all_notes.append({
-                    "id": note.id,
-                    "noteType": note.note_type,
-                    "patientId": note.patient_id,
-                    "text": note.text,
-                    "note_name": f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note.id}"
-                })
+        # Obtain all clinical notes
+        notes = note_api.list_notes(dataset_id, fhir_store_id)
+        for note in notes.notes:
+            all_notes.append({
+                "id": note.id,
+                "noteType": note.note_type,
+                "patientId": note.patient_id,
+                "text": note.text,
+                "note_name": f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note.id}"
+            })
     return all_notes
 
 
