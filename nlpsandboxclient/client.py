@@ -1,11 +1,10 @@
-"""
-NLP data node client - This module has convenience functions to interact
-with the DataNodeApiClient.
-"""
+"""NLP data node client that interacts with the SDK datanodeclient"""
 import os
 from typing import List
 
 import datanodeclient
+
+DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
 
 
 def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
