@@ -12,8 +12,9 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
     """Get all clinical notes for a dataset
 
     Args:
-        host: Data node host IP.
-        dataset_id: Dataset id
+        host: Data node host IP
+        dataset_id: Dataset Id
+        fhir_store_id: FHIR store Id
 
     Returns:
         list of clinical notes.
@@ -61,8 +62,9 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
     """Store annotation
 
     Args:
-        host: Data node host IP.
-        annotation_store: AnnotationStore object
+        host: Data node host IP
+        dataset_id: Dataset Id
+        annotation_store_id: Annotation store Id
         annotation: Annotation dict
 
     Returns:
