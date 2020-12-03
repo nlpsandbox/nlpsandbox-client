@@ -5,6 +5,7 @@ import click
 import synapseclient
 
 from nlpsandboxclient import client, utils
+from nlpsandboxclient.client import DATA_NODE_HOST
 
 
 # Command Group

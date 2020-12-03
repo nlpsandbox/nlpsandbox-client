@@ -1,5 +1,4 @@
 """NLP data node client that interacts with the SDK datanodeclient"""
-import os
 from typing import List
 
 import datanodeclient
@@ -31,9 +30,7 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
             "note_name": "dataset/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid"
         }
     """
-    configuration = datanodeclient.Configuration(
-        host = host
-    )
+    configuration = datanodeclient.Configuration(host=host)
     all_notes = []
     with datanodeclient.ApiClient(configuration) as api_client:
         note_api = datanodeclient.NoteApi(api_client)
@@ -93,9 +90,7 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         >>>                               annotation=example_annotation)
 
     """
-    configuration = datanodeclient.Configuration(
-        host = host
-    )
+    configuration = datanodeclient.Configuration(host=host)
     with datanodeclient.ApiClient(configuration) as api_client:
         annotation_api = datanodeclient.AnnotationApi(api_client)
         annotation_obj = annotation_api.create_annotation(
