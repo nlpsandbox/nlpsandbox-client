@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.text_person_name_annotation import TextPersonNameAnnotation  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.text_person_name_annotation import TextPersonNameAnnotation  # noqa: E501
+from datanode.rest import ApiException
 
 class TestTextPersonNameAnnotation(unittest.TestCase):
     """TextPersonNameAnnotation unit test stubs"""
@@ -34,7 +34,7 @@ class TestTextPersonNameAnnotation(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.text_person_name_annotation.TextPersonNameAnnotation()  # noqa: E501
+        # model = datanode.models.text_person_name_annotation.TextPersonNameAnnotation()  # noqa: E501
         if include_optional :
             return TextPersonNameAnnotation(
             )

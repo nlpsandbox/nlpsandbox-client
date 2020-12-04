@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.page_of_patients_all_of import PageOfPatientsAllOf  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.page_of_patients_all_of import PageOfPatientsAllOf  # noqa: E501
+from datanode.rest import ApiException
 
 class TestPageOfPatientsAllOf(unittest.TestCase):
     """PageOfPatientsAllOf unit test stubs"""
@@ -34,11 +34,11 @@ class TestPageOfPatientsAllOf(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.page_of_patients_all_of.PageOfPatientsAllOf()  # noqa: E501
+        # model = datanode.models.page_of_patients_all_of.PageOfPatientsAllOf()  # noqa: E501
         if include_optional :
             return PageOfPatientsAllOf(
                 patients = [
-                    datanodeclient.models.patient.Patient(
+                    datanode.models.patient.Patient(
                         id = '0', 
                         identifier = '0', 
                         gender = 'male', )

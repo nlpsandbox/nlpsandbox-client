@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.page_of_annotation_stores import PageOfAnnotationStores  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.page_of_annotation_stores import PageOfAnnotationStores  # noqa: E501
+from datanode.rest import ApiException
 
 class TestPageOfAnnotationStores(unittest.TestCase):
     """PageOfAnnotationStores unit test stubs"""
@@ -34,15 +34,15 @@ class TestPageOfAnnotationStores(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.page_of_annotation_stores.PageOfAnnotationStores()  # noqa: E501
+        # model = datanode.models.page_of_annotation_stores.PageOfAnnotationStores()  # noqa: E501
         if include_optional :
             return PageOfAnnotationStores(
                 offset = 56, 
                 limit = 56, 
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ), 
                 annotation_stores = [
-                    datanodeclient.models.annotation_store.AnnotationStore(
+                    datanode.models.annotation_store.AnnotationStore(
                         name = '0', )
                     ]
             )
@@ -50,7 +50,7 @@ class TestPageOfAnnotationStores(unittest.TestCase):
             return PageOfAnnotationStores(
                 offset = 56,
                 limit = 56,
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ),
         )
 

@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.page_of_notes import PageOfNotes  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.page_of_notes import PageOfNotes  # noqa: E501
+from datanode.rest import ApiException
 
 class TestPageOfNotes(unittest.TestCase):
     """PageOfNotes unit test stubs"""
@@ -34,15 +34,15 @@ class TestPageOfNotes(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.page_of_notes.PageOfNotes()  # noqa: E501
+        # model = datanode.models.page_of_notes.PageOfNotes()  # noqa: E501
         if include_optional :
             return PageOfNotes(
                 offset = 56, 
                 limit = 56, 
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ), 
                 notes = [
-                    datanodeclient.models.note.Note(
+                    datanode.models.note.Note(
                         id = '0', 
                         text = 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.', 
                         note_type = 'loinc:LP29684-5', 
@@ -53,7 +53,7 @@ class TestPageOfNotes(unittest.TestCase):
             return PageOfNotes(
                 offset = 56,
                 limit = 56,
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ),
         )
 

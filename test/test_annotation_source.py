@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.annotation_source import AnnotationSource  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.annotation_source import AnnotationSource  # noqa: E501
+from datanode.rest import ApiException
 
 class TestAnnotationSource(unittest.TestCase):
     """AnnotationSource unit test stubs"""
@@ -34,10 +34,10 @@ class TestAnnotationSource(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.annotation_source.AnnotationSource()  # noqa: E501
+        # model = datanode.models.annotation_source.AnnotationSource()  # noqa: E501
         if include_optional :
             return AnnotationSource(
-                resource_source = datanodeclient.models.resource_source.ResourceSource(
+                resource_source = datanode.models.resource_source.ResourceSource(
                     name = '0', )
             )
         else :

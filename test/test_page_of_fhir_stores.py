@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.page_of_fhir_stores import PageOfFhirStores  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.page_of_fhir_stores import PageOfFhirStores  # noqa: E501
+from datanode.rest import ApiException
 
 class TestPageOfFhirStores(unittest.TestCase):
     """PageOfFhirStores unit test stubs"""
@@ -34,15 +34,15 @@ class TestPageOfFhirStores(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.page_of_fhir_stores.PageOfFhirStores()  # noqa: E501
+        # model = datanode.models.page_of_fhir_stores.PageOfFhirStores()  # noqa: E501
         if include_optional :
             return PageOfFhirStores(
                 offset = 56, 
                 limit = 56, 
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ), 
                 fhir_stores = [
-                    datanodeclient.models.fhir_store.FhirStore(
+                    datanode.models.fhir_store.FhirStore(
                         name = '0', )
                     ]
             )
@@ -50,7 +50,7 @@ class TestPageOfFhirStores(unittest.TestCase):
             return PageOfFhirStores(
                 offset = 56,
                 limit = 56,
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ),
         )
 

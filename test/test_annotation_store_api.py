@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import datanodeclient
-from datanodeclient.api.annotation_store_api import AnnotationStoreApi  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.api.annotation_store_api import AnnotationStoreApi  # noqa: E501
+from datanode.rest import ApiException
 
 
 class TestAnnotationStoreApi(unittest.TestCase):
     """AnnotationStoreApi unit test stubs"""
 
     def setUp(self):
-        self.api = datanodeclient.api.annotation_store_api.AnnotationStoreApi()  # noqa: E501
+        self.api = datanode.api.annotation_store_api.AnnotationStoreApi()  # noqa: E501
 
     def tearDown(self):
         pass

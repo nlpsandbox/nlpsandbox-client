@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import datanodeclient
-from datanodeclient.api.text_date_annotation_api import TextDateAnnotationApi  # noqa: E501
-from datanodeclient.rest import ApiException
+import textdateannotator
+from textdateannotator.api.text_date_annotation_api import TextDateAnnotationApi  # noqa: E501
+from textdateannotator.rest import ApiException
 
 
 class TestTextDateAnnotationApi(unittest.TestCase):
     """TextDateAnnotationApi unit test stubs"""
 
     def setUp(self):
-        self.api = datanodeclient.api.text_date_annotation_api.TextDateAnnotationApi()  # noqa: E501
+        self.api = textdateannotator.api.text_date_annotation_api.TextDateAnnotationApi()  # noqa: E501
 
     def tearDown(self):
         pass

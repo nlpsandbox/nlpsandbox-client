@@ -25,10 +25,10 @@ import tempfile
 import six
 from six.moves.urllib.parse import quote
 
-from dateannotator.configuration import Configuration
-import dateannotator.models
-from dateannotator import rest
-from dateannotator.exceptions import ApiValueError, ApiException
+from textdateannotator.configuration import Configuration
+import textdateannotator.models
+from textdateannotator import rest
+from textdateannotator.exceptions import ApiValueError, ApiException
 
 
 class ApiClient(object):
@@ -306,7 +306,7 @@ class ApiClient(object):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(dateannotator.models, klass)
+                klass = getattr(textdateannotator.models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)

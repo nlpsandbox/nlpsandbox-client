@@ -18,24 +18,24 @@ from __future__ import absolute_import
 __version__ = "1.0.0"
 
 # import apis into sdk package
-from dateannotator.api.service_api import ServiceApi
-from dateannotator.api.text_date_annotation_api import TextDateAnnotationApi
+from textdateannotator.api.service_api import ServiceApi
+from textdateannotator.api.text_date_annotation_api import TextDateAnnotationApi
 
 # import ApiClient
-from dateannotator.api_client import ApiClient
-from dateannotator.configuration import Configuration
-from dateannotator.exceptions import OpenApiException
-from dateannotator.exceptions import ApiTypeError
-from dateannotator.exceptions import ApiValueError
-from dateannotator.exceptions import ApiKeyError
-from dateannotator.exceptions import ApiException
+from textdateannotator.api_client import ApiClient
+from textdateannotator.configuration import Configuration
+from textdateannotator.exceptions import OpenApiException
+from textdateannotator.exceptions import ApiTypeError
+from textdateannotator.exceptions import ApiValueError
+from textdateannotator.exceptions import ApiKeyError
+from textdateannotator.exceptions import ApiException
 # import models into sdk package
-from dateannotator.models.error import Error
-from dateannotator.models.note import Note
-from dateannotator.models.service import Service
-from dateannotator.models.text_annotation import TextAnnotation
-from dateannotator.models.text_date_annotation import TextDateAnnotation
-from dateannotator.models.text_date_annotation_all_of import TextDateAnnotationAllOf
-from dateannotator.models.text_date_annotation_request import TextDateAnnotationRequest
-from dateannotator.models.text_date_annotations import TextDateAnnotations
+from textdateannotator.models.error import Error
+from textdateannotator.models.note import Note
+from textdateannotator.models.service import Service
+from textdateannotator.models.text_annotation import TextAnnotation
+from textdateannotator.models.text_date_annotation import TextDateAnnotation
+from textdateannotator.models.text_date_annotation_all_of import TextDateAnnotationAllOf
+from textdateannotator.models.text_date_annotation_request import TextDateAnnotationRequest
+from textdateannotator.models.text_date_annotations import TextDateAnnotations
 

@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import datanodeclient
-from datanodeclient.api.service_api import ServiceApi  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.api.service_api import ServiceApi  # noqa: E501
+from datanode.rest import ApiException
 
 
 class TestServiceApi(unittest.TestCase):
     """ServiceApi unit test stubs"""
 
     def setUp(self):
-        self.api = datanodeclient.api.service_api.ServiceApi()  # noqa: E501
+        self.api = datanode.api.service_api.ServiceApi()  # noqa: E501
 
     def tearDown(self):
         pass

@@ -25,7 +25,7 @@ import six
 from six.moves.urllib.parse import urlencode
 import urllib3
 
-from datanodeclient.exceptions import ApiException, ApiValueError
+from datanode.exceptions import ApiException, ApiValueError
 
 
 logger = logging.getLogger(__name__)

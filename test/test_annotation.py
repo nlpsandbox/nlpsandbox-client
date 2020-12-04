@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.annotation import Annotation  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.annotation import Annotation  # noqa: E501
+from datanode.rest import ApiException
 
 class TestAnnotation(unittest.TestCase):
     """Annotation unit test stubs"""
@@ -34,12 +34,12 @@ class TestAnnotation(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.annotation.Annotation()  # noqa: E501
+        # model = datanode.models.annotation.Annotation()  # noqa: E501
         if include_optional :
             return Annotation(
                 name = '0', 
-                annotation_source = datanodeclient.models.annotation_source.AnnotationSource(
-                    resource_source = datanodeclient.models.resource_source.ResourceSource(
+                annotation_source = datanode.models.annotation_source.AnnotationSource(
+                    resource_source = datanode.models.resource_source.ResourceSource(
                         name = '0', ), ), 
                 text_date_annotations = [
                     {"start":42,"length":10,"text":"10/26/2020","dateFormat":"MM/DD/YYYY"}

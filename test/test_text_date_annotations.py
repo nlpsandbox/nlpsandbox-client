@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.text_date_annotations import TextDateAnnotations  # noqa: E501
-from datanodeclient.rest import ApiException
+import textdateannotator
+from textdateannotator.models.text_date_annotations import TextDateAnnotations  # noqa: E501
+from textdateannotator.rest import ApiException
 
 class TestTextDateAnnotations(unittest.TestCase):
     """TextDateAnnotations unit test stubs"""
@@ -34,7 +34,7 @@ class TestTextDateAnnotations(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.text_date_annotations.TextDateAnnotations()  # noqa: E501
+        # model = textdateannotator.models.text_date_annotations.TextDateAnnotations()  # noqa: E501
         if include_optional :
             return TextDateAnnotations(
                 text_date_annotations = [

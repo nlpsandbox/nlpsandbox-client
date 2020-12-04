@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.page_of_patients import PageOfPatients  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.page_of_patients import PageOfPatients  # noqa: E501
+from datanode.rest import ApiException
 
 class TestPageOfPatients(unittest.TestCase):
     """PageOfPatients unit test stubs"""
@@ -34,15 +34,15 @@ class TestPageOfPatients(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.page_of_patients.PageOfPatients()  # noqa: E501
+        # model = datanode.models.page_of_patients.PageOfPatients()  # noqa: E501
         if include_optional :
             return PageOfPatients(
                 offset = 56, 
                 limit = 56, 
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ), 
                 patients = [
-                    datanodeclient.models.patient.Patient(
+                    datanode.models.patient.Patient(
                         id = '0', 
                         identifier = '0', 
                         gender = 'male', )
@@ -52,7 +52,7 @@ class TestPageOfPatients(unittest.TestCase):
             return PageOfPatients(
                 offset = 56,
                 limit = 56,
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ),
         )
 

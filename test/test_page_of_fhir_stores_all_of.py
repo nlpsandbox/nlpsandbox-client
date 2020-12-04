@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.page_of_fhir_stores_all_of import PageOfFhirStoresAllOf  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.page_of_fhir_stores_all_of import PageOfFhirStoresAllOf  # noqa: E501
+from datanode.rest import ApiException
 
 class TestPageOfFhirStoresAllOf(unittest.TestCase):
     """PageOfFhirStoresAllOf unit test stubs"""
@@ -34,11 +34,11 @@ class TestPageOfFhirStoresAllOf(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.page_of_fhir_stores_all_of.PageOfFhirStoresAllOf()  # noqa: E501
+        # model = datanode.models.page_of_fhir_stores_all_of.PageOfFhirStoresAllOf()  # noqa: E501
         if include_optional :
             return PageOfFhirStoresAllOf(
                 fhir_stores = [
-                    datanodeclient.models.fhir_store.FhirStore(
+                    datanode.models.fhir_store.FhirStore(
                         name = '0', )
                     ]
             )

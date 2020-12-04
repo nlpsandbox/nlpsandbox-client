@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.page_of_datasets import PageOfDatasets  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.page_of_datasets import PageOfDatasets  # noqa: E501
+from datanode.rest import ApiException
 
 class TestPageOfDatasets(unittest.TestCase):
     """PageOfDatasets unit test stubs"""
@@ -34,12 +34,12 @@ class TestPageOfDatasets(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.page_of_datasets.PageOfDatasets()  # noqa: E501
+        # model = datanode.models.page_of_datasets.PageOfDatasets()  # noqa: E501
         if include_optional :
             return PageOfDatasets(
                 offset = 56, 
                 limit = 56, 
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ), 
                 datasets = [
                     {"name":"datasets/awesome-dataset"}
@@ -49,7 +49,7 @@ class TestPageOfDatasets(unittest.TestCase):
             return PageOfDatasets(
                 offset = 56,
                 limit = 56,
-                links = datanodeclient.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
                     next = '0', ),
         )
 

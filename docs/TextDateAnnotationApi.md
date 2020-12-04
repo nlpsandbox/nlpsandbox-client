@@ -1,4 +1,4 @@
-# dateannotator.TextDateAnnotationApi
+# textdateannotator.TextDateAnnotationApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -19,21 +19,21 @@ Return the date annotations found in a clinical note
 ```python
 from __future__ import print_function
 import time
-import dateannotator
-from dateannotator.rest import ApiException
+import textdateannotator
+from textdateannotator.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = dateannotator.Configuration(
+configuration = textdateannotator.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with dateannotator.ApiClient() as api_client:
+with textdateannotator.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = dateannotator.TextDateAnnotationApi(api_client)
-    text_date_annotation_request = dateannotator.TextDateAnnotationRequest() # TextDateAnnotationRequest |  (optional)
+    api_instance = textdateannotator.TextDateAnnotationApi(api_client)
+    text_date_annotation_request = textdateannotator.TextDateAnnotationRequest() # TextDateAnnotationRequest |  (optional)
 
     try:
         # Annotate dates in a clinical note

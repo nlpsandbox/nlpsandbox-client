@@ -16,7 +16,7 @@ import re  # noqa: F401
 
 import six
 
-from datanodeclient.configuration import Configuration
+from datanode.configuration import Configuration
 
 
 class PageOfFhirStoresAllOf(object):

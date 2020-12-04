@@ -16,7 +16,7 @@ import re  # noqa: F401
 
 import six
 
-from dateannotator.configuration import Configuration
+from textdateannotator.configuration import Configuration
 
 
 class TextDateAnnotationRequest(object):

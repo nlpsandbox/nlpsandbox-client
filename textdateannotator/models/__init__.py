@@ -15,11 +15,11 @@
 from __future__ import absolute_import
 
 # import models into model package
-from dateannotator.models.error import Error
-from dateannotator.models.note import Note
-from dateannotator.models.service import Service
-from dateannotator.models.text_annotation import TextAnnotation
-from dateannotator.models.text_date_annotation import TextDateAnnotation
-from dateannotator.models.text_date_annotation_all_of import TextDateAnnotationAllOf
-from dateannotator.models.text_date_annotation_request import TextDateAnnotationRequest
-from dateannotator.models.text_date_annotations import TextDateAnnotations
+from textdateannotator.models.error import Error
+from textdateannotator.models.note import Note
+from textdateannotator.models.service import Service
+from textdateannotator.models.text_annotation import TextAnnotation
+from textdateannotator.models.text_date_annotation import TextDateAnnotation
+from textdateannotator.models.text_date_annotation_all_of import TextDateAnnotationAllOf
+from textdateannotator.models.text_date_annotation_request import TextDateAnnotationRequest
+from textdateannotator.models.text_date_annotations import TextDateAnnotations

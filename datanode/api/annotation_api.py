@@ -18,8 +18,8 @@ import re  # noqa: F401
 # python 2 and python 3 compatibility library
 import six
 
-from datanodeclient.api_client import ApiClient
-from datanodeclient.exceptions import (  # noqa: F401
+from datanode.api_client import ApiClient
+from datanode.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )

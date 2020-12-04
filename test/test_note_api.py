@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import datanodeclient
-from datanodeclient.api.note_api import NoteApi  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.api.note_api import NoteApi  # noqa: E501
+from datanode.rest import ApiException
 
 
 class TestNoteApi(unittest.TestCase):
     """NoteApi unit test stubs"""
 
     def setUp(self):
-        self.api = datanodeclient.api.note_api.NoteApi()  # noqa: E501
+        self.api = datanode.api.note_api.NoteApi()  # noqa: E501
 
     def tearDown(self):
         pass

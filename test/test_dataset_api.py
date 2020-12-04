@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import datanodeclient
-from datanodeclient.api.dataset_api import DatasetApi  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.api.dataset_api import DatasetApi  # noqa: E501
+from datanode.rest import ApiException
 
 
 class TestDatasetApi(unittest.TestCase):
     """DatasetApi unit test stubs"""
 
     def setUp(self):
-        self.api = datanodeclient.api.dataset_api.DatasetApi()  # noqa: E501
+        self.api = datanode.api.dataset_api.DatasetApi()  # noqa: E501
 
     def tearDown(self):
         pass

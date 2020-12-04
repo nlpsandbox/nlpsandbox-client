@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import datanodeclient
-from datanodeclient.models.annotation_store import AnnotationStore  # noqa: E501
-from datanodeclient.rest import ApiException
+import datanode
+from datanode.models.annotation_store import AnnotationStore  # noqa: E501
+from datanode.rest import ApiException
 
 class TestAnnotationStore(unittest.TestCase):
     """AnnotationStore unit test stubs"""
@@ -34,7 +34,7 @@ class TestAnnotationStore(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = datanodeclient.models.annotation_store.AnnotationStore()  # noqa: E501
+        # model = datanode.models.annotation_store.AnnotationStore()  # noqa: E501
         if include_optional :
             return AnnotationStore(
                 name = '0'

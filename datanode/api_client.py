@@ -25,10 +25,10 @@ import tempfile
 import six
 from six.moves.urllib.parse import quote
 
-from datanodeclient.configuration import Configuration
-import datanodeclient.models
-from datanodeclient import rest
-from datanodeclient.exceptions import ApiValueError, ApiException
+from datanode.configuration import Configuration
+import datanode.models
+from datanode import rest
+from datanode.exceptions import ApiValueError, ApiException
 
 
 class ApiClient(object):
@@ -306,7 +306,7 @@ class ApiClient(object):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(datanodeclient.models, klass)
+                klass = getattr(datanode.models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)
