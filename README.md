@@ -75,14 +75,6 @@ openapi-generator generate -g python -o . --package-name datanode -i https://nlp
 
 Date annotator client
 ```
-openapi-generator generate -g python -o . --package-name dateannotator -i https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/edge/openapi.json
+openapi-generator generate -g python -o . --package-name textdateannotator -i https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/edge/openapi.json
 ```
 
-
-```
-openapi-generator generate -g python -o . --package-name personannotator -i https://nlpsandbox.github.io/nlpsandbox-schemas/person-name-annotator/edge/openapi.json
-```
-
-```
-openapi-generator generate -g python -o . --package-name addressannotator -i https://nlpsandbox.github.io/nlpsandbox-schemas/physical-address-annotator/edge/openapi.json
-```
