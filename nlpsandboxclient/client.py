@@ -32,8 +32,8 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
     """
     configuration = datanode.Configuration(host=host)
     all_notes = []
-    offset=0
-    limit=10
+    offset = 0
+    limit = 10
     with datanode.ApiClient(configuration) as api_client:
         note_api = datanode.NoteApi(api_client)
         # Obtain all clinical notes
