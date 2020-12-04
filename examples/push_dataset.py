@@ -1,17 +1,15 @@
 from __future__ import print_function
 
-import time
-import datanodeclient
-from datanodeclient.rest import ApiException
-from pprint import pprint
 import json
 import sys
+
+import datanodeclient
+from datanodeclient.rest import ApiException
 
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanodeclient.Configuration(
-    host="http://10.23.55.45:8080/api/v1"
-    # host="http://localhost:8080/api/v1"
+    host="http://localhost:8080/api/v1"
 )
 
 
