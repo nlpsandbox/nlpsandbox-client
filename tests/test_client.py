@@ -16,7 +16,7 @@ def test_get_notes():
         notes=[datanodeclient.models.Note(
             id="12344", note_type="foo", patient_id="pat1", text="foobarbaz"
         )],
-        offset=0, limit=3, links="foo"
+        offset=0, limit=3, links=Mock(next="")
     )
 
     with patch.object(datanodeclient, "Configuration",
@@ -40,7 +40,8 @@ def test_get_notes():
         config.assert_called_once_with(host=host)
         api_client.assert_called_once_with(configuration)
         note_api.assert_called_once_with(api)
-        list_notes.assert_called_once_with("awesome-dataset", "awesome-fhir-store")
+        list_notes.assert_called_once_with("awesome-dataset", "awesome-fhir-store",
+                                           limit=10, offset=0)
         assert notes == [{
             'id': '12344',
             'noteType': 'foo',
