@@ -39,7 +39,7 @@ class TestPageOfFhirStores(unittest.TestCase):
             return PageOfFhirStores(
                 offset = 56, 
                 limit = 56, 
-                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadataLinks(
                     next = '0', ), 
                 fhir_stores = [
                     datanode.models.fhir_store.FhirStore(
@@ -50,7 +50,7 @@ class TestPageOfFhirStores(unittest.TestCase):
             return PageOfFhirStores(
                 offset = 56,
                 limit = 56,
-                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadataLinks(
                     next = '0', ),
         )
 

@@ -5,8 +5,7 @@ import click
 import synapseclient
 
 from nlpsandboxclient import client, utils
-from nlpsandboxclient.api_client import DATA_NODE_HOST
-from nlpsandboxclient.datanode.models import AnnotationStore
+from nlpsandboxclient.client import DATA_NODE_HOST
 
 
 # Command Group
@@ -28,12 +27,14 @@ def get_num_users():
 @click.option('--data_node_host',
               help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
 @click.option('--dataset_id', help='Dataset id')
-def get_clinical_notes(output, data_node_host, dataset_id):
+@click.option('--fhir_store_id', help='Dataset id')
+def get_notes(output, data_node_host, dataset_id, fhir_store_id):
     """Gets all the clinical notes"""
     data_node_host = (data_node_host if data_node_host is not None
                       else DATA_NODE_HOST)
-    clinical_notes = client.get_clinical_notes(host=data_node_host,
-                                               dataset_id=dataset_id)
+    clinical_notes = client.get_notes(host=data_node_host,
+                                      dataset_id=dataset_id,
+                                      fhir_store_id=fhir_store_id)
     # Stdout or store to json
     utils.stdout_or_json(clinical_notes, output)
 
@@ -56,12 +57,11 @@ def store_annotations(data_node_host, dataset_id, annotation_store_id,
     if isinstance(annotations, dict):
         annotations = [annotations]
     # Create annotation store object
-    annotation_store = AnnotationStore(dataset_id=dataset_id,
-                                       id=annotation_store_id)
     for annotation in annotations:
         client.store_annotation(
             host=data_node_host,
-            annotation_store=annotation_store,
+            dataset_id=dataset_id,
+            annotation_store_id=annotation_store_id,
             annotation=annotation
         )
 

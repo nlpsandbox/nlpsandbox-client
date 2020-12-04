@@ -1,26 +1,26 @@
-"""
-NLP data node client - This module has convenience functions to interact
-with the DataNodeApiClient.
-"""
+"""NLP data node client that interacts with the SDK datanodeclient"""
 from typing import List
 
-from .api_client import DataNodeApiClient
-from .datanode.models import Annotation, AnnotationStore
+import datanode
+
+DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
 
 
-def get_clinical_notes(host: str, dataset_id: str) -> List[dict]:
+def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
     """Get all clinical notes for a dataset
 
     Args:
-        host: Data node host IP.
-        dataset_id: Dataset id
+        host: Data node host IP
+        dataset_id: Dataset Id
+        fhir_store_id: FHIR store Id
 
     Returns:
         list of clinical notes.
 
     Examples:
-        >>> notes = get_clinical_notes(host="0.0.0.0/api/v1",
-        >>>                            dataset_id="awesome-dataset")
+        >>> notes = get_notes(host="0.0.0.0/api/v1",
+        >>>                   dataset_id="awesome-dataset",
+        >>>                   fhir_store_id="awesome-fhir-store")
         >>> notes[0]
         {
             "id": "noteid",
@@ -30,41 +30,44 @@ def get_clinical_notes(host: str, dataset_id: str) -> List[dict]:
             "note_name": "dataset/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid"
         }
     """
-    nlp = DataNodeApiClient(host=host)
-    fhir_stores = nlp.list_fhir_stores(dataset_id=dataset_id)
-
+    configuration = datanode.Configuration(host=host)
     all_notes = []
-    # Obtain all clinical notes for all fhir stores in a dataset
-    for fhir_store in fhir_stores:
-        clinical_notes = nlp.list_notes(dataset_id=dataset_id,
-                                        fhir_store_id=fhir_store.id)
+    offset = 0
+    limit = 10
+    with datanode.ApiClient(configuration) as api_client:
+        note_api = datanode.NoteApi(api_client)
         # Obtain all clinical notes
-        for note in clinical_notes:
-            all_notes.append({
-                "id": note.id,
-                "noteType": note.note_type,
-                "patientId": note.patient_id,
-                "text": note.text,
-                "note_name": f"dataset/{dataset_id}/fhirStores/{fhir_store.id}/fhir/Note/{note.id}"
-            })
+        next_page = True
+        while next_page:
+            notes = note_api.list_notes(dataset_id, fhir_store_id,
+                                        offset=offset, limit=limit)
+            for note in notes.notes:
+                all_notes.append({
+                    "id": note.id,
+                    "noteType": note.note_type,
+                    "patientId": note.patient_id,
+                    "text": note.text,
+                    "note_name": f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note.id}"
+                })
+            next_page = notes.links.next
+            offset += limit
     return all_notes
 
 
-def store_annotation(host: str, annotation_store: AnnotationStore,
-                     annotation: dict) -> Annotation:
+def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
+                     annotation: dict) -> datanode.models.Annotation:
     """Store annotation
 
     Args:
-        host: Data node host IP.
-        annotation_store: AnnotationStore object
+        host: Data node host IP
+        dataset_id: Dataset Id
+        annotation_store_id: Annotation store Id
         annotation: Annotation dict
 
     Returns:
         Data node Annotation object
 
     Examples:
-        >>> annotation_store = AnnotationStore(dataset_id="awesome-dataset",
-        >>>                                    id="annotation-store-store")
         >>> example_annotation = {
         >>>     "annotationSource": {
         >>>         "resourceSource": {
@@ -89,14 +92,17 @@ def store_annotation(host: str, annotation_store: AnnotationStore,
         >>>     "textPhysicalAddressAnnotations": []
         >>> }
         >>> annotation = store_annotation(host="0.0.0.0/api/v1",
-        >>>                               annotation_store=annotation_store,
+        >>>                               dataset_id="awesome-dataset",
+        >>>                               annotation_store_id="awesome-annotation-store",
         >>>                               annotation=example_annotation)
 
     """
-    nlp = DataNodeApiClient(host=host)
-    annotation_obj = nlp.create_annotation(
-        dataset_id=annotation_store.datasetid,
-        annotation_store_id=annotation_store.id,
-        annotation=annotation
-    )
+    configuration = datanode.Configuration(host=host)
+    with datanode.ApiClient(configuration) as api_client:
+        annotation_api = datanode.AnnotationApi(api_client)
+        annotation_obj = annotation_api.create_annotation(
+            dataset_id=dataset_id,
+            annotation_store_id=annotation_store_id,
+            annotation=annotation
+        )
     return annotation_obj
