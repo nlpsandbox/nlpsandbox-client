@@ -1,7 +1,7 @@
 """Test client functions"""
 from unittest.mock import Mock, patch
 
-import datanodeclient
+import datanode
 
 from nlpsandboxclient import client
 
@@ -12,17 +12,17 @@ def test_get_notes():
     note_api_mock = Mock()
     host = "0.0.0.0"
     configuration = Mock()
-    note_example = datanodeclient.models.PageOfNotes(
-        notes=[datanodeclient.models.Note(
+    note_example = datanode.models.PageOfNotes(
+        notes=[datanode.models.Note(
             id="12344", note_type="foo", patient_id="pat1", text="foobarbaz"
         )],
         offset=0, limit=3, links=Mock(next="")
     )
 
-    with patch.object(datanodeclient, "Configuration",
+    with patch.object(datanode, "Configuration",
                       return_value=configuration) as config,\
-         patch.object(datanodeclient, "ApiClient") as api_client,\
-         patch.object(datanodeclient, "NoteApi",
+         patch.object(datanode, "ApiClient") as api_client,\
+         patch.object(datanode, "NoteApi",
                       return_value=note_api_mock) as note_api,\
          patch.object(note_api_mock, "list_notes",
                       return_value=note_example) as list_notes:

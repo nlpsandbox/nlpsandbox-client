@@ -39,14 +39,14 @@ class TestResponsePageMetadata(unittest.TestCase):
             return ResponsePageMetadata(
                 offset = 56, 
                 limit = 56, 
-                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadataLinks(
                     next = '0', )
             )
         else :
             return ResponsePageMetadata(
                 offset = 56,
                 limit = 56,
-                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadataLinks(
                     next = '0', ),
         )
 

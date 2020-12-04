@@ -39,7 +39,7 @@ class TestPageOfDatasets(unittest.TestCase):
             return PageOfDatasets(
                 offset = 56, 
                 limit = 56, 
-                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadataLinks(
                     next = '0', ), 
                 datasets = [
                     {"name":"datasets/awesome-dataset"}
@@ -49,7 +49,7 @@ class TestPageOfDatasets(unittest.TestCase):
             return PageOfDatasets(
                 offset = 56,
                 limit = 56,
-                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadataLinks(
                     next = '0', ),
         )
 

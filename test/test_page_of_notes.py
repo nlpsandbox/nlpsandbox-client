@@ -39,7 +39,7 @@ class TestPageOfNotes(unittest.TestCase):
             return PageOfNotes(
                 offset = 56, 
                 limit = 56, 
-                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadataLinks(
                     next = '0', ), 
                 notes = [
                     datanode.models.note.Note(
@@ -53,7 +53,7 @@ class TestPageOfNotes(unittest.TestCase):
             return PageOfNotes(
                 offset = 56,
                 limit = 56,
-                links = datanode.models.response_page_metadata_links.ResponsePageMetadata_links(
+                links = datanode.models.response_page_metadata_links.ResponsePageMetadataLinks(
                     next = '0', ),
         )
 
