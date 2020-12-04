@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 import setuptools
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setuptools.setup(
     # basic
     name='nlpsandbox-client',
@@ -24,7 +27,7 @@ setuptools.setup(
 
     # metadata to display on PyPI
     description='NLP Sandbox Client Library for Python',
-    long_description="TBA",
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/nlpsandbox',
     author='The NLP Sandbox Team',
