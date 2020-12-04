@@ -64,3 +64,25 @@ Run the program
 ```
 nlp-cli evaluate prediction --pred_filepath tests/data/prediction_1.json --gold_filepath tests/data/goldstandard_1.json
 ```
+
+
+## Create clients
+
+Data node client
+```
+openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/edge/openapi.json
+```
+
+Date annotator client
+```
+openapi-generator generate -g python -o . --package-name dateannotator -i https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/edge/openapi.json
+```
+
+
+```
+openapi-generator generate -g python -o . --package-name personannotator -i https://nlpsandbox.github.io/nlpsandbox-schemas/person-name-annotator/edge/openapi.json
+```
+
+```
+openapi-generator generate -g python -o . --package-name addressannotator -i https://nlpsandbox.github.io/nlpsandbox-schemas/physical-address-annotator/edge/openapi.json
+```
