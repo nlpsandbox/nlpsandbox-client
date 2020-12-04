@@ -40,7 +40,8 @@ def test_get_notes():
         config.assert_called_once_with(host=host)
         api_client.assert_called_once_with(configuration)
         note_api.assert_called_once_with(api)
-        list_notes.assert_called_once_with("awesome-dataset", "awesome-fhir-store",
+        list_notes.assert_called_once_with("awesome-dataset",
+                                           "awesome-fhir-store",
                                            limit=10, offset=0)
         assert notes == [{
             'id': '12344',
