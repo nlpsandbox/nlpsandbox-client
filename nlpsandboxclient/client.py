@@ -54,6 +54,38 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
     return all_notes
 
 
+def create_annotation_store(
+        host: str, dataset_id: str,
+        annotation_store_id: str
+    ) -> datanode.models.AnnotationStore:
+    """Store annotation
+
+    Args:
+        host: Data node host IP
+        dataset_id: Dataset Id
+        annotation_store_id: Annotation store Id
+        annotation: Annotation dict
+
+    Returns:
+        Data node Annotation object
+
+    Examples:
+        >>> annotation = create_annotation_store(
+        >>>     host="0.0.0.0/api/v1", dataset_id="awesome-dataset",
+        >>>     annotation_store_id="awesome-annotation-store"
+        >>> )
+
+    """
+    configuration = datanode.Configuration(host=host)
+    with datanode.ApiClient(configuration) as api_client:
+        annotation_store_api = datanode.AnnotationStoreApi(api_client)
+        annotation_store_obj = annotation_store_api.create_annotation_store(
+            dataset_id=dataset_id,
+            annotation_store_id=annotation_store_id,
+        )
+    return annotation_store_obj
+
+
 def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
                      annotation: dict) -> datanode.models.Annotation:
     """Store annotation
