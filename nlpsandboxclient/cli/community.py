@@ -77,8 +77,7 @@ def create_annotation_store(data_node_host, dataset_id, annotation_store_id):
                       else DATA_NODE_HOST)
     # Create annotation store object
     client.create_annotation_store(
-        host=data_node_host,
-        dataset_id=dataset_id,
+        host=data_node_host, dataset_id=dataset_id,
         annotation_store_id=annotation_store_id,
     )
 

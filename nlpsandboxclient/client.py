@@ -78,8 +78,7 @@ def create_annotation_store(host: str, dataset_id: str,
     with datanode.ApiClient(configuration) as api_client:
         annotation_store_api = datanode.AnnotationStoreApi(api_client)
         annotation_store_obj = annotation_store_api.create_annotation_store(
-            dataset_id=dataset_id,
-            annotation_store_id=annotation_store_id,
+            dataset_id, annotation_store_id, annotation_store={}
         )
     return annotation_store_obj
 
