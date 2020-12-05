@@ -56,7 +56,7 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
 
 def get_annotation_store(host: str, dataset_id: str,
                          annotation_store_id: str,
-                         create_if_missing: bool=False) -> datanode.models.AnnotationStore:
+                         create_if_missing: bool = False) -> datanode.models.AnnotationStore:
     """Creates an annotation store
 
     Args:
