@@ -56,16 +56,15 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
 
 def create_annotation_store(host: str, dataset_id: str,
                             annotation_store_id: str) -> datanode.models.AnnotationStore:
-    """Store annotation
+    """Create annotation store
 
     Args:
         host: Data node host IP
         dataset_id: Dataset Id
         annotation_store_id: Annotation store Id
-        annotation: Annotation dict
 
     Returns:
-        Data node Annotation object
+        Data node Annotation Store object
 
     Examples:
         >>> annotation = create_annotation_store(
