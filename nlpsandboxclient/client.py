@@ -54,14 +54,17 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
     return all_notes
 
 
-def create_annotation_store(host: str, dataset_id: str,
-                            annotation_store_id: str) -> datanode.models.AnnotationStore:
-    """Create annotation store
+def get_annotation_store(host: str, dataset_id: str,
+                         annotation_store_id: str,
+                         create_if_missing: bool=False) -> datanode.models.AnnotationStore:
+    """Creates an annotation store
 
     Args:
         host: Data node host IP
         dataset_id: Dataset Id
         annotation_store_id: Annotation store Id
+        create_if_missing: Creates annotation store if the resource
+                           doesn't exist
 
     Returns:
         Data node Annotation Store object
@@ -76,9 +79,18 @@ def create_annotation_store(host: str, dataset_id: str,
     configuration = datanode.Configuration(host=host)
     with datanode.ApiClient(configuration) as api_client:
         annotation_store_api = datanode.AnnotationStoreApi(api_client)
-        annotation_store_obj = annotation_store_api.create_annotation_store(
-            dataset_id, annotation_store_id, annotation_store={}
-        )
+        try:
+            # get the annotation store
+            annotation_store_obj = annotation_store_api.get_annotation_store(
+                dataset_id, annotation_store_id
+            )
+        except datanode.rest.ApiException as err:
+            if err.status == 404 and create_if_missing:
+                annotation_store_obj = annotation_store_api.create_annotation_store(
+                    dataset_id, annotation_store_id, annotation_store={}
+                )
+            else:
+                raise err
     return annotation_store_obj
 
 
