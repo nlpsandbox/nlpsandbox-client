@@ -83,6 +83,26 @@ def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create
         create_if_missing=create_if_missing
     )
 
+
+@cli.command()
+@click.option('--data_node_host',
+              help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
+@click.option('--dataset_id', help='Dataset id')
+@click.option('--annotation_store_id', help='Dataset id')
+@click.option('--output', help='Output json filepath', type=click.Path())
+def list_annotations(data_node_host, dataset_id, annotation_store_id, output):
+    """List annotations"""
+    data_node_host = (data_node_host if data_node_host is not None
+                      else DATA_NODE_HOST)
+    # Create annotation store object
+    annotations = client.list_annotations(
+        host=data_node_host, dataset_id=dataset_id,
+        annotation_store_id=annotation_store_id
+    )
+    annotation_list = [annotation.to_dict() for annotation in annotations]
+    utils.stdout_or_json(annotation_list, output)
+
+
 # @cli.command()
 # @click.argument('noteid', type=click.INT)
 # @click.option('--output', help='Output json filepath', type=click.Path())
