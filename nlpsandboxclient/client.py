@@ -1,7 +1,8 @@
 """NLP data node client that interacts with the SDK datanodeclient"""
-from typing import List
+from typing import List, Iterator
 
 import datanode
+from datanode.models import Annotation, AnnotationStore
 
 DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
 
@@ -56,7 +57,7 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
 
 def get_annotation_store(host: str, dataset_id: str,
                          annotation_store_id: str,
-                         create_if_missing: bool = False) -> datanode.models.AnnotationStore:
+                         create_if_missing: bool = False) -> AnnotationStore:
     """Creates an annotation store
 
     Args:
@@ -95,7 +96,7 @@ def get_annotation_store(host: str, dataset_id: str,
 
 
 def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
-                     annotation: dict) -> datanode.models.Annotation:
+                     annotation: dict) -> Annotation:
     """Store annotation
 
     Args:
@@ -146,3 +147,38 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
             annotation=annotation
         )
     return annotation_obj
+
+
+def list_annotations(host: str, dataset_id: str,
+                     annotation_store_id: str) -> Iterator[Annotation]:
+    """List annotations
+
+    Args:
+        host: Data node host IP
+        dataset_id: Dataset Id
+        annotation_store_id: Annotation store Id
+
+    Yields:
+        Data node annotation objects
+
+    Examples:
+        >>> annotations = get_annotations(host="0.0.0.0/api/v1",
+        >>>                               dataset_id="awesome-dataset",
+        >>>                               annotation_store_id="awesome-annotation-store")
+
+    """
+    configuration = datanode.Configuration(host=host)
+    offset = 0
+    limit = 10
+    with datanode.ApiClient(configuration) as api_client:
+        annotation_api = datanode.AnnotationApi(api_client)
+        next_page = True
+        while next_page:
+            annotations = annotation_api.list_annotations(
+                dataset_id, annotation_store_id,
+                offset=offset, limit=limit
+            )
+            for annotation in annotations.annotations:
+                yield annotation
+            next_page = annotations.links.next
+            offset += limit
