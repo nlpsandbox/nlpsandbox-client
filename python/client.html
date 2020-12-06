@@ -226,6 +226,30 @@ doesn’t exist</p></li>
 </dd></dl>
 
 <dl class="function">
+<dt id="nlpsandboxclient.client.list_annotations">
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">list_annotations</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em><span class="sig-paren">)</span> &#x2192; Iterator[datanode.models.annotation.Annotation]<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#list_annotations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.list_annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>List annotations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – Data node host IP</p></li>
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>annotation_store_id</strong> – Annotation store Id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p>Data node annotation objects</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">get_annotations</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                              <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                              <span class="n">annotation_store_id</span><span class="o">=</span><span class="s2">&quot;awesome-annotation-store&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="nlpsandboxclient.client.store_annotation">
 <code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">store_annotation</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em>, <em class="sig-param">annotation: dict</em><span class="sig-paren">)</span> &#x2192; datanode.models.annotation.Annotation<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#store_annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.store_annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Store annotation</p>
