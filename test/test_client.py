@@ -50,3 +50,38 @@ def test_get_notes():
             'text': 'foobarbaz',
             'note_name': 'dataset/awesome-dataset/fhirStores/awesome-fhir-store/fhir/Note/12344'
         }]
+
+
+def test_get_annotation_store__get():
+    """Test getting of annotation store"""
+    configuration = Mock()
+    api = Mock()
+    mock_api = Mock()
+    host = "0.0.0.0"
+    configuration = Mock()
+    store_example = datanode.models.AnnotationStore(name="fooo")
+
+    with patch.object(datanode, "Configuration",
+                      return_value=configuration) as config,\
+         patch.object(datanode, "ApiClient") as api_client,\
+         patch.object(datanode, "AnnotationStoreApi",
+                      return_value=mock_api) as note_api,\
+         patch.object(mock_api, "get_annotation_store",
+                      return_value=store_example) as get_store:
+
+        # To mock context manager
+        api_client.return_value = api_client
+        api_client.__enter__ = Mock(return_value=api)
+        api_client.__exit__ = Mock(return_value=None)
+
+        store = client.get_annotation_store(
+            host=host,
+            dataset_id = "awesome-dataset",
+            annotation_store_id = "awesome-fhir-store"
+        )
+        config.assert_called_once_with(host=host)
+        api_client.assert_called_once_with(configuration)
+        note_api.assert_called_once_with(api)
+        get_store.assert_called_once_with("awesome-dataset",
+                                          "awesome-fhir-store")
+        assert store == store_example
