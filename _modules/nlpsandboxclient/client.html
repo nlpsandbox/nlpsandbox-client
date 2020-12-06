@@ -216,6 +216,46 @@
     <span class="k">return</span> <span class="n">all_notes</span></div>
 
 
+<div class="viewcode-block" id="get_annotation_store"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.get_annotation_store">[docs]</a><span class="k">def</span> <span class="nf">get_annotation_store</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">create_if_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datanode</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">AnnotationStore</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Creates an annotation store</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        host: Data node host IP</span>
+<span class="sd">        dataset_id: Dataset Id</span>
+<span class="sd">        annotation_store_id: Annotation store Id</span>
+<span class="sd">        create_if_missing: Creates annotation store if the resource</span>
+<span class="sd">                           doesn&#39;t exist</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data node Annotation Store object</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; annotation = create_annotation_store(</span>
+<span class="sd">        &gt;&gt;&gt;     host=&quot;0.0.0.0/api/v1&quot;, dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;     annotation_store_id=&quot;awesome-annotation-store&quot;</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">datanode</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+        <span class="n">annotation_store_api</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">AnnotationStoreApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># get the annotation store</span>
+            <span class="n">annotation_store_obj</span> <span class="o">=</span> <span class="n">annotation_store_api</span><span class="o">.</span><span class="n">get_annotation_store</span><span class="p">(</span>
+                <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">datanode</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">404</span> <span class="ow">and</span> <span class="n">create_if_missing</span><span class="p">:</span>
+                <span class="n">annotation_store_obj</span> <span class="o">=</span> <span class="n">annotation_store_api</span><span class="o">.</span><span class="n">create_annotation_store</span><span class="p">(</span>
+                    <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">,</span> <span class="n">annotation_store</span><span class="o">=</span><span class="p">{}</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">err</span>
+    <span class="k">return</span> <span class="n">annotation_store_obj</span></div>
+
+
 <div class="viewcode-block" id="store_annotation"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.store_annotation">[docs]</a><span class="k">def</span> <span class="nf">store_annotation</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                      <span class="n">annotation</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datanode</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Annotation</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Store annotation</span>

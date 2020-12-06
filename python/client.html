@@ -167,6 +167,33 @@
 <span id="nlp-client"></span><h1>NLP Client<a class="headerlink" href="#module-nlpsandboxclient.client" title="Permalink to this headline">¶</a></h1>
 <p>NLP data node client that interacts with the SDK datanodeclient</p>
 <dl class="function">
+<dt id="nlpsandboxclient.client.get_annotation_store">
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotation_store</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em>, <em class="sig-param">create_if_missing: bool = False</em><span class="sig-paren">)</span> &#x2192; datanode.models.annotation_store.AnnotationStore<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotation_store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotation_store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an annotation store</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – Data node host IP</p></li>
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>annotation_store_id</strong> – Annotation store Id</p></li>
+<li><p><strong>create_if_missing</strong> – Creates annotation store if the resource
+doesn’t exist</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data node Annotation Store object</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">annotation</span> <span class="o">=</span> <span class="n">create_annotation_store</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span> <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_store_id</span><span class="o">=</span><span class="s2">&quot;awesome-annotation-store&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="nlpsandboxclient.client.get_notes">
 <code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_notes</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em><span class="sig-paren">)</span> &#x2192; List[dict]<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_notes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all clinical notes for a dataset</p>
