@@ -194,40 +194,8 @@ doesn’t exist</p></li>
 </dd></dl>
 
 <dl class="function">
-<dt id="nlpsandboxclient.client.get_notes">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_notes</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em><span class="sig-paren">)</span> &#x2192; List[dict]<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_notes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_notes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all clinical notes for a dataset</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>host</strong> – Data node host IP</p></li>
-<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
-<li><p><strong>fhir_store_id</strong> – FHIR store Id</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>list of clinical notes.</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">get_notes</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                  <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                  <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;awesome-fhir-store&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">{</span>
-<span class="go">    &quot;id&quot;: &quot;noteid&quot;,</span>
-<span class="go">    &quot;noteType&quot;: &quot;&quot;,</span>
-<span class="go">    &quot;patientId&quot;: &quot;patient_id&quot;,</span>
-<span class="go">    &quot;text&quot;: &quot;Example text&quot;,</span>
-<span class="go">    &quot;note_name&quot;: &quot;dataset/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid&quot;</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
 <dt id="nlpsandboxclient.client.list_annotations">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">list_annotations</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em><span class="sig-paren">)</span> &#x2192; Iterator[datanode.models.annotation.Annotation]<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#list_annotations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.list_annotations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">list_annotations</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em><span class="sig-paren">)</span> &#x2192; Iterator[dict]<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#list_annotations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.list_annotations" title="Permalink to this definition">¶</a></dt>
 <dd><p>List annotations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -245,6 +213,38 @@ doesn’t exist</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">get_annotations</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                              <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                              <span class="n">annotation_store_id</span><span class="o">=</span><span class="s2">&quot;awesome-annotation-store&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nlpsandboxclient.client.list_notes">
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">list_notes</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em><span class="sig-paren">)</span> &#x2192; List[dict]<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#list_notes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.list_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all clinical notes for a dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – Data node host IP</p></li>
+<li><p><strong>dataset_id</strong> – Dataset Id</p></li>
+<li><p><strong>fhir_store_id</strong> – FHIR store Id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p>list of clinical notes.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">get_notes</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                  <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                  <span class="n">fhir_store_id</span><span class="o">=</span><span class="s2">&quot;awesome-fhir-store&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">notes</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">{</span>
+<span class="go">    &quot;id&quot;: &quot;noteid&quot;,</span>
+<span class="go">    &quot;noteType&quot;: &quot;&quot;,</span>
+<span class="go">    &quot;patientId&quot;: &quot;patient_id&quot;,</span>
+<span class="go">    &quot;text&quot;: &quot;Example text&quot;,</span>
+<span class="go">    &quot;note_name&quot;: &quot;dataset/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid&quot;</span>
+<span class="go">}</span>
 </pre></div>
 </div>
 </dd></dl>

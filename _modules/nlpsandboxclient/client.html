@@ -169,7 +169,7 @@
 <span class="n">DATA_NODE_HOST</span> <span class="o">=</span> <span class="s2">&quot;http://10.23.55.45:8080/api/v1&quot;</span>
 
 
-<div class="viewcode-block" id="get_notes"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.get_notes">[docs]</a><span class="k">def</span> <span class="nf">get_notes</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<div class="viewcode-block" id="list_notes"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.list_notes">[docs]</a><span class="k">def</span> <span class="nf">list_notes</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Get all clinical notes for a dataset</span>
 
 <span class="sd">    Args:</span>
@@ -177,14 +177,14 @@
 <span class="sd">        dataset_id: Dataset Id</span>
 <span class="sd">        fhir_store_id: FHIR store Id</span>
 
-<span class="sd">    Returns:</span>
+<span class="sd">    Yields:</span>
 <span class="sd">        list of clinical notes.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; notes = get_notes(host=&quot;0.0.0.0/api/v1&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;                   dataset_id=&quot;awesome-dataset&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;                   fhir_store_id=&quot;awesome-fhir-store&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; notes[0]</span>
+<span class="sd">        &gt;&gt;&gt; list(notes)[0]</span>
 <span class="sd">        {</span>
 <span class="sd">            &quot;id&quot;: &quot;noteid&quot;,</span>
 <span class="sd">            &quot;noteType&quot;: &quot;&quot;,</span>
@@ -194,7 +194,6 @@
 <span class="sd">        }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">configuration</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
-    <span class="n">all_notes</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">limit</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="k">with</span> <span class="n">datanode</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
@@ -204,17 +203,15 @@
         <span class="k">while</span> <span class="n">next_page</span><span class="p">:</span>
             <span class="n">notes</span> <span class="o">=</span> <span class="n">note_api</span><span class="o">.</span><span class="n">list_notes</span><span class="p">(</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">,</span>
                                         <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
-                <span class="n">all_notes</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-                    <span class="s2">&quot;noteType&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">note_type</span><span class="p">,</span>
-                    <span class="s2">&quot;patientId&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">patient_id</span><span class="p">,</span>
-                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
-                    <span class="s2">&quot;note_name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;dataset/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/Note/</span><span class="si">{note.id}</span><span class="s2">&quot;</span>
-                <span class="p">})</span>
+            <span class="c1"># change from snake case to camel case</span>
+            <span class="n">sanitized_notes</span> <span class="o">=</span> <span class="n">api_client</span><span class="o">.</span><span class="n">sanitize_for_serialization</span><span class="p">(</span>
+                <span class="n">notes</span><span class="o">.</span><span class="n">notes</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">sanitized_notes</span><span class="p">:</span>
+                <span class="n">note</span><span class="p">[</span><span class="s2">&quot;note_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dataset/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/Note/</span><span class="si">{note[&#39;id&#39;]}</span><span class="s2">&quot;</span>
+                <span class="k">yield</span> <span class="n">note</span>
             <span class="n">next_page</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">next</span>
-            <span class="n">offset</span> <span class="o">+=</span> <span class="n">limit</span>
-    <span class="k">return</span> <span class="n">all_notes</span></div>
+            <span class="n">offset</span> <span class="o">+=</span> <span class="n">limit</span></div>
 
 
 <div class="viewcode-block" id="get_annotation_store"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.get_annotation_store">[docs]</a><span class="k">def</span> <span class="nf">get_annotation_store</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -312,7 +309,7 @@
 
 
 <div class="viewcode-block" id="list_annotations"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.list_annotations">[docs]</a><span class="k">def</span> <span class="nf">list_annotations</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                     <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Annotation</span><span class="p">]:</span>
+                     <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;List annotations</span>
 
 <span class="sd">    Args:</span>
@@ -340,7 +337,11 @@
                 <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">,</span>
                 <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span>
             <span class="p">)</span>
-            <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">annotations</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
+            <span class="c1"># change from snake case to camel case</span>
+            <span class="n">sanitized_annotations</span> <span class="o">=</span> <span class="n">api_client</span><span class="o">.</span><span class="n">sanitize_for_serialization</span><span class="p">(</span>
+                <span class="n">annotations</span><span class="o">.</span><span class="n">annotations</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">sanitized_annotations</span><span class="p">:</span>
                 <span class="k">yield</span> <span class="n">annotation</span>
             <span class="n">next_page</span> <span class="o">=</span> <span class="n">annotations</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">next</span>
             <span class="n">offset</span> <span class="o">+=</span> <span class="n">limit</span></div>
