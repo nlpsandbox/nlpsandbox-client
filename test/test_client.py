@@ -59,8 +59,8 @@ from nlpsandboxclient import client
 class TestClient:
 
     def setup_method(self):
-        self.configuration = Mock()
-        self.api = Mock()
+        self.configuration = datanode.Configuration()
+        self.api = datanode.ApiClient()
         self.mock_api = Mock()
         self.host = "0.0.0.0"
         self.config = patch.object(datanode, "Configuration",
@@ -71,7 +71,7 @@ class TestClient:
         self.fhir_store_id = "fhir-store"
         # To mock context manager
 
-    def test_get_notes(self):
+    def test_list_notes(self):
         note_example = PageOfNotes(
             notes=[Note(
                 id="12344", note_type="foo", patient_id="pat1", text="foobarbaz"
@@ -91,11 +91,11 @@ class TestClient:
             api_client.__enter__ = Mock(return_value=self.api)
             api_client.__exit__ = Mock(return_value=None)
 
-            notes = client.get_notes(
+            notes = list(client.list_notes(
                 host=self.host,
                 dataset_id=self.dataset_id,
                 fhir_store_id=self.fhir_store_id
-            )
+            ))
             config.assert_called_once_with(host=self.host)
             api_client.assert_called_once_with(self.configuration)
             note_api.assert_called_once_with(self.api)
@@ -214,7 +214,7 @@ class TestClient:
                 host=self.host, dataset_id = self.dataset_id,
                 annotation_store_id = self.annotation_store_id
             )
-            assert list(annotations) == [Annotation(name="12344")]
+            assert list(annotations) == [{'name': '12344'}]
 
             config.assert_called_once_with(host=self.host)
             api_client.assert_called_once_with(self.configuration)
