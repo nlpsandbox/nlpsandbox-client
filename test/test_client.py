@@ -59,8 +59,8 @@ from nlpsandboxclient import client
 class TestClient:
 
     def setup_method(self):
-        self.configuration = Mock()
-        self.api = Mock()
+        self.configuration = datanode.Configuration()
+        self.api = datanode.ApiClient()
         self.mock_api = Mock()
         self.host = "0.0.0.0"
         self.config = patch.object(datanode, "Configuration",
@@ -203,8 +203,6 @@ class TestClient:
              self.api_client as api_client,\
              patch.object(datanode, "AnnotationApi",
                           return_value=self.mock_api) as resource_api,\
-             patch.object(api_client, "sanitize_for_serialization",
-                          return_value=self.mock_api) as sanitize,\
              patch.object(self.mock_api, "list_annotations",
                           return_value=annotation_example) as list_annotations:
 
@@ -216,7 +214,7 @@ class TestClient:
                 host=self.host, dataset_id = self.dataset_id,
                 annotation_store_id = self.annotation_store_id
             )
-            assert list(annotations) == [Annotation(name="12344")]
+            assert list(annotations) == [{'name': '12344'}]
 
             config.assert_called_once_with(host=self.host)
             api_client.assert_called_once_with(self.configuration)
