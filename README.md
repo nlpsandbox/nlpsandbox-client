@@ -77,4 +77,3 @@ Date annotator client
 ```
 openapi-generator generate -g python -o . --package-name textdateannotator -i https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/edge/openapi.json
 ```
-
