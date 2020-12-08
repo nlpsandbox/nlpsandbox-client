@@ -28,15 +28,15 @@ def get_num_users():
               help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
 @click.option('--dataset_id', help='Dataset id')
 @click.option('--fhir_store_id', help='Dataset id')
-def get_notes(output, data_node_host, dataset_id, fhir_store_id):
+def list_notes(output, data_node_host, dataset_id, fhir_store_id):
     """Gets all the clinical notes"""
     data_node_host = (data_node_host if data_node_host is not None
                       else DATA_NODE_HOST)
-    clinical_notes = client.get_notes(host=data_node_host,
-                                      dataset_id=dataset_id,
-                                      fhir_store_id=fhir_store_id)
+    clinical_notes = client.list_notes(host=data_node_host,
+                                       dataset_id=dataset_id,
+                                       fhir_store_id=fhir_store_id)
     # Stdout or store to json
-    utils.stdout_or_json(clinical_notes, output)
+    utils.stdout_or_json(list(clinical_notes), output)
 
 
 @cli.command()
@@ -99,8 +99,7 @@ def list_annotations(data_node_host, dataset_id, annotation_store_id, output):
         host=data_node_host, dataset_id=dataset_id,
         annotation_store_id=annotation_store_id
     )
-    annotation_list = [annotation.to_dict() for annotation in annotations]
-    utils.stdout_or_json(annotation_list, output)
+    utils.stdout_or_json(list(annotations), output)
 
 
 # @cli.command()

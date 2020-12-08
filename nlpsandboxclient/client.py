@@ -7,7 +7,7 @@ from datanode.models import Annotation, AnnotationStore
 DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
 
 
-def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
+def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
     """Get all clinical notes for a dataset
 
     Args:
@@ -15,14 +15,14 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
         dataset_id: Dataset Id
         fhir_store_id: FHIR store Id
 
-    Returns:
+    Yields:
         list of clinical notes.
 
     Examples:
         >>> notes = get_notes(host="0.0.0.0/api/v1",
         >>>                   dataset_id="awesome-dataset",
         >>>                   fhir_store_id="awesome-fhir-store")
-        >>> notes[0]
+        >>> list(notes)[0]
         {
             "id": "noteid",
             "noteType": "",
@@ -32,7 +32,6 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
         }
     """
     configuration = datanode.Configuration(host=host)
-    all_notes = []
     offset = 0
     limit = 10
     with datanode.ApiClient(configuration) as api_client:
@@ -42,17 +41,15 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
         while next_page:
             notes = note_api.list_notes(dataset_id, fhir_store_id,
                                         offset=offset, limit=limit)
-            for note in notes.notes:
-                all_notes.append({
-                    "id": note.id,
-                    "noteType": note.note_type,
-                    "patientId": note.patient_id,
-                    "text": note.text,
-                    "note_name": f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note.id}"
-                })
+            # change from snake case to camel case
+            sanitized_notes = api_client.sanitize_for_serialization(
+                notes.notes
+            )
+            for note in sanitized_notes:
+                note["note_name"] = f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note['id']}"
+                yield note
             next_page = notes.links.next
             offset += limit
-    return all_notes
 
 
 def get_annotation_store(host: str, dataset_id: str,
@@ -150,7 +147,7 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
 
 
 def list_annotations(host: str, dataset_id: str,
-                     annotation_store_id: str) -> Iterator[Annotation]:
+                     annotation_store_id: str) -> Iterator[dict]:
     """List annotations
 
     Args:
@@ -178,7 +175,11 @@ def list_annotations(host: str, dataset_id: str,
                 dataset_id, annotation_store_id,
                 offset=offset, limit=limit
             )
-            for annotation in annotations.annotations:
+            # change from snake case to camel case
+            sanitized_annotations = api_client.sanitize_for_serialization(
+                annotations.annotations
+            )
+            for annotation in sanitized_annotations:
                 yield annotation
             next_page = annotations.links.next
             offset += limit
