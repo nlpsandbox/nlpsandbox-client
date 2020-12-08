@@ -71,7 +71,7 @@ class TestClient:
         self.fhir_store_id = "fhir-store"
         # To mock context manager
 
-    def test_get_notes(self):
+    def test_list_notes(self):
         note_example = PageOfNotes(
             notes=[Note(
                 id="12344", note_type="foo", patient_id="pat1", text="foobarbaz"
@@ -91,11 +91,11 @@ class TestClient:
             api_client.__enter__ = Mock(return_value=self.api)
             api_client.__exit__ = Mock(return_value=None)
 
-            notes = client.get_notes(
+            notes = list(client.list_notes(
                 host=self.host,
                 dataset_id=self.dataset_id,
                 fhir_store_id=self.fhir_store_id
-            )
+            ))
             config.assert_called_once_with(host=self.host)
             api_client.assert_called_once_with(self.configuration)
             note_api.assert_called_once_with(self.api)
@@ -203,6 +203,8 @@ class TestClient:
              self.api_client as api_client,\
              patch.object(datanode, "AnnotationApi",
                           return_value=self.mock_api) as resource_api,\
+             patch.object(api_client, "sanitize_for_serialization",
+                          return_value=self.mock_api) as sanitize,\
              patch.object(self.mock_api, "list_annotations",
                           return_value=annotation_example) as list_annotations:
 
