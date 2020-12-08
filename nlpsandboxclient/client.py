@@ -42,14 +42,13 @@ def get_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
         while next_page:
             notes = note_api.list_notes(dataset_id, fhir_store_id,
                                         offset=offset, limit=limit)
-            for note in notes.notes:
-                all_notes.append({
-                    "id": note.id,
-                    "noteType": note.note_type,
-                    "patientId": note.patient_id,
-                    "text": note.text,
-                    "note_name": f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note.id}"
-                })
+            # change from snake case to camel case
+            sanitized_notes = api_client.sanitize_for_serialization(
+                notes.notes
+            )
+            for note in sanitized_notes:
+                note["note_name"] = f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note['id']}"
+                all_notes.append(note)
             next_page = notes.links.next
             offset += limit
     return all_notes
@@ -178,7 +177,11 @@ def list_annotations(host: str, dataset_id: str,
                 dataset_id, annotation_store_id,
                 offset=offset, limit=limit
             )
-            for annotation in annotations.annotations:
+            # change from snake case to camel case
+            sanitized_annotations = api_client.sanitize_for_serialization(
+                annotations.annotations
+            )
+            for annotation in sanitized_annotations:
                 yield annotation
             next_page = annotations.links.next
             offset += limit
