@@ -32,7 +32,6 @@ def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
         }
     """
     configuration = datanode.Configuration(host=host)
-    # all_notes = []
     offset = 0
     limit = 10
     with datanode.ApiClient(configuration) as api_client:
@@ -48,11 +47,9 @@ def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
             )
             for note in sanitized_notes:
                 note["note_name"] = f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note['id']}"
-                # all_notes.append(note)
                 yield note
             next_page = notes.links.next
             offset += limit
-    # return all_notes
 
 
 def get_annotation_store(host: str, dataset_id: str,
