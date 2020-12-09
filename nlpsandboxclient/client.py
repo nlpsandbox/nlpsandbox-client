@@ -187,7 +187,7 @@ def list_annotations(host: str, dataset_id: str,
             offset += limit
 
 
-def annotate_date(host: str, note: dict):
+def annotate_date(host: str, note: dict) -> dict:
     """Annotate notes with date
 
     Args:
@@ -220,3 +220,26 @@ def annotate_date(host: str, note: dict):
             annotations
         )
     return sanitized_annotations
+
+
+
+def get_annotator_service_info(host: str) -> textdateannotator.models.Service:
+    """Get annotater service
+
+    Args:
+        host: Annotation Service host IP
+
+    Returns:
+        Service object
+
+    Examples:
+        >>> annotations = annotater_service(host="0.0.0.0/api/v1",
+        >>>                                 note=example_note)
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    configuration = textdateannotator.Configuration(host=host)
+    with textdateannotator.ApiClient(configuration) as api_client:
+        service_api = textdateannotator.ServiceApi(api_client)
+        service_info = service_api.service()
+    return service_info

@@ -67,5 +67,21 @@ def text_date_annotate(date_annotator_host, note_json, output):
     utils.stdout_or_json(all_annotations, output)
 
 
+@cli.command(name="get-annotator-service")
+@click.option('--annotator_host',
+              help='Date annotator host. '
+                   f'If not specified, uses {DATE_ANNOTATOR_HOST}')
+@click.option('--output', help='Specify output json path',
+              type=click.Path())
+def get_annotator_service(annotator_host, output):
+    """Evaluate the performance of a local prediction file"""
+    date_annotator_host = (annotator_host if annotator_host is not None
+                           else DATE_ANNOTATOR_HOST)
+    service = client.get_annotator_service_info(
+        host=date_annotator_host
+    )
+    utils.stdout_or_json(service.to_dict(), output)
+
+
 if __name__ == '__main__':
     cli()
