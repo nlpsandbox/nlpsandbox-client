@@ -3,8 +3,11 @@ from typing import List, Iterator
 
 import datanode
 from datanode.models import Annotation, AnnotationStore
+import textdateannotator
+from textdateannotator.models import Service
 
 DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
+DATE_ANNOTATOR_HOST = "http://10.23.55.45:9000/api/v1"
 
 
 def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
@@ -183,3 +186,60 @@ def list_annotations(host: str, dataset_id: str,
                 yield annotation
             next_page = annotations.links.next
             offset += limit
+
+
+def annotate_date(host: str, note: dict) -> dict:
+    """Annotate notes with date
+
+    Args:
+        host: Data node host IP
+        note: Clinical note
+
+    Yields:
+        Annotated notes
+
+    Examples:
+        >>> example_note = {
+        >>>    "note": {
+        >>>        "noteType": "loinc:LP29684-5",
+        >>>        "patientId": "507f1f77bcf86cd799439011",
+        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+        >>>    }
+        >>> }
+        >>> annotations = annotate_date(host="0.0.0.0/api/v1",
+        >>>                             note=example_note)
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    configuration = textdateannotator.Configuration(host=host)
+    with textdateannotator.ApiClient(configuration) as api_client:
+        annotation_api = textdateannotator.TextDateAnnotationApi(api_client)
+        annotations = annotation_api.create_text_date_annotations(
+            text_date_annotation_request=note
+        )
+        sanitized_annotations = api_client.sanitize_for_serialization(
+            annotations
+        )
+    return sanitized_annotations
+
+
+def get_annotator_service_info(host: str) -> Service:
+    """Get annotater service
+
+    Args:
+        host: Annotation Service host IP
+
+    Returns:
+        Service object
+
+    Examples:
+        >>> service = get_annotator_service_info(host="0.0.0.0/api/v1",
+        >>>                                      note=example_note)
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    configuration = textdateannotator.Configuration(host=host)
+    with textdateannotator.ApiClient(configuration) as api_client:
+        service_api = textdateannotator.ServiceApi(api_client)
+        service_info = service_api.service()
+    return service_info
