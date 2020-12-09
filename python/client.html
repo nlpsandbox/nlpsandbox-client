@@ -167,6 +167,35 @@
 <span id="nlp-client"></span><h1>NLP Client<a class="headerlink" href="#module-nlpsandboxclient.client" title="Permalink to this headline">¶</a></h1>
 <p>NLP data node client that interacts with the SDK datanodeclient</p>
 <dl class="function">
+<dt id="nlpsandboxclient.client.annotate_date">
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">annotate_date</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">note: dict</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#annotate_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.annotate_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate notes with date</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – Data node host IP</p></li>
+<li><p><strong>note</strong> – Clinical note</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p>Annotated notes</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example_note</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="s2">&quot;noteType&quot;</span><span class="p">:</span> <span class="s2">&quot;loinc:LP29684-5&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="s2">&quot;patientId&quot;</span><span class="p">:</span> <span class="s2">&quot;507f1f77bcf86cd799439011&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">annotate_date</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">note</span><span class="o">=</span><span class="n">example_note</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="nlpsandboxclient.client.get_annotation_store">
 <code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotation_store</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em>, <em class="sig-param">create_if_missing: bool = False</em><span class="sig-paren">)</span> &#x2192; datanode.models.annotation_store.AnnotationStore<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotation_store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotation_store" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an annotation store</p>
@@ -189,6 +218,25 @@ doesn’t exist</p></li>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span> <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;awesome-dataset&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">annotation_store_id</span><span class="o">=</span><span class="s2">&quot;awesome-annotation-store&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nlpsandboxclient.client.get_annotator_service_info">
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotator_service_info</code><span class="sig-paren">(</span><em class="sig-param">host: str</em><span class="sig-paren">)</span> &#x2192; textdateannotator.models.service.Service<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotator_service_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotator_service_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get annotater service</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>host</strong> – Annotation Service host IP</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Service object</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">service</span> <span class="o">=</span> <span class="n">get_annotator_service_info</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                     <span class="n">note</span><span class="o">=</span><span class="n">example_note</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
