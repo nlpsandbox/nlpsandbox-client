@@ -4,6 +4,7 @@ from typing import List, Iterator
 import datanode
 from datanode.models import Annotation, AnnotationStore
 import textdateannotator
+from textdateannotator.models import Service
 
 DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
 DATE_ANNOTATOR_HOST = "http://10.23.55.45:9000/api/v1"
@@ -222,7 +223,7 @@ def annotate_date(host: str, note: dict) -> dict:
     return sanitized_annotations
 
 
-def get_annotator_service_info(host: str) -> textdateannotator.models.Service:
+def get_annotator_service_info(host: str) -> Service:
     """Get annotater service
 
     Args:
@@ -232,8 +233,8 @@ def get_annotator_service_info(host: str) -> textdateannotator.models.Service:
         Service object
 
     Examples:
-        >>> annotations = annotater_service(host="0.0.0.0/api/v1",
-        >>>                                 note=example_note)
+        >>> service = get_annotator_service_info(host="0.0.0.0/api/v1",
+        >>>                                      note=example_note)
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
