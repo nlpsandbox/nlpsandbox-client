@@ -222,7 +222,6 @@ def annotate_date(host: str, note: dict) -> dict:
     return sanitized_annotations
 
 
-
 def get_annotator_service_info(host: str) -> textdateannotator.models.Service:
     """Get annotater service
 
