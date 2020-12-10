@@ -302,8 +302,8 @@ def annotate_note(host: str, note: dict, annotator_type: str) -> dict:
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    configuration = textdateannotator.Configuration(host=host)
-    with textdateannotator.ApiClient(configuration) as api_client:
+    configuration = annotator.Configuration(host=host)
+    with annotator.ApiClient(configuration) as api_client:
         if annotator_type == "date":
             annotations = _annotate_date(api_client, note)
         elif annotator_type == "person":
@@ -312,9 +312,9 @@ def annotate_note(host: str, note: dict, annotator_type: str) -> dict:
             annotations = _annotate_person(api_client, note)
         else:
             raise ValueError(f"Invalid annotator_type: {annotator_type}")
-    sanitized_annotations = api_client.sanitize_for_serialization(
-        annotations
-    )
+        sanitized_annotations = api_client.sanitize_for_serialization(
+            annotations
+        )
     return sanitized_annotations
 
 
