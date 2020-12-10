@@ -1,4 +1,4 @@
-# textdateannotator.ServiceApi
+# annotator.ServiceApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -19,20 +19,20 @@ Get information about the service
 ```python
 from __future__ import print_function
 import time
-import textdateannotator
-from textdateannotator.rest import ApiException
+import annotator
+from annotator.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = textdateannotator.Configuration(
+configuration = annotator.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with textdateannotator.ApiClient() as api_client:
+with annotator.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = textdateannotator.ServiceApi(api_client)
+    api_instance = annotator.ServiceApi(api_client)
     
     try:
         # Get service information

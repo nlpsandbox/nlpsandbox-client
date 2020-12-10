@@ -1,18 +1,18 @@
-# annotator.TextDateAnnotationApi
+# annotator.TextPhysicalAddressAnnotationApi
 
 All URIs are relative to *http://example.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_text_date_annotations**](TextDateAnnotationApi.md#create_text_date_annotations) | **POST** /textDateAnnotations | Annotate dates in a clinical note
+[**create_text_physical_address_annotations**](TextPhysicalAddressAnnotationApi.md#create_text_physical_address_annotations) | **POST** /textPhysicalAddressAnnotations | Annotate physical addresses in a clinical note
 
 
-# **create_text_date_annotations**
-> TextDateAnnotations create_text_date_annotations(text_date_annotation_request=text_date_annotation_request)
+# **create_text_physical_address_annotations**
+> TextPhysicalAddressAnnotations create_text_physical_address_annotations(text_physical_address_annotation_request=text_physical_address_annotation_request)
 
-Annotate dates in a clinical note
+Annotate physical addresses in a clinical note
 
-Return the date annotations found in a clinical note
+Return the physical addresse annotations found in a clinical note
 
 ### Example
 
@@ -32,26 +32,26 @@ configuration = annotator.Configuration(
 # Enter a context with an instance of the API client
 with annotator.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = annotator.TextDateAnnotationApi(api_client)
-    text_date_annotation_request = annotator.TextDateAnnotationRequest() # TextDateAnnotationRequest |  (optional)
+    api_instance = annotator.TextPhysicalAddressAnnotationApi(api_client)
+    text_physical_address_annotation_request = annotator.TextPhysicalAddressAnnotationRequest() # TextPhysicalAddressAnnotationRequest |  (optional)
 
     try:
-        # Annotate dates in a clinical note
-        api_response = api_instance.create_text_date_annotations(text_date_annotation_request=text_date_annotation_request)
+        # Annotate physical addresses in a clinical note
+        api_response = api_instance.create_text_physical_address_annotations(text_physical_address_annotation_request=text_physical_address_annotation_request)
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling TextDateAnnotationApi->create_text_date_annotations: %s\n" % e)
+        print("Exception when calling TextPhysicalAddressAnnotationApi->create_text_physical_address_annotations: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text_date_annotation_request** | [**TextDateAnnotationRequest**](TextDateAnnotationRequest.md)|  | [optional] 
+ **text_physical_address_annotation_request** | [**TextPhysicalAddressAnnotationRequest**](TextPhysicalAddressAnnotationRequest.md)|  | [optional] 
 
 ### Return type
 
-[**TextDateAnnotations**](TextDateAnnotations.md)
+[**TextPhysicalAddressAnnotations**](TextPhysicalAddressAnnotations.md)
 
 ### Authorization
 
