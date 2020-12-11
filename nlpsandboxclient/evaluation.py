@@ -179,7 +179,10 @@ class Evaluation(metaclass=ABCMeta):
         # F1 score: 2 * ((P * R) / (P + R))
         precision = round(tp / (tp + fp), 2)
         recall = round(tp / (tp + fn), 2)
-        F1 = round(2 * ((precision * recall) / (precision + recall)), 2)
+        if precision + recall == 0:
+            F1 = 0
+        else:
+            F1 = round(2 * ((precision * recall) / (precision + recall)), 2)
         # print("F1 {}".format(F1))
         # print(type_up,type_lower)
         # print("tp: {},fp: {},fn: {}".format(tp,fp,fn))
