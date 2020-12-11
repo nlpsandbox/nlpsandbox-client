@@ -167,14 +167,15 @@
 <span id="nlp-client"></span><h1>NLP Client<a class="headerlink" href="#module-nlpsandboxclient.client" title="Permalink to this headline">¶</a></h1>
 <p>NLP data node client that interacts with the SDK datanodeclient</p>
 <dl class="function">
-<dt id="nlpsandboxclient.client.annotate_date">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">annotate_date</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">note: dict</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#annotate_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.annotate_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Annotate notes with date</p>
+<dt id="nlpsandboxclient.client.annotate_note">
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">annotate_note</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">note: dict</em>, <em class="sig-param">annotator_type: str</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#annotate_note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.annotate_note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate notes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>host</strong> – Data node host IP</p></li>
 <li><p><strong>note</strong> – Clinical note</p></li>
+<li><p><strong>annotator_type</strong> – Type of annotator</p></li>
 </ul>
 </dd>
 <dt class="field-even">Yields</dt>
@@ -224,7 +225,7 @@ doesn’t exist</p></li>
 
 <dl class="function">
 <dt id="nlpsandboxclient.client.get_annotator_service_info">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotator_service_info</code><span class="sig-paren">(</span><em class="sig-param">host: str</em><span class="sig-paren">)</span> &#x2192; textdateannotator.models.service.Service<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotator_service_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotator_service_info" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotator_service_info</code><span class="sig-paren">(</span><em class="sig-param">host: str</em><span class="sig-paren">)</span> &#x2192; annotator.models.service.Service<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotator_service_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotator_service_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get annotater service</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
