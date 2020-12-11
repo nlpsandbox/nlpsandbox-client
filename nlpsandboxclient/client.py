@@ -7,7 +7,6 @@ import annotator
 from annotator.models import Service
 
 DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
-DATE_ANNOTATOR_HOST = "http://10.23.55.45:9000/api/v1"
 
 
 def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:

@@ -3,7 +3,6 @@ import json
 
 import click
 from nlpsandboxclient import client, evaluation, utils
-from nlpsandboxclient.client import DATE_ANNOTATOR_HOST
 
 
 @click.group(name='evaluate')
@@ -38,26 +37,31 @@ def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
     #     outfile.write(json_object)
 
 
-@cli.command(name="text-date-annotate")
-@click.option('--date_annotator_host',
-              help='Date annotator host. '
-                   f'If not specified, uses {DATE_ANNOTATOR_HOST}')
+@cli.command(name="annotate-note")
+@click.option('--annotator_host', help='Annotator host.')
 @click.option('--note_json', help='Clinical notes json',
               type=click.Path(exists=True))
 @click.option('--output', help='Specify output json path',
               type=click.Path())
-def text_date_annotate(date_annotator_host, note_json, output):
-    """Evaluate the performance of a local prediction file"""
-    date_annotator_host = (date_annotator_host
-                           if date_annotator_host is not None
-                           else DATE_ANNOTATOR_HOST)
+@click.option('--annotator_type', help='Type of annotator.',
+              type=click.Choice(['date', 'person', 'address'],
+                                case_sensitive=False))
+def annotate_note(annotator_host, note_json, output, annotator_type):
+    """Annotate a note with specified annotator
+
+    >>> nlp-cli evaluate annotate-note \
+        --annotator_host http://10.23.55.45:9000/api/v1 \
+        --note_json notes.json \
+        --annotator_type date
+    """
     with open(note_json, "r") as note_f:
         notes = json.load(note_f)
     all_annotations = []
     for note in notes:
         note.pop("id")
-        annotations = client.annotate_date(host=date_annotator_host,
-                                           note={"note": note})
+        annotations = client.annotate_note(host=annotator_host,
+                                           note={"note": note},
+                                           annotator_type=annotator_type)
         annotations['annotationSource'] = {
             "resourceSource": {
                 "name": note['note_name']
@@ -68,17 +72,13 @@ def text_date_annotate(date_annotator_host, note_json, output):
 
 
 @cli.command(name="get-annotator-service")
-@click.option('--annotator_host',
-              help='Date annotator host. '
-                   f'If not specified, uses {DATE_ANNOTATOR_HOST}')
+@click.option('--annotator_host', help='Annotator host.')
 @click.option('--output', help='Specify output json path',
               type=click.Path())
 def get_annotator_service(annotator_host, output):
     """Evaluate the performance of a local prediction file"""
-    date_annotator_host = (annotator_host if annotator_host is not None
-                           else DATE_ANNOTATOR_HOST)
     service = client.get_annotator_service_info(
-        host=date_annotator_host
+        host=annotator_host
     )
     utils.stdout_or_json(service.to_dict(), output)
 
