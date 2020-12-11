@@ -25,7 +25,7 @@ import six
 from six.moves.urllib.parse import urlencode
 import urllib3
 
-from textdateannotator.exceptions import ApiException, ApiValueError
+from annotator.exceptions import ApiException, ApiValueError
 
 
 logger = logging.getLogger(__name__)

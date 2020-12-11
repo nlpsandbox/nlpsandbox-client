@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import annotator
-from annotator.models.text_date_annotation_request import TextDateAnnotationRequest  # noqa: E501
+from annotator.models.text_person_name_annotation_request import TextPersonNameAnnotationRequest  # noqa: E501
 from annotator.rest import ApiException
 
-class TestTextDateAnnotationRequest(unittest.TestCase):
-    """TextDateAnnotationRequest unit test stubs"""
+class TestTextPersonNameAnnotationRequest(unittest.TestCase):
+    """TextPersonNameAnnotationRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,13 +30,13 @@ class TestTextDateAnnotationRequest(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test TextDateAnnotationRequest
+        """Test TextPersonNameAnnotationRequest
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = annotator.models.text_date_annotation_request.TextDateAnnotationRequest()  # noqa: E501
+        # model = annotator.models.text_person_name_annotation_request.TextPersonNameAnnotationRequest()  # noqa: E501
         if include_optional :
-            return TextDateAnnotationRequest(
+            return TextPersonNameAnnotationRequest(
                 note = annotator.models.note.Note(
                     id = '0', 
                     text = 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.', 
@@ -44,11 +44,11 @@ class TestTextDateAnnotationRequest(unittest.TestCase):
                     patient_id = '507f1f77bcf86cd799439011', )
             )
         else :
-            return TextDateAnnotationRequest(
+            return TextPersonNameAnnotationRequest(
         )
 
-    def testTextDateAnnotationRequest(self):
-        """Test TextDateAnnotationRequest"""
+    def testTextPersonNameAnnotationRequest(self):
+        """Test TextPersonNameAnnotationRequest"""
         inst_req_only = self.make_instance(include_optional=False)
         inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -16,23 +16,23 @@ from __future__ import absolute_import
 import unittest
 
 import annotator
-from annotator.api.text_date_annotation_api import TextDateAnnotationApi  # noqa: E501
+from annotator.api.text_physical_address_annotation_api import TextPhysicalAddressAnnotationApi  # noqa: E501
 from annotator.rest import ApiException
 
 
-class TestTextDateAnnotationApi(unittest.TestCase):
-    """TextDateAnnotationApi unit test stubs"""
+class TestTextPhysicalAddressAnnotationApi(unittest.TestCase):
+    """TextPhysicalAddressAnnotationApi unit test stubs"""
 
     def setUp(self):
-        self.api = annotator.api.text_date_annotation_api.TextDateAnnotationApi()  # noqa: E501
+        self.api = annotator.api.text_physical_address_annotation_api.TextPhysicalAddressAnnotationApi()  # noqa: E501
 
     def tearDown(self):
         pass
 
-    def test_create_text_date_annotations(self):
-        """Test case for create_text_date_annotations
+    def test_create_text_physical_address_annotations(self):
+        """Test case for create_text_physical_address_annotations
 
-        Annotate dates in a clinical note  # noqa: E501
+        Annotate physical addresses in a clinical note  # noqa: E501
         """
         pass
 

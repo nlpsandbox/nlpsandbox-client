@@ -18,8 +18,8 @@ import re  # noqa: F401
 # python 2 and python 3 compatibility library
 import six
 
-from textdateannotator.api_client import ApiClient
-from textdateannotator.exceptions import (  # noqa: F401
+from annotator.api_client import ApiClient
+from annotator.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )

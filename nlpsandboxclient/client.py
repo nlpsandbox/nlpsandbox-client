@@ -3,11 +3,10 @@ from typing import List, Iterator
 
 import datanode
 from datanode.models import Annotation, AnnotationStore
-import textdateannotator
-from textdateannotator.models import Service
+import annotator
+from annotator.models import Service
 
 DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
-DATE_ANNOTATOR_HOST = "http://10.23.55.45:9000/api/v1"
 
 
 def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
@@ -188,7 +187,7 @@ def list_annotations(host: str, dataset_id: str,
             offset += limit
 
 
-def annotate_date(host: str, note: dict) -> dict:
+def _annotate_person(api_client, note: dict) -> dict:
     """Annotate notes with date
 
     Args:
@@ -211,12 +210,107 @@ def annotate_date(host: str, note: dict) -> dict:
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    configuration = textdateannotator.Configuration(host=host)
-    with textdateannotator.ApiClient(configuration) as api_client:
-        annotation_api = textdateannotator.TextDateAnnotationApi(api_client)
-        annotations = annotation_api.create_text_date_annotations(
-            text_date_annotation_request=note
-        )
+    annotation_api = annotator.TextPersonNameAnnotationApi(api_client)
+    annotations = annotation_api.create_text_person_name_annotations(
+        text_person_name_annotation_request=note
+    )
+    return annotations
+
+
+def _annotate_address(api_client, note: dict) -> dict:
+    """Annotate notes with date
+
+    Args:
+        host: Data node host IP
+        note: Clinical note
+
+    Yields:
+        Annotated notes
+
+    Examples:
+        >>> example_note = {
+        >>>    "note": {
+        >>>        "noteType": "loinc:LP29684-5",
+        >>>        "patientId": "507f1f77bcf86cd799439011",
+        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+        >>>    }
+        >>> }
+        >>> annotations = annotate_date(host="0.0.0.0/api/v1",
+        >>>                             note=example_note)
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    annotation_api = annotator.TextPhysicalAddressAnnotationApi(api_client)
+    annotations = annotation_api.create_text_physical_address_annotations(
+        text_physical_address_annotation_request=note
+    )
+    return annotations
+
+
+def _annotate_date(api_client, note: dict) -> dict:
+    """Annotate notes with date
+
+    Args:
+        host: Data node host IP
+        note: Clinical note
+
+    Yields:
+        Annotated notes
+
+    Examples:
+        >>> example_note = {
+        >>>    "note": {
+        >>>        "noteType": "loinc:LP29684-5",
+        >>>        "patientId": "507f1f77bcf86cd799439011",
+        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+        >>>    }
+        >>> }
+        >>> annotations = annotate_date(host="0.0.0.0/api/v1",
+        >>>                             note=example_note)
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    annotation_api = annotator.TextDateAnnotationApi(api_client)
+    annotations = annotation_api.create_text_date_annotations(
+        text_date_annotation_request=note
+    )
+    return annotations
+
+
+def annotate_note(host: str, note: dict, annotator_type: str) -> dict:
+    """Annotate notes
+
+    Args:
+        host: Data node host IP
+        note: Clinical note
+        annotator_type: Type of annotator
+
+    Yields:
+        Annotated notes
+
+    Examples:
+        >>> example_note = {
+        >>>    "note": {
+        >>>        "noteType": "loinc:LP29684-5",
+        >>>        "patientId": "507f1f77bcf86cd799439011",
+        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+        >>>    }
+        >>> }
+        >>> annotations = annotate_date(host="0.0.0.0/api/v1",
+        >>>                             note=example_note)
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    configuration = annotator.Configuration(host=host)
+    with annotator.ApiClient(configuration) as api_client:
+        if annotator_type == "date":
+            annotations = _annotate_date(api_client, note)
+        elif annotator_type == "person":
+            annotations = _annotate_person(api_client, note)
+        elif annotator_type == "address":
+            annotations = _annotate_person(api_client, note)
+        else:
+            raise ValueError(f"Invalid annotator_type: {annotator_type}")
         sanitized_annotations = api_client.sanitize_for_serialization(
             annotations
         )
@@ -238,8 +332,8 @@ def get_annotator_service_info(host: str) -> Service:
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    configuration = textdateannotator.Configuration(host=host)
-    with textdateannotator.ApiClient(configuration) as api_client:
-        service_api = textdateannotator.ServiceApi(api_client)
+    configuration = annotator.Configuration(host=host)
+    with annotator.ApiClient(configuration) as api_client:
+        service_api = annotator.ServiceApi(api_client)
         service_info = service_api.service()
     return service_info

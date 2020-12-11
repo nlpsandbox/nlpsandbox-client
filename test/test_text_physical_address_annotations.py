@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import annotator
-from annotator.models.text_date_annotation_request import TextDateAnnotationRequest  # noqa: E501
+from annotator.models.text_physical_address_annotations import TextPhysicalAddressAnnotations  # noqa: E501
 from annotator.rest import ApiException
 
-class TestTextDateAnnotationRequest(unittest.TestCase):
-    """TextDateAnnotationRequest unit test stubs"""
+class TestTextPhysicalAddressAnnotations(unittest.TestCase):
+    """TextPhysicalAddressAnnotations unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,25 +30,23 @@ class TestTextDateAnnotationRequest(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test TextDateAnnotationRequest
+        """Test TextPhysicalAddressAnnotations
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = annotator.models.text_date_annotation_request.TextDateAnnotationRequest()  # noqa: E501
+        # model = annotator.models.text_physical_address_annotations.TextPhysicalAddressAnnotations()  # noqa: E501
         if include_optional :
-            return TextDateAnnotationRequest(
-                note = annotator.models.note.Note(
-                    id = '0', 
-                    text = 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.', 
-                    note_type = 'loinc:LP29684-5', 
-                    patient_id = '507f1f77bcf86cd799439011', )
+            return TextPhysicalAddressAnnotations(
+                text_physical_address_annotations = [
+                    {"start":42,"length":11,"text":"Seattle","addressType":"city"}
+                    ]
             )
         else :
-            return TextDateAnnotationRequest(
+            return TextPhysicalAddressAnnotations(
         )
 
-    def testTextDateAnnotationRequest(self):
-        """Test TextDateAnnotationRequest"""
+    def testTextPhysicalAddressAnnotations(self):
+        """Test TextPhysicalAddressAnnotations"""
         inst_req_only = self.make_instance(include_optional=False)
         inst_req_and_optional = self.make_instance(include_optional=True)
 
