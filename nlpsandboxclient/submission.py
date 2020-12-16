@@ -36,6 +36,10 @@ def submit(syn: Synapse, docker_image: str,
             "Docker image must follow "
             "docker.synapse.org/synXXXXX/your-image-name:your-tag convention"
         )
+    # Checks if Synapse team exists
+    if team is not None:
+        team = syn.getTeam(team)
+
     project_id = docker_components[1]
     docker_repo = docker_image.split(":")[0]
     docker_tag = docker_components[3]
