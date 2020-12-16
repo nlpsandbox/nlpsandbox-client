@@ -34,7 +34,8 @@ def submit(syn: Synapse, docker_image: str,
     if not docker_components:
         raise ValueError(
             "Docker image must follow "
-            "docker.synapse.org/synXXXXX/your-image-name:your-tag convention")
+            "docker.synapse.org/synXXXXX/your-image-name:your-tag convention"
+        )
     project_id = docker_components[1]
     docker_repo = docker_image.split(":")[0]
     docker_tag = docker_components[3]
@@ -47,4 +48,5 @@ def submit(syn: Synapse, docker_image: str,
         "address": "9614684"
     }
     queue_id = evaluation_queue_map[annotator_type]
-    return syn.submit(evaluation=queue_id, entity=synid, team=team, dockerTag=docker_tag)
+    return syn.submit(evaluation=queue_id, entity=synid, team=team,
+                      dockerTag=docker_tag)
