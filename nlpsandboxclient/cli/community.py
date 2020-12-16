@@ -4,7 +4,7 @@ import json
 import click
 import synapseclient
 
-from nlpsandboxclient import client, utils
+from nlpsandboxclient import client, utils, submission
 from nlpsandboxclient.client import DATA_NODE_HOST
 
 
@@ -100,6 +100,21 @@ def list_annotations(data_node_host, dataset_id, annotation_store_id, output):
         annotation_store_id=annotation_store_id
     )
     utils.stdout_or_json(list(annotations), output)
+
+
+@cli.command(name="submit")
+@click.option('--docker_image', help='The address of the Tool to validate',
+              required=True)
+@click.option('--annotator_type', help='Type of annotator.',
+              type=click.Choice(['date', 'person', 'address'],
+                                case_sensitive=False))
+@click.option('--team', help='Synapse team name or Id.',
+              required=False)
+def submit(docker_image, annotator_type, team):
+    """Submit a docker image"""
+    syn = synapseclient.login()
+    sub = submission.submit(syn, docker_image, annotator_type, team)
+    print(sub.id)
 
 
 # @cli.command()

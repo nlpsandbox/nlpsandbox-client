@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import click
 
-from . import community, evaluate
+from . import community, evaluate, submit
 
 
 @click.group()
