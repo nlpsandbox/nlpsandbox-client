@@ -1,7 +1,6 @@
 """Submission module"""
 import re
 
-import synapseclient
 from synapseclient import Submission, Synapse
 
 
