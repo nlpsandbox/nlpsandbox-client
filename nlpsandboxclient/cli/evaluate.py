@@ -76,7 +76,7 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
 @click.option('--output', help='Specify output json path',
               type=click.Path())
 def get_annotator_service(annotator_host, output):
-    """Evaluate the performance of a local prediction file"""
+    """Get annotator service endpoint"""
     service = client.get_annotator_service_info(
         host=annotator_host
     )
