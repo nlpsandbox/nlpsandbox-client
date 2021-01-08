@@ -308,7 +308,7 @@ def annotate_note(host: str, note: dict, annotator_type: str) -> dict:
         elif annotator_type == "person":
             annotations = _annotate_person(api_client, note)
         elif annotator_type == "address":
-            annotations = _annotate_person(api_client, note)
+            annotations = _annotate_address(api_client, note)
         else:
             raise ValueError(f"Invalid annotator_type: {annotator_type}")
         sanitized_annotations = api_client.sanitize_for_serialization(
