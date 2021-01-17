@@ -1,6 +1,6 @@
 # datanode.AnnotationApi
 
-All URIs are relative to *http://example.com/api/v1*
+All URIs are relative to *https://example.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_annotation**
-> Annotation create_annotation(dataset_id, annotation_store_id, annotation=annotation)
+> AnnotationCreateResponse create_annotation(dataset_id, annotation_store_id, annotation_create_request=annotation_create_request)
 
 Create an annotation
 
@@ -25,10 +25,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://example.com/api/v1
+# Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "http://example.com/api/v1"
+    host = "https://example.com/api/v1"
 )
 
 
@@ -38,11 +38,11 @@ with datanode.ApiClient() as api_client:
     api_instance = datanode.AnnotationApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 annotation_store_id = 'annotation_store_id_example' # str | The ID of the annotation store
-annotation = datanode.Annotation() # Annotation |  (optional)
+annotation_create_request = datanode.AnnotationCreateRequest() # AnnotationCreateRequest |  (optional)
 
     try:
         # Create an annotation
-        api_response = api_instance.create_annotation(dataset_id, annotation_store_id, annotation=annotation)
+        api_response = api_instance.create_annotation(dataset_id, annotation_store_id, annotation_create_request=annotation_create_request)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling AnnotationApi->create_annotation: %s\n" % e)
@@ -54,11 +54,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **str**| The ID of the dataset | 
  **annotation_store_id** | **str**| The ID of the annotation store | 
- **annotation** | [**Annotation**](Annotation.md)|  | [optional] 
+ **annotation_create_request** | [**AnnotationCreateRequest**](AnnotationCreateRequest.md)|  | [optional] 
 
 ### Return type
 
-[**Annotation**](Annotation.md)
+[**AnnotationCreateResponse**](AnnotationCreateResponse.md)
 
 ### Authorization
 
@@ -72,15 +72,14 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
-**403** | Unauthorized |  -  |
-**404** | The specified resource was not found |  -  |
+**201** | Success |  -  |
+**400** | Invalid request |  -  |
 **409** | The request conflicts with current state of the target resource |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_annotation**
-> Annotation delete_annotation(dataset_id, annotation_store_id, annotation_id)
+> object delete_annotation(dataset_id, annotation_store_id, annotation_id)
 
 Delete an annotation
 
@@ -94,10 +93,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://example.com/api/v1
+# Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "http://example.com/api/v1"
+    host = "https://example.com/api/v1"
 )
 
 
@@ -127,7 +126,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Annotation**](Annotation.md)
+**object**
 
 ### Authorization
 
@@ -142,7 +141,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
 **404** | The specified resource was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -162,10 +160,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://example.com/api/v1
+# Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "http://example.com/api/v1"
+    host = "https://example.com/api/v1"
 )
 
 
@@ -210,7 +208,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
 **404** | The specified resource was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -230,10 +227,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://example.com/api/v1
+# Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "http://example.com/api/v1"
+    host = "https://example.com/api/v1"
 )
 
 
@@ -280,8 +277,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
-**404** | The specified resource was not found |  -  |
+**400** | Invalid request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -67,7 +67,7 @@ class Patient(object):
     def id(self):
         """Gets the id of this Patient.  # noqa: E501
 
-        The patient ID  # noqa: E501
+        The ID of the FHIR patient  # noqa: E501
 
         :return: The id of this Patient.  # noqa: E501
         :rtype: str
@@ -78,7 +78,7 @@ class Patient(object):
     def id(self, id):
         """Sets the id of this Patient.
 
-        The patient ID  # noqa: E501
+        The ID of the FHIR patient  # noqa: E501
 
         :param id: The id of this Patient.  # noqa: E501
         :type: str

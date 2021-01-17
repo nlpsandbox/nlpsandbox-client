@@ -49,7 +49,7 @@ class NoteApi(object):
         :param async_req bool: execute request asynchronously
         :param str dataset_id: The ID of the dataset (required)
         :param str fhir_store_id: The ID of the FHIR store (required)
-        :param Note note:
+        :param NoteCreateRequest note_create_request:
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -57,7 +57,7 @@ class NoteApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Note
+        :return: NoteCreateResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -76,7 +76,7 @@ class NoteApi(object):
         :param async_req bool: execute request asynchronously
         :param str dataset_id: The ID of the dataset (required)
         :param str fhir_store_id: The ID of the FHIR store (required)
-        :param Note note:
+        :param NoteCreateRequest note_create_request:
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -86,7 +86,7 @@ class NoteApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(Note, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(NoteCreateResponse, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -96,7 +96,7 @@ class NoteApi(object):
         all_params = [
             'dataset_id',
             'fhir_store_id',
-            'note'
+            'note_create_request'
         ]
         all_params.extend(
             [
@@ -124,6 +124,22 @@ class NoteApi(object):
                                                         local_var_params['fhir_store_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `fhir_store_id` when calling `create_note`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `create_note`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `create_note`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `create_note`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `create_note`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `create_note`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `create_note`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}
@@ -140,8 +156,8 @@ class NoteApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'note' in local_var_params:
-            body_params = local_var_params['note']
+        if 'note_create_request' in local_var_params:
+            body_params = local_var_params['note_create_request']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
@@ -161,7 +177,7 @@ class NoteApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Note',  # noqa: E501
+            response_type='NoteCreateResponse',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -189,7 +205,7 @@ class NoteApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Note
+        :return: object
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -218,7 +234,7 @@ class NoteApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(Note, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(object, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -260,6 +276,22 @@ class NoteApi(object):
                                                         local_var_params['note_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `note_id` when calling `delete_note`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_note`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_note`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_note`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `delete_note`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `delete_note`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `delete_note`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}
@@ -293,7 +325,7 @@ class NoteApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Note',  # noqa: E501
+            response_type='object',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -392,6 +424,22 @@ class NoteApi(object):
                                                         local_var_params['note_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `note_id` when calling `get_note`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_note`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_note`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_note`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `get_note`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `get_note`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `get_note`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}
@@ -523,6 +571,22 @@ class NoteApi(object):
                                                         local_var_params['fhir_store_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `fhir_store_id` when calling `list_notes`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `list_notes`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `list_notes`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `list_notes`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `list_notes`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `list_notes`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `list_notes`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] > 100:  # noqa: E501
             raise ApiValueError("Invalid value for parameter `limit` when calling `list_notes`, must be a value less than or equal to `100`")  # noqa: E501
         if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] < 10:  # noqa: E501

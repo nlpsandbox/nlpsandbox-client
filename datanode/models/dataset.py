@@ -57,7 +57,7 @@ class Dataset(object):
     def name(self):
         """Gets the name of this Dataset.  # noqa: E501
 
-        Resource name of the dataset, of the form datasets/{datasetId}  # noqa: E501
+        The name of the dataset  # noqa: E501
 
         :return: The name of this Dataset.  # noqa: E501
         :rtype: str
@@ -68,7 +68,7 @@ class Dataset(object):
     def name(self, name):
         """Sets the name of this Dataset.
 
-        Resource name of the dataset, of the form datasets/{datasetId}  # noqa: E501
+        The name of the dataset  # noqa: E501
 
         :param name: The name of this Dataset.  # noqa: E501
         :type: str

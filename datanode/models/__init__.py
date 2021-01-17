@@ -16,12 +16,19 @@ from __future__ import absolute_import
 
 # import models into model package
 from datanode.models.annotation import Annotation
+from datanode.models.annotation_create_request import AnnotationCreateRequest
+from datanode.models.annotation_create_response import AnnotationCreateResponse
 from datanode.models.annotation_source import AnnotationSource
 from datanode.models.annotation_store import AnnotationStore
+from datanode.models.annotation_store_create_response import AnnotationStoreCreateResponse
 from datanode.models.dataset import Dataset
+from datanode.models.dataset_create_response import DatasetCreateResponse
 from datanode.models.error import Error
 from datanode.models.fhir_store import FhirStore
+from datanode.models.fhir_store_create_response import FhirStoreCreateResponse
 from datanode.models.note import Note
+from datanode.models.note_create_request import NoteCreateRequest
+from datanode.models.note_create_response import NoteCreateResponse
 from datanode.models.page_of_annotation_stores import PageOfAnnotationStores
 from datanode.models.page_of_annotation_stores_all_of import PageOfAnnotationStoresAllOf
 from datanode.models.page_of_annotations import PageOfAnnotations
@@ -35,6 +42,8 @@ from datanode.models.page_of_notes_all_of import PageOfNotesAllOf
 from datanode.models.page_of_patients import PageOfPatients
 from datanode.models.page_of_patients_all_of import PageOfPatientsAllOf
 from datanode.models.patient import Patient
+from datanode.models.patient_create_request import PatientCreateRequest
+from datanode.models.patient_create_response import PatientCreateResponse
 from datanode.models.resource_source import ResourceSource
 from datanode.models.response_page_metadata import ResponsePageMetadata
 from datanode.models.response_page_metadata_links import ResponsePageMetadataLinks

@@ -1,21 +1,21 @@
 # datanode.PatientApi
 
-All URIs are relative to *http://example.com/api/v1*
+All URIs are relative to *https://example.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_patient**](PatientApi.md#create_patient) | **POST** /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient | Create a FHIR Patient
-[**delete_patient**](PatientApi.md#delete_patient) | **DELETE** /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId} | Delete a FHIR Patient
-[**get_patient**](PatientApi.md#get_patient) | **GET** /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId} | Get a FHIR Patient
+[**create_patient**](PatientApi.md#create_patient) | **POST** /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient | Create a FHIR patient
+[**delete_patient**](PatientApi.md#delete_patient) | **DELETE** /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId} | Delete a FHIR patient
+[**get_patient**](PatientApi.md#get_patient) | **GET** /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId} | Get a FHIR patient
 [**list_patients**](PatientApi.md#list_patients) | **GET** /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient | List the Patients in a FHIR store
 
 
 # **create_patient**
-> Patient create_patient(dataset_id, fhir_store_id, patient=patient)
+> PatientCreateResponse create_patient(dataset_id, fhir_store_id, patient_create_request=patient_create_request)
 
-Create a FHIR Patient
+Create a FHIR patient
 
-Create a FHIR Patient
+Create a FHIR patient
 
 ### Example
 
@@ -25,10 +25,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://example.com/api/v1
+# Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "http://example.com/api/v1"
+    host = "https://example.com/api/v1"
 )
 
 
@@ -38,11 +38,11 @@ with datanode.ApiClient() as api_client:
     api_instance = datanode.PatientApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
-patient = datanode.Patient() # Patient |  (optional)
+patient_create_request = datanode.PatientCreateRequest() # PatientCreateRequest |  (optional)
 
     try:
-        # Create a FHIR Patient
-        api_response = api_instance.create_patient(dataset_id, fhir_store_id, patient=patient)
+        # Create a FHIR patient
+        api_response = api_instance.create_patient(dataset_id, fhir_store_id, patient_create_request=patient_create_request)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PatientApi->create_patient: %s\n" % e)
@@ -54,11 +54,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **str**| The ID of the dataset | 
  **fhir_store_id** | **str**| The ID of the FHIR store | 
- **patient** | [**Patient**](Patient.md)|  | [optional] 
+ **patient_create_request** | [**PatientCreateRequest**](PatientCreateRequest.md)|  | [optional] 
 
 ### Return type
 
-[**Patient**](Patient.md)
+[**PatientCreateResponse**](PatientCreateResponse.md)
 
 ### Authorization
 
@@ -72,19 +72,18 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
-**403** | Unauthorized |  -  |
-**404** | The specified resource was not found |  -  |
+**201** | Success |  -  |
+**400** | Invalid request |  -  |
 **409** | The request conflicts with current state of the target resource |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_patient**
-> Patient delete_patient(dataset_id, fhir_store_id, patient_id)
+> object delete_patient(dataset_id, fhir_store_id, patient_id)
 
-Delete a FHIR Patient
+Delete a FHIR patient
 
-Deletes the FHIR Patient specified
+Deletes the FHIR patient specified
 
 ### Example
 
@@ -94,10 +93,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://example.com/api/v1
+# Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "http://example.com/api/v1"
+    host = "https://example.com/api/v1"
 )
 
 
@@ -107,10 +106,10 @@ with datanode.ApiClient() as api_client:
     api_instance = datanode.PatientApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
-patient_id = 'patient_id_example' # str | The ID of the FHIR Patient
+patient_id = 'patient_id_example' # str | The ID of the FHIR patient
 
     try:
-        # Delete a FHIR Patient
+        # Delete a FHIR patient
         api_response = api_instance.delete_patient(dataset_id, fhir_store_id, patient_id)
         pprint(api_response)
     except ApiException as e:
@@ -123,11 +122,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **str**| The ID of the dataset | 
  **fhir_store_id** | **str**| The ID of the FHIR store | 
- **patient_id** | **str**| The ID of the FHIR Patient | 
+ **patient_id** | **str**| The ID of the FHIR patient | 
 
 ### Return type
 
-[**Patient**](Patient.md)
+**object**
 
 ### Authorization
 
@@ -142,7 +141,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
 **404** | The specified resource was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -150,9 +148,9 @@ No authorization required
 # **get_patient**
 > Patient get_patient(dataset_id, fhir_store_id, patient_id)
 
-Get a FHIR Patient
+Get a FHIR patient
 
-Returns the FHIR Patient specified
+Returns the FHIR patient specified
 
 ### Example
 
@@ -162,10 +160,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://example.com/api/v1
+# Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "http://example.com/api/v1"
+    host = "https://example.com/api/v1"
 )
 
 
@@ -175,10 +173,10 @@ with datanode.ApiClient() as api_client:
     api_instance = datanode.PatientApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
-patient_id = 'patient_id_example' # str | The ID of the FHIR Patient
+patient_id = 'patient_id_example' # str | The ID of the FHIR patient
 
     try:
-        # Get a FHIR Patient
+        # Get a FHIR patient
         api_response = api_instance.get_patient(dataset_id, fhir_store_id, patient_id)
         pprint(api_response)
     except ApiException as e:
@@ -191,7 +189,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **str**| The ID of the dataset | 
  **fhir_store_id** | **str**| The ID of the FHIR store | 
- **patient_id** | **str**| The ID of the FHIR Patient | 
+ **patient_id** | **str**| The ID of the FHIR patient | 
 
 ### Return type
 
@@ -210,7 +208,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
 **404** | The specified resource was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -230,10 +227,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to http://example.com/api/v1
+# Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "http://example.com/api/v1"
+    host = "https://example.com/api/v1"
 )
 
 
@@ -280,8 +277,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
-**404** | The specified resource was not found |  -  |
+**400** | Invalid request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

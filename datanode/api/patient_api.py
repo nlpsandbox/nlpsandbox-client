@@ -38,9 +38,9 @@ class PatientApi(object):
         self.api_client = api_client
 
     def create_patient(self, dataset_id, fhir_store_id, **kwargs):  # noqa: E501
-        """Create a FHIR Patient  # noqa: E501
+        """Create a FHIR patient  # noqa: E501
 
-        Create a FHIR Patient  # noqa: E501
+        Create a FHIR patient  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.create_patient(dataset_id, fhir_store_id, async_req=True)
@@ -49,7 +49,7 @@ class PatientApi(object):
         :param async_req bool: execute request asynchronously
         :param str dataset_id: The ID of the dataset (required)
         :param str fhir_store_id: The ID of the FHIR store (required)
-        :param Patient patient:
+        :param PatientCreateRequest patient_create_request:
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -57,7 +57,7 @@ class PatientApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Patient
+        :return: PatientCreateResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -65,9 +65,9 @@ class PatientApi(object):
         return self.create_patient_with_http_info(dataset_id, fhir_store_id, **kwargs)  # noqa: E501
 
     def create_patient_with_http_info(self, dataset_id, fhir_store_id, **kwargs):  # noqa: E501
-        """Create a FHIR Patient  # noqa: E501
+        """Create a FHIR patient  # noqa: E501
 
-        Create a FHIR Patient  # noqa: E501
+        Create a FHIR patient  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.create_patient_with_http_info(dataset_id, fhir_store_id, async_req=True)
@@ -76,7 +76,7 @@ class PatientApi(object):
         :param async_req bool: execute request asynchronously
         :param str dataset_id: The ID of the dataset (required)
         :param str fhir_store_id: The ID of the FHIR store (required)
-        :param Patient patient:
+        :param PatientCreateRequest patient_create_request:
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -86,7 +86,7 @@ class PatientApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(Patient, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(PatientCreateResponse, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -96,7 +96,7 @@ class PatientApi(object):
         all_params = [
             'dataset_id',
             'fhir_store_id',
-            'patient'
+            'patient_create_request'
         ]
         all_params.extend(
             [
@@ -124,6 +124,22 @@ class PatientApi(object):
                                                         local_var_params['fhir_store_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `fhir_store_id` when calling `create_patient`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `create_patient`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `create_patient`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `create_patient`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `create_patient`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `create_patient`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `create_patient`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}
@@ -140,8 +156,8 @@ class PatientApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'patient' in local_var_params:
-            body_params = local_var_params['patient']
+        if 'patient_create_request' in local_var_params:
+            body_params = local_var_params['patient_create_request']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
@@ -161,7 +177,7 @@ class PatientApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Patient',  # noqa: E501
+            response_type='PatientCreateResponse',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -170,9 +186,9 @@ class PatientApi(object):
             collection_formats=collection_formats)
 
     def delete_patient(self, dataset_id, fhir_store_id, patient_id, **kwargs):  # noqa: E501
-        """Delete a FHIR Patient  # noqa: E501
+        """Delete a FHIR patient  # noqa: E501
 
-        Deletes the FHIR Patient specified  # noqa: E501
+        Deletes the FHIR patient specified  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.delete_patient(dataset_id, fhir_store_id, patient_id, async_req=True)
@@ -181,7 +197,7 @@ class PatientApi(object):
         :param async_req bool: execute request asynchronously
         :param str dataset_id: The ID of the dataset (required)
         :param str fhir_store_id: The ID of the FHIR store (required)
-        :param str patient_id: The ID of the FHIR Patient (required)
+        :param str patient_id: The ID of the FHIR patient (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -189,7 +205,7 @@ class PatientApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Patient
+        :return: object
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -197,9 +213,9 @@ class PatientApi(object):
         return self.delete_patient_with_http_info(dataset_id, fhir_store_id, patient_id, **kwargs)  # noqa: E501
 
     def delete_patient_with_http_info(self, dataset_id, fhir_store_id, patient_id, **kwargs):  # noqa: E501
-        """Delete a FHIR Patient  # noqa: E501
+        """Delete a FHIR patient  # noqa: E501
 
-        Deletes the FHIR Patient specified  # noqa: E501
+        Deletes the FHIR patient specified  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.delete_patient_with_http_info(dataset_id, fhir_store_id, patient_id, async_req=True)
@@ -208,7 +224,7 @@ class PatientApi(object):
         :param async_req bool: execute request asynchronously
         :param str dataset_id: The ID of the dataset (required)
         :param str fhir_store_id: The ID of the FHIR store (required)
-        :param str patient_id: The ID of the FHIR Patient (required)
+        :param str patient_id: The ID of the FHIR patient (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -218,7 +234,7 @@ class PatientApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(Patient, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(object, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -260,6 +276,22 @@ class PatientApi(object):
                                                         local_var_params['patient_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `patient_id` when calling `delete_patient`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_patient`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_patient`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_patient`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `delete_patient`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `delete_patient`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `delete_patient`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}
@@ -293,7 +325,7 @@ class PatientApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Patient',  # noqa: E501
+            response_type='object',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -302,9 +334,9 @@ class PatientApi(object):
             collection_formats=collection_formats)
 
     def get_patient(self, dataset_id, fhir_store_id, patient_id, **kwargs):  # noqa: E501
-        """Get a FHIR Patient  # noqa: E501
+        """Get a FHIR patient  # noqa: E501
 
-        Returns the FHIR Patient specified  # noqa: E501
+        Returns the FHIR patient specified  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_patient(dataset_id, fhir_store_id, patient_id, async_req=True)
@@ -313,7 +345,7 @@ class PatientApi(object):
         :param async_req bool: execute request asynchronously
         :param str dataset_id: The ID of the dataset (required)
         :param str fhir_store_id: The ID of the FHIR store (required)
-        :param str patient_id: The ID of the FHIR Patient (required)
+        :param str patient_id: The ID of the FHIR patient (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -329,9 +361,9 @@ class PatientApi(object):
         return self.get_patient_with_http_info(dataset_id, fhir_store_id, patient_id, **kwargs)  # noqa: E501
 
     def get_patient_with_http_info(self, dataset_id, fhir_store_id, patient_id, **kwargs):  # noqa: E501
-        """Get a FHIR Patient  # noqa: E501
+        """Get a FHIR patient  # noqa: E501
 
-        Returns the FHIR Patient specified  # noqa: E501
+        Returns the FHIR patient specified  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_patient_with_http_info(dataset_id, fhir_store_id, patient_id, async_req=True)
@@ -340,7 +372,7 @@ class PatientApi(object):
         :param async_req bool: execute request asynchronously
         :param str dataset_id: The ID of the dataset (required)
         :param str fhir_store_id: The ID of the FHIR store (required)
-        :param str patient_id: The ID of the FHIR Patient (required)
+        :param str patient_id: The ID of the FHIR patient (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -392,6 +424,22 @@ class PatientApi(object):
                                                         local_var_params['patient_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `patient_id` when calling `get_patient`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_patient`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_patient`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_patient`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `get_patient`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `get_patient`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `get_patient`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}
@@ -523,6 +571,22 @@ class PatientApi(object):
                                                         local_var_params['fhir_store_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `fhir_store_id` when calling `list_patients`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `list_patients`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `list_patients`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `list_patients`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `list_patients`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `list_patients`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `list_patients`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] > 100:  # noqa: E501
             raise ApiValueError("Invalid value for parameter `limit` when calling `list_patients`, must be a value less than or equal to `100`")  # noqa: E501
         if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] < 10:  # noqa: E501

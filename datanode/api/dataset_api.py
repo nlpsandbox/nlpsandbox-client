@@ -47,8 +47,8 @@ class DatasetApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset that is being created. (required)
-        :param Dataset dataset:
+        :param str dataset_id: The ID of the dataset that is being created (required)
+        :param object body:
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -56,7 +56,7 @@ class DatasetApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Dataset
+        :return: DatasetCreateResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -73,8 +73,8 @@ class DatasetApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset that is being created. (required)
-        :param Dataset dataset:
+        :param str dataset_id: The ID of the dataset that is being created (required)
+        :param object body:
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -84,7 +84,7 @@ class DatasetApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(Dataset, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(DatasetCreateResponse, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -93,7 +93,7 @@ class DatasetApi(object):
 
         all_params = [
             'dataset_id',
-            'dataset'
+            'body'
         ]
         all_params.extend(
             [
@@ -139,8 +139,8 @@ class DatasetApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'dataset' in local_var_params:
-            body_params = local_var_params['dataset']
+        if 'body' in local_var_params:
+            body_params = local_var_params['body']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
@@ -160,7 +160,7 @@ class DatasetApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Dataset',  # noqa: E501
+            response_type='DatasetCreateResponse',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -186,7 +186,7 @@ class DatasetApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Dataset
+        :return: object
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -213,7 +213,7 @@ class DatasetApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(Dataset, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(object, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -245,6 +245,14 @@ class DatasetApi(object):
                                                         local_var_params['dataset_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `dataset_id` when calling `delete_dataset`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_dataset`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_dataset`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_dataset`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}
@@ -274,7 +282,7 @@ class DatasetApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Dataset',  # noqa: E501
+            response_type='object',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -359,6 +367,14 @@ class DatasetApi(object):
                                                         local_var_params['dataset_id'] is None):  # noqa: E501
             raise ApiValueError("Missing the required parameter `dataset_id` when calling `get_dataset`")  # noqa: E501
 
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_dataset`, length must be less than or equal to `60`")  # noqa: E501
+        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
+                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_dataset`, length must be greater than or equal to `3`")  # noqa: E501
+        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
+            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_dataset`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
         collection_formats = {}
 
         path_params = {}

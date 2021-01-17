@@ -37,13 +37,13 @@ class ServiceApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def service(self, **kwargs):  # noqa: E501
+    def get_service(self, **kwargs):  # noqa: E501
         """Get service information  # noqa: E501
 
         Get information about the service  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.service(async_req=True)
+        >>> thread = api.get_service(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
@@ -59,15 +59,15 @@ class ServiceApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        return self.service_with_http_info(**kwargs)  # noqa: E501
+        return self.get_service_with_http_info(**kwargs)  # noqa: E501
 
-    def service_with_http_info(self, **kwargs):  # noqa: E501
+    def get_service_with_http_info(self, **kwargs):  # noqa: E501
         """Get service information  # noqa: E501
 
         Get information about the service  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.service_with_http_info(async_req=True)
+        >>> thread = api.get_service_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
@@ -102,7 +102,7 @@ class ServiceApi(object):
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method service" % key
+                    " to method get_service" % key
                 )
             local_var_params[key] = val
         del local_var_params['kwargs']

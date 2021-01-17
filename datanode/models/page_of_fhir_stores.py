@@ -47,7 +47,7 @@ class PageOfFhirStores(object):
         'fhir_stores': 'fhirStores'
     }
 
-    def __init__(self, offset=None, limit=None, links=None, fhir_stores=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, offset=0, limit=10, links=None, fhir_stores=None, local_vars_configuration=None):  # noqa: E501
         """PageOfFhirStores - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -87,6 +87,9 @@ class PageOfFhirStores(object):
         """
         if self.local_vars_configuration.client_side_validation and offset is None:  # noqa: E501
             raise ValueError("Invalid value for `offset`, must not be `None`")  # noqa: E501
+        if (self.local_vars_configuration.client_side_validation and
+                offset is not None and offset < 0):  # noqa: E501
+            raise ValueError("Invalid value for `offset`, must be a value greater than or equal to `0`")  # noqa: E501
 
         self._offset = offset
 
@@ -112,6 +115,12 @@ class PageOfFhirStores(object):
         """
         if self.local_vars_configuration.client_side_validation and limit is None:  # noqa: E501
             raise ValueError("Invalid value for `limit`, must not be `None`")  # noqa: E501
+        if (self.local_vars_configuration.client_side_validation and
+                limit is not None and limit > 100):  # noqa: E501
+            raise ValueError("Invalid value for `limit`, must be a value less than or equal to `100`")  # noqa: E501
+        if (self.local_vars_configuration.client_side_validation and
+                limit is not None and limit < 10):  # noqa: E501
+            raise ValueError("Invalid value for `limit`, must be a value greater than or equal to `10`")  # noqa: E501
 
         self._limit = limit
 

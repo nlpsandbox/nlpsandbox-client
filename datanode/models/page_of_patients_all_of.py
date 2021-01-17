@@ -57,7 +57,7 @@ class PageOfPatientsAllOf(object):
     def patients(self):
         """Gets the patients of this PageOfPatientsAllOf.  # noqa: E501
 
-        An array of FHIR Patients  # noqa: E501
+        An array of FHIR patients  # noqa: E501
 
         :return: The patients of this PageOfPatientsAllOf.  # noqa: E501
         :rtype: list[Patient]
@@ -68,7 +68,7 @@ class PageOfPatientsAllOf(object):
     def patients(self, patients):
         """Sets the patients of this PageOfPatientsAllOf.
 
-        An array of FHIR Patients  # noqa: E501
+        An array of FHIR patients  # noqa: E501
 
         :param patients: The patients of this PageOfPatientsAllOf.  # noqa: E501
         :type: list[Patient]
