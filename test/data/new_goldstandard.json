@@ -1,0 +1,137 @@
+[
+    {
+        "annotationSource": {
+            "resourceSource": {
+                    "name": "0"
+            }
+        },
+        "name": "name",
+        "textDateAnnotations": [
+            {
+                "start": 20,
+                "length": 10,
+                "text": "11/21/2019",
+                "dateFormat": "MM/DD/YYYY"
+            }
+        ],
+        "textPersonNameAnnotations": [
+            {
+                "start": 20,
+                "length": 8,
+                "text": "Dr.Smith",
+                "person_type": "doctor"
+            }
+        ],
+        "textPhysicalAddressAnnotations": [
+            {
+                "start": 40,
+                "length": 7,
+                "text": "Seattle",
+                "address_type": "city"
+            }
+        ]
+    }, {
+        "annotationSource": {
+            "resourceSource": {
+                    "name": "1"
+            }
+        },
+        "name": "name",
+        "textDateAnnotations": [
+            {
+                "start": 45,
+                "length": 10,
+                "text": "12/25/2020",
+                "dateFormat": "MM/DD/YYYY"
+            }
+        ],
+        "textPersonNameAnnotations": [
+            {
+                "start": 45,
+                "length": 9,
+                "text": "Jon Smith",
+                "person_type": "patient"
+            }
+        ],
+        "textPhysicalAddressAnnotations": [
+            {
+                "start": 98,
+                "length": 2,
+                "text": "WA",
+                "address_type": "state"
+            }
+        ]
+    }, {
+        "annotationSource": {
+            "resourceSource": {
+                    "name": "2"
+            }
+        },
+        "name": "name",
+        "textDateAnnotations": [
+            {
+                "start": 45,
+                "length": 10,
+                "text": "12/25/2020",
+                "dateFormat": "MM/DD/YYYY"
+            }
+        ],
+        "textPersonNameAnnotations": [
+            {
+                "start": 25,
+                "length": 6,
+                "text": "Jon Ki",
+                "person_type": "patient"
+            }
+        ],
+        "textPhysicalAddressAnnotations": []
+    }, {
+        "annotationSource": {
+            "resourceSource": {
+                    "name": "3"
+            }
+        },
+        "name": "name",
+        "textDateAnnotations": [
+            {
+                "start": 47,
+                "length": 9,
+                "text": "Wednesday",
+                "dateFormat": "D"
+            }
+        ],
+        "textPersonNameAnnotations": [
+            {
+                "start": 20,
+                "length": 11,
+                "text": "DrSmith Ke",
+                "person_type": "doctor"
+            }
+        ],
+        "textPhysicalAddressAnnotations": [
+            {
+                "start": 22,
+                "length": 11,
+                "text": "UW medicine",
+                "address_type": "hospitalization"
+            }
+        ]
+    }, {
+        "annotationSource": {
+            "resourceSource": {
+                    "name": "4"
+            }
+        },
+        "name": "name",
+        "textDateAnnotations": [],
+        "textPersonNameAnnotations": [],
+        "textPhysicalAddressAnnotations": [
+            {
+                "start": 25,
+                "length": 7,
+                "text": "David's",
+                "address_type": "organization"
+            }
+        ]
+    }
+]
