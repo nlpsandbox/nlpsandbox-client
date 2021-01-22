@@ -16,10 +16,10 @@
         ],
         "textPersonNameAnnotations": [
             {
-                "start": 45,
-                "length": 9,
-                "text": "Jon Smith",
-                "person_type": "patient"
+                "start": 20,
+                "length": 8,
+                "text": "Dr.Smith",
+                "person_type": "doctor"
             }
         ],
         "textPhysicalAddressAnnotations": [
@@ -47,10 +47,10 @@
         ],
         "textPersonNameAnnotations": [
             {
-                "start": 20,
-                "length": 8,
-                "text": "Dr.Smith",
-                "person_type": "doctor"
+                "start": 45,
+                "length": 9,
+                "text": "Jon Smith",
+                "person_type": "patient"
             }
         ],
         "textPhysicalAddressAnnotations": [
@@ -84,14 +84,7 @@
                 "person_type": "patient"
             }
         ],
-        "textPhysicalAddressAnnotations": [
-            {
-                "start": 22,
-                "length": 11,
-                "text": "UW medicine",
-                "address_type": "hospitalization"
-            }
-        ]
+        "textPhysicalAddressAnnotations": []
     }, {
         "annotationSource": {
             "resourceSource": {
@@ -115,6 +108,23 @@
                 "person_type": "doctor"
             }
         ],
+        "textPhysicalAddressAnnotations": [
+            {
+                "start": 22,
+                "length": 11,
+                "text": "UW medicine",
+                "address_type": "hospitalization"
+            }
+        ]
+    }, {
+        "annotationSource": {
+            "resourceSource": {
+                    "name": "4"
+            }
+        },
+        "name": "name",
+        "textDateAnnotations": [],
+        "textPersonNameAnnotations": [],
         "textPhysicalAddressAnnotations": [
             {
                 "start": 25,
