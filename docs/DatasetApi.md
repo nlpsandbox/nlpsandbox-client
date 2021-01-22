@@ -1,4 +1,4 @@
-# datanode.DatasetApi
+# data-node.DatasetApi
 
 All URIs are relative to *https://example.com/api/v1*
 
@@ -22,20 +22,20 @@ Create a dataset with the name specified
 ```python
 from __future__ import print_function
 import time
-import datanode
-from datanode.rest import ApiException
+import data-node
+from data-node.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = data-node.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with data-node.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.DatasetApi(api_client)
+    api_instance = data-node.DatasetApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset that is being created
 body = None # object |  (optional)
 
@@ -73,6 +73,7 @@ No authorization required
 **201** | Success |  -  |
 **400** | Invalid request |  -  |
 **409** | The request conflicts with current state of the target resource |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -88,20 +89,20 @@ Deletes the dataset for a given ID
 ```python
 from __future__ import print_function
 import time
-import datanode
-from datanode.rest import ApiException
+import data-node
+from data-node.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = data-node.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with data-node.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.DatasetApi(api_client)
+    api_instance = data-node.DatasetApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 
     try:
@@ -136,6 +137,7 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | Success |  -  |
 **404** | The specified resource was not found |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -151,20 +153,20 @@ Returns the dataset for a given ID
 ```python
 from __future__ import print_function
 import time
-import datanode
-from datanode.rest import ApiException
+import data-node
+from data-node.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = data-node.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with data-node.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.DatasetApi(api_client)
+    api_instance = data-node.DatasetApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 
     try:
@@ -199,6 +201,7 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | Success |  -  |
 **404** | The specified resource was not found |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -214,20 +217,20 @@ Returns the datasets
 ```python
 from __future__ import print_function
 import time
-import datanode
-from datanode.rest import ApiException
+import data-node
+from data-node.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = data-node.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with data-node.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.DatasetApi(api_client)
+    api_instance = data-node.DatasetApi(api_client)
     limit = 10 # int | Maximum number of results returned (optional) (default to 10)
 offset = 0 # int | Index of the first result that must be returned (optional) (default to 0)
 
@@ -264,6 +267,7 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | Success |  -  |
 **400** | Invalid request |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
