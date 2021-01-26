@@ -1,4 +1,4 @@
-# data-node.NoteApi
+# datanode.NoteApi
 
 All URIs are relative to *https://example.com/api/v1*
 
@@ -22,23 +22,23 @@ Create a note
 ```python
 from __future__ import print_function
 import time
-import data-node
-from data-node.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = data-node.Configuration(
+configuration = datanode.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with data-node.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = data-node.NoteApi(api_client)
+    api_instance = datanode.NoteApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
-note_create_request = data-node.NoteCreateRequest() # NoteCreateRequest |  (optional)
+note_create_request = datanode.NoteCreateRequest() # NoteCreateRequest |  (optional)
 
     try:
         # Create a note
@@ -91,20 +91,20 @@ Deletes the note specified
 ```python
 from __future__ import print_function
 import time
-import data-node
-from data-node.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = data-node.Configuration(
+configuration = datanode.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with data-node.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = data-node.NoteApi(api_client)
+    api_instance = datanode.NoteApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
 note_id = 'note_id_example' # str | The ID of the note
@@ -159,20 +159,20 @@ Returns the note specified
 ```python
 from __future__ import print_function
 import time
-import data-node
-from data-node.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = data-node.Configuration(
+configuration = datanode.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with data-node.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = data-node.NoteApi(api_client)
+    api_instance = datanode.NoteApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
 note_id = 'note_id_example' # str | The ID of the note
@@ -227,20 +227,20 @@ Returns the notes in a FHIR store
 ```python
 from __future__ import print_function
 import time
-import data-node
-from data-node.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = data-node.Configuration(
+configuration = datanode.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with data-node.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = data-node.NoteApi(api_client)
+    api_instance = datanode.NoteApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
 limit = 10 # int | Maximum number of results returned (optional) (default to 10)

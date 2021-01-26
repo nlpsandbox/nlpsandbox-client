@@ -1,4 +1,4 @@
-# data-node.AnnotationApi
+# datanode.AnnotationApi
 
 All URIs are relative to *https://example.com/api/v1*
 
@@ -22,23 +22,23 @@ Create an annotation
 ```python
 from __future__ import print_function
 import time
-import data-node
-from data-node.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = data-node.Configuration(
+configuration = datanode.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with data-node.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = data-node.AnnotationApi(api_client)
+    api_instance = datanode.AnnotationApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 annotation_store_id = 'annotation_store_id_example' # str | The ID of the annotation store
-annotation_create_request = data-node.AnnotationCreateRequest() # AnnotationCreateRequest |  (optional)
+annotation_create_request = datanode.AnnotationCreateRequest() # AnnotationCreateRequest |  (optional)
 
     try:
         # Create an annotation
@@ -91,20 +91,20 @@ Deletes the annotation specified
 ```python
 from __future__ import print_function
 import time
-import data-node
-from data-node.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = data-node.Configuration(
+configuration = datanode.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with data-node.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = data-node.AnnotationApi(api_client)
+    api_instance = datanode.AnnotationApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 annotation_store_id = 'annotation_store_id_example' # str | The ID of the annotation store
 annotation_id = 'annotation_id_example' # str | The ID of the annotation
@@ -159,20 +159,20 @@ Returns the annotation specified
 ```python
 from __future__ import print_function
 import time
-import data-node
-from data-node.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = data-node.Configuration(
+configuration = datanode.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with data-node.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = data-node.AnnotationApi(api_client)
+    api_instance = datanode.AnnotationApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 annotation_store_id = 'annotation_store_id_example' # str | The ID of the annotation store
 annotation_id = 'annotation_id_example' # str | The ID of the annotation
@@ -227,20 +227,20 @@ Returns the annotations in an annotation store
 ```python
 from __future__ import print_function
 import time
-import data-node
-from data-node.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = data-node.Configuration(
+configuration = datanode.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with data-node.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = data-node.AnnotationApi(api_client)
+    api_instance = datanode.AnnotationApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 annotation_store_id = 'annotation_store_id_example' # str | The ID of the annotation store
 limit = 10 # int | Maximum number of results returned (optional) (default to 10)

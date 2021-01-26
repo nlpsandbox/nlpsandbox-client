@@ -1,4 +1,4 @@
-# data-node.ServiceApi
+# datanode.ServiceApi
 
 All URIs are relative to *https://example.com/api/v1*
 
@@ -19,20 +19,20 @@ Get information about the service
 ```python
 from __future__ import print_function
 import time
-import data-node
-from data-node.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = data-node.Configuration(
+configuration = datanode.Configuration(
     host = "https://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with data-node.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = data-node.ServiceApi(api_client)
+    api_instance = datanode.ServiceApi(api_client)
     
     try:
         # Get service information
