@@ -76,7 +76,7 @@ class TestClient:
             notes=[Note(
                 id="12344", note_type="foo", patient_id="pat1", text="foobarbaz"
             )],
-            offset=0, limit=3, links=Mock(next="")
+            offset=0, limit=20, links=Mock(next="")
         )
 
         with self.config as config,\
@@ -196,7 +196,7 @@ class TestClient:
             annotations=[Annotation(
                 name="12344"
             )],
-            offset=0, limit=3, links=Mock(next="")
+            offset=0, limit=20, links=Mock(next="")
         )
 
         with self.config as config,\
