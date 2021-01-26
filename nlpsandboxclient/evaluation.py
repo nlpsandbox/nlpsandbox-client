@@ -5,6 +5,7 @@
 # physical address
 from abc import ABCMeta
 import json
+import os
 import re
 
 
@@ -24,12 +25,38 @@ class Evaluation(metaclass=ABCMeta):
     def __init__(self):
         pass
 
+    def convert_annotations(self, annotations):
+        if self.evaluation_type == "date":
+            annotation_key = "date_annotations"
+            post_path = "textDateAnnotations"
+        elif self.evaluation_type == "person":
+            annotation_key = "person_name_annotations"
+            post_path = "textPersonNameAnnotations"
+        elif self.evaluation_type == "address":
+            annotation_key = "physical_location_annotations"
+            post_path = "textPhysicalAddressAnnotations"
+        else:
+            raise ValueError("Must specify evaluation_type attribute")
+
+        all_annotations = []
+        for annotation in annotations:
+            # print(annotation)
+            noteid = annotation['annotationSource']['resourceSource']['name']
+            for annots in annotation[post_path]:
+                annots['noteId'] = os.path.basename(noteid)
+                all_annotations.append(annots)
+
+        new_annotations = {annotation_key: all_annotations}
+        return new_annotations
+
     def convert_dict(self, sys_file, gs_file):
         with open(gs_file) as f:
             gs = json.load(f)
+            gs = self.convert_annotations(gs)
             gs = gs[self.col]
         with open(sys_file) as f:
             sys = json.load(f)
+            sys = self.convert_annotations(sys)
             sys = sys[self.col]
 
         self.sys_dict_seq = self.json_dict_seq(sys)
