@@ -1,6 +1,6 @@
 # datanode.FhirStoreApi
 
-All URIs are relative to *https://example.com/api/v1*
+All URIs are relative to *http://example.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -25,10 +25,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://example.com/api/v1
+# Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "https://example.com/api/v1"
+    host = "http://example.com/api/v1"
 )
 
 
@@ -94,10 +94,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://example.com/api/v1
+# Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "https://example.com/api/v1"
+    host = "http://example.com/api/v1"
 )
 
 
@@ -160,10 +160,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://example.com/api/v1
+# Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "https://example.com/api/v1"
+    host = "http://example.com/api/v1"
 )
 
 
@@ -226,10 +226,10 @@ import time
 import datanode
 from datanode.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to https://example.com/api/v1
+# Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = datanode.Configuration(
-    host = "https://example.com/api/v1"
+    host = "http://example.com/api/v1"
 )
 
 

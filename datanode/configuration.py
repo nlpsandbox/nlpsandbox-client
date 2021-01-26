@@ -55,7 +55,7 @@ class Configuration(object):
 
     _default = None
 
-    def __init__(self, host="https://example.com/api/v1",
+    def __init__(self, host="http://example.com/api/v1",
                  api_key=None, api_key_prefix=None,
                  username=None, password=None,
                  discard_unknown_keys=False,
@@ -336,18 +336,12 @@ class Configuration(object):
         """
         return [
             {
-                'url': "{protocol}://example.com/api/v1",
+                'url': "http://example.com/api/v1",
                 'description': "No description provided",
-                'variables': {
-                    'protocol': {
-                        'description': "No description provided",
-                        'default_value': "https",
-                        'enum_values': [
-                            "http",
-                            "https"
-                        ]
-                        }
-                    }
+            },
+            {
+                'url': "https://example.com/api/v1",
+                'description': "No description provided",
             }
         ]
 
