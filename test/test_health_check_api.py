@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import data-node
-from data-node.api.health_check_api import HealthCheckApi  # noqa: E501
-from data-node.rest import ApiException
+import datanode
+from datanode.api.health_check_api import HealthCheckApi  # noqa: E501
+from datanode.rest import ApiException
 
 
 class TestHealthCheckApi(unittest.TestCase):
     """HealthCheckApi unit test stubs"""
 
     def setUp(self):
-        self.api = data-node.api.health_check_api.HealthCheckApi()  # noqa: E501
+        self.api = datanode.api.health_check_api.HealthCheckApi()  # noqa: E501
 
     def tearDown(self):
         pass

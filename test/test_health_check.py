@@ -16,9 +16,9 @@ from __future__ import absolute_import
 import unittest
 import datetime
 
-import data-node
-from data-node.models.health_check import HealthCheck  # noqa: E501
-from data-node.rest import ApiException
+import datanode
+from datanode.models.health_check import HealthCheck  # noqa: E501
+from datanode.rest import ApiException
 
 class TestHealthCheck(unittest.TestCase):
     """HealthCheck unit test stubs"""
@@ -34,7 +34,7 @@ class TestHealthCheck(unittest.TestCase):
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = data-node.models.health_check.HealthCheck()  # noqa: E501
+        # model = datanode.models.health_check.HealthCheck()  # noqa: E501
         if include_optional :
             return HealthCheck(
                 status = 'pass'
