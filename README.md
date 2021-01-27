@@ -70,7 +70,7 @@ nlp-cli evaluate prediction --pred_filepath tests/data/prediction_1.json --gold_
 
 Data node client
 ```
-openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/0.3.0/openapi.json
+openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/edge/openapi.json
 ```
 
 Date annotator client
