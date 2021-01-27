@@ -47,6 +47,7 @@ class TestTextDateAnnotation(unittest.TestCase):
             return TextDateAnnotation(
                 start = 42,
                 length = 10,
+                text = '0'
         )
 
     def testTextDateAnnotation(self):
