@@ -10,4 +10,3 @@ from datanode.api.fhir_store_api import FhirStoreApi
 from datanode.api.health_check_api import HealthCheckApi
 from datanode.api.note_api import NoteApi
 from datanode.api.patient_api import PatientApi
-from datanode.api.service_api import ServiceApi

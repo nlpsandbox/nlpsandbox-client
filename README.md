@@ -70,12 +70,7 @@ nlp-cli evaluate prediction --pred_filepath tests/data/prediction_1.json --gold_
 
 Data node client
 ```
-openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/0.3.0/openapi.json --skip-validate-spec
-# Use --skip-validate-spec for now because openapi-generator will throw this error below
-
- | Error count: 1, Warning count: 0
-Errors:
-	-attribute .servers.invalid url : {protocol}://example.com/api/v1
+openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/0.3.0/openapi.json
 ```
 
 Date annotator client
