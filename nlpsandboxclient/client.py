@@ -143,7 +143,7 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         annotation_obj = annotation_api.create_annotation(
             dataset_id=dataset_id,
             annotation_store_id=annotation_store_id,
-            annotation=annotation
+            annotation_create_request=annotation
         )
     return annotation_obj
 

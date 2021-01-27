@@ -1,31 +1,37 @@
 from __future__ import print_function
-
 import json
 import sys
 
-import datanodeclient
-from datanodeclient.rest import ApiException
+import synapseclient
 
+import datanode
+from datanode.rest import ApiException
+
+
+syn = synapseclient.login()
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanodeclient.Configuration(
-    host="http://localhost:8080/api/v1"
+host = "http://10.23.54.142/api/v1"
+# host = "http://localhost:8080/api/v1"
+configuration = datanode.Configuration(
+    host=host
 )
 
 
 dataset_id = '2014-i2b2-20201203'
 fhir_store_id = 'evaluation'
 annotation_store_id = 'goldstandard'
+# Get evaluation-patient-bundles.json
+json_ent = syn.get("syn23593068")
+json_filename = json_ent.path
 
-json_filename = 'evaluation-patient-bundles.json'
-
-with datanodeclient.ApiClient(configuration) as api_client:
-    dataset_api = datanodeclient.DatasetApi(api_client)
-    fhir_store_api = datanodeclient.FhirStoreApi(api_client)
-    annotation_store_api = datanodeclient.AnnotationStoreApi(api_client)
-    patient_api = datanodeclient.PatientApi(api_client)
-    note_api = datanodeclient.NoteApi(api_client)
-    annotation_api = datanodeclient.AnnotationApi(api_client)
+with datanode.ApiClient(configuration) as api_client:
+    dataset_api = datanode.DatasetApi(api_client)
+    fhir_store_api = datanode.FhirStoreApi(api_client)
+    annotation_store_api = datanode.AnnotationStoreApi(api_client)
+    patient_api = datanode.PatientApi(api_client)
+    note_api = datanode.NoteApi(api_client)
+    annotation_api = datanode.AnnotationApi(api_client)
 
     try:
         # get the dataset
@@ -36,7 +42,7 @@ with datanodeclient.ApiClient(configuration) as api_client:
             try:
                 dataset = dataset_api.create_dataset(
                     dataset_id,
-                    dataset=datanodeclient.Dataset()
+                    body=datanode.Dataset()
                 )
             except ApiException as e:
                 print("Exception when calling DatasetApi->create_dataset: %s\n" % e)
@@ -55,7 +61,7 @@ with datanodeclient.ApiClient(configuration) as api_client:
                 fhir_store = fhir_store_api.create_fhir_store(
                     dataset_id,
                     fhir_store_id,
-                    fhir_store=datanodeclient.FhirStore()
+                    body=datanode.FhirStore()
                 )
             except ApiException as e:
                 print("Exception when calling FhirStoreApi->create_fhir_store: %s\n" % e)
@@ -74,7 +80,7 @@ with datanodeclient.ApiClient(configuration) as api_client:
                 annotation_store = annotation_store_api.create_annotation_store(
                     dataset_id,
                     annotation_store_id,
-                    annotation_store=datanodeclient.AnnotationStore()
+                    body=datanode.AnnotationStore()
                 )
             except ApiException as e:
                 print("Exception when calling AnnotationStoreApi->create_annotation_store: %s\n" % e)
@@ -100,7 +106,7 @@ with datanodeclient.ApiClient(configuration) as api_client:
             patient = patient_api.create_patient(
                 dataset_id,
                 fhir_store_id,
-                patient=patient)
+                patient_create_request=patient)
             print(f"patient: {patient}")
 
             # Create the Note and Annotation objects linked to the patient
@@ -109,12 +115,12 @@ with datanodeclient.ApiClient(configuration) as api_client:
 
             for note_bundle in note_bundles:
                 note = note_bundle['note']
-                note['patientId'] = patient.id
+                note['patientId'] = patient.name.split("/")[-1]
                 try:
                     note = note_api.create_note(
                         dataset_id,
                         fhir_store_id,
-                        note=note
+                        note_create_request=note
                     )
                     print(f"note: {note}")
                 except ApiException as e:
@@ -124,13 +130,13 @@ with datanodeclient.ApiClient(configuration) as api_client:
                 annotation['annotationSource']['resourceSource']['name'] = \
                     "{fhir_store_name}/fhir/Note/{note_id}".format(
                         fhir_store_name=fhir_store.name,
-                        note_id=note.id
+                        note_id=note.name.split("/")[-1]
                     )
                 try:
                     annotation = annotation_api.create_annotation(
                         dataset_id,
                         annotation_store_id,
-                        annotation=annotation
+                        annotation_create_request=annotation
                     )
                     print(f"annotation: {annotation}")
                 except ApiException as e:
