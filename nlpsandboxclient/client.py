@@ -6,7 +6,7 @@ from datanode.models import Annotation, AnnotationStore
 import annotator
 from annotator.models import Service
 
-DATA_NODE_HOST = "http://10.23.55.45:8080/api/v1"
+DATA_NODE_HOST = "http://10.23.54.142/api/v1"
 
 
 def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
