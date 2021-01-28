@@ -47,13 +47,7 @@ def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
               type=click.Choice(['date', 'person', 'address'],
                                 case_sensitive=False), required=True)
 def annotate_note(annotator_host, note_json, output, annotator_type):
-    """Annotate a note with specified annotator
-
-    >>> nlp-cli evaluate annotate-note \
-        --annotator_host http://10.23.55.45:9000/api/v1 \
-        --note_json notes.json \
-        --annotator_type date
-    """
+    """Annotate a note with specified annotator"""
     with open(note_json, "r") as note_f:
         notes = json.load(note_f)
     all_annotations = []
