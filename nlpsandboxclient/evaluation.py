@@ -77,8 +77,9 @@ class Evaluation(metaclass=ABCMeta):
             data_loc = '{}-{}'.format(noteId, start)
             text = anno['text']
             length = anno['length']
-            dateFormat = anno[self.annotation]
-            date_list = [text, dateFormat, length]
+            # dateFormat, personType, addressType
+            annotation_format = anno.get(self.annotation, float('nan'))
+            date_list = [text, annotation_format, length]
             json_dict[data_loc] = date_list
         return json_dict
 
@@ -93,7 +94,7 @@ class Evaluation(metaclass=ABCMeta):
             start = anno['start']
             text = anno['text']
             # dateFormat, personType, addressType
-            annotation_format = anno.get(self.annotation)
+            annotation_format = anno.get(self.annotation, float('nan'))
             sub_text = re.split(r'\s+', text)
             for sub in sub_text:
                 leng = len(sub)
