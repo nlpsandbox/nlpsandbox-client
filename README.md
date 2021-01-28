@@ -1,11 +1,13 @@
 # NLP Sandbox Client
 
-[![GitHub Stars](https://img.shields.io/github/stars/data2health/nlp-sandbox-client.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-client/stargazers)
+[![GitHub Release](https://img.shields.io/github/release/nlpsandbox/nlpsandbox-client.svg?include_prereleases&color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/nlpsandbox/nlpsandbox-client/releases)
+[![GitHub CI](https://img.shields.io/github/workflow/status/nlpsandbox/nlpsandbox-client/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/nlpsandbox/nlpsandbox-client)
+[![GitHub License](https://img.shields.io/github/license/nlpsandbox/nlpsandbox-client.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/nlpsandbox/nlpsandbox-client)
+[![PyPi](https://img.shields.io/pypi/v/nlpsandbox-client.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=PyPi&logo=PyPi)](https://pypi.org/project/nlpsandbox-client)
 [![Docker Pulls](https://img.shields.io/docker/pulls/nlpsandbox/cli.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/r/nlpsandbox/cli)
-[![GitHub CI](https://img.shields.io/github/workflow/status/data2health/nlp-sandbox-client/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-client)
-[![GitHub License](https://img.shields.io/github/license/data2health/nlp-sandbox-client.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-client/blob/main/LICENSE)
+[![Discord](https://img.shields.io/discord/770484164393828373.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=Discord&logo=discord)](https://discord.gg/Zb4ymtF "Realtime support / chat with the community and the team")
 
-Python client to interact with the NLP Sandbox
+NLP Sandbox Client Library for Python
 
 ## Usage
 
@@ -58,4 +60,24 @@ Run the program
 
 ```
 nlp-cli evaluate prediction --pred_filepath tests/data/prediction_1.json --gold_filepath tests/data/goldstandard_1.json
+```
+
+
+## Create clients
+
+Data node client
+```
+openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/edge/openapi.json
+```
+
+Annotator client
+
+Must merge the three NLP annotator specifications together:
+
+* [date](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/date-annotator)
+* [person](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/person-name-annotator)
+* [address](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/physical-address-annotator)
+
+```
+openapi-generator generate -g python -o . --package-name annotator -i openapi.yaml
 ```

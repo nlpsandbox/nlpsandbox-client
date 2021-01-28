@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 import setuptools
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setuptools.setup(
     # basic
-    name='nlp-sandbox-client',
-    version='0.1.1',
+    name='nlpsandbox-client',
+    version='0.2.1',
     # packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     # py_modules=['hello'],
     # scripts=['bin/nlp-evaluate'],
@@ -17,25 +20,30 @@ setuptools.setup(
     # requirements
     python_requires='>=3.6.*',
     install_requires=[
-        'click>=7.1.2',
-        'jsonschema>=3.2.0',
-        'synapseclient>=2.2.0'
+        'certifi >= 14.05.14',
+        'click >= 7.1.2',
+        'jsonschema >= 3.2.0',
+        'python_dateutil >= 2.5.3',
+        'setuptools >= 21.0.0',
+        'six >= 1.10',
+        'synapseclient >= 2.2.0',
+        'urllib3 >= 1.15.1'
     ],
 
     # metadata to display on PyPI
-    description='Python client for the NLP Sandbox',
-    long_description="TBA",
+    description='NLP Sandbox Client Library for Python',
+    long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://www.synapse.org/nlp_sandbox',
+    url='https://github.com/nlpsandbox',
     author='The NLP Sandbox Team',
     author_email='thomas.schaffter@sagebionetworks.org',
     license='Apache',
     project_urls={
-        "Source Code": "https://github.com/Sage-Bionetworks/nlp-sandbox-client",
-        "Bug Tracker": "https://github.com/Sage-Bionetworks/nlp-sandbox-client/issues",
+        "Source Code": "https://github.com/nlpsandbox/nlpsandbox-client",
+        "Bug Tracker": "https://github.com/nlpsandbox/nlpsandbox-client/issues",
     },
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 2 - Pre-Alpha',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',

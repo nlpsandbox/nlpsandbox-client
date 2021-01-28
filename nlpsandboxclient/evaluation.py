@@ -5,6 +5,7 @@
 # physical address
 from abc import ABCMeta
 import json
+import os
 import re
 
 
@@ -24,13 +25,40 @@ class Evaluation(metaclass=ABCMeta):
     def __init__(self):
         pass
 
+    def convert_annotations(self, annotations):
+        if self.evaluation_type == "date":
+            annotation_key = "date_annotations"
+            post_path = "textDateAnnotations"
+        elif self.evaluation_type == "person":
+            annotation_key = "person_name_annotations"
+            post_path = "textPersonNameAnnotations"
+        elif self.evaluation_type == "address":
+            annotation_key = "physical_location_annotations"
+            post_path = "textPhysicalAddressAnnotations"
+        else:
+            raise ValueError("Must specify evaluation_type attribute")
+
+        all_annotations = []
+        for annotation in annotations:
+            # print(annotation)
+            noteid = annotation['annotationSource']['resourceSource']['name']
+            for annots in annotation[post_path]:
+                annots['noteId'] = os.path.basename(noteid)
+                all_annotations.append(annots)
+
+        new_annotations = {annotation_key: all_annotations}
+        return new_annotations
+
     def convert_dict(self, sys_file, gs_file):
         with open(gs_file) as f:
             gs = json.load(f)
+            gs = self.convert_annotations(gs)
             gs = gs[self.col]
         with open(sys_file) as f:
             sys = json.load(f)
+            sys = self.convert_annotations(sys)
             sys = sys[self.col]
+
         self.sys_dict_seq = self.json_dict_seq(sys)
         self.gs_dict_seq = self.json_dict_seq(gs)
         # print(self.sys_dict_seq)
@@ -75,7 +103,7 @@ class Evaluation(metaclass=ABCMeta):
                 json_dict[data_loc] = date_list
         return json_dict
 
-    def eval(self, output_dir):
+    def eval(self):
         self.eval_category_instance()
         self.eval_category_token()
         final_address_eval = dict()
@@ -94,10 +122,6 @@ class Evaluation(metaclass=ABCMeta):
         #       "value" (double): 0.89
         #       }
 
-        # output json file
-        json_object = json.dumps(final_address_eval, indent=4)
-        with open(f"{output_dir}/eval.json", "w") as outfile:
-            outfile.write(json_object)
         # calculate true positive
 
         # instance based_eval
@@ -182,7 +206,10 @@ class Evaluation(metaclass=ABCMeta):
         # F1 score: 2 * ((P * R) / (P + R))
         precision = round(tp / (tp + fp), 2)
         recall = round(tp / (tp + fn), 2)
-        F1 = round(2 * ((precision * recall) / (precision + recall)), 2)
+        if precision + recall == 0:
+            F1 = 0
+        else:
+            F1 = round(2 * ((precision * recall) / (precision + recall)), 2)
         # print("F1 {}".format(F1))
         # print(type_up,type_lower)
         # print("tp: {},fp: {},fn: {}".format(tp,fp,fn))
@@ -222,11 +249,11 @@ class DateEvaluation(Evaluation):
 
 class PersonNameEvaluation(Evaluation):
     evaluation_type = "person"
-    annotation = "person_type"
+    annotation = "personType"
     col = "person_name_annotations"
 
 
 class PhysicalAddressEvaluation(Evaluation):
     evaluation_type = "address"
-    annotation = "address_type"
+    annotation = "addressType"
     col = "physical_location_annotations"
