@@ -171,7 +171,8 @@
 <span class="kn">import</span> <span class="nn">datanode</span>
 <span class="kn">from</span> <span class="nn">datanode.models</span> <span class="kn">import</span> <span class="n">Annotation</span><span class="p">,</span> <span class="n">AnnotationStore</span>
 <span class="kn">import</span> <span class="nn">annotator</span>
-<span class="kn">from</span> <span class="nn">annotator.models</span> <span class="kn">import</span> <span class="n">Service</span>
+<span class="kn">from</span> <span class="nn">annotator.models</span> <span class="kn">import</span> <span class="n">Tool</span>
+
 
 <span class="n">DATA_NODE_HOST</span> <span class="o">=</span> <span class="s2">&quot;http://10.23.54.142/api/v1&quot;</span>
 
@@ -372,8 +373,11 @@
 <span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
-<span class="sd">        &gt;&gt;&gt; annotations = annotate_date(host=&quot;0.0.0.0/api/v1&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                             note=example_note)</span>
+<span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0:8080/api/v1&quot;</span>
+<span class="sd">        &gt;&gt;&gt; configuration = annotator.Configuration(host=host)</span>
+<span class="sd">        &gt;&gt;&gt; with annotator.ApiClient(configuration) as api_client:</span>
+<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_person(api_client=api_client,</span>
+<span class="sd">        &gt;&gt;&gt;                                    note=example_note)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
@@ -399,11 +403,14 @@
 <span class="sd">        &gt;&gt;&gt;    &quot;note&quot;: {</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;noteType&quot;: &quot;loinc:LP29684-5&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;patientId&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.&quot;</span>
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
-<span class="sd">        &gt;&gt;&gt; annotations = annotate_date(host=&quot;0.0.0.0/api/v1&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                             note=example_note)</span>
+<span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0:8080/api/v1&quot;</span>
+<span class="sd">        &gt;&gt;&gt; configuration = annotator.Configuration(host=host)</span>
+<span class="sd">        &gt;&gt;&gt; with annotator.ApiClient(configuration) as api_client:</span>
+<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_address(api_client=api_client,</span>
+<span class="sd">        &gt;&gt;&gt;                                     note=example_note)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
@@ -432,8 +439,11 @@
 <span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
-<span class="sd">        &gt;&gt;&gt; annotations = annotate_date(host=&quot;0.0.0.0/api/v1&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                             note=example_note)</span>
+<span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0:8080/api/v1&quot;</span>
+<span class="sd">        &gt;&gt;&gt; configuration = annotator.Configuration(host=host)</span>
+<span class="sd">        &gt;&gt;&gt; with annotator.ApiClient(configuration) as api_client:</span>
+<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_date(api_client=api_client,</span>
+<span class="sd">        &gt;&gt;&gt;                                  note=example_note)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
@@ -463,8 +473,9 @@
 <span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
-<span class="sd">        &gt;&gt;&gt; annotations = annotate_date(host=&quot;0.0.0.0/api/v1&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                             note=example_note)</span>
+<span class="sd">        &gt;&gt;&gt; annotations = annotate_note(host=&quot;0.0.0.0/api/v1&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                             note=example_note,</span>
+<span class="sd">        &gt;&gt;&gt;                             annotator_type=&quot;date&quot;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
@@ -484,7 +495,7 @@
     <span class="k">return</span> <span class="n">sanitized_annotations</span></div>
 
 
-<div class="viewcode-block" id="get_annotator_service_info"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.get_annotator_service_info">[docs]</a><span class="k">def</span> <span class="nf">get_annotator_service_info</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Service</span><span class="p">:</span>
+<div class="viewcode-block" id="get_annotator"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.get_annotator">[docs]</a><span class="k">def</span> <span class="nf">get_annotator</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Get annotater service</span>
 
 <span class="sd">    Args:</span>
@@ -494,16 +505,15 @@
 <span class="sd">        Service object</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; service = get_annotator_service_info(host=&quot;0.0.0.0/api/v1&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                                      note=example_note)</span>
+<span class="sd">        &gt;&gt;&gt; tool = get_annotator(host=&quot;0.0.0.0/api/v1&quot;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
     <span class="n">configuration</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">annotator</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
-        <span class="n">service_api</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">ServiceApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
-        <span class="n">service_info</span> <span class="o">=</span> <span class="n">service_api</span><span class="o">.</span><span class="n">service</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">service_info</span></div>
+        <span class="n">tool_api</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">ToolApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+        <span class="n">tool_info</span> <span class="o">=</span> <span class="n">tool_api</span><span class="o">.</span><span class="n">get_tool</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">tool_info</span></div>
 </pre></div>
 
            </div>

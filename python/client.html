@@ -195,8 +195,9 @@
 <span class="gp">&gt;&gt;&gt; </span>       <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span>   <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">annotate_date</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">note</span><span class="o">=</span><span class="n">example_note</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">annotate_note</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">note</span><span class="o">=</span><span class="n">example_note</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">annotator_type</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -229,8 +230,8 @@ doesn’t exist</p></li>
 </dd></dl>
 
 <dl class="function">
-<dt id="nlpsandboxclient.client.get_annotator_service_info">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotator_service_info</code><span class="sig-paren">(</span><em class="sig-param">host: str</em><span class="sig-paren">)</span> &#x2192; annotator.models.service.Service<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotator_service_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotator_service_info" title="Permalink to this definition">¶</a></dt>
+<dt id="nlpsandboxclient.client.get_annotator">
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotator</code><span class="sig-paren">(</span><em class="sig-param">host: str</em><span class="sig-paren">)</span> &#x2192; annotator.models.tool.Tool<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get annotater service</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -241,8 +242,7 @@ doesn’t exist</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">service</span> <span class="o">=</span> <span class="n">get_annotator_service_info</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                     <span class="n">note</span><span class="o">=</span><span class="n">example_note</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tool</span> <span class="o">=</span> <span class="n">get_annotator</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
