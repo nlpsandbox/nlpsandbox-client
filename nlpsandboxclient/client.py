@@ -4,7 +4,8 @@ from typing import List, Iterator
 import datanode
 from datanode.models import Annotation, AnnotationStore
 import annotator
-from annotator.models import Service
+from annotator.models import Tool
+
 
 DATA_NODE_HOST = "http://10.23.54.142/api/v1"
 
@@ -317,7 +318,7 @@ def annotate_note(host: str, note: dict, annotator_type: str) -> dict:
     return sanitized_annotations
 
 
-def get_annotator_service_info(host: str) -> Service:
+def get_annotator(host: str) -> Tool:
     """Get annotater service
 
     Args:
@@ -327,13 +328,12 @@ def get_annotator_service_info(host: str) -> Service:
         Service object
 
     Examples:
-        >>> service = get_annotator_service_info(host="0.0.0.0/api/v1",
-        >>>                                      note=example_note)
+        >>> tool = get_annotator(host="0.0.0.0/api/v1")
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
     configuration = annotator.Configuration(host=host)
     with annotator.ApiClient(configuration) as api_client:
-        service_api = annotator.ServiceApi(api_client)
-        service_info = service_api.service()
-    return service_info
+        tool_api = annotator.ToolApi(api_client)
+        tool_info = tool_api.get_tool()
+    return tool_info
