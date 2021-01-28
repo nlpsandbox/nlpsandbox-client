@@ -88,7 +88,7 @@ def get_annotation_store(host: str, dataset_id: str,
         except datanode.rest.ApiException as err:
             if err.status == 404 and create_if_missing:
                 annotation_store_obj = annotation_store_api.create_annotation_store(
-                    dataset_id, annotation_store_id, annotation_store={}
+                    dataset_id, annotation_store_id, body={}
                 )
             else:
                 raise err
