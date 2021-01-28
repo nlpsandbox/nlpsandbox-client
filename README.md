@@ -75,7 +75,12 @@ openapi-generator generate -g python -o . --package-name datanode -i https://nlp
 
 Annotator client
 
-Must use [merged annotator openapi spec](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/merge-annotators/openapi/annotator).  Build this specification locally, then run:
+Must merge the three NLP annotator specifications together:
+
+* [date](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/date-annotator)
+* [person](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/person-name-annotator)
+* [address](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/physical-address-annotator)
+
 ```
 openapi-generator generate -g python -o . --package-name annotator -i openapi.yaml
 ```
