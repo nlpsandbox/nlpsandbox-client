@@ -69,7 +69,7 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
 
 
 @cli.command(no_args_is_help=True)
-@click.option('--annotator_host', help='Annotator host' )
+@click.option('--annotator_host', help='Annotator host')
 @click.option('--output', help='Specify output json path',
               type=click.Path())
 def get_annotator(annotator_host, output):
