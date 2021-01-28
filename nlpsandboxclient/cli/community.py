@@ -26,8 +26,8 @@ def get_num_users():
 @click.option('--output', help='Output json filepath', type=click.Path())
 @click.option('--data_node_host', help='Data node host',
               default=DATA_NODE_HOST, show_default=True)
-@click.option('--dataset_id', help='Dataset id')
-@click.option('--fhir_store_id', help='Dataset id')
+@click.option('--dataset_id', help='Dataset id', required=True)
+@click.option('--fhir_store_id', help='Dataset id', required=True)
 def list_notes(output, data_node_host, dataset_id, fhir_store_id):
     """Gets all the clinical notes"""
     clinical_notes = client.list_notes(host=data_node_host,
@@ -41,9 +41,9 @@ def list_notes(output, data_node_host, dataset_id, fhir_store_id):
 @click.option('--data_node_host', help='Data node host',
               default=DATA_NODE_HOST, show_default=True)
 @click.option('--dataset_id', help='Dataset id')
-@click.option('--annotation_store_id', help='Dataset id')
+@click.option('--annotation_store_id', help='Dataset id', required=True)
 @click.option('--annotation_json', help='Json file with annotations to store',
-              type=click.Path(exists=True))
+              type=click.Path(exists=True), required=True)
 def store_annotations(data_node_host, dataset_id, annotation_store_id,
                       annotation_json):
     """Store annotations"""
@@ -65,8 +65,8 @@ def store_annotations(data_node_host, dataset_id, annotation_store_id,
 @cli.command(no_args_is_help=True)
 @click.option('--data_node_host', help='Data node host',
               default=DATA_NODE_HOST, show_default=True)
-@click.option('--dataset_id', help='Dataset id')
-@click.option('--annotation_store_id', help='Dataset id')
+@click.option('--dataset_id', help='Dataset id', required=True)
+@click.option('--annotation_store_id', help='Dataset id', required=True)
 @click.option('--create_if_missing', help='Create resource if missing', is_flag=True)
 def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create_if_missing):
     """Create annotation store"""
@@ -82,8 +82,8 @@ def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create
 @cli.command(no_args_is_help=True)
 @click.option('--data_node_host', help='Data node host',
               default=DATA_NODE_HOST, show_default=True)
-@click.option('--dataset_id', help='Dataset id')
-@click.option('--annotation_store_id', help='Dataset id')
+@click.option('--dataset_id', help='Dataset id', required=True)
+@click.option('--annotation_store_id', help='Dataset id', required=True)
 @click.option('--output', help='Output json filepath', type=click.Path())
 def list_annotations(data_node_host, dataset_id, annotation_store_id, output):
     """List annotations"""

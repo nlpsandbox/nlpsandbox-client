@@ -35,14 +35,14 @@ def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
 
 
 @cli.command(no_args_is_help=True)
-@click.option('--annotator_host', help='Annotator host.')
+@click.option('--annotator_host', help='Annotator host.', required=True)
 @click.option('--note_json', help='Clinical notes json',
-              type=click.Path(exists=True))
+              type=click.Path(exists=True), required=True)
 @click.option('--output', help='Specify output json path',
               type=click.Path())
 @click.option('--annotator_type', help='Type of annotator.',
               type=click.Choice(['date', 'person', 'address'],
-                                case_sensitive=False))
+                                case_sensitive=False), required=True)
 def annotate_note(annotator_host, note_json, output, annotator_type):
     """Annotate a note with specified annotator
 
@@ -69,7 +69,7 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
 
 
 @cli.command(no_args_is_help=True)
-@click.option('--annotator_host', help='Annotator host')
+@click.option('--annotator_host', help='Annotator host', required=True)
 @click.option('--output', help='Specify output json path',
               type=click.Path())
 def get_annotator(annotator_host, output):
