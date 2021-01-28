@@ -29,7 +29,7 @@ def get_num_users():
 @click.option('--dataset_id', help='Dataset id', required=True)
 @click.option('--fhir_store_id', help='Dataset id', required=True)
 def list_notes(output, data_node_host, dataset_id, fhir_store_id):
-    """Gets all the clinical notes"""
+    """Gets clinical notes of a NLP data node FHIR store."""
     clinical_notes = client.list_notes(host=data_node_host,
                                        dataset_id=dataset_id,
                                        fhir_store_id=fhir_store_id)
@@ -46,7 +46,7 @@ def list_notes(output, data_node_host, dataset_id, fhir_store_id):
               type=click.Path(exists=True), required=True)
 def store_annotations(data_node_host, dataset_id, annotation_store_id,
                       annotation_json):
-    """Store annotations"""
+    """Store annotations in an NLP data node annotation store."""
     with open(annotation_json, "r") as annot_f:
         annotations = json.load(annot_f)
     # If only one annotation is passed in, turn it into a list
@@ -69,7 +69,7 @@ def store_annotations(data_node_host, dataset_id, annotation_store_id,
 @click.option('--annotation_store_id', help='Dataset id', required=True)
 @click.option('--create_if_missing', help='Create resource if missing', is_flag=True)
 def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create_if_missing):
-    """Create annotation store"""
+    """Create annotation store for a NLP data node dataset."""
     # Create annotation store object
     annotation_store = client.get_annotation_store(
         host=data_node_host, dataset_id=dataset_id,
@@ -86,7 +86,7 @@ def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create
 @click.option('--annotation_store_id', help='Dataset id', required=True)
 @click.option('--output', help='Output json filepath', type=click.Path())
 def list_annotations(data_node_host, dataset_id, annotation_store_id, output):
-    """List annotations"""
+    """List annotations of a NLP data node annotation store."""
     # Create annotation store object
     annotations = client.list_annotations(
         host=data_node_host, dataset_id=dataset_id,
