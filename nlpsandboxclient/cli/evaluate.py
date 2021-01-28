@@ -21,7 +21,10 @@ def cli():
               type=click.Choice(['date', 'person', 'address'],
                                 case_sensitive=False))
 def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
-    """Evaluate the performance of a local prediction file"""
+    """Evaluate the performance of a prediction file. Example prediction and
+    goldstandard files are found in test/data/new_prediction.json and
+    test/data/new_goldstandard.json respectively.
+    """
     eval_mapping = {
         "date": evaluation.DateEvaluation,
         "person": evaluation.PersonNameEvaluation,
