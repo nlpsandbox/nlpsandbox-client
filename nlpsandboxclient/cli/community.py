@@ -9,12 +9,12 @@ from nlpsandboxclient.client import DATA_NODE_HOST
 
 
 # Command Group
-@click.group(name='community')
+@click.group(name='community', no_args_is_help=True)
 def cli():
     """Community related commands"""
 
 
-@cli.command()
+@cli.command(no_args_is_help=True)
 def get_num_users():
     """Gets the number of NLP Sandbox users"""
     syn = synapseclient.login()
@@ -22,7 +22,7 @@ def get_num_users():
     print(res)
 
 
-@cli.command()
+@cli.command(no_args_is_help=True)
 @click.option('--output', help='Output json filepath', type=click.Path())
 @click.option('--data_node_host',
               help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
@@ -39,7 +39,7 @@ def list_notes(output, data_node_host, dataset_id, fhir_store_id):
     utils.stdout_or_json(list(clinical_notes), output)
 
 
-@cli.command()
+@cli.command(no_args_is_help=True)
 @click.option('--data_node_host',
               help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
 @click.option('--dataset_id', help='Dataset id')
@@ -66,7 +66,7 @@ def store_annotations(data_node_host, dataset_id, annotation_store_id,
         )
 
 
-@cli.command()
+@cli.command(no_args_is_help=True)
 @click.option('--data_node_host',
               help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
 @click.option('--dataset_id', help='Dataset id')
@@ -85,7 +85,7 @@ def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create
     print(annotation_store.name)
 
 
-@cli.command()
+@cli.command(no_args_is_help=True)
 @click.option('--data_node_host',
               help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
 @click.option('--dataset_id', help='Dataset id')

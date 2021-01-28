@@ -5,12 +5,12 @@ import click
 from nlpsandboxclient import client, evaluation, utils
 
 
-@click.group(name='evaluate')
+@click.group(name='evaluate', no_args_is_help=True)
 def cli():
     """Evaluation related commands"""
 
 
-@cli.command(name="prediction")
+@cli.command(name="prediction", no_args_is_help=True)
 @click.option('--pred_filepath', help='Prediction filepath',
               type=click.Path(exists=True), required=True)
 @click.option('--gold_filepath', help='Gold standard filepath',
@@ -37,7 +37,7 @@ def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
     #     outfile.write(json_object)
 
 
-@cli.command(name="annotate-note")
+@cli.command(no_args_is_help=True)
 @click.option('--annotator_host', help='Annotator host.')
 @click.option('--note_json', help='Clinical notes json',
               type=click.Path(exists=True))
@@ -71,16 +71,16 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
     utils.stdout_or_json(all_annotations, output)
 
 
-@cli.command(name="get-annotator-service")
-@click.option('--annotator_host', help='Annotator host.')
+@cli.command(no_args_is_help=True)
+@click.option('--annotator_host', help='Annotator host' )
 @click.option('--output', help='Specify output json path',
               type=click.Path())
-def get_annotator_service(annotator_host, output):
-    """Get annotator service endpoint"""
-    service = client.get_annotator_service_info(
+def get_annotator(annotator_host, output):
+    """Get annotator tool endpoint"""
+    tool = client.get_annotator(
         host=annotator_host
     )
-    utils.stdout_or_json(service.to_dict(), output)
+    utils.stdout_or_json(tool.to_dict(), output)
 
 
 if __name__ == '__main__':
