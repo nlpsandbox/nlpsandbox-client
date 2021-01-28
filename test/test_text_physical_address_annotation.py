@@ -47,6 +47,7 @@ class TestTextPhysicalAddressAnnotation(unittest.TestCase):
             return TextPhysicalAddressAnnotation(
                 start = 42,
                 length = 10,
+                text = '0'
         )
 
     def testTextPhysicalAddressAnnotation(self):

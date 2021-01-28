@@ -4,7 +4,7 @@ An annotation record
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId} | [optional] [readonly] 
+**name** | **str** | Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId} | [optional] 
 **annotation_source** | [**AnnotationSource**](AnnotationSource.md) |  | [optional] 
 **text_date_annotations** | [**list[TextDateAnnotation]**](TextDateAnnotation.md) | Date annotations in a text | [optional] 
 **text_person_name_annotations** | [**list[TextPersonNameAnnotation]**](TextPersonNameAnnotation.md) | Person name annotations in a text | [optional] 

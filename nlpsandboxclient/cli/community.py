@@ -77,11 +77,12 @@ def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create
     data_node_host = (data_node_host if data_node_host is not None
                       else DATA_NODE_HOST)
     # Create annotation store object
-    client.get_annotation_store(
+    annotation_store = client.get_annotation_store(
         host=data_node_host, dataset_id=dataset_id,
         annotation_store_id=annotation_store_id,
         create_if_missing=create_if_missing
     )
+    print(annotation_store.name)
 
 
 @cli.command()

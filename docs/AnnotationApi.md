@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_annotation**
-> Annotation create_annotation(dataset_id, annotation_store_id, annotation=annotation)
+> AnnotationCreateResponse create_annotation(dataset_id, annotation_store_id, annotation_create_request=annotation_create_request)
 
 Create an annotation
 
@@ -38,11 +38,11 @@ with datanode.ApiClient() as api_client:
     api_instance = datanode.AnnotationApi(api_client)
     dataset_id = 'dataset_id_example' # str | The ID of the dataset
 annotation_store_id = 'annotation_store_id_example' # str | The ID of the annotation store
-annotation = datanode.Annotation() # Annotation |  (optional)
+annotation_create_request = datanode.AnnotationCreateRequest() # AnnotationCreateRequest |  (optional)
 
     try:
         # Create an annotation
-        api_response = api_instance.create_annotation(dataset_id, annotation_store_id, annotation=annotation)
+        api_response = api_instance.create_annotation(dataset_id, annotation_store_id, annotation_create_request=annotation_create_request)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling AnnotationApi->create_annotation: %s\n" % e)
@@ -54,11 +54,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **str**| The ID of the dataset | 
  **annotation_store_id** | **str**| The ID of the annotation store | 
- **annotation** | [**Annotation**](Annotation.md)|  | [optional] 
+ **annotation_create_request** | [**AnnotationCreateRequest**](AnnotationCreateRequest.md)|  | [optional] 
 
 ### Return type
 
-[**Annotation**](Annotation.md)
+[**AnnotationCreateResponse**](AnnotationCreateResponse.md)
 
 ### Authorization
 
@@ -72,15 +72,15 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success |  -  |
-**403** | Unauthorized |  -  |
-**404** | The specified resource was not found |  -  |
+**201** | Success |  -  |
+**400** | Invalid request |  -  |
 **409** | The request conflicts with current state of the target resource |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_annotation**
-> Annotation delete_annotation(dataset_id, annotation_store_id, annotation_id)
+> object delete_annotation(dataset_id, annotation_store_id, annotation_id)
 
 Delete an annotation
 
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Annotation**](Annotation.md)
+**object**
 
 ### Authorization
 
@@ -142,8 +142,8 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
 **404** | The specified resource was not found |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -210,8 +210,8 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
 **404** | The specified resource was not found |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -280,8 +280,8 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
-**404** | The specified resource was not found |  -  |
+**400** | Invalid request |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

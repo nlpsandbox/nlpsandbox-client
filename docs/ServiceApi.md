@@ -1,14 +1,14 @@
-# annotator.ServiceApi
+# datanode.ServiceApi
 
 All URIs are relative to *http://example.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**service**](ServiceApi.md#service) | **GET** /service | Get service information
+[**get_service**](ServiceApi.md#get_service) | **GET** /service | Get service information
 
 
-# **service**
-> Service service()
+# **get_service**
+> Service get_service()
 
 Get service information
 
@@ -19,27 +19,27 @@ Get information about the service
 ```python
 from __future__ import print_function
 import time
-import annotator
-from annotator.rest import ApiException
+import datanode
+from datanode.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = annotator.Configuration(
+configuration = datanode.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with annotator.ApiClient() as api_client:
+with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = annotator.ServiceApi(api_client)
+    api_instance = datanode.ServiceApi(api_client)
     
     try:
         # Get service information
-        api_response = api_instance.service()
+        api_response = api_instance.get_service()
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling ServiceApi->service: %s\n" % e)
+        print("Exception when calling ServiceApi->get_service: %s\n" % e)
 ```
 
 ### Parameters
@@ -62,8 +62,8 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
 **404** | The specified resource was not found |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,10 +1,10 @@
 # Patient
 
-A FHIR Patient
+A FHIR patient
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The patient ID | [optional] [readonly] 
+**id** | **str** | ID of the FHIR patient | [optional] 
 **identifier** | **str** | An identifier for this patient | [optional] 
 **gender** | **str** | Gender of the patient | [optional] 
 
