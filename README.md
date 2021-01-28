@@ -73,7 +73,14 @@ Data node client
 openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/edge/openapi.json
 ```
 
-Date annotator client
+Annotator client
+
+Must merge the three NLP annotator specifications together:
+
+* [date](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/date-annotator)
+* [person](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/person-name-annotator)
+* [address](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/physical-address-annotator)
+
 ```
-openapi-generator generate -g python -o . --package-name textdateannotator -i https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/edge/openapi.json
+openapi-generator generate -g python -o . --package-name annotator -i openapi.yaml
 ```

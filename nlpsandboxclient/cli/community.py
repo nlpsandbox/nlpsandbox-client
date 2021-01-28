@@ -9,12 +9,12 @@ from nlpsandboxclient.client import DATA_NODE_HOST
 
 
 # Command Group
-@click.group(name='community')
+@click.group(name='community', no_args_is_help=True)
 def cli():
     """Community related commands"""
 
 
-@cli.command()
+@cli.command(no_args_is_help=True)
 def get_num_users():
     """Gets the number of NLP Sandbox users"""
     syn = synapseclient.login()
@@ -22,16 +22,14 @@ def get_num_users():
     print(res)
 
 
-@cli.command()
+@cli.command(no_args_is_help=True)
 @click.option('--output', help='Output json filepath', type=click.Path())
-@click.option('--data_node_host',
-              help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
-@click.option('--dataset_id', help='Dataset id')
-@click.option('--fhir_store_id', help='Dataset id')
+@click.option('--data_node_host', help='Data node host',
+              default=DATA_NODE_HOST, show_default=True)
+@click.option('--dataset_id', help='Dataset id', required=True)
+@click.option('--fhir_store_id', help='Dataset id', required=True)
 def list_notes(output, data_node_host, dataset_id, fhir_store_id):
-    """Gets all the clinical notes"""
-    data_node_host = (data_node_host if data_node_host is not None
-                      else DATA_NODE_HOST)
+    """Gets clinical notes of a NLP data node FHIR store."""
     clinical_notes = client.list_notes(host=data_node_host,
                                        dataset_id=dataset_id,
                                        fhir_store_id=fhir_store_id)
@@ -39,18 +37,16 @@ def list_notes(output, data_node_host, dataset_id, fhir_store_id):
     utils.stdout_or_json(list(clinical_notes), output)
 
 
-@cli.command()
-@click.option('--data_node_host',
-              help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
+@cli.command(no_args_is_help=True)
+@click.option('--data_node_host', help='Data node host',
+              default=DATA_NODE_HOST, show_default=True)
 @click.option('--dataset_id', help='Dataset id')
-@click.option('--annotation_store_id', help='Dataset id')
+@click.option('--annotation_store_id', help='Dataset id', required=True)
 @click.option('--annotation_json', help='Json file with annotations to store',
-              type=click.Path(exists=True))
+              type=click.Path(exists=True), required=True)
 def store_annotations(data_node_host, dataset_id, annotation_store_id,
                       annotation_json):
-    """Store annotations"""
-    data_node_host = (data_node_host if data_node_host is not None
-                      else DATA_NODE_HOST)
+    """Store annotations in an NLP data node annotation store."""
     with open(annotation_json, "r") as annot_f:
         annotations = json.load(annot_f)
     # If only one annotation is passed in, turn it into a list
@@ -66,16 +62,14 @@ def store_annotations(data_node_host, dataset_id, annotation_store_id,
         )
 
 
-@cli.command()
-@click.option('--data_node_host',
-              help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
-@click.option('--dataset_id', help='Dataset id')
-@click.option('--annotation_store_id', help='Dataset id')
+@cli.command(no_args_is_help=True)
+@click.option('--data_node_host', help='Data node host',
+              default=DATA_NODE_HOST, show_default=True)
+@click.option('--dataset_id', help='Dataset id', required=True)
+@click.option('--annotation_store_id', help='Dataset id', required=True)
 @click.option('--create_if_missing', help='Create resource if missing', is_flag=True)
 def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create_if_missing):
-    """Create annotation store"""
-    data_node_host = (data_node_host if data_node_host is not None
-                      else DATA_NODE_HOST)
+    """Create annotation store for a NLP data node dataset."""
     # Create annotation store object
     annotation_store = client.get_annotation_store(
         host=data_node_host, dataset_id=dataset_id,
@@ -85,16 +79,14 @@ def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create
     print(annotation_store.name)
 
 
-@cli.command()
-@click.option('--data_node_host',
-              help=f'Data node host. If not specified, uses {DATA_NODE_HOST}')
-@click.option('--dataset_id', help='Dataset id')
-@click.option('--annotation_store_id', help='Dataset id')
+@cli.command(no_args_is_help=True)
+@click.option('--data_node_host', help='Data node host',
+              default=DATA_NODE_HOST, show_default=True)
+@click.option('--dataset_id', help='Dataset id', required=True)
+@click.option('--annotation_store_id', help='Dataset id', required=True)
 @click.option('--output', help='Output json filepath', type=click.Path())
 def list_annotations(data_node_host, dataset_id, annotation_store_id, output):
-    """List annotations"""
-    data_node_host = (data_node_host if data_node_host is not None
-                      else DATA_NODE_HOST)
+    """List annotations of a NLP data node annotation store."""
     # Create annotation store object
     annotations = client.list_annotations(
         host=data_node_host, dataset_id=dataset_id,
