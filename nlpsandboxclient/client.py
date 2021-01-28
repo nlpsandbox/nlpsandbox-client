@@ -206,8 +206,11 @@ def _annotate_person(api_client, note: dict) -> dict:
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
         >>> }
-        >>> annotations = annotate_date(host="0.0.0.0/api/v1",
-        >>>                             note=example_note)
+        >>> host = "0.0.0.0:8080/api/v1"
+        >>> configuration = annotator.Configuration(host=host)
+        >>> with annotator.ApiClient(configuration) as api_client:
+        >>>     annotations = _annotate_person(api_client=api_client,
+        >>>                                    note=example_note)
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
@@ -233,11 +236,14 @@ def _annotate_address(api_client, note: dict) -> dict:
         >>>    "note": {
         >>>        "noteType": "loinc:LP29684-5",
         >>>        "patientId": "507f1f77bcf86cd799439011",
-        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle."
         >>>    }
         >>> }
-        >>> annotations = annotate_date(host="0.0.0.0/api/v1",
-        >>>                             note=example_note)
+        >>> host = "0.0.0.0:8080/api/v1"
+        >>> configuration = annotator.Configuration(host=host)
+        >>> with annotator.ApiClient(configuration) as api_client:
+        >>>     annotations = _annotate_address(api_client=api_client,
+        >>>                                     note=example_note)
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
@@ -266,8 +272,11 @@ def _annotate_date(api_client, note: dict) -> dict:
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
         >>> }
-        >>> annotations = annotate_date(host="0.0.0.0/api/v1",
-        >>>                             note=example_note)
+        >>> host = "0.0.0.0:8080/api/v1"
+        >>> configuration = annotator.Configuration(host=host)
+        >>> with annotator.ApiClient(configuration) as api_client:
+        >>>     annotations = _annotate_date(api_client=api_client,
+        >>>                                  note=example_note)
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
@@ -297,8 +306,9 @@ def annotate_note(host: str, note: dict, annotator_type: str) -> dict:
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
         >>> }
-        >>> annotations = annotate_date(host="0.0.0.0/api/v1",
-        >>>                             note=example_note)
+        >>> annotations = annotate_note(host="0.0.0.0/api/v1",
+        >>>                             note=example_note,
+        >>>                             annotator_type="date")
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
