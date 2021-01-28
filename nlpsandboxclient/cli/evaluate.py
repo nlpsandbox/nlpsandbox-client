@@ -32,9 +32,6 @@ def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
     evaluator.convert_dict(pred_filepath, gold_filepath)
     results = evaluator.eval()
     utils.stdout_or_json(results, output)
-    # json_object = json.dumps(results, indent=4)
-    # with open(output, "w") as outfile:
-    #     outfile.write(json_object)
 
 
 @cli.command(no_args_is_help=True)
