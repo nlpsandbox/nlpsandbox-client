@@ -55,12 +55,11 @@ def store_annotations(data_node_host, dataset_id, annotation_store_id,
         annotations = [annotations]
     # Create annotation store object
     for annotation in annotations:
-        new_annotation = utils.change_keys(annotation, utils.camelcase_to_snakecase)
         client.store_annotation(
             host=data_node_host,
             dataset_id=dataset_id,
             annotation_store_id=annotation_store_id,
-            annotation=new_annotation
+            annotation=annotation
         )
 
 

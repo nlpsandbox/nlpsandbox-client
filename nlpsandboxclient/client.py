@@ -9,7 +9,7 @@ from annotator.api import (text_date_annotation_api,
                            text_person_name_annotation_api,
                            text_physical_address_annotation_api)
 from annotator.models import Tool
-
+from . import utils
 
 DATA_NODE_HOST = "http://10.23.54.142/api/v1"
 
@@ -144,13 +144,16 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         >>>                               annotation_create_request=example_annotation)
 
     """
+
     configuration = datanode.Configuration(host=host)
     with datanode.ApiClient(configuration) as api_client:
         annotation_instance = annotation_api.AnnotationApi(api_client)
+        new_annotation = utils.change_keys(annotation, utils.camelcase_to_snakecase)
+
         annotation_obj = annotation_instance.create_annotation(
             dataset_id=dataset_id,
             annotation_store_id=annotation_store_id,
-            annotation_create_request=annotation
+            annotation_create_request=new_annotation
         )
     return annotation_obj
 
