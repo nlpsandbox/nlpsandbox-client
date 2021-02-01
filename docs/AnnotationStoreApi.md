@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_annotation_store**
-> AnnotationStoreCreateResponse create_annotation_store(dataset_id, annotation_store_id, body=body)
+> AnnotationStoreCreateResponse create_annotation_store(dataset_id, annotation_store_id)
 
 Create an annotation store
 
@@ -20,10 +20,13 @@ Create an annotation store with the ID specified
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import annotation_store_api
+from datanode.model.annotation_store_create_response import AnnotationStoreCreateResponse
+from datanode.model.dataset_id import DatasetId
+from datanode.model.annotation_store_id import AnnotationStoreId
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -35,16 +38,26 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.AnnotationStoreApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-annotation_store_id = 'annotation_store_id_example' # str | The ID of the annotation store that is being created.
-body = None # object |  (optional)
+    api_instance = annotation_store_api.AnnotationStoreApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    annotation_store_id = AnnotationStoreId("awesome-annotation-store") # AnnotationStoreId | The ID of the annotation store that is being created.
+    body = {} # {str: (bool, date, datetime, dict, float, int, list, str, none_type)} |  (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        # Create an annotation store
+        api_response = api_instance.create_annotation_store(dataset_id, annotation_store_id)
+        pprint(api_response)
+    except datanode.ApiException as e:
+        print("Exception when calling AnnotationStoreApi->create_annotation_store: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # Create an annotation store
         api_response = api_instance.create_annotation_store(dataset_id, annotation_store_id, body=body)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling AnnotationStoreApi->create_annotation_store: %s\n" % e)
 ```
 
@@ -52,9 +65,9 @@ body = None # object |  (optional)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **annotation_store_id** | **str**| The ID of the annotation store that is being created. | 
- **body** | **object**|  | [optional] 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **annotation_store_id** | **AnnotationStoreId**| The ID of the annotation store that is being created. |
+ **body** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**|  | [optional]
 
 ### Return type
 
@@ -80,7 +93,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_annotation_store**
-> object delete_annotation_store(dataset_id, annotation_store_id)
+> {str: (bool, date, datetime, dict, float, int, list, str, none_type)} delete_annotation_store(dataset_id, annotation_store_id)
 
 Delete an annotation store
 
@@ -89,10 +102,12 @@ Deletes the annotation store specified
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import annotation_store_api
+from datanode.model.dataset_id import DatasetId
+from datanode.model.annotation_store_id import AnnotationStoreId
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -104,15 +119,16 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.AnnotationStoreApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-annotation_store_id = 'annotation_store_id_example' # str | The ID of the annotation store
+    api_instance = annotation_store_api.AnnotationStoreApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    annotation_store_id = AnnotationStoreId("awesome-annotation-store") # AnnotationStoreId | The ID of the annotation store
 
+    # example passing only required values which don't have defaults set
     try:
         # Delete an annotation store
         api_response = api_instance.delete_annotation_store(dataset_id, annotation_store_id)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling AnnotationStoreApi->delete_annotation_store: %s\n" % e)
 ```
 
@@ -120,12 +136,12 @@ annotation_store_id = 'annotation_store_id_example' # str | The ID of the annota
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **annotation_store_id** | **str**| The ID of the annotation store | 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **annotation_store_id** | **AnnotationStoreId**| The ID of the annotation store |
 
 ### Return type
 
-**object**
+**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**
 
 ### Authorization
 
@@ -155,10 +171,13 @@ Returns the annotation store specified
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import annotation_store_api
+from datanode.model.dataset_id import DatasetId
+from datanode.model.annotation_store import AnnotationStore
+from datanode.model.annotation_store_id import AnnotationStoreId
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -170,15 +189,16 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.AnnotationStoreApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-annotation_store_id = 'annotation_store_id_example' # str | The ID of the annotation store
+    api_instance = annotation_store_api.AnnotationStoreApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    annotation_store_id = AnnotationStoreId("awesome-annotation-store") # AnnotationStoreId | The ID of the annotation store
 
+    # example passing only required values which don't have defaults set
     try:
         # Get an annotation store
         api_response = api_instance.get_annotation_store(dataset_id, annotation_store_id)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling AnnotationStoreApi->get_annotation_store: %s\n" % e)
 ```
 
@@ -186,8 +206,8 @@ annotation_store_id = 'annotation_store_id_example' # str | The ID of the annota
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **annotation_store_id** | **str**| The ID of the annotation store | 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **annotation_store_id** | **AnnotationStoreId**| The ID of the annotation store |
 
 ### Return type
 
@@ -212,7 +232,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_annotation_stores**
-> PageOfAnnotationStores list_annotation_stores(dataset_id, limit=limit, offset=offset)
+> PageOfAnnotationStores list_annotation_stores(dataset_id)
 
 List the annotation stores in a dataset
 
@@ -221,10 +241,14 @@ Returns the annotation stores
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import annotation_store_api
+from datanode.model.page_of_annotation_stores import PageOfAnnotationStores
+from datanode.model.dataset_id import DatasetId
+from datanode.model.page_limit import PageLimit
+from datanode.model.page_offset import PageOffset
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -236,16 +260,26 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.AnnotationStoreApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-limit = 10 # int | Maximum number of results returned (optional) (default to 10)
-offset = 0 # int | Index of the first result that must be returned (optional) (default to 0)
+    api_instance = annotation_store_api.AnnotationStoreApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    limit = PageLimit(10) # PageLimit | Maximum number of results returned (optional)
+    offset = PageOffset(0) # PageOffset | Index of the first result that must be returned (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        # List the annotation stores in a dataset
+        api_response = api_instance.list_annotation_stores(dataset_id)
+        pprint(api_response)
+    except datanode.ApiException as e:
+        print("Exception when calling AnnotationStoreApi->list_annotation_stores: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # List the annotation stores in a dataset
         api_response = api_instance.list_annotation_stores(dataset_id, limit=limit, offset=offset)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling AnnotationStoreApi->list_annotation_stores: %s\n" % e)
 ```
 
@@ -253,9 +287,9 @@ offset = 0 # int | Index of the first result that must be returned (optional) (d
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **limit** | **int**| Maximum number of results returned | [optional] [default to 10]
- **offset** | **int**| Index of the first result that must be returned | [optional] [default to 0]
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **limit** | **PageLimit**| Maximum number of results returned | [optional]
+ **offset** | **PageOffset**| Index of the first result that must be returned | [optional]
 
 ### Return type
 

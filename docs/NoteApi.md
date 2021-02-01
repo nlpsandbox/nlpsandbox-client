@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_note**
-> NoteCreateResponse create_note(dataset_id, fhir_store_id, note_create_request=note_create_request)
+> NoteCreateResponse create_note(dataset_id, fhir_store_id)
 
 Create a note
 
@@ -20,10 +20,14 @@ Create a note
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import note_api
+from datanode.model.note_create_request import NoteCreateRequest
+from datanode.model.fhir_store_id import FhirStoreId
+from datanode.model.dataset_id import DatasetId
+from datanode.model.note_create_response import NoteCreateResponse
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -35,16 +39,30 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.NoteApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
-note_create_request = datanode.NoteCreateRequest() # NoteCreateRequest |  (optional)
+    api_instance = note_api.NoteApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
+    note_create_request = NoteCreateRequest(
+        text="On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.",
+        note_type="loinc:LP29684-5",
+        patient_id="507f1f77bcf86cd799439011",
+    ) # NoteCreateRequest |  (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        # Create a note
+        api_response = api_instance.create_note(dataset_id, fhir_store_id)
+        pprint(api_response)
+    except datanode.ApiException as e:
+        print("Exception when calling NoteApi->create_note: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # Create a note
         api_response = api_instance.create_note(dataset_id, fhir_store_id, note_create_request=note_create_request)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling NoteApi->create_note: %s\n" % e)
 ```
 
@@ -52,9 +70,9 @@ note_create_request = datanode.NoteCreateRequest() # NoteCreateRequest |  (optio
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **fhir_store_id** | **str**| The ID of the FHIR store | 
- **note_create_request** | [**NoteCreateRequest**](NoteCreateRequest.md)|  | [optional] 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
+ **note_create_request** | [**NoteCreateRequest**](NoteCreateRequest.md)|  | [optional]
 
 ### Return type
 
@@ -80,7 +98,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_note**
-> object delete_note(dataset_id, fhir_store_id, note_id)
+> {str: (bool, date, datetime, dict, float, int, list, str, none_type)} delete_note(dataset_id, fhir_store_id, note_id)
 
 Delete a note
 
@@ -89,10 +107,12 @@ Deletes the note specified
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import note_api
+from datanode.model.fhir_store_id import FhirStoreId
+from datanode.model.dataset_id import DatasetId
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -104,16 +124,17 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.NoteApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
-note_id = 'note_id_example' # str | The ID of the note
+    api_instance = note_api.NoteApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
+    note_id = "507f1f77bcf86cd799439011" # str | The ID of the note
 
+    # example passing only required values which don't have defaults set
     try:
         # Delete a note
         api_response = api_instance.delete_note(dataset_id, fhir_store_id, note_id)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling NoteApi->delete_note: %s\n" % e)
 ```
 
@@ -121,13 +142,13 @@ note_id = 'note_id_example' # str | The ID of the note
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **fhir_store_id** | **str**| The ID of the FHIR store | 
- **note_id** | **str**| The ID of the note | 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
+ **note_id** | **str**| The ID of the note |
 
 ### Return type
 
-**object**
+**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**
 
 ### Authorization
 
@@ -157,10 +178,13 @@ Returns the note specified
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import note_api
+from datanode.model.fhir_store_id import FhirStoreId
+from datanode.model.dataset_id import DatasetId
+from datanode.model.note import Note
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -172,16 +196,17 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.NoteApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
-note_id = 'note_id_example' # str | The ID of the note
+    api_instance = note_api.NoteApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
+    note_id = "507f1f77bcf86cd799439011" # str | The ID of the note
 
+    # example passing only required values which don't have defaults set
     try:
         # Get a note
         api_response = api_instance.get_note(dataset_id, fhir_store_id, note_id)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling NoteApi->get_note: %s\n" % e)
 ```
 
@@ -189,9 +214,9 @@ note_id = 'note_id_example' # str | The ID of the note
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **fhir_store_id** | **str**| The ID of the FHIR store | 
- **note_id** | **str**| The ID of the note | 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
+ **note_id** | **str**| The ID of the note |
 
 ### Return type
 
@@ -216,7 +241,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_notes**
-> PageOfNotes list_notes(dataset_id, fhir_store_id, limit=limit, offset=offset)
+> PageOfNotes list_notes(dataset_id, fhir_store_id)
 
 List notes
 
@@ -225,10 +250,15 @@ Returns the notes in a FHIR store
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import note_api
+from datanode.model.page_of_notes import PageOfNotes
+from datanode.model.fhir_store_id import FhirStoreId
+from datanode.model.dataset_id import DatasetId
+from datanode.model.page_limit import PageLimit
+from datanode.model.page_offset import PageOffset
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -240,17 +270,27 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.NoteApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
-limit = 10 # int | Maximum number of results returned (optional) (default to 10)
-offset = 0 # int | Index of the first result that must be returned (optional) (default to 0)
+    api_instance = note_api.NoteApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
+    limit = PageLimit(10) # PageLimit | Maximum number of results returned (optional)
+    offset = PageOffset(0) # PageOffset | Index of the first result that must be returned (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        # List notes
+        api_response = api_instance.list_notes(dataset_id, fhir_store_id)
+        pprint(api_response)
+    except datanode.ApiException as e:
+        print("Exception when calling NoteApi->list_notes: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # List notes
         api_response = api_instance.list_notes(dataset_id, fhir_store_id, limit=limit, offset=offset)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling NoteApi->list_notes: %s\n" % e)
 ```
 
@@ -258,10 +298,10 @@ offset = 0 # int | Index of the first result that must be returned (optional) (d
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **fhir_store_id** | **str**| The ID of the FHIR store | 
- **limit** | **int**| Maximum number of results returned | [optional] [default to 10]
- **offset** | **int**| Index of the first result that must be returned | [optional] [default to 0]
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
+ **limit** | **PageLimit**| Maximum number of results returned | [optional]
+ **offset** | **PageOffset**| Index of the first result that must be returned | [optional]
 
 ### Return type
 

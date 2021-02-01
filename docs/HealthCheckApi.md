@@ -17,10 +17,11 @@ Get information about the health of the service
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import health_check_api
+from datanode.model.health_check import HealthCheck
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -32,13 +33,14 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.HealthCheckApi(api_client)
-    
+    api_instance = health_check_api.HealthCheckApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
     try:
         # Get health check information
         api_response = api_instance.get_health_check()
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling HealthCheckApi->get_health_check: %s\n" % e)
 ```
 
