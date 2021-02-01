@@ -7,7 +7,8 @@ from datanode.models import Annotation, AnnotationStore
 import annotator
 from annotator.api import (text_date_annotation_api,
                            text_person_name_annotation_api,
-                           text_physical_address_annotation_api)
+                           text_physical_address_annotation_api,
+                           tool_api)
 from annotator.models import Tool
 from . import utils
 
@@ -322,13 +323,14 @@ def annotate_note(host: str, note: dict, annotator_type: str) -> dict:
     """
     # host = "http://10.23.55.45:9000/api/v1"
     configuration = annotator.Configuration(host=host)
+    new_note = utils.change_keys(note, utils.camelcase_to_snakecase)
     with annotator.ApiClient(configuration) as api_client:
         if annotator_type == "date":
-            annotations = _annotate_date(api_client, note)
+            annotations = _annotate_date(api_client, new_note)
         elif annotator_type == "person":
-            annotations = _annotate_person(api_client, note)
+            annotations = _annotate_person(api_client, new_note)
         elif annotator_type == "address":
-            annotations = _annotate_address(api_client, note)
+            annotations = _annotate_address(api_client, new_note)
         else:
             raise ValueError(f"Invalid annotator_type: {annotator_type}")
         sanitized_annotations = api_client.sanitize_for_serialization(
@@ -353,6 +355,6 @@ def get_annotator(host: str) -> Tool:
     # host = "http://10.23.55.45:9000/api/v1"
     configuration = annotator.Configuration(host=host)
     with annotator.ApiClient(configuration) as api_client:
-        tool_api = annotator.api.tool_api.ToolApi(api_client)
-        tool_info = tool_api.get_tool()
+        tool_instance = tool_api.ToolApi(api_client)
+        tool_info = tool_instance.get_tool()
     return tool_info
