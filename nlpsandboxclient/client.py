@@ -141,7 +141,7 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         >>> annotation = store_annotation(host="0.0.0.0/api/v1",
         >>>                               dataset_id="awesome-dataset",
         >>>                               annotation_store_id="awesome-annotation-store",
-        >>>                               annotation=example_annotation)
+        >>>                               annotation_create_request=example_annotation)
 
     """
     configuration = datanode.Configuration(host=host)
@@ -220,8 +220,8 @@ def _annotate_person(api_client, note: dict) -> dict:
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    annotation_api = text_person_name_annotation_api.TextPersonNameAnnotationApi(api_client)
-    annotations = annotation_api.create_text_person_name_annotations(
+    api_instance = text_person_name_annotation_api.TextPersonNameAnnotationApi(api_client)
+    annotations = api_instance.create_text_person_name_annotations(
         text_person_name_annotation_request=note
     )
     return annotations
@@ -253,8 +253,8 @@ def _annotate_address(api_client, note: dict) -> dict:
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    annotation_api = text_physical_address_annotation_api.TextPhysicalAddressAnnotationApi(api_client)
-    annotations = annotation_api.create_text_physical_address_annotations(
+    api_instance = text_physical_address_annotation_api.TextPhysicalAddressAnnotationApi(api_client)
+    annotations = api_instance.create_text_physical_address_annotations(
         text_physical_address_annotation_request=note
     )
     return annotations
@@ -286,8 +286,8 @@ def _annotate_date(api_client, note: dict) -> dict:
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    annotation_api = text_date_annotation_api.TextDateAnnotationApi(api_client)
-    annotations = annotation_api.create_text_date_annotations(
+    api_instance = text_date_annotation_api.TextDateAnnotationApi(api_client)
+    annotations = api_instance.create_text_date_annotations(
         text_date_annotation_request=note
     )
     return annotations
