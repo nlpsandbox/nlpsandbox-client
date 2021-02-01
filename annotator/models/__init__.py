@@ -10,8 +10,9 @@
 # sys.setrecursionlimit(n)
 
 from annotator.model.error import Error
+from annotator.model.health_check import HealthCheck
+from annotator.model.license import License
 from annotator.model.note import Note
-from annotator.model.service import Service
 from annotator.model.text_annotation import TextAnnotation
 from annotator.model.text_date_annotation import TextDateAnnotation
 from annotator.model.text_date_annotation_all_of import TextDateAnnotationAllOf
@@ -24,3 +25,5 @@ from annotator.model.text_physical_address_annotation import TextPhysicalAddress
 from annotator.model.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
 from annotator.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
 from annotator.model.text_physical_address_annotations import TextPhysicalAddressAnnotations
+from annotator.model.tool import Tool
+from annotator.model.tool_dependencies import ToolDependencies

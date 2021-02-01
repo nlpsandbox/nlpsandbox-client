@@ -2,8 +2,12 @@
 from typing import List, Iterator
 
 import datanode
+from datanode.api import annotation_store_api, annotation_api, note_api
 from datanode.models import Annotation, AnnotationStore
 import annotator
+from annotator.api import (text_date_annotation_api,
+                           text_person_name_annotation_api,
+                           text_physical_address_annotation_api)
 from annotator.models import Tool
 
 
@@ -38,12 +42,12 @@ def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
     offset = 0
     limit = 10
     with datanode.ApiClient(configuration) as api_client:
-        note_api = datanode.NoteApi(api_client)
+        note_instance = note_api.NoteApi(api_client)
         # Obtain all clinical notes
         next_page = True
         while next_page:
-            notes = note_api.list_notes(dataset_id, fhir_store_id,
-                                        offset=offset, limit=limit)
+            notes = note_instance.list_notes(dataset_id, fhir_store_id,
+                                             offset=offset, limit=limit)
             # change from snake case to camel case
             sanitized_notes = api_client.sanitize_for_serialization(
                 notes.notes
@@ -79,15 +83,17 @@ def get_annotation_store(host: str, dataset_id: str,
     """
     configuration = datanode.Configuration(host=host)
     with datanode.ApiClient(configuration) as api_client:
-        annotation_store_api = datanode.AnnotationStoreApi(api_client)
+        annot_store_instance = annotation_store_api.AnnotationStoreApi(
+            api_client
+        )
         try:
             # get the annotation store
-            annotation_store_obj = annotation_store_api.get_annotation_store(
+            annotation_store_obj = annot_store_instance.get_annotation_store(
                 dataset_id, annotation_store_id
             )
         except datanode.rest.ApiException as err:
             if err.status == 404 and create_if_missing:
-                annotation_store_obj = annotation_store_api.create_annotation_store(
+                annotation_store_obj = annot_store_instance.create_annotation_store(
                     dataset_id, annotation_store_id, body={}
                 )
             else:
@@ -140,8 +146,8 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
     """
     configuration = datanode.Configuration(host=host)
     with datanode.ApiClient(configuration) as api_client:
-        annotation_api = datanode.AnnotationApi(api_client)
-        annotation_obj = annotation_api.create_annotation(
+        annotation_instance = annotation_api.AnnotationApi(api_client)
+        annotation_obj = annotation_instance.create_annotation(
             dataset_id=dataset_id,
             annotation_store_id=annotation_store_id,
             annotation_create_request=annotation
@@ -171,10 +177,10 @@ def list_annotations(host: str, dataset_id: str,
     offset = 0
     limit = 10
     with datanode.ApiClient(configuration) as api_client:
-        annotation_api = datanode.AnnotationApi(api_client)
+        annotation_instance = annotation_api.AnnotationApi(api_client)
         next_page = True
         while next_page:
-            annotations = annotation_api.list_annotations(
+            annotations = annotation_instance.list_annotations(
                 dataset_id, annotation_store_id,
                 offset=offset, limit=limit
             )
@@ -214,7 +220,7 @@ def _annotate_person(api_client, note: dict) -> dict:
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    annotation_api = annotator.TextPersonNameAnnotationApi(api_client)
+    annotation_api = text_person_name_annotation_api.TextPersonNameAnnotationApi(api_client)
     annotations = annotation_api.create_text_person_name_annotations(
         text_person_name_annotation_request=note
     )
@@ -247,7 +253,7 @@ def _annotate_address(api_client, note: dict) -> dict:
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    annotation_api = annotator.TextPhysicalAddressAnnotationApi(api_client)
+    annotation_api = text_physical_address_annotation_api.TextPhysicalAddressAnnotationApi(api_client)
     annotations = annotation_api.create_text_physical_address_annotations(
         text_physical_address_annotation_request=note
     )
@@ -280,7 +286,7 @@ def _annotate_date(api_client, note: dict) -> dict:
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    annotation_api = annotator.TextDateAnnotationApi(api_client)
+    annotation_api = text_date_annotation_api.TextDateAnnotationApi(api_client)
     annotations = annotation_api.create_text_date_annotations(
         text_date_annotation_request=note
     )
@@ -344,6 +350,6 @@ def get_annotator(host: str) -> Tool:
     # host = "http://10.23.55.45:9000/api/v1"
     configuration = annotator.Configuration(host=host)
     with annotator.ApiClient(configuration) as api_client:
-        tool_api = annotator.ToolApi(api_client)
+        tool_api = annotator.api.tool_api.ToolApi(api_client)
         tool_info = tool_api.get_tool()
     return tool_info

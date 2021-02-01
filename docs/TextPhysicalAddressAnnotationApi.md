@@ -37,7 +37,7 @@ with annotator.ApiClient() as api_client:
     api_instance = text_physical_address_annotation_api.TextPhysicalAddressAnnotationApi(api_client)
     text_physical_address_annotation_request = TextPhysicalAddressAnnotationRequest(
         note=Note(
-            id="id_example",
+            id="507f1f77bcf86cd799439011",
             text="On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.",
             note_type="loinc:LP29684-5",
             patient_id="507f1f77bcf86cd799439011",
@@ -78,6 +78,7 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | Success |  -  |
 **403** | Unauthorized |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

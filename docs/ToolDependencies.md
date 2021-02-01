@@ -1,13 +1,10 @@
-# Note
+# ToolDependencies
 
-A clinical note
+A list of tool dependencies
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**text** | **str** | The content of the clinical note | 
-**note_type** | **str** | The note type (LOINC concept) | 
-**id** | **str** | ID of the clinical note | [optional] 
-**patient_id** | **str** | ID of the FHIR patient | [optional] 
+**tool_dependencies** | [**[Tool]**](Tool.md) | A list of tools | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
