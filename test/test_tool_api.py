@@ -1,9 +1,7 @@
-# coding: utf-8
-
 """
     NLP Sandbox Date Annotator API
 
-    The OpenAPI specification implemented by NLP Sandbox Date Annotators. # Overview This NLP tool detects date references in the clinical note specified and returns a list of date annotations.   # noqa: E501
+    The OpenAPI specification implemented by NLP Sandbox Annotators.   # noqa: E501
 
     The version of the OpenAPI document: 0.3.1
     Contact: thomas.schaffter@sagebionetworks.org
@@ -11,20 +9,17 @@
 """
 
 
-from __future__ import absolute_import
-
 import unittest
 
 import annotator
 from annotator.api.tool_api import ToolApi  # noqa: E501
-from annotator.rest import ApiException
 
 
 class TestToolApi(unittest.TestCase):
     """ToolApi unit test stubs"""
 
     def setUp(self):
-        self.api = annotator.api.tool_api.ToolApi()  # noqa: E501
+        self.api = ToolApi()  # noqa: E501
 
     def tearDown(self):
         pass

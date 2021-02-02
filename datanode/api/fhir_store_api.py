@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     NLP Sandbox Data Node API
 
@@ -11,18 +9,27 @@
 """
 
 
-from __future__ import absolute_import
-
 import re  # noqa: F401
+import sys  # noqa: F401
 
-# python 2 and python 3 compatibility library
-import six
-
-from datanode.api_client import ApiClient
-from datanode.exceptions import (  # noqa: F401
-    ApiTypeError,
-    ApiValueError
+from datanode.api_client import ApiClient, Endpoint
+from datanode.model_utils import (  # noqa: F401
+    check_allowed_values,
+    check_validations,
+    date,
+    datetime,
+    file_type,
+    none_type,
+    validate_and_convert_types
 )
+from datanode.model.dataset_id import DatasetId
+from datanode.model.error import Error
+from datanode.model.fhir_store import FhirStore
+from datanode.model.fhir_store_create_response import FhirStoreCreateResponse
+from datanode.model.fhir_store_id import FhirStoreId
+from datanode.model.page_limit import PageLimit
+from datanode.model.page_of_fhir_stores import PageOfFhirStores
+from datanode.model.page_offset import PageOffset
 
 
 class FhirStoreApi(object):
@@ -37,566 +44,519 @@ class FhirStoreApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def create_fhir_store(self, dataset_id, fhir_store_id, **kwargs):  # noqa: E501
-        """Create a FHIR store  # noqa: E501
+        def __create_fhir_store(
+            self,
+            dataset_id,
+            fhir_store_id,
+            **kwargs
+        ):
+            """Create a FHIR store  # noqa: E501
 
-        Create a FHIR store with the ID specified  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_fhir_store(dataset_id, fhir_store_id, async_req=True)
-        >>> result = thread.get()
+            Create a FHIR store with the ID specified  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset (required)
-        :param str fhir_store_id: The ID of the FHIR store that is being created. (required)
-        :param object body:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: FhirStoreCreateResponse
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.create_fhir_store_with_http_info(dataset_id, fhir_store_id, **kwargs)  # noqa: E501
+            >>> thread = api.create_fhir_store(dataset_id, fhir_store_id, async_req=True)
+            >>> result = thread.get()
 
-    def create_fhir_store_with_http_info(self, dataset_id, fhir_store_id, **kwargs):  # noqa: E501
-        """Create a FHIR store  # noqa: E501
+            Args:
+                dataset_id (DatasetId): The ID of the dataset
+                fhir_store_id (FhirStoreId): The ID of the FHIR store that is being created.
 
-        Create a FHIR store with the ID specified  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_fhir_store_with_http_info(dataset_id, fhir_store_id, async_req=True)
-        >>> result = thread.get()
+            Keyword Args:
+                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset (required)
-        :param str fhir_store_id: The ID of the FHIR store that is being created. (required)
-        :param object body:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(FhirStoreCreateResponse, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
+            Returns:
+                FhirStoreCreateResponse
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['dataset_id'] = \
+                dataset_id
+            kwargs['fhir_store_id'] = \
+                fhir_store_id
+            return self.call_with_http_info(**kwargs)
 
-        local_var_params = locals()
-
-        all_params = [
-            'dataset_id',
-            'fhir_store_id',
-            'body'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.create_fhir_store = Endpoint(
+            settings={
+                'response_type': (FhirStoreCreateResponse,),
+                'auth': [],
+                'endpoint_path': '/datasets/{datasetId}/fhirStores',
+                'operation_id': 'create_fhir_store',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'dataset_id',
+                    'fhir_store_id',
+                    'body',
+                ],
+                'required': [
+                    'dataset_id',
+                    'fhir_store_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'dataset_id':
+                        (DatasetId,),
+                    'fhir_store_id':
+                        (FhirStoreId,),
+                    'body':
+                        ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                },
+                'attribute_map': {
+                    'dataset_id': 'datasetId',
+                    'fhir_store_id': 'fhirStoreId',
+                },
+                'location_map': {
+                    'dataset_id': 'path',
+                    'fhir_store_id': 'query',
+                    'body': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client,
+            callable=__create_fhir_store
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method create_fhir_store" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'dataset_id' is set
-        if self.api_client.client_side_validation and ('dataset_id' not in local_var_params or  # noqa: E501
-                                                        local_var_params['dataset_id'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `dataset_id` when calling `create_fhir_store`")  # noqa: E501
-        # verify the required parameter 'fhir_store_id' is set
-        if self.api_client.client_side_validation and ('fhir_store_id' not in local_var_params or  # noqa: E501
-                                                        local_var_params['fhir_store_id'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `fhir_store_id` when calling `create_fhir_store`")  # noqa: E501
+        def __delete_fhir_store(
+            self,
+            dataset_id,
+            fhir_store_id,
+            **kwargs
+        ):
+            """Delete a FHIR store  # noqa: E501
 
-        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `create_fhir_store`, length must be less than or equal to `60`")  # noqa: E501
-        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `create_fhir_store`, length must be greater than or equal to `3`")  # noqa: E501
-        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `create_fhir_store`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
-        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `create_fhir_store`, length must be less than or equal to `60`")  # noqa: E501
-        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `create_fhir_store`, length must be greater than or equal to `3`")  # noqa: E501
-        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `create_fhir_store`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
-        collection_formats = {}
+            Deletes the FHIR store specified  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'dataset_id' in local_var_params:
-            path_params['datasetId'] = local_var_params['dataset_id']  # noqa: E501
+            >>> thread = api.delete_fhir_store(dataset_id, fhir_store_id, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'fhir_store_id' in local_var_params and local_var_params['fhir_store_id'] is not None:  # noqa: E501
-            query_params.append(('fhirStoreId', local_var_params['fhir_store_id']))  # noqa: E501
+            Args:
+                dataset_id (DatasetId): The ID of the dataset
+                fhir_store_id (FhirStoreId): The ID of the FHIR store
 
-        header_params = {}
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['dataset_id'] = \
+                dataset_id
+            kwargs['fhir_store_id'] = \
+                fhir_store_id
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        if 'body' in local_var_params:
-            body_params = local_var_params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = []  # noqa: E501
-
-        return self.api_client.call_api(
-            '/datasets/{datasetId}/fhirStores', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='FhirStoreCreateResponse',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_fhir_store(self, dataset_id, fhir_store_id, **kwargs):  # noqa: E501
-        """Delete a FHIR store  # noqa: E501
-
-        Deletes the FHIR store specified  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_fhir_store(dataset_id, fhir_store_id, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset (required)
-        :param str fhir_store_id: The ID of the FHIR store (required)
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: object
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.delete_fhir_store_with_http_info(dataset_id, fhir_store_id, **kwargs)  # noqa: E501
-
-    def delete_fhir_store_with_http_info(self, dataset_id, fhir_store_id, **kwargs):  # noqa: E501
-        """Delete a FHIR store  # noqa: E501
-
-        Deletes the FHIR store specified  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_fhir_store_with_http_info(dataset_id, fhir_store_id, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset (required)
-        :param str fhir_store_id: The ID of the FHIR store (required)
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(object, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'dataset_id',
-            'fhir_store_id'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.delete_fhir_store = Endpoint(
+            settings={
+                'response_type': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
+                'auth': [],
+                'endpoint_path': '/datasets/{datasetId}/fhirStores/{fhirStoreId}',
+                'operation_id': 'delete_fhir_store',
+                'http_method': 'DELETE',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'dataset_id',
+                    'fhir_store_id',
+                ],
+                'required': [
+                    'dataset_id',
+                    'fhir_store_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'dataset_id':
+                        (DatasetId,),
+                    'fhir_store_id':
+                        (FhirStoreId,),
+                },
+                'attribute_map': {
+                    'dataset_id': 'datasetId',
+                    'fhir_store_id': 'fhirStoreId',
+                },
+                'location_map': {
+                    'dataset_id': 'path',
+                    'fhir_store_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__delete_fhir_store
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_fhir_store" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'dataset_id' is set
-        if self.api_client.client_side_validation and ('dataset_id' not in local_var_params or  # noqa: E501
-                                                        local_var_params['dataset_id'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `dataset_id` when calling `delete_fhir_store`")  # noqa: E501
-        # verify the required parameter 'fhir_store_id' is set
-        if self.api_client.client_side_validation and ('fhir_store_id' not in local_var_params or  # noqa: E501
-                                                        local_var_params['fhir_store_id'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `fhir_store_id` when calling `delete_fhir_store`")  # noqa: E501
+        def __get_fhir_store(
+            self,
+            dataset_id,
+            fhir_store_id,
+            **kwargs
+        ):
+            """Get a FHIR store  # noqa: E501
 
-        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_fhir_store`, length must be less than or equal to `60`")  # noqa: E501
-        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_fhir_store`, length must be greater than or equal to `3`")  # noqa: E501
-        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `delete_fhir_store`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
-        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `delete_fhir_store`, length must be less than or equal to `60`")  # noqa: E501
-        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `delete_fhir_store`, length must be greater than or equal to `3`")  # noqa: E501
-        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `delete_fhir_store`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
-        collection_formats = {}
+            Returns the FHIR store specified  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'dataset_id' in local_var_params:
-            path_params['datasetId'] = local_var_params['dataset_id']  # noqa: E501
-        if 'fhir_store_id' in local_var_params:
-            path_params['fhirStoreId'] = local_var_params['fhir_store_id']  # noqa: E501
+            >>> thread = api.get_fhir_store(dataset_id, fhir_store_id, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
+            Args:
+                dataset_id (DatasetId): The ID of the dataset
+                fhir_store_id (FhirStoreId): The ID of the FHIR store
 
-        header_params = {}
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                FhirStore
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['dataset_id'] = \
+                dataset_id
+            kwargs['fhir_store_id'] = \
+                fhir_store_id
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = []  # noqa: E501
-
-        return self.api_client.call_api(
-            '/datasets/{datasetId}/fhirStores/{fhirStoreId}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='object',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def get_fhir_store(self, dataset_id, fhir_store_id, **kwargs):  # noqa: E501
-        """Get a FHIR store  # noqa: E501
-
-        Returns the FHIR store specified  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_fhir_store(dataset_id, fhir_store_id, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset (required)
-        :param str fhir_store_id: The ID of the FHIR store (required)
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: FhirStore
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.get_fhir_store_with_http_info(dataset_id, fhir_store_id, **kwargs)  # noqa: E501
-
-    def get_fhir_store_with_http_info(self, dataset_id, fhir_store_id, **kwargs):  # noqa: E501
-        """Get a FHIR store  # noqa: E501
-
-        Returns the FHIR store specified  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_fhir_store_with_http_info(dataset_id, fhir_store_id, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset (required)
-        :param str fhir_store_id: The ID of the FHIR store (required)
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(FhirStore, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'dataset_id',
-            'fhir_store_id'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.get_fhir_store = Endpoint(
+            settings={
+                'response_type': (FhirStore,),
+                'auth': [],
+                'endpoint_path': '/datasets/{datasetId}/fhirStores/{fhirStoreId}',
+                'operation_id': 'get_fhir_store',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'dataset_id',
+                    'fhir_store_id',
+                ],
+                'required': [
+                    'dataset_id',
+                    'fhir_store_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'dataset_id':
+                        (DatasetId,),
+                    'fhir_store_id':
+                        (FhirStoreId,),
+                },
+                'attribute_map': {
+                    'dataset_id': 'datasetId',
+                    'fhir_store_id': 'fhirStoreId',
+                },
+                'location_map': {
+                    'dataset_id': 'path',
+                    'fhir_store_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__get_fhir_store
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method get_fhir_store" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'dataset_id' is set
-        if self.api_client.client_side_validation and ('dataset_id' not in local_var_params or  # noqa: E501
-                                                        local_var_params['dataset_id'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `dataset_id` when calling `get_fhir_store`")  # noqa: E501
-        # verify the required parameter 'fhir_store_id' is set
-        if self.api_client.client_side_validation and ('fhir_store_id' not in local_var_params or  # noqa: E501
-                                                        local_var_params['fhir_store_id'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `fhir_store_id` when calling `get_fhir_store`")  # noqa: E501
+        def __list_fhir_stores(
+            self,
+            dataset_id,
+            **kwargs
+        ):
+            """List the FHIR stores in a dataset  # noqa: E501
 
-        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_fhir_store`, length must be less than or equal to `60`")  # noqa: E501
-        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_fhir_store`, length must be greater than or equal to `3`")  # noqa: E501
-        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `get_fhir_store`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
-        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['fhir_store_id']) > 60):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `get_fhir_store`, length must be less than or equal to `60`")  # noqa: E501
-        if self.api_client.client_side_validation and ('fhir_store_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['fhir_store_id']) < 3):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `get_fhir_store`, length must be greater than or equal to `3`")  # noqa: E501
-        if self.api_client.client_side_validation and 'fhir_store_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['fhir_store_id']):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `fhir_store_id` when calling `get_fhir_store`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
-        collection_formats = {}
+            Returns the FHIR stores  # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'dataset_id' in local_var_params:
-            path_params['datasetId'] = local_var_params['dataset_id']  # noqa: E501
-        if 'fhir_store_id' in local_var_params:
-            path_params['fhirStoreId'] = local_var_params['fhir_store_id']  # noqa: E501
+            >>> thread = api.list_fhir_stores(dataset_id, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
+            Args:
+                dataset_id (DatasetId): The ID of the dataset
 
-        header_params = {}
+            Keyword Args:
+                limit (PageLimit): Maximum number of results returned. [optional]
+                offset (PageOffset): Index of the first result that must be returned. [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                PageOfFhirStores
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['dataset_id'] = \
+                dataset_id
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = []  # noqa: E501
-
-        return self.api_client.call_api(
-            '/datasets/{datasetId}/fhirStores/{fhirStoreId}', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='FhirStore',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def list_fhir_stores(self, dataset_id, **kwargs):  # noqa: E501
-        """List the FHIR stores in a dataset  # noqa: E501
-
-        Returns the FHIR stores  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_fhir_stores(dataset_id, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset (required)
-        :param int limit: Maximum number of results returned
-        :param int offset: Index of the first result that must be returned
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: PageOfFhirStores
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.list_fhir_stores_with_http_info(dataset_id, **kwargs)  # noqa: E501
-
-    def list_fhir_stores_with_http_info(self, dataset_id, **kwargs):  # noqa: E501
-        """List the FHIR stores in a dataset  # noqa: E501
-
-        Returns the FHIR stores  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_fhir_stores_with_http_info(dataset_id, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str dataset_id: The ID of the dataset (required)
-        :param int limit: Maximum number of results returned
-        :param int offset: Index of the first result that must be returned
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(PageOfFhirStores, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'dataset_id',
-            'limit',
-            'offset'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.list_fhir_stores = Endpoint(
+            settings={
+                'response_type': (PageOfFhirStores,),
+                'auth': [],
+                'endpoint_path': '/datasets/{datasetId}/fhirStores',
+                'operation_id': 'list_fhir_stores',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'dataset_id',
+                    'limit',
+                    'offset',
+                ],
+                'required': [
+                    'dataset_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'dataset_id':
+                        (DatasetId,),
+                    'limit':
+                        (PageLimit,),
+                    'offset':
+                        (PageOffset,),
+                },
+                'attribute_map': {
+                    'dataset_id': 'datasetId',
+                    'limit': 'limit',
+                    'offset': 'offset',
+                },
+                'location_map': {
+                    'dataset_id': 'path',
+                    'limit': 'query',
+                    'offset': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__list_fhir_stores
         )
-
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method list_fhir_stores" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'dataset_id' is set
-        if self.api_client.client_side_validation and ('dataset_id' not in local_var_params or  # noqa: E501
-                                                        local_var_params['dataset_id'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `dataset_id` when calling `list_fhir_stores`")  # noqa: E501
-
-        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['dataset_id']) > 60):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `list_fhir_stores`, length must be less than or equal to `60`")  # noqa: E501
-        if self.api_client.client_side_validation and ('dataset_id' in local_var_params and  # noqa: E501
-                                                        len(local_var_params['dataset_id']) < 3):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `list_fhir_stores`, length must be greater than or equal to `3`")  # noqa: E501
-        if self.api_client.client_side_validation and 'dataset_id' in local_var_params and not re.search(r'^[a-z0-9]+(?:-[a-z0-9]+)*$', local_var_params['dataset_id']):  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `dataset_id` when calling `list_fhir_stores`, must conform to the pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`")  # noqa: E501
-        if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] > 100:  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `limit` when calling `list_fhir_stores`, must be a value less than or equal to `100`")  # noqa: E501
-        if self.api_client.client_side_validation and 'limit' in local_var_params and local_var_params['limit'] < 10:  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `limit` when calling `list_fhir_stores`, must be a value greater than or equal to `10`")  # noqa: E501
-        if self.api_client.client_side_validation and 'offset' in local_var_params and local_var_params['offset'] < 0:  # noqa: E501
-            raise ApiValueError("Invalid value for parameter `offset` when calling `list_fhir_stores`, must be a value greater than or equal to `0`")  # noqa: E501
-        collection_formats = {}
-
-        path_params = {}
-        if 'dataset_id' in local_var_params:
-            path_params['datasetId'] = local_var_params['dataset_id']  # noqa: E501
-
-        query_params = []
-        if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
-            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
-        if 'offset' in local_var_params and local_var_params['offset'] is not None:  # noqa: E501
-            query_params.append(('offset', local_var_params['offset']))  # noqa: E501
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = []  # noqa: E501
-
-        return self.api_client.call_api(
-            '/datasets/{datasetId}/fhirStores', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='PageOfFhirStores',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)

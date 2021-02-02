@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     NLP Sandbox Date Annotator API
 
@@ -11,20 +9,17 @@
 """
 
 
-from __future__ import absolute_import
-
 import unittest
 
 import annotator
 from annotator.api.text_date_annotation_api import TextDateAnnotationApi  # noqa: E501
-from annotator.rest import ApiException
 
 
 class TestTextDateAnnotationApi(unittest.TestCase):
     """TextDateAnnotationApi unit test stubs"""
 
     def setUp(self):
-        self.api = annotator.api.text_date_annotation_api.TextDateAnnotationApi()  # noqa: E501
+        self.api = TextDateAnnotationApi()  # noqa: E501
 
     def tearDown(self):
         pass

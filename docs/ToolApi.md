@@ -18,10 +18,11 @@ Get information about the tool
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import annotator
-from annotator.rest import ApiException
+from annotator.api import tool_api
+from annotator.model.error import Error
+from annotator.model.tool import Tool
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -33,13 +34,14 @@ configuration = annotator.Configuration(
 # Enter a context with an instance of the API client
 with annotator.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = annotator.ToolApi(api_client)
-    
+    api_instance = tool_api.ToolApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
     try:
         # Get tool information
         api_response = api_instance.get_tool()
         pprint(api_response)
-    except ApiException as e:
+    except annotator.ApiException as e:
         print("Exception when calling ToolApi->get_tool: %s\n" % e)
 ```
 
@@ -78,10 +80,11 @@ Get the dependencies of this tool
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import annotator
-from annotator.rest import ApiException
+from annotator.api import tool_api
+from annotator.model.error import Error
+from annotator.model.tool_dependencies import ToolDependencies
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -93,13 +96,14 @@ configuration = annotator.Configuration(
 # Enter a context with an instance of the API client
 with annotator.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = annotator.ToolApi(api_client)
-    
+    api_instance = tool_api.ToolApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
     try:
         # Get tool dependencies
         api_response = api_instance.get_tool_dependencies()
         pprint(api_response)
-    except ApiException as e:
+    except annotator.ApiException as e:
         print("Exception when calling ToolApi->get_tool_dependencies: %s\n" % e)
 ```
 

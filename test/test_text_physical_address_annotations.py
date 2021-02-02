@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     NLP Sandbox Date Annotator API
 
@@ -11,14 +9,14 @@
 """
 
 
-from __future__ import absolute_import
-
+import sys
 import unittest
-import datetime
 
 import annotator
-from annotator.models.text_physical_address_annotations import TextPhysicalAddressAnnotations  # noqa: E501
-from annotator.rest import ApiException
+from annotator.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+globals()['TextPhysicalAddressAnnotation'] = TextPhysicalAddressAnnotation
+from annotator.model.text_physical_address_annotations import TextPhysicalAddressAnnotations
+
 
 class TestTextPhysicalAddressAnnotations(unittest.TestCase):
     """TextPhysicalAddressAnnotations unit test stubs"""
@@ -29,26 +27,11 @@ class TestTextPhysicalAddressAnnotations(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
-        """Test TextPhysicalAddressAnnotations
-            include_option is a boolean, when False only required
-            params are included, when True both required and
-            optional params are included """
-        # model = annotator.models.text_physical_address_annotations.TextPhysicalAddressAnnotations()  # noqa: E501
-        if include_optional :
-            return TextPhysicalAddressAnnotations(
-                text_physical_address_annotations = [
-                    {"start":42,"length":11,"text":"Seattle","addressType":"city"}
-                    ]
-            )
-        else :
-            return TextPhysicalAddressAnnotations(
-        )
-
     def testTextPhysicalAddressAnnotations(self):
         """Test TextPhysicalAddressAnnotations"""
-        inst_req_only = self.make_instance(include_optional=False)
-        inst_req_and_optional = self.make_instance(include_optional=True)
+        # FIXME: construct object with mandatory attributes with example values
+        # model = TextPhysicalAddressAnnotations()  # noqa: E501
+        pass
 
 
 if __name__ == '__main__':

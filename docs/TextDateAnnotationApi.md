@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_text_date_annotations**
-> TextDateAnnotations create_text_date_annotations(text_date_annotation_request=text_date_annotation_request)
+> TextDateAnnotations create_text_date_annotations()
 
 Annotate dates in a clinical note
 
@@ -17,10 +17,12 @@ Return the date annotations found in a clinical note
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import annotator
-from annotator.rest import ApiException
+from annotator.api import text_date_annotation_api
+from annotator.model.text_date_annotations import TextDateAnnotations
+from annotator.model.text_date_annotation_request import TextDateAnnotationRequest
+from annotator.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -32,14 +34,23 @@ configuration = annotator.Configuration(
 # Enter a context with an instance of the API client
 with annotator.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = annotator.TextDateAnnotationApi(api_client)
-    text_date_annotation_request = annotator.TextDateAnnotationRequest() # TextDateAnnotationRequest |  (optional)
+    api_instance = text_date_annotation_api.TextDateAnnotationApi(api_client)
+    text_date_annotation_request = TextDateAnnotationRequest(
+        note=Note(
+            id="507f1f77bcf86cd799439011",
+            text="On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.",
+            note_type="loinc:LP29684-5",
+            patient_id="507f1f77bcf86cd799439011",
+        ),
+    ) # TextDateAnnotationRequest |  (optional)
 
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # Annotate dates in a clinical note
         api_response = api_instance.create_text_date_annotations(text_date_annotation_request=text_date_annotation_request)
         pprint(api_response)
-    except ApiException as e:
+    except annotator.ApiException as e:
         print("Exception when calling TextDateAnnotationApi->create_text_date_annotations: %s\n" % e)
 ```
 
@@ -47,7 +58,7 @@ with annotator.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **text_date_annotation_request** | [**TextDateAnnotationRequest**](TextDateAnnotationRequest.md)|  | [optional] 
+ **text_date_annotation_request** | [**TextDateAnnotationRequest**](TextDateAnnotationRequest.md)|  | [optional]
 
 ### Return type
 
