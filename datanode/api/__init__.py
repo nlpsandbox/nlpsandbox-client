@@ -1,12 +1,3 @@
-from __future__ import absolute_import
-
-# flake8: noqa
-
-# import apis into api package
-from datanode.api.annotation_api import AnnotationApi
-from datanode.api.annotation_store_api import AnnotationStoreApi
-from datanode.api.dataset_api import DatasetApi
-from datanode.api.fhir_store_api import FhirStoreApi
-from datanode.api.health_check_api import HealthCheckApi
-from datanode.api.note_api import NoteApi
-from datanode.api.patient_api import PatientApi
+# do not import all apis into this module because that uses a lot of memory and stack frames
+# if you need the ability to import all apis from one package, import them with
+# from datanode.apis import AnnotationApi

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_fhir_store**
-> FhirStoreCreateResponse create_fhir_store(dataset_id, fhir_store_id, body=body)
+> FhirStoreCreateResponse create_fhir_store(dataset_id, fhir_store_id)
 
 Create a FHIR store
 
@@ -20,10 +20,13 @@ Create a FHIR store with the ID specified
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import fhir_store_api
+from datanode.model.fhir_store_id import FhirStoreId
+from datanode.model.dataset_id import DatasetId
+from datanode.model.fhir_store_create_response import FhirStoreCreateResponse
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -35,16 +38,26 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.FhirStoreApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store that is being created.
-body = None # object |  (optional)
+    api_instance = fhir_store_api.FhirStoreApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store that is being created.
+    body = {} # {str: (bool, date, datetime, dict, float, int, list, str, none_type)} |  (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        # Create a FHIR store
+        api_response = api_instance.create_fhir_store(dataset_id, fhir_store_id)
+        pprint(api_response)
+    except datanode.ApiException as e:
+        print("Exception when calling FhirStoreApi->create_fhir_store: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # Create a FHIR store
         api_response = api_instance.create_fhir_store(dataset_id, fhir_store_id, body=body)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling FhirStoreApi->create_fhir_store: %s\n" % e)
 ```
 
@@ -52,9 +65,9 @@ body = None # object |  (optional)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **fhir_store_id** | **str**| The ID of the FHIR store that is being created. | 
- **body** | **object**|  | [optional] 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store that is being created. |
+ **body** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**|  | [optional]
 
 ### Return type
 
@@ -80,7 +93,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_fhir_store**
-> object delete_fhir_store(dataset_id, fhir_store_id)
+> {str: (bool, date, datetime, dict, float, int, list, str, none_type)} delete_fhir_store(dataset_id, fhir_store_id)
 
 Delete a FHIR store
 
@@ -89,10 +102,12 @@ Deletes the FHIR store specified
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import fhir_store_api
+from datanode.model.fhir_store_id import FhirStoreId
+from datanode.model.dataset_id import DatasetId
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -104,15 +119,16 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.FhirStoreApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
+    api_instance = fhir_store_api.FhirStoreApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
 
+    # example passing only required values which don't have defaults set
     try:
         # Delete a FHIR store
         api_response = api_instance.delete_fhir_store(dataset_id, fhir_store_id)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling FhirStoreApi->delete_fhir_store: %s\n" % e)
 ```
 
@@ -120,12 +136,12 @@ fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **fhir_store_id** | **str**| The ID of the FHIR store | 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
 
 ### Return type
 
-**object**
+**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**
 
 ### Authorization
 
@@ -155,10 +171,13 @@ Returns the FHIR store specified
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import fhir_store_api
+from datanode.model.fhir_store import FhirStore
+from datanode.model.fhir_store_id import FhirStoreId
+from datanode.model.dataset_id import DatasetId
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -170,15 +189,16 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.FhirStoreApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
+    api_instance = fhir_store_api.FhirStoreApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
 
+    # example passing only required values which don't have defaults set
     try:
         # Get a FHIR store
         api_response = api_instance.get_fhir_store(dataset_id, fhir_store_id)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling FhirStoreApi->get_fhir_store: %s\n" % e)
 ```
 
@@ -186,8 +206,8 @@ fhir_store_id = 'fhir_store_id_example' # str | The ID of the FHIR store
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **fhir_store_id** | **str**| The ID of the FHIR store | 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
 
 ### Return type
 
@@ -212,7 +232,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_fhir_stores**
-> PageOfFhirStores list_fhir_stores(dataset_id, limit=limit, offset=offset)
+> PageOfFhirStores list_fhir_stores(dataset_id)
 
 List the FHIR stores in a dataset
 
@@ -221,10 +241,14 @@ Returns the FHIR stores
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import fhir_store_api
+from datanode.model.dataset_id import DatasetId
+from datanode.model.page_limit import PageLimit
+from datanode.model.page_of_fhir_stores import PageOfFhirStores
+from datanode.model.page_offset import PageOffset
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -236,16 +260,26 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.FhirStoreApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
-limit = 10 # int | Maximum number of results returned (optional) (default to 10)
-offset = 0 # int | Index of the first result that must be returned (optional) (default to 0)
+    api_instance = fhir_store_api.FhirStoreApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
+    limit = PageLimit(10) # PageLimit | Maximum number of results returned (optional)
+    offset = PageOffset(0) # PageOffset | Index of the first result that must be returned (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        # List the FHIR stores in a dataset
+        api_response = api_instance.list_fhir_stores(dataset_id)
+        pprint(api_response)
+    except datanode.ApiException as e:
+        print("Exception when calling FhirStoreApi->list_fhir_stores: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # List the FHIR stores in a dataset
         api_response = api_instance.list_fhir_stores(dataset_id, limit=limit, offset=offset)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling FhirStoreApi->list_fhir_stores: %s\n" % e)
 ```
 
@@ -253,9 +287,9 @@ offset = 0 # int | Index of the first result that must be returned (optional) (d
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
- **limit** | **int**| Maximum number of results returned | [optional] [default to 10]
- **offset** | **int**| Index of the first result that must be returned | [optional] [default to 0]
+ **dataset_id** | **DatasetId**| The ID of the dataset |
+ **limit** | **PageLimit**| Maximum number of results returned | [optional]
+ **offset** | **PageOffset**| Index of the first result that must be returned | [optional]
 
 ### Return type
 

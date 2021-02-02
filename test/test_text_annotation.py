@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     NLP Sandbox Data Node API
 
@@ -11,14 +9,12 @@
 """
 
 
-from __future__ import absolute_import
-
+import sys
 import unittest
-import datetime
 
 import datanode
-from datanode.models.text_annotation import TextAnnotation  # noqa: E501
-from datanode.rest import ApiException
+from datanode.model.text_annotation import TextAnnotation
+
 
 class TestTextAnnotation(unittest.TestCase):
     """TextAnnotation unit test stubs"""
@@ -29,30 +25,11 @@ class TestTextAnnotation(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
-        """Test TextAnnotation
-            include_option is a boolean, when False only required
-            params are included, when True both required and
-            optional params are included """
-        # model = datanode.models.text_annotation.TextAnnotation()  # noqa: E501
-        if include_optional :
-            return TextAnnotation(
-                start = 42, 
-                length = 10, 
-                text = '0', 
-                confidence = 95
-            )
-        else :
-            return TextAnnotation(
-                start = 42,
-                length = 10,
-                text = '0'
-        )
-
     def testTextAnnotation(self):
         """Test TextAnnotation"""
-        inst_req_only = self.make_instance(include_optional=False)
-        inst_req_and_optional = self.make_instance(include_optional=True)
+        # FIXME: construct object with mandatory attributes with example values
+        # model = TextAnnotation()  # noqa: E501
+        pass
 
 
 if __name__ == '__main__':

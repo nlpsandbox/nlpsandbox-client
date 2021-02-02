@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     NLP Sandbox Date Annotator API
 
@@ -11,14 +9,14 @@
 """
 
 
-from __future__ import absolute_import
-
+import sys
 import unittest
-import datetime
 
 import annotator
-from annotator.models.text_date_annotation_request import TextDateAnnotationRequest  # noqa: E501
-from annotator.rest import ApiException
+from annotator.model.note import Note
+globals()['Note'] = Note
+from annotator.model.text_date_annotation_request import TextDateAnnotationRequest
+
 
 class TestTextDateAnnotationRequest(unittest.TestCase):
     """TextDateAnnotationRequest unit test stubs"""
@@ -29,28 +27,11 @@ class TestTextDateAnnotationRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
-        """Test TextDateAnnotationRequest
-            include_option is a boolean, when False only required
-            params are included, when True both required and
-            optional params are included """
-        # model = annotator.models.text_date_annotation_request.TextDateAnnotationRequest()  # noqa: E501
-        if include_optional :
-            return TextDateAnnotationRequest(
-                note = annotator.models.note.Note(
-                    id = '0', 
-                    text = 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.', 
-                    note_type = 'loinc:LP29684-5', 
-                    patient_id = '507f1f77bcf86cd799439011', )
-            )
-        else :
-            return TextDateAnnotationRequest(
-        )
-
     def testTextDateAnnotationRequest(self):
         """Test TextDateAnnotationRequest"""
-        inst_req_only = self.make_instance(include_optional=False)
-        inst_req_and_optional = self.make_instance(include_optional=True)
+        # FIXME: construct object with mandatory attributes with example values
+        # model = TextDateAnnotationRequest()  # noqa: E501
+        pass
 
 
 if __name__ == '__main__':

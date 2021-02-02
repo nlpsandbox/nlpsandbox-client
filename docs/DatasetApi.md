@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_dataset**
-> DatasetCreateResponse create_dataset(dataset_id, body=body)
+> DatasetCreateResponse create_dataset(dataset_id)
 
 Create a dataset
 
@@ -20,10 +20,12 @@ Create a dataset with the name specified
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import dataset_api
+from datanode.model.dataset_id import DatasetId
+from datanode.model.dataset_create_response import DatasetCreateResponse
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -35,15 +37,25 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.DatasetApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset that is being created
-body = None # object |  (optional)
+    api_instance = dataset_api.DatasetApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset that is being created
+    body = {} # {str: (bool, date, datetime, dict, float, int, list, str, none_type)} |  (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        # Create a dataset
+        api_response = api_instance.create_dataset(dataset_id)
+        pprint(api_response)
+    except datanode.ApiException as e:
+        print("Exception when calling DatasetApi->create_dataset: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # Create a dataset
         api_response = api_instance.create_dataset(dataset_id, body=body)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling DatasetApi->create_dataset: %s\n" % e)
 ```
 
@@ -51,8 +63,8 @@ body = None # object |  (optional)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset that is being created | 
- **body** | **object**|  | [optional] 
+ **dataset_id** | **DatasetId**| The ID of the dataset that is being created |
+ **body** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**|  | [optional]
 
 ### Return type
 
@@ -78,7 +90,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_dataset**
-> object delete_dataset(dataset_id)
+> {str: (bool, date, datetime, dict, float, int, list, str, none_type)} delete_dataset(dataset_id)
 
 Delete a dataset by ID
 
@@ -87,10 +99,11 @@ Deletes the dataset for a given ID
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import dataset_api
+from datanode.model.dataset_id import DatasetId
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -102,14 +115,15 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.DatasetApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
+    api_instance = dataset_api.DatasetApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
 
+    # example passing only required values which don't have defaults set
     try:
         # Delete a dataset by ID
         api_response = api_instance.delete_dataset(dataset_id)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling DatasetApi->delete_dataset: %s\n" % e)
 ```
 
@@ -117,11 +131,11 @@ with datanode.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
 
 ### Return type
 
-**object**
+**{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**
 
 ### Authorization
 
@@ -151,10 +165,12 @@ Returns the dataset for a given ID
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import dataset_api
+from datanode.model.dataset_id import DatasetId
+from datanode.model.dataset import Dataset
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -166,14 +182,15 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.DatasetApi(api_client)
-    dataset_id = 'dataset_id_example' # str | The ID of the dataset
+    api_instance = dataset_api.DatasetApi(api_client)
+    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
 
+    # example passing only required values which don't have defaults set
     try:
         # Get a dataset by ID
         api_response = api_instance.get_dataset(dataset_id)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling DatasetApi->get_dataset: %s\n" % e)
 ```
 
@@ -181,7 +198,7 @@ with datanode.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **str**| The ID of the dataset | 
+ **dataset_id** | **DatasetId**| The ID of the dataset |
 
 ### Return type
 
@@ -206,7 +223,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_datasets**
-> PageOfDatasets list_datasets(limit=limit, offset=offset)
+> PageOfDatasets list_datasets()
 
 Get all datasets
 
@@ -215,10 +232,13 @@ Returns the datasets
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import datanode
-from datanode.rest import ApiException
+from datanode.api import dataset_api
+from datanode.model.page_of_datasets import PageOfDatasets
+from datanode.model.page_limit import PageLimit
+from datanode.model.page_offset import PageOffset
+from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -230,15 +250,17 @@ configuration = datanode.Configuration(
 # Enter a context with an instance of the API client
 with datanode.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = datanode.DatasetApi(api_client)
-    limit = 10 # int | Maximum number of results returned (optional) (default to 10)
-offset = 0 # int | Index of the first result that must be returned (optional) (default to 0)
+    api_instance = dataset_api.DatasetApi(api_client)
+    limit = PageLimit(10) # PageLimit | Maximum number of results returned (optional)
+    offset = PageOffset(0) # PageOffset | Index of the first result that must be returned (optional)
 
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # Get all datasets
         api_response = api_instance.list_datasets(limit=limit, offset=offset)
         pprint(api_response)
-    except ApiException as e:
+    except datanode.ApiException as e:
         print("Exception when calling DatasetApi->list_datasets: %s\n" % e)
 ```
 
@@ -246,8 +268,8 @@ offset = 0 # int | Index of the first result that must be returned (optional) (d
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| Maximum number of results returned | [optional] [default to 10]
- **offset** | **int**| Index of the first result that must be returned | [optional] [default to 0]
+ **limit** | **PageLimit**| Maximum number of results returned | [optional]
+ **offset** | **PageOffset**| Index of the first result that must be returned | [optional]
 
 ### Return type
 
