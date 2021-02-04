@@ -95,6 +95,19 @@ def list_annotations(data_node_host, dataset_id, annotation_store_id, output):
     utils.stdout_or_json(list(annotations), output)
 
 
+@cli.command()
+@click.option('--data_node_host', help='Data node host',
+              default=DATA_NODE_HOST, show_default=True)
+@click.option('--output', help='Output json filepath', type=click.Path())
+def list_datasets(data_node_host, output):
+    """List annotations of a NLP data node annotation store."""
+    # Create annotation store object
+    datasets = client.list_datasets(
+        host=data_node_host
+    )
+    utils.stdout_or_json(list(datasets), output)
+
+
 # @cli.command()
 # @click.argument('noteid', type=click.INT)
 # @click.option('--output', help='Output json filepath', type=click.Path())

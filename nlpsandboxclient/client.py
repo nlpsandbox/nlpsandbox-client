@@ -2,7 +2,7 @@
 from typing import List, Iterator
 
 import datanode
-from datanode.api import annotation_store_api, annotation_api, note_api
+from datanode.api import annotation_store_api, annotation_api, dataset_api, note_api
 from datanode.models import Annotation, AnnotationStore
 import annotator
 from annotator.api import (text_date_annotation_api,
@@ -358,3 +358,38 @@ def get_annotator(host: str) -> Tool:
         tool_instance = tool_api.ToolApi(api_client)
         tool_info = tool_instance.get_tool()
     return tool_info
+
+
+def list_datasets(host: str) -> List[dict]:
+    """Get all datasets
+
+    Args:
+        host: Data node host IP
+
+    Yields:
+        list of datasets.
+
+    Examples:
+        >>> datasets = list_datasets(host="0.0.0.0/api/v1")
+        >>> list(datasets)[0]
+        >>> {
+        >>>    "name": "datasets/testing"
+        >>> }
+    """
+    configuration = datanode.Configuration(host=host)
+    offset = 0
+    limit = 10
+    with datanode.ApiClient(configuration) as api_client:
+        api_instance = dataset_api.DatasetApi(api_client)
+        # Obtain all clinical notes
+        next_page = True
+        while next_page:
+            datasets = api_instance.list_datasets(offset=offset, limit=limit)
+            # change from snake case to camel case
+            sanitized = api_client.sanitize_for_serialization(
+                datasets.datasets
+            )
+            for dataset in sanitized:
+                yield dataset
+            next_page = datasets.links.next
+            offset += limit
