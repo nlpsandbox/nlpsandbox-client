@@ -1,4 +1,5 @@
 """NLP data node client that interacts with the SDK datanodeclient"""
+import time
 from typing import List, Iterator
 
 import datanode
@@ -149,13 +150,14 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
     configuration = datanode.Configuration(host=host)
     with datanode.ApiClient(configuration) as api_client:
         annotation_instance = annotation_api.AnnotationApi(api_client)
-        new_annotation = utils.change_keys(annotation, utils.camelcase_to_snakecase)
-
+        new_annotation = utils.change_keys(annotation,
+                                           utils.camelcase_to_snakecase)
         annotation_obj = annotation_instance.create_annotation(
             dataset_id=dataset_id,
             annotation_store_id=annotation_store_id,
             annotation_create_request=new_annotation
         )
+    time.sleep(10)
     return annotation_obj
 
 
