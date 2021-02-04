@@ -157,7 +157,7 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
             annotation_store_id=annotation_store_id,
             annotation_create_request=new_annotation
         )
-    time.sleep(10)
+    time.sleep(1)
     return annotation_obj
 
 
