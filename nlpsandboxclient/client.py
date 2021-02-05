@@ -1,5 +1,4 @@
 """NLP data node client that interacts with the SDK datanodeclient"""
-import time
 from typing import List, Iterator
 
 import datanode
