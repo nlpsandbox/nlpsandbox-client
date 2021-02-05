@@ -5,8 +5,10 @@ import sys
 import synapseclient
 
 import datanode
+import datanode.apis
+import datanode.models
 from datanode.rest import ApiException
-
+import nlpsandboxclient.utils
 
 syn = synapseclient.login()
 # Defining the host is optional and defaults to http://example.com/api/v1
@@ -26,12 +28,12 @@ json_ent = syn.get("syn23593068")
 json_filename = json_ent.path
 
 with datanode.ApiClient(configuration) as api_client:
-    dataset_api = datanode.DatasetApi(api_client)
-    fhir_store_api = datanode.FhirStoreApi(api_client)
-    annotation_store_api = datanode.AnnotationStoreApi(api_client)
-    patient_api = datanode.PatientApi(api_client)
-    note_api = datanode.NoteApi(api_client)
-    annotation_api = datanode.AnnotationApi(api_client)
+    dataset_api = datanode.apis.DatasetApi(api_client)
+    fhir_store_api = datanode.apis.FhirStoreApi(api_client)
+    annotation_store_api = datanode.apis.AnnotationStoreApi(api_client)
+    patient_api = datanode.apis.PatientApi(api_client)
+    note_api = datanode.apis.NoteApi(api_client)
+    annotation_api = datanode.apis.AnnotationApi(api_client)
 
     try:
         # get the dataset
@@ -42,7 +44,7 @@ with datanode.ApiClient(configuration) as api_client:
             try:
                 dataset = dataset_api.create_dataset(
                     dataset_id,
-                    body=datanode.Dataset()
+                    body=datanode.models.Dataset()
                 )
             except ApiException as e:
                 print("Exception when calling DatasetApi->create_dataset: %s\n" % e)
@@ -50,7 +52,6 @@ with datanode.ApiClient(configuration) as api_client:
         else:
             print("Exception when calling DatasetApi->get_dataset: %s\n" % e)
             sys.exit(-1)
-
     try:
         # get the FHIR store
         fhir_store = fhir_store_api.get_fhir_store(dataset_id, fhir_store_id)
@@ -61,7 +62,7 @@ with datanode.ApiClient(configuration) as api_client:
                 fhir_store = fhir_store_api.create_fhir_store(
                     dataset_id,
                     fhir_store_id,
-                    body=datanode.FhirStore()
+                    body={}
                 )
             except ApiException as e:
                 print("Exception when calling FhirStoreApi->create_fhir_store: %s\n" % e)
@@ -69,7 +70,6 @@ with datanode.ApiClient(configuration) as api_client:
         else:
             print("Exception when calling FhirStoreApi->get_fhir_store: %s\n" % e)
             sys.exit(-1)
-
     try:
         # get the annotation store
         annotation_store = annotation_store_api.get_annotation_store(dataset_id, annotation_store_id)
@@ -80,7 +80,7 @@ with datanode.ApiClient(configuration) as api_client:
                 annotation_store = annotation_store_api.create_annotation_store(
                     dataset_id,
                     annotation_store_id,
-                    body=datanode.AnnotationStore()
+                    body={}
                 )
             except ApiException as e:
                 print("Exception when calling AnnotationStoreApi->create_annotation_store: %s\n" % e)
@@ -99,8 +99,10 @@ with datanode.ApiClient(configuration) as api_client:
         # patient_bundles = patient_bundles[:1]
 
     for patient_bundle in patient_bundles:
-        patient = patient_bundle['patient']
-
+        patient = nlpsandboxclient.utils.change_keys(
+            patient_bundle['patient'],
+            nlpsandboxclient.utils.camelcase_to_snakecase
+        )
         try:
             # Create a FHIR Patient
             patient = patient_api.create_patient(
@@ -114,8 +116,11 @@ with datanode.ApiClient(configuration) as api_client:
             # note_bundles = note_bundles[:1]
 
             for note_bundle in note_bundles:
-                note = note_bundle['note']
-                note['patientId'] = patient.name.split("/")[-1]
+                note = nlpsandboxclient.utils.change_keys(
+                    note_bundle['note'],
+                    nlpsandboxclient.utils.camelcase_to_snakecase
+                )
+                note['patient_id'] = patient.name.split("/")[-1]
                 try:
                     note = note_api.create_note(
                         dataset_id,
@@ -132,11 +137,15 @@ with datanode.ApiClient(configuration) as api_client:
                         fhir_store_name=fhir_store.name,
                         note_id=note.name.split("/")[-1]
                     )
+                new_annotation = nlpsandboxclient.utils.change_keys(
+                    annotation,
+                    nlpsandboxclient.utils.camelcase_to_snakecase
+                )
                 try:
                     annotation = annotation_api.create_annotation(
                         dataset_id,
                         annotation_store_id,
-                        annotation_create_request=annotation
+                        annotation_create_request=new_annotation
                     )
                     print(f"annotation: {annotation}")
                 except ApiException as e:
