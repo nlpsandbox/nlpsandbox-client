@@ -155,10 +155,10 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         annotation_obj = annotation_instance.create_annotation(
             dataset_id=dataset_id,
             annotation_store_id=annotation_store_id,
-            annotation_create_request=new_annotation
+            annotation_create_request=new_annotation,
+            async_req=True
         )
-    time.sleep(1)
-    return annotation_obj
+    return annotation_obj.get()
 
 
 def list_annotations(host: str, dataset_id: str,
