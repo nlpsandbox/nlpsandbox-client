@@ -20,6 +20,7 @@ import typing
 from urllib.parse import quote
 from urllib3.fields import RequestField
 
+
 from datanode import rest
 from datanode.configuration import Configuration
 from datanode.exceptions import ApiTypeError, ApiValueError, ApiException
