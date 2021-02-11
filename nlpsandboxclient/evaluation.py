@@ -203,7 +203,7 @@ class Evaluation(metaclass=ABCMeta):
         self.print_out(tp, fp, fn, "token", "strict")
 
     def print_out(self, tp, fp, fn, type_up, type_lower):
-        if self.evaluation_type == "date" or self.evaluation_type == "person" :
+        if self.evaluation_type == "date" or self.evaluation_type == "person":
             precision = "NA"
             recall = "NA"
             F1 = "NA"
