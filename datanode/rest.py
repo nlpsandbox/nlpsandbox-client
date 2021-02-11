@@ -93,7 +93,6 @@ class RESTClientObject(object):
                 ca_certs=configuration.ssl_ca_cert,
                 cert_file=configuration.cert_file,
                 key_file=configuration.key_file,
-                retries=retries
                 **addition_pool_args
             )
 
