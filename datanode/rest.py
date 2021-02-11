@@ -85,7 +85,7 @@ class RESTClientObject(object):
                 key_file=configuration.key_file,
                 proxy_url=configuration.proxy,
                 proxy_headers=configuration.proxy_headers,
-                retries=retries
+                retries=retries,
                 **addition_pool_args
             )
         else:
@@ -96,7 +96,7 @@ class RESTClientObject(object):
                 ca_certs=configuration.ssl_ca_cert,
                 cert_file=configuration.cert_file,
                 key_file=configuration.key_file,
-                retries=retries
+                retries=retries,
                 **addition_pool_args
             )
 
