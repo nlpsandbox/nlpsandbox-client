@@ -81,7 +81,6 @@ class PatientCreateRequest(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'identifier': (str,),  # noqa: E501
             'gender': (str,),  # noqa: E501
         }
 
@@ -91,7 +90,6 @@ class PatientCreateRequest(ModelNormal):
 
 
     attribute_map = {
-        'identifier': 'identifier',  # noqa: E501
         'gender': 'gender',  # noqa: E501
     }
 
@@ -141,7 +139,6 @@ class PatientCreateRequest(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            identifier (str): An identifier for this patient. [optional]  # noqa: E501
             gender (str): Gender of the patient. [optional]  # noqa: E501
         """
 

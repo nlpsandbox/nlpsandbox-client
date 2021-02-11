@@ -103,7 +103,7 @@ def get_annotation_store(host: str, dataset_id: str,
 
 
 def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
-                     annotation: dict) -> Annotation:
+                     annotation_id: str, annotation: dict) -> Annotation:
     """Store annotation
 
     Args:
@@ -142,7 +142,8 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         >>> annotation = store_annotation(host="0.0.0.0/api/v1",
         >>>                               dataset_id="awesome-dataset",
         >>>                               annotation_store_id="awesome-annotation-store",
-        >>>                               annotation_create_request=example_annotation)
+        >>>                               annotation_id="awesome-id",
+        >>>                               annotation=example_annotation)
 
     """
 
@@ -154,6 +155,7 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         annotation_obj = annotation_instance.create_annotation(
             dataset_id=dataset_id,
             annotation_store_id=annotation_store_id,
+            annotation_id=annotation_id,
             annotation_create_request=new_annotation,
             async_req=True
         )

@@ -102,10 +102,10 @@ class PageOffset(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (int): Index of the first result that must be returned. if omitted defaults to 0  # noqa: E501
+            args[0] (int): The index of the first result that must be returned. if omitted defaults to 0  # noqa: E501
 
         Keyword Args:
-            value (int): Index of the first result that must be returned. if omitted defaults to 0  # noqa: E501
+            value (int): The index of the first result that must be returned. if omitted defaults to 0  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.

@@ -30,10 +30,12 @@ from datanode.model_utils import (  # noqa: F401
 )
 
 def lazy_import():
+    from datanode.model.annotation_name import AnnotationName
     from datanode.model.annotation_source import AnnotationSource
     from datanode.model.text_date_annotation import TextDateAnnotation
     from datanode.model.text_person_name_annotation import TextPersonNameAnnotation
     from datanode.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+    globals()['AnnotationName'] = AnnotationName
     globals()['AnnotationSource'] = AnnotationSource
     globals()['TextDateAnnotation'] = TextDateAnnotation
     globals()['TextPersonNameAnnotation'] = TextPersonNameAnnotation
@@ -86,7 +88,7 @@ class Annotation(ModelNormal):
         """
         lazy_import()
         return {
-            'name': (str,),  # noqa: E501
+            'name': (AnnotationName,),  # noqa: E501
             'annotation_source': (AnnotationSource,),  # noqa: E501
             'text_date_annotations': ([TextDateAnnotation],),  # noqa: E501
             'text_person_name_annotations': ([TextPersonNameAnnotation],),  # noqa: E501
@@ -152,7 +154,7 @@ class Annotation(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            name (str): Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}. [optional]  # noqa: E501
+            name (AnnotationName): [optional]  # noqa: E501
             annotation_source (AnnotationSource): [optional]  # noqa: E501
             text_date_annotations ([TextDateAnnotation]): Date annotations in a text. [optional]  # noqa: E501
             text_person_name_annotations ([TextPersonNameAnnotation]): Person name annotations in a text. [optional]  # noqa: E501

@@ -116,8 +116,11 @@ class AnnotationCreateRequest(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, *args, **kwargs):  # noqa: E501
+    def __init__(self, annotation_source, *args, **kwargs):  # noqa: E501
         """AnnotationCreateRequest - a model defined in OpenAPI
+
+        Args:
+            annotation_source (AnnotationSource):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -150,7 +153,6 @@ class AnnotationCreateRequest(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            annotation_source (AnnotationSource): [optional]  # noqa: E501
             text_date_annotations ([TextDateAnnotation]): Date annotations in a text. [optional]  # noqa: E501
             text_person_name_annotations ([TextPersonNameAnnotation]): Person name annotations in a text. [optional]  # noqa: E501
             text_physical_address_annotations ([TextPhysicalAddressAnnotation]): Physical address annotations in a text. [optional]  # noqa: E501
@@ -179,6 +181,7 @@ class AnnotationCreateRequest(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
+        self.annotation_source = annotation_source
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

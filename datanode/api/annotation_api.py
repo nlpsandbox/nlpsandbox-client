@@ -25,6 +25,7 @@ from datanode.model_utils import (  # noqa: F401
 from datanode.model.annotation import Annotation
 from datanode.model.annotation_create_request import AnnotationCreateRequest
 from datanode.model.annotation_create_response import AnnotationCreateResponse
+from datanode.model.annotation_id import AnnotationId
 from datanode.model.annotation_store_id import AnnotationStoreId
 from datanode.model.dataset_id import DatasetId
 from datanode.model.error import Error
@@ -50,6 +51,7 @@ class AnnotationApi(object):
             self,
             dataset_id,
             annotation_store_id,
+            annotation_id,
             **kwargs
         ):
             """Create an annotation  # noqa: E501
@@ -58,12 +60,13 @@ class AnnotationApi(object):
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
 
-            >>> thread = api.create_annotation(dataset_id, annotation_store_id, async_req=True)
+            >>> thread = api.create_annotation(dataset_id, annotation_store_id, annotation_id, async_req=True)
             >>> result = thread.get()
 
             Args:
                 dataset_id (DatasetId): The ID of the dataset
                 annotation_store_id (AnnotationStoreId): The ID of the annotation store
+                annotation_id (AnnotationId): The ID of the annotation that is being created
 
             Keyword Args:
                 annotation_create_request (AnnotationCreateRequest): [optional]
@@ -115,6 +118,8 @@ class AnnotationApi(object):
                 dataset_id
             kwargs['annotation_store_id'] = \
                 annotation_store_id
+            kwargs['annotation_id'] = \
+                annotation_id
             return self.call_with_http_info(**kwargs)
 
         self.create_annotation = Endpoint(
@@ -130,11 +135,13 @@ class AnnotationApi(object):
                 'all': [
                     'dataset_id',
                     'annotation_store_id',
+                    'annotation_id',
                     'annotation_create_request',
                 ],
                 'required': [
                     'dataset_id',
                     'annotation_store_id',
+                    'annotation_id',
                 ],
                 'nullable': [
                 ],
@@ -153,16 +160,20 @@ class AnnotationApi(object):
                         (DatasetId,),
                     'annotation_store_id':
                         (AnnotationStoreId,),
+                    'annotation_id':
+                        (AnnotationId,),
                     'annotation_create_request':
                         (AnnotationCreateRequest,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
                     'annotation_store_id': 'annotationStoreId',
+                    'annotation_id': 'annotationId',
                 },
                 'location_map': {
                     'dataset_id': 'path',
                     'annotation_store_id': 'path',
+                    'annotation_id': 'query',
                     'annotation_create_request': 'body',
                 },
                 'collection_format_map': {
@@ -199,7 +210,7 @@ class AnnotationApi(object):
             Args:
                 dataset_id (DatasetId): The ID of the dataset
                 annotation_store_id (FhirStoreId): The ID of the annotation store
-                annotation_id (str): The ID of the annotation
+                annotation_id (AnnotationId): The ID of the annotation
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -292,7 +303,7 @@ class AnnotationApi(object):
                     'annotation_store_id':
                         (FhirStoreId,),
                     'annotation_id':
-                        (str,),
+                        (AnnotationId,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -336,7 +347,7 @@ class AnnotationApi(object):
             Args:
                 dataset_id (DatasetId): The ID of the dataset
                 annotation_store_id (FhirStoreId): The ID of the annotation store
-                annotation_id (str): The ID of the annotation
+                annotation_id (AnnotationId): The ID of the annotation
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -429,7 +440,7 @@ class AnnotationApi(object):
                     'annotation_store_id':
                         (FhirStoreId,),
                     'annotation_id':
-                        (str,),
+                        (AnnotationId,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',

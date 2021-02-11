@@ -28,6 +28,7 @@ from datanode.model.fhir_store_id import FhirStoreId
 from datanode.model.note import Note
 from datanode.model.note_create_request import NoteCreateRequest
 from datanode.model.note_create_response import NoteCreateResponse
+from datanode.model.note_id import NoteId
 from datanode.model.page_limit import PageLimit
 from datanode.model.page_of_notes import PageOfNotes
 from datanode.model.page_offset import PageOffset
@@ -49,6 +50,7 @@ class NoteApi(object):
             self,
             dataset_id,
             fhir_store_id,
+            note_id,
             **kwargs
         ):
             """Create a note  # noqa: E501
@@ -57,12 +59,13 @@ class NoteApi(object):
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
 
-            >>> thread = api.create_note(dataset_id, fhir_store_id, async_req=True)
+            >>> thread = api.create_note(dataset_id, fhir_store_id, note_id, async_req=True)
             >>> result = thread.get()
 
             Args:
                 dataset_id (DatasetId): The ID of the dataset
                 fhir_store_id (FhirStoreId): The ID of the FHIR store
+                note_id (NoteId): The ID of the note that is being created
 
             Keyword Args:
                 note_create_request (NoteCreateRequest): [optional]
@@ -114,6 +117,8 @@ class NoteApi(object):
                 dataset_id
             kwargs['fhir_store_id'] = \
                 fhir_store_id
+            kwargs['note_id'] = \
+                note_id
             return self.call_with_http_info(**kwargs)
 
         self.create_note = Endpoint(
@@ -129,11 +134,13 @@ class NoteApi(object):
                 'all': [
                     'dataset_id',
                     'fhir_store_id',
+                    'note_id',
                     'note_create_request',
                 ],
                 'required': [
                     'dataset_id',
                     'fhir_store_id',
+                    'note_id',
                 ],
                 'nullable': [
                 ],
@@ -152,16 +159,20 @@ class NoteApi(object):
                         (DatasetId,),
                     'fhir_store_id':
                         (FhirStoreId,),
+                    'note_id':
+                        (NoteId,),
                     'note_create_request':
                         (NoteCreateRequest,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
                     'fhir_store_id': 'fhirStoreId',
+                    'note_id': 'noteId',
                 },
                 'location_map': {
                     'dataset_id': 'path',
                     'fhir_store_id': 'path',
+                    'note_id': 'query',
                     'note_create_request': 'body',
                 },
                 'collection_format_map': {
@@ -198,7 +209,7 @@ class NoteApi(object):
             Args:
                 dataset_id (DatasetId): The ID of the dataset
                 fhir_store_id (FhirStoreId): The ID of the FHIR store
-                note_id (str): The ID of the note
+                note_id (NoteId): The ID of the note
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -291,7 +302,7 @@ class NoteApi(object):
                     'fhir_store_id':
                         (FhirStoreId,),
                     'note_id':
-                        (str,),
+                        (NoteId,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -335,7 +346,7 @@ class NoteApi(object):
             Args:
                 dataset_id (DatasetId): The ID of the dataset
                 fhir_store_id (FhirStoreId): The ID of the FHIR store
-                note_id (str): The ID of the note
+                note_id (NoteId): The ID of the note
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -428,7 +439,7 @@ class NoteApi(object):
                     'fhir_store_id':
                         (FhirStoreId,),
                     'note_id':
-                        (str,),
+                        (NoteId,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
