@@ -15,7 +15,6 @@ import logging
 import re
 import ssl
 from urllib.parse import urlencode
-from urllib3 import Retry
 
 import urllib3
 
