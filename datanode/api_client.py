@@ -14,11 +14,9 @@ from multiprocessing.pool import ThreadPool
 import io
 import os
 import re
-import requests
 import typing
 from urllib.parse import quote
 from urllib3.fields import RequestField
-import backoff
 
 from datanode import rest
 from datanode.configuration import Configuration
@@ -328,8 +326,6 @@ class ApiClient(object):
         )
         return deserialized_data
 
-    @backoff.on_exception(backoff.expo,
-                          requests.exceptions.RequestException)
     def call_api(
         self,
         resource_path: str,
