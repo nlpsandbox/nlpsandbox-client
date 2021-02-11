@@ -251,11 +251,11 @@ class DateEvaluation(Evaluation):
 
 class PersonNameEvaluation(Evaluation):
     evaluation_type = "person"
-    annotation = "person_type"
+    annotation = "personType"
     col = "person_name_annotations"
 
 
 class PhysicalAddressEvaluation(Evaluation):
     evaluation_type = "address"
-    annotation = "address_type"
+    annotation = "addressType"
     col = "physical_location_annotations"
