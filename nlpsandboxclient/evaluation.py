@@ -208,9 +208,9 @@ class Evaluation(metaclass=ABCMeta):
             recall = "NA"
             F1 = "NA"
         else:
-        # precision (P): TP / (TP + FP)
-        # Recall (R): TP / (TP + FN)
-        # F1 score: 2 * ((P * R) / (P + R))
+            # precision (P): TP / (TP + FP)
+            # Recall (R): TP / (TP + FN)
+            # F1 score: 2 * ((P * R) / (P + R))
             precision = round(tp / (tp + fp), 2)
             recall = round(tp / (tp + fn), 2)
             if precision + recall == 0:
