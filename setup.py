@@ -28,7 +28,8 @@ setuptools.setup(
         'six >= 1.10',
         'synapseclient >= 2.2.0',
         'urllib3 >= 1.15.1',
-        'nulltype >= 2.3.1'
+        'nulltype >= 2.3.1',
+        'backoff >= 1.10.0'
     ],
 
     # metadata to display on PyPI
