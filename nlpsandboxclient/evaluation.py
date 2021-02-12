@@ -206,7 +206,7 @@ class Evaluation(metaclass=ABCMeta):
         if self.evaluation_type == "date" or self.evaluation_type == "person":
             precision = float('nan')
             recall = float('nan')
-            F1 = "float('nan')
+            F1 = float('nan')
         else:
             # precision (P): TP / (TP + FP)
             # Recall (R): TP / (TP + FN)
