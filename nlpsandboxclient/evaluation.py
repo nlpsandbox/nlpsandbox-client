@@ -204,9 +204,9 @@ class Evaluation(metaclass=ABCMeta):
 
     def print_out(self, tp, fp, fn, type_up, type_lower):
         if self.evaluation_type == "date" or self.evaluation_type == "person":
-            precision = "NA"
-            recall = "NA"
-            F1 = "NA"
+            precision = float('nan')
+            recall = float('nan')
+            F1 = "float('nan')
         else:
             # precision (P): TP / (TP + FP)
             # Recall (R): TP / (TP + FN)
