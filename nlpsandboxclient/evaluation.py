@@ -203,11 +203,6 @@ class Evaluation(metaclass=ABCMeta):
         self.print_out(tp, fp, fn, "token", "strict")
 
     def print_out(self, tp, fp, fn, type_up, type_lower):
-        # if self.evaluation_type == "date" or self.evaluation_type == "person":
-        #     precision = float('nan')
-        #     recall = float('nan')
-        #     F1 = float('nan')
-        # else:
         # precision (P): TP / (TP + FP)
         # Recall (R): TP / (TP + FN)
         # F1 score: 2 * ((P * R) / (P + R))
