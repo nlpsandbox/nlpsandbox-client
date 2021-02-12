@@ -179,4 +179,3 @@ with datanode.ApiClient(configuration) as api_client:
                 note_id,
                 annotation_create_request=new_annotation
             )
-
