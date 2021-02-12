@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # Author: Yao Yan
-# Description: This script is used to evaluate the annotation by participants with
-# gold standards, we will conduct the annotation based on subcategory: date, person name,
-# physical address
+# Description: This script is used to evaluate the annotation by participants
+# with gold standards, we will conduct the evaluation based on subcategory:
+# date, person name,physical address
+
 from abc import ABCMeta
 import json
 import os
@@ -203,7 +204,7 @@ class Evaluation(metaclass=ABCMeta):
         self.print_out(tp, fp, fn, "token", "strict")
 
     def print_out(self, tp, fp, fn, type_up, type_lower):
-        if self.evaluation_type == "date" or self.evaluation_type == "person":
+        if type_up == self.evaluation_type and (self.evaluation_type == "date" or self.evaluation_type == "person"):
             precision = float('nan')
             recall = float('nan')
             F1 = float('nan')
