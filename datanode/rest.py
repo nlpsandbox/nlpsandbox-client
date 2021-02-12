@@ -1,7 +1,7 @@
 """
     NLP Sandbox Data Node API
 
-    # Overview The NLP Sandbox Data Node is a repository of data used to benchmark NLP Tools like the NLP Sandbox Date Annotator and Person Name Annotator. The resources that can be stored in this Data Node and the operations supported are listed below: - Create and manage datasets - Create and manage FHIR stores   - Store and retrieve FHIR patient profiles   - Store and retrieve clinical notes - Create and manage annotation stores   - Store and retrieve text annotations   # noqa: E501
+    The OpenAPI specification implemented by NLP Sandbox Data Nodes. # Overview A NLP Sandbox Data Node is a repository of clinical notes that implements this OpenAPI specification so that other services in the NLP Sandbox ecosystem can access them. For example, a client requests data from a Data Node before passing them as input to an NLP Tool like a Date Annotator, Person Name Annotator, etc. For the sake of benchmarking NLP Tool, a Data Node can also give access to the gold standard that the NLP Tool is expected to infer (e.g. annotations).   # noqa: E501
 
     The version of the OpenAPI document: 1.0.0
     Contact: thomas.schaffter@sagebionetworks.org
@@ -15,6 +15,7 @@ import logging
 import re
 import ssl
 from urllib.parse import urlencode
+from urllib3 import Retry
 
 import urllib3
 
@@ -49,6 +50,7 @@ class RESTClientObject(object):
         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/connectionpool.py#L680  # noqa: E501
         # maxsize is the number of requests to host that are allowed in parallel  # noqa: E501
         # Custom SSL certificates and client certificates: http://urllib3.readthedocs.io/en/latest/advanced-usage.html  # noqa: E501
+        retries = Retry(total=5, backoff_factor=2)
 
         # cert_reqs
         if configuration.verify_ssl:
@@ -83,6 +85,7 @@ class RESTClientObject(object):
                 key_file=configuration.key_file,
                 proxy_url=configuration.proxy,
                 proxy_headers=configuration.proxy_headers,
+                retries=retries,
                 **addition_pool_args
             )
         else:
@@ -93,6 +96,7 @@ class RESTClientObject(object):
                 ca_certs=configuration.ssl_ca_cert,
                 cert_file=configuration.cert_file,
                 key_file=configuration.key_file,
+                retries=retries,
                 **addition_pool_args
             )
 
