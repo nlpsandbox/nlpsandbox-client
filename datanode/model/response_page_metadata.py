@@ -84,10 +84,10 @@ class ResponsePageMetadata(ModelNormal):
         """
         lazy_import()
         return {
-            'offset': (PageOffset,),  # noqa: E501
-            'limit': (PageLimit,),  # noqa: E501
             'links': (ResponsePageMetadataLinks,),  # noqa: E501
             'total_results': (int,),  # noqa: E501
+            'offset': (PageOffset,),  # noqa: E501
+            'limit': (PageLimit,),  # noqa: E501
         }
 
     @cached_property
@@ -96,10 +96,10 @@ class ResponsePageMetadata(ModelNormal):
 
 
     attribute_map = {
-        'offset': 'offset',  # noqa: E501
-        'limit': 'limit',  # noqa: E501
         'links': 'links',  # noqa: E501
         'total_results': 'totalResults',  # noqa: E501
+        'offset': 'offset',  # noqa: E501
+        'limit': 'limit',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -114,12 +114,10 @@ class ResponsePageMetadata(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, offset, limit, links, total_results, *args, **kwargs):  # noqa: E501
+    def __init__(self, links, total_results, *args, **kwargs):  # noqa: E501
         """ResponsePageMetadata - a model defined in OpenAPI
 
         Args:
-            offset (PageOffset):
-            limit (PageLimit):
             links (ResponsePageMetadataLinks):
             total_results (int): Total number of results in the result set
 
@@ -154,6 +152,8 @@ class ResponsePageMetadata(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            offset (PageOffset): [optional]  # noqa: E501
+            limit (PageLimit): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -179,8 +179,6 @@ class ResponsePageMetadata(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.offset = offset
-        self.limit = limit
         self.links = links
         self.total_results = total_results
         for var_name, var_value in kwargs.items():
