@@ -400,11 +400,20 @@ def get_annotator(host: str) -> Tool:
     return tool_info
 
 
-def store_annotations(host, dataset_id, annotation_store_id,
-                      annotations, delete_existing_annotations=True):
+def store_annotations(host: str, dataset_id: str, annotation_store_id: str,
+                      annotations: dict,
+                      delete_existing_annotations: bool = True):
     """Store submission annotated notes.  Delete an annotation store if
     the annotation store exists, then create a new annotation store, then
-    store the annotation
+    store the annotation.
+
+    Args:
+        host: Data node host IP
+        dataset_id: Dataset Id
+        annotation_store_id: Annotation store Id
+        annotations: Data Node Annotations
+        delete_existing_annotations: To delete existing annotation store.
+                                     Default is True.
     """
     configuration = datanode.Configuration(host=host)
     with datanode.ApiClient(configuration) as api_client:
