@@ -1,29 +1,14 @@
+"""
+Example code to push a dataset into the data node. A complete
+dataset includes
+"""
 import json
-import sys
-
-import synapseclient
 
 import datanode
 import datanode.apis
 import datanode.models
 from datanode.rest import ApiException
 import nlpsandboxclient.utils
-
-syn = synapseclient.login()
-# Defining the host is optional and defaults to http://example.com/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-host = "http://10.23.54.142/api/v1"
-# host = "http://localhost:8080/api/v1"
-configuration = datanode.Configuration(
-    host=host
-)
-
-dataset_id = '2014-i2b2-20201203'
-fhir_store_id = 'evaluation'
-annotation_store_id = 'goldstandard'
-# Get evaluation-patient-bundles.json
-json_ent = syn.get("syn23593068")
-json_filename = json_ent.path
 
 
 def get_or_create_resource(get_func, create_func, *args, **kwargs):
@@ -52,11 +37,24 @@ def get_or_create_resource(get_func, create_func, *args, **kwargs):
                 )
             except ApiException as e:
                 print(f"Exception when calling {create_func}: {e}\n")
-                sys.exit(-1)
+                raise
         else:
             print(f"Exception when calling {get_func}: {e}\n")
-            sys.exit(-1)
+            raise
     return resource
+
+
+# Defining the host is optional and defaults to http://example.com/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+host = "http://localhost:8080/api/v1"
+configuration = datanode.Configuration(
+    host=host
+)
+
+dataset_id = 'test-dataset'
+fhir_store_id = 'evaluation'
+annotation_store_id = 'goldstandard'
+json_filename = "example-patient-bundles.json"
 
 
 with datanode.ApiClient(configuration) as api_client:
@@ -83,10 +81,10 @@ with datanode.ApiClient(configuration) as api_client:
                 )
             except ApiException as e:
                 print("Exception when calling DatasetApi->create_dataset: %s\n" % e)
-                sys.exit(-1)
+                raise
         else:
             print("Exception when calling DatasetApi->get_dataset: %s\n" % e)
-            sys.exit(-1)
+            raise
     # Get or create FHIR store
     fhir_store = get_or_create_resource(
         fhir_store_api.get_fhir_store,
