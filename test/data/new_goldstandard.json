@@ -19,7 +19,7 @@
                 "start": 20,
                 "length": 8,
                 "text": "Dr.Smith",
-                "person_type": "doctor"
+                "personType": "doctor"
             }
         ],
         "textPhysicalAddressAnnotations": [
@@ -27,7 +27,7 @@
                 "start": 40,
                 "length": 7,
                 "text": "Seattle",
-                "address_type": "city"
+                "addressType": "city"
             }
         ]
     }, {
@@ -50,7 +50,7 @@
                 "start": 45,
                 "length": 9,
                 "text": "Jon Smith",
-                "person_type": "patient"
+                "personType": "patient"
             }
         ],
         "textPhysicalAddressAnnotations": [
@@ -58,7 +58,7 @@
                 "start": 98,
                 "length": 2,
                 "text": "WA",
-                "address_type": "state"
+                "addressType": "state"
             }
         ]
     }, {
@@ -81,7 +81,7 @@
                 "start": 25,
                 "length": 6,
                 "text": "Jon Ki",
-                "person_type": "patient"
+                "personType": "patient"
             }
         ],
         "textPhysicalAddressAnnotations": []
@@ -105,7 +105,7 @@
                 "start": 20,
                 "length": 11,
                 "text": "DrSmith Ke",
-                "person_type": "doctor"
+                "personType": "doctor"
             }
         ],
         "textPhysicalAddressAnnotations": [
@@ -113,7 +113,7 @@
                 "start": 22,
                 "length": 11,
                 "text": "UW medicine",
-                "address_type": "hospitalization"
+                "addressType": "hospitalization"
             }
         ]
     }, {
@@ -130,7 +130,7 @@
                 "start": 25,
                 "length": 7,
                 "text": "David's",
-                "address_type": "organization"
+                "addressType": "organization"
             }
         ]
     }

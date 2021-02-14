@@ -54,7 +54,9 @@ def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
                 notes.notes
             )
             for note in sanitized_notes:
-                note["note_name"] = f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note['id']}"
+                # note_name is added for convenience for the controller as
+                # it is needed to store the annotations
+                note["note_name"] = f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note['identifier']}"
                 yield note
             next_page = notes.links.next
             offset += limit
@@ -102,8 +104,42 @@ def get_annotation_store(host: str, dataset_id: str,
     return annotation_store_obj
 
 
-def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
-                     annotation: dict) -> Annotation:
+def get_annotation(host: str, dataset_id: str,
+                   annotation_store_id: str,
+                   annotation_id: str) -> Annotation:
+    """Gets an annotation
+
+    Args:
+        host: Data node host IP
+        dataset_id: Dataset Id
+        annotation_store_id: Annotation store Id
+        annotation_id: Annotation Id
+
+    Returns:
+        Data node Annotation object
+
+    Examples:
+        >>> annotation = get_annotation(
+        >>>     host="0.0.0.0/api/v1", dataset_id="awesome-dataset",
+        >>>     annotation_store_id="awesome-annotation-store",
+        >>>     annotation_id="awesome-annotation"
+        >>> )
+
+    """
+    configuration = datanode.Configuration(host=host)
+    with datanode.ApiClient(configuration) as api_client:
+        annot_instance = annotation_api.AnnotationApi(
+            api_client
+        )
+        # get the annotation store
+        annotation_store_obj = annot_instance.get_annotation(
+            dataset_id, annotation_store_id, annotation_id
+        )
+    return annotation_store_obj
+
+
+def _store_annotation(host: str, dataset_id: str, annotation_store_id: str,
+                      annotation_id: str, annotation: dict) -> Annotation:
     """Store annotation
 
     Args:
@@ -142,7 +178,8 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         >>> annotation = store_annotation(host="0.0.0.0/api/v1",
         >>>                               dataset_id="awesome-dataset",
         >>>                               annotation_store_id="awesome-annotation-store",
-        >>>                               annotation_create_request=example_annotation)
+        >>>                               annotation_id="awesome-id",
+        >>>                               annotation=example_annotation)
 
     """
 
@@ -154,6 +191,7 @@ def store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         annotation_obj = annotation_instance.create_annotation(
             dataset_id=dataset_id,
             annotation_store_id=annotation_store_id,
+            annotation_id=annotation_id,
             annotation_create_request=new_annotation,
             async_req=True
         )
@@ -173,9 +211,9 @@ def list_annotations(host: str, dataset_id: str,
         Data node annotation objects
 
     Examples:
-        >>> annotations = get_annotations(host="0.0.0.0/api/v1",
-        >>>                               dataset_id="awesome-dataset",
-        >>>                               annotation_store_id="awesome-annotation-store")
+        >>> annotations = list_annotations(host="0.0.0.0/api/v1",
+        >>>                                dataset_id="awesome-dataset",
+        >>>                                annotation_store_id="awesome-annotation-store")
 
     """
     configuration = datanode.Configuration(host=host)
@@ -359,3 +397,54 @@ def get_annotator(host: str) -> Tool:
         tool_instance = tool_api.ToolApi(api_client)
         tool_info = tool_instance.get_tool()
     return tool_info
+
+
+def store_annotations(host: str, dataset_id: str, annotation_store_id: str,
+                      annotations: dict,
+                      delete_existing_annotations: bool = True):
+    """Store submission annotated notes.  Delete an annotation store if
+    the annotation store exists, then create a new annotation store, then
+    store the annotation.
+
+    Args:
+        host: Data node host IP
+        dataset_id: Dataset Id
+        annotation_store_id: Annotation store Id
+        annotations: Data Node Annotations
+        delete_existing_annotations: To delete existing annotation store.
+                                     Default is True.
+    """
+    configuration = datanode.Configuration(host=host)
+    with datanode.ApiClient(configuration) as api_client:
+        annot_store_instance = annotation_store_api.AnnotationStoreApi(
+            api_client
+        )
+        try:
+            # Always try to delete the annotation store prior to
+            # storing predictions
+            if delete_existing_annotations:
+                annot_store_instance.delete_annotation_store(
+                    dataset_id, annotation_store_id
+                )
+                print("Deleted existing Annotation Store")
+        except datanode.rest.ApiException:
+            pass
+        try:
+            annot_store_instance.create_annotation_store(
+                dataset_id, annotation_store_id, body={}
+            )
+            print("Created Annotation Store")
+        except datanode.rest.ApiException:
+            print("Using existing Annotation Store")
+
+    for annotation in annotations:
+        annotation_id = annotation[
+            'annotation_source'
+        ]['resource_source']['name'].split("/")[-1]
+        _store_annotation(
+            host=host,
+            dataset_id=dataset_id,
+            annotation_store_id=annotation_store_id,
+            annotation_id=annotation_id,
+            annotation=annotation
+        )
