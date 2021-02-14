@@ -1,7 +1,7 @@
 """
-    NLP Sandbox Date Annotator API
+    NLP Sandbox Data Node API
 
-    # Overview The OpenAPI specification implemented by NLP Sandbox Annotators.   # noqa: E501
+    # Overview The NLP Sandbox Data Node is a repository of data used to benchmark NLP Tools like the NLP Sandbox Date Annotator and Person Name Annotator. The resources that can be stored in this Data Node and the operations supported are listed below: - Create and manage datasets - Create and manage FHIR stores   - Store and retrieve FHIR patient profiles   - Store and retrieve clinical notes - Create and manage annotation stores   - Store and retrieve text annotations   # noqa: E501
 
     The version of the OpenAPI document: 1.0.0
     Contact: thomas.schaffter@sagebionetworks.org
@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.patient_id import PatientId
+import datanode
+from datanode.model.patient_id import PatientId
 
 
 class TestPatientId(unittest.TestCase):

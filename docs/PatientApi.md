@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_patient**
-> PatientCreateResponse create_patient(dataset_id, fhir_store_id)
+> PatientCreateResponse create_patient(dataset_id, fhir_store_id, patient_id)
 
 Create a FHIR patient
 
@@ -26,6 +26,7 @@ from datanode.api import patient_api
 from datanode.model.patient_create_response import PatientCreateResponse
 from datanode.model.fhir_store_id import FhirStoreId
 from datanode.model.dataset_id import DatasetId
+from datanode.model.patient_id import PatientId
 from datanode.model.patient_create_request import PatientCreateRequest
 from datanode.model.error import Error
 from pprint import pprint
@@ -42,15 +43,15 @@ with datanode.ApiClient() as api_client:
     api_instance = patient_api.PatientApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
     fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
+    patient_id = PatientId("awesome-patient") # PatientId | The ID of the patient that is being created
     patient_create_request = PatientCreateRequest(
-        identifier="identifier_example",
         gender="male",
     ) # PatientCreateRequest |  (optional)
 
     # example passing only required values which don't have defaults set
     try:
         # Create a FHIR patient
-        api_response = api_instance.create_patient(dataset_id, fhir_store_id)
+        api_response = api_instance.create_patient(dataset_id, fhir_store_id, patient_id)
         pprint(api_response)
     except datanode.ApiException as e:
         print("Exception when calling PatientApi->create_patient: %s\n" % e)
@@ -59,7 +60,7 @@ with datanode.ApiClient() as api_client:
     # and optional values
     try:
         # Create a FHIR patient
-        api_response = api_instance.create_patient(dataset_id, fhir_store_id, patient_create_request=patient_create_request)
+        api_response = api_instance.create_patient(dataset_id, fhir_store_id, patient_id, patient_create_request=patient_create_request)
         pprint(api_response)
     except datanode.ApiException as e:
         print("Exception when calling PatientApi->create_patient: %s\n" % e)
@@ -71,6 +72,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **DatasetId**| The ID of the dataset |
  **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
+ **patient_id** | **PatientId**| The ID of the patient that is being created |
  **patient_create_request** | [**PatientCreateRequest**](PatientCreateRequest.md)|  | [optional]
 
 ### Return type
@@ -111,6 +113,7 @@ import datanode
 from datanode.api import patient_api
 from datanode.model.fhir_store_id import FhirStoreId
 from datanode.model.dataset_id import DatasetId
+from datanode.model.patient_id import PatientId
 from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
@@ -126,7 +129,7 @@ with datanode.ApiClient() as api_client:
     api_instance = patient_api.PatientApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
     fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
-    patient_id = "507f1f77bcf86cd799439011" # str | The ID of the FHIR patient
+    patient_id = PatientId("awesome-patient") # PatientId | The ID of the FHIR patient
 
     # example passing only required values which don't have defaults set
     try:
@@ -143,7 +146,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **DatasetId**| The ID of the dataset |
  **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
- **patient_id** | **str**| The ID of the FHIR patient |
+ **patient_id** | **PatientId**| The ID of the FHIR patient |
 
 ### Return type
 
@@ -183,6 +186,7 @@ from datanode.api import patient_api
 from datanode.model.fhir_store_id import FhirStoreId
 from datanode.model.dataset_id import DatasetId
 from datanode.model.patient import Patient
+from datanode.model.patient_id import PatientId
 from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
@@ -198,7 +202,7 @@ with datanode.ApiClient() as api_client:
     api_instance = patient_api.PatientApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
     fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
-    patient_id = "507f1f77bcf86cd799439011" # str | The ID of the FHIR patient
+    patient_id = PatientId("awesome-patient") # PatientId | The ID of the FHIR patient
 
     # example passing only required values which don't have defaults set
     try:
@@ -215,7 +219,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **DatasetId**| The ID of the dataset |
  **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
- **patient_id** | **str**| The ID of the FHIR patient |
+ **patient_id** | **PatientId**| The ID of the FHIR patient |
 
 ### Return type
 

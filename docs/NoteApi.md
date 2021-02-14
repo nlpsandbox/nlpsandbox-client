@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_note**
-> NoteCreateResponse create_note(dataset_id, fhir_store_id)
+> NoteCreateResponse create_note(dataset_id, fhir_store_id, note_id)
 
 Create a note
 
@@ -27,6 +27,7 @@ from datanode.model.note_create_request import NoteCreateRequest
 from datanode.model.fhir_store_id import FhirStoreId
 from datanode.model.dataset_id import DatasetId
 from datanode.model.note_create_response import NoteCreateResponse
+from datanode.model.note_id import NoteId
 from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
@@ -42,16 +43,17 @@ with datanode.ApiClient() as api_client:
     api_instance = note_api.NoteApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
     fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
+    note_id = NoteId("awesome-note") # NoteId | The ID of the note that is being created
     note_create_request = NoteCreateRequest(
-        text="On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.",
+        text="On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.",
         note_type="loinc:LP29684-5",
-        patient_id="507f1f77bcf86cd799439011",
+        patient_id=PatientId("awesome-patient"),
     ) # NoteCreateRequest |  (optional)
 
     # example passing only required values which don't have defaults set
     try:
         # Create a note
-        api_response = api_instance.create_note(dataset_id, fhir_store_id)
+        api_response = api_instance.create_note(dataset_id, fhir_store_id, note_id)
         pprint(api_response)
     except datanode.ApiException as e:
         print("Exception when calling NoteApi->create_note: %s\n" % e)
@@ -60,7 +62,7 @@ with datanode.ApiClient() as api_client:
     # and optional values
     try:
         # Create a note
-        api_response = api_instance.create_note(dataset_id, fhir_store_id, note_create_request=note_create_request)
+        api_response = api_instance.create_note(dataset_id, fhir_store_id, note_id, note_create_request=note_create_request)
         pprint(api_response)
     except datanode.ApiException as e:
         print("Exception when calling NoteApi->create_note: %s\n" % e)
@@ -72,6 +74,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **DatasetId**| The ID of the dataset |
  **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
+ **note_id** | **NoteId**| The ID of the note that is being created |
  **note_create_request** | [**NoteCreateRequest**](NoteCreateRequest.md)|  | [optional]
 
 ### Return type
@@ -112,6 +115,7 @@ import datanode
 from datanode.api import note_api
 from datanode.model.fhir_store_id import FhirStoreId
 from datanode.model.dataset_id import DatasetId
+from datanode.model.note_id import NoteId
 from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
@@ -127,7 +131,7 @@ with datanode.ApiClient() as api_client:
     api_instance = note_api.NoteApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
     fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
-    note_id = "507f1f77bcf86cd799439011" # str | The ID of the note
+    note_id = NoteId("awesome-note") # NoteId | The ID of the note
 
     # example passing only required values which don't have defaults set
     try:
@@ -144,7 +148,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **DatasetId**| The ID of the dataset |
  **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
- **note_id** | **str**| The ID of the note |
+ **note_id** | **NoteId**| The ID of the note |
 
 ### Return type
 
@@ -184,6 +188,7 @@ from datanode.api import note_api
 from datanode.model.fhir_store_id import FhirStoreId
 from datanode.model.dataset_id import DatasetId
 from datanode.model.note import Note
+from datanode.model.note_id import NoteId
 from datanode.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
@@ -199,7 +204,7 @@ with datanode.ApiClient() as api_client:
     api_instance = note_api.NoteApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
     fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
-    note_id = "507f1f77bcf86cd799439011" # str | The ID of the note
+    note_id = NoteId("awesome-note") # NoteId | The ID of the note
 
     # example passing only required values which don't have defaults set
     try:
@@ -216,7 +221,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **DatasetId**| The ID of the dataset |
  **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
- **note_id** | **str**| The ID of the note |
+ **note_id** | **NoteId**| The ID of the note |
 
 ### Return type
 

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_annotation**
-> AnnotationCreateResponse create_annotation(dataset_id, annotation_store_id)
+> AnnotationCreateResponse create_annotation(dataset_id, annotation_store_id, annotation_id)
 
 Create an annotation
 
@@ -23,6 +23,7 @@ Create an annotation
 import time
 import datanode
 from datanode.api import annotation_api
+from datanode.model.annotation_id import AnnotationId
 from datanode.model.annotation_create_request import AnnotationCreateRequest
 from datanode.model.dataset_id import DatasetId
 from datanode.model.annotation_create_response import AnnotationCreateResponse
@@ -42,6 +43,7 @@ with datanode.ApiClient() as api_client:
     api_instance = annotation_api.AnnotationApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
     annotation_store_id = AnnotationStoreId("awesome-annotation-store") # AnnotationStoreId | The ID of the annotation store
+    annotation_id = AnnotationId("awesome-annotation") # AnnotationId | The ID of the annotation that is being created
     annotation_create_request = AnnotationCreateRequest(
         annotation_source=AnnotationSource(
             resource_source=ResourceSource(
@@ -62,7 +64,7 @@ with datanode.ApiClient() as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Create an annotation
-        api_response = api_instance.create_annotation(dataset_id, annotation_store_id)
+        api_response = api_instance.create_annotation(dataset_id, annotation_store_id, annotation_id)
         pprint(api_response)
     except datanode.ApiException as e:
         print("Exception when calling AnnotationApi->create_annotation: %s\n" % e)
@@ -71,7 +73,7 @@ with datanode.ApiClient() as api_client:
     # and optional values
     try:
         # Create an annotation
-        api_response = api_instance.create_annotation(dataset_id, annotation_store_id, annotation_create_request=annotation_create_request)
+        api_response = api_instance.create_annotation(dataset_id, annotation_store_id, annotation_id, annotation_create_request=annotation_create_request)
         pprint(api_response)
     except datanode.ApiException as e:
         print("Exception when calling AnnotationApi->create_annotation: %s\n" % e)
@@ -83,6 +85,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **DatasetId**| The ID of the dataset |
  **annotation_store_id** | **AnnotationStoreId**| The ID of the annotation store |
+ **annotation_id** | **AnnotationId**| The ID of the annotation that is being created |
  **annotation_create_request** | [**AnnotationCreateRequest**](AnnotationCreateRequest.md)|  | [optional]
 
 ### Return type
@@ -121,6 +124,7 @@ Deletes the annotation specified
 import time
 import datanode
 from datanode.api import annotation_api
+from datanode.model.annotation_id import AnnotationId
 from datanode.model.fhir_store_id import FhirStoreId
 from datanode.model.dataset_id import DatasetId
 from datanode.model.error import Error
@@ -138,7 +142,7 @@ with datanode.ApiClient() as api_client:
     api_instance = annotation_api.AnnotationApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
     annotation_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the annotation store
-    annotation_id = "507f1f77bcf86cd799439011" # str | The ID of the annotation
+    annotation_id = AnnotationId("awesome-annotation") # AnnotationId | The ID of the annotation
 
     # example passing only required values which don't have defaults set
     try:
@@ -155,7 +159,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **DatasetId**| The ID of the dataset |
  **annotation_store_id** | **FhirStoreId**| The ID of the annotation store |
- **annotation_id** | **str**| The ID of the annotation |
+ **annotation_id** | **AnnotationId**| The ID of the annotation |
 
 ### Return type
 
@@ -192,6 +196,7 @@ Returns the annotation specified
 import time
 import datanode
 from datanode.api import annotation_api
+from datanode.model.annotation_id import AnnotationId
 from datanode.model.fhir_store_id import FhirStoreId
 from datanode.model.annotation import Annotation
 from datanode.model.dataset_id import DatasetId
@@ -210,7 +215,7 @@ with datanode.ApiClient() as api_client:
     api_instance = annotation_api.AnnotationApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
     annotation_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the annotation store
-    annotation_id = "507f1f77bcf86cd799439011" # str | The ID of the annotation
+    annotation_id = AnnotationId("awesome-annotation") # AnnotationId | The ID of the annotation
 
     # example passing only required values which don't have defaults set
     try:
@@ -227,7 +232,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataset_id** | **DatasetId**| The ID of the dataset |
  **annotation_store_id** | **FhirStoreId**| The ID of the annotation store |
- **annotation_id** | **str**| The ID of the annotation |
+ **annotation_id** | **AnnotationId**| The ID of the annotation |
 
 ### Return type
 
