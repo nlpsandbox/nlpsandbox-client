@@ -19,7 +19,7 @@ def cli():
               type=click.Path())
 @click.option('--eval_type', help='Type of evaluation.',
               type=click.Choice(['date', 'person', 'address'],
-                                case_sensitive=False))
+                                case_sensitive=False), required=True)
 def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
     """Evaluate the performance of a prediction file. Example prediction and
     goldstandard files are found in test/data/new_prediction.json and
