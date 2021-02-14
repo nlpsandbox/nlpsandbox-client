@@ -439,8 +439,8 @@ def store_annotations(host: str, dataset_id: str, annotation_store_id: str,
 
     for annotation in annotations:
         annotation_id = annotation[
-            'annotation_source'
-        ]['resource_source']['name'].split("/")[-1]
+            'annotationSource'
+        ]['resourceSource']['name'].split("/")[-1]
         _store_annotation(
             host=host,
             dataset_id=dataset_id,
