@@ -1,6 +1,8 @@
 """NLP data node client that interacts with the SDK datanodeclient"""
-import requests
+import os
 from typing import List, Iterator
+
+import requests
 
 import datanode
 from datanode.api import annotation_store_api, annotation_api, note_api
@@ -349,6 +351,9 @@ def get_tool(host: str) -> Tool:
 
     Returns:
         Service object
+
+    Raises:
+        ValueError: If tool base URL isn't redirected to tool service endpoint
 
     Examples:
         >>> tool = get_tool(host="0.0.0.0/api/v1")

@@ -75,5 +75,12 @@ def get_tool(annotator_host, output):
     utils.stdout_or_json(tool.to_dict(), output)
 
 
+@cli.command(no_args_is_help=True)
+@click.option('--url', help='The url to check', required=True)
+def check_url(url):
+    """Checks if URL is implemented"""
+    utils.check_url(url=url)
+
+
 if __name__ == '__main__':
     cli()
