@@ -69,11 +69,9 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
 @click.option('--annotator_host', help='Annotator host', required=True)
 @click.option('--output', help='Specify output json path',
               type=click.Path())
-def get_annotator(annotator_host, output):
+def get_tool(annotator_host, output):
     """Get annotator tool endpoint"""
-    tool = client.get_annotator(
-        host=annotator_host
-    )
+    tool = client.get_tool(host=annotator_host)
     utils.stdout_or_json(tool.to_dict(), output)
 
 
