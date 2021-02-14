@@ -52,7 +52,6 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
         notes = json.load(note_f)
     all_annotations = []
     for note in notes:
-        note.pop("id")
         note_name = note.pop("note_name")
         annotations = client.annotate_note(host=annotator_host,
                                            note={"note": note},
