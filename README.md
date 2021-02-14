@@ -62,7 +62,7 @@ Run the program
 ## Tests
 
 ```
-nlp-cli evaluate prediction --pred_filepath test/data/new_prediction.json --gold_filepath test/data/new_goldstandard.json --eval_type date
+nlp-cli evaluate prediction --pred_filepath test/data/new_prediction.json --gold_filepath test/data/new_goldstandard.json --eval_type person
 ```
 
 
