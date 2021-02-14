@@ -13,6 +13,8 @@ from annotator.model.error import Error
 from annotator.model.health_check import HealthCheck
 from annotator.model.license import License
 from annotator.model.note import Note
+from annotator.model.note_id import NoteId
+from annotator.model.patient_id import PatientId
 from annotator.model.text_annotation import TextAnnotation
 from annotator.model.text_date_annotation import TextDateAnnotation
 from annotator.model.text_date_annotation_all_of import TextDateAnnotationAllOf
@@ -27,3 +29,4 @@ from annotator.model.text_physical_address_annotation_request import TextPhysica
 from annotator.model.text_physical_address_annotations import TextPhysicalAddressAnnotations
 from annotator.model.tool import Tool
 from annotator.model.tool_dependencies import ToolDependencies
+from annotator.model.tool_type import ToolType

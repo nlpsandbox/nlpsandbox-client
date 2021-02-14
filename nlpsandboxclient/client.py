@@ -1,6 +1,8 @@
 """NLP data node client that interacts with the SDK datanodeclient"""
 from typing import List, Iterator
 
+import requests
+
 import datanode
 from datanode.api import annotation_store_api, annotation_api, note_api
 from datanode.models import Annotation, AnnotationStore
@@ -378,8 +380,36 @@ def annotate_note(host: str, note: dict, annotator_type: str) -> dict:
     return sanitized_annotations
 
 
-def get_annotator(host: str) -> Tool:
+def get_tool(host: str) -> Tool:
     """Get annotater service
+
+    Args:
+        host: Annotation Service host IP
+
+    Returns:
+        Service object
+
+    Raises:
+        ValueError: If tool base URL isn't redirected to tool service endpoint
+
+    Examples:
+        >>> tool = get_tool(host="0.0.0.0/api/v1")
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    configuration = annotator.Configuration(host=host)
+    with annotator.ApiClient(configuration) as api_client:
+        tool_instance = tool_api.ToolApi(api_client)
+        tool_info = tool_instance.get_tool()
+    # check if tool / redirects to /tool path
+    redirect_info = _get_tool_redirect(host)
+    if tool_info.to_dict() != redirect_info:
+        raise ValueError("Tool base URL must redirect to tool service")
+    return tool_info
+
+
+def _get_tool_redirect(host: str) -> Tool:
+    """Make sure tool's base URL redirects to tool service
 
     Args:
         host: Annotation Service host IP
@@ -391,12 +421,16 @@ def get_annotator(host: str) -> Tool:
         >>> tool = get_annotator(host="0.0.0.0/api/v1")
 
     """
+
     # host = "http://10.23.55.45:9000/api/v1"
-    configuration = annotator.Configuration(host=host)
-    with annotator.ApiClient(configuration) as api_client:
-        tool_instance = tool_api.ToolApi(api_client)
-        tool_info = tool_instance.get_tool()
-    return tool_info
+    if not host.startswith("http"):
+        host = f"http://{host}"
+    # Remove /api/v1 string
+    host = host.replace("/api/v1", '')
+    response = requests.get(host)
+    tool_response = utils.change_keys(response.json(),
+                                      utils.camelcase_to_snakecase)
+    return tool_response
 
 
 def store_annotations(host: str, dataset_id: str, annotation_store_id: str,

@@ -37,10 +37,10 @@ with annotator.ApiClient() as api_client:
     api_instance = text_date_annotation_api.TextDateAnnotationApi(api_client)
     text_date_annotation_request = TextDateAnnotationRequest(
         note=Note(
-            id="507f1f77bcf86cd799439011",
-            text="On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.",
-            note_type="loinc:LP29684-5",
-            patient_id="507f1f77bcf86cd799439011",
+            identifier=NoteId("awesome-note"),
+            text="text_example",
+            note_type="note_type_example",
+            patient_id=PatientId("awesome-patient"),
         ),
     ) # TextDateAnnotationRequest |  (optional)
 
@@ -77,7 +77,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
+**400** | Invalid request |  -  |
 **500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

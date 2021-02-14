@@ -2,6 +2,8 @@
 import json
 import re
 
+import requests
+
 
 def stdout_or_json(json_dict: dict, output: str):
     """Write dict to json or stdout"""
@@ -34,3 +36,23 @@ def change_keys(obj, convert):
     else:
         return obj
     return new
+
+
+def check_url(url: str):
+    """Check if url is implemented
+
+    Args:
+        url: The url to check
+
+    Raises:
+        ValueError: If url is not implemented
+
+    Examples:
+        >>> check_url(url="https://www.google.com")
+
+    """
+    if not url.startswith("http"):
+        url = f"http://{url}"
+    response = requests.get(url)
+    if not response.ok:
+        raise ValueError(f"{url} not implemented")
