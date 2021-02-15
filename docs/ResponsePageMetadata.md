@@ -5,7 +5,7 @@ A page of results
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **links** | [**ResponsePageMetadataLinks**](ResponsePageMetadataLinks.md) |  | 
-**total_results** | **int** | Total number of results in the result set | 
+**total_results** | **int** | The total number of results in the result set | 
 **offset** | [**PageOffset**](PageOffset.md) |  | [optional] 
 **limit** | [**PageLimit**](PageLimit.md) |  | [optional] 
 
