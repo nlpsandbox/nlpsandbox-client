@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     # basic
     name='nlpsandbox-client',
-    version='0.2.1',
+    version='0.3.1',
     # packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     # py_modules=['hello'],
     # scripts=['bin/nlp-evaluate'],
