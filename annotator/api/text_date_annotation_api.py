@@ -24,7 +24,7 @@ from annotator.model_utils import (  # noqa: F401
 )
 from annotator.model.error import Error
 from annotator.model.text_date_annotation_request import TextDateAnnotationRequest
-from annotator.model.text_date_annotations import TextDateAnnotations
+from annotator.model.text_date_annotation_response import TextDateAnnotationResponse
 
 
 class TextDateAnnotationApi(object):
@@ -76,7 +76,7 @@ class TextDateAnnotationApi(object):
                 async_req (bool): execute request asynchronously
 
             Returns:
-                TextDateAnnotations
+                TextDateAnnotationResponse
                     If the method is called asynchronously, returns the request
                     thread.
             """
@@ -103,7 +103,7 @@ class TextDateAnnotationApi(object):
 
         self.create_text_date_annotations = Endpoint(
             settings={
-                'response_type': (TextDateAnnotations,),
+                'response_type': (TextDateAnnotationResponse,),
                 'auth': [],
                 'endpoint_path': '/textDateAnnotations',
                 'operation_id': 'create_text_date_annotations',

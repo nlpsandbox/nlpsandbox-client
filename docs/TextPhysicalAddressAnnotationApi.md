@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_text_physical_address_annotations**
-> TextPhysicalAddressAnnotations create_text_physical_address_annotations()
+> TextPhysicalAddressAnnotationResponse create_text_physical_address_annotations()
 
 Annotate physical addresses in a clinical note
 
@@ -20,7 +20,7 @@ Return the physical addresse annotations found in a clinical note
 import time
 import annotator
 from annotator.api import text_physical_address_annotation_api
-from annotator.model.text_physical_address_annotations import TextPhysicalAddressAnnotations
+from annotator.model.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
 from annotator.model.error import Error
 from annotator.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
 from pprint import pprint
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TextPhysicalAddressAnnotations**](TextPhysicalAddressAnnotations.md)
+[**TextPhysicalAddressAnnotationResponse**](TextPhysicalAddressAnnotationResponse.md)
 
 ### Authorization
 

@@ -24,7 +24,7 @@ from annotator.model_utils import (  # noqa: F401
 )
 from annotator.model.error import Error
 from annotator.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
-from annotator.model.text_physical_address_annotations import TextPhysicalAddressAnnotations
+from annotator.model.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
 
 
 class TextPhysicalAddressAnnotationApi(object):
@@ -76,7 +76,7 @@ class TextPhysicalAddressAnnotationApi(object):
                 async_req (bool): execute request asynchronously
 
             Returns:
-                TextPhysicalAddressAnnotations
+                TextPhysicalAddressAnnotationResponse
                     If the method is called asynchronously, returns the request
                     thread.
             """
@@ -103,7 +103,7 @@ class TextPhysicalAddressAnnotationApi(object):
 
         self.create_text_physical_address_annotations = Endpoint(
             settings={
-                'response_type': (TextPhysicalAddressAnnotations,),
+                'response_type': (TextPhysicalAddressAnnotationResponse,),
                 'auth': [],
                 'endpoint_path': '/textPhysicalAddressAnnotations',
                 'operation_id': 'create_text_physical_address_annotations',

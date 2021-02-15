@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_text_person_name_annotations**
-> TextPersonNameAnnotations create_text_person_name_annotations()
+> TextPersonNameAnnotationResponse create_text_person_name_annotations()
 
 Annotate person names in a clinical note
 
@@ -20,9 +20,9 @@ Return the person name annotations found in a clinical note
 import time
 import annotator
 from annotator.api import text_person_name_annotation_api
-from annotator.model.text_person_name_annotations import TextPersonNameAnnotations
 from annotator.model.error import Error
 from annotator.model.text_person_name_annotation_request import TextPersonNameAnnotationRequest
+from annotator.model.text_person_name_annotation_response import TextPersonNameAnnotationResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TextPersonNameAnnotations**](TextPersonNameAnnotations.md)
+[**TextPersonNameAnnotationResponse**](TextPersonNameAnnotationResponse.md)
 
 ### Authorization
 

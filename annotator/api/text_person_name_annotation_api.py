@@ -24,7 +24,7 @@ from annotator.model_utils import (  # noqa: F401
 )
 from annotator.model.error import Error
 from annotator.model.text_person_name_annotation_request import TextPersonNameAnnotationRequest
-from annotator.model.text_person_name_annotations import TextPersonNameAnnotations
+from annotator.model.text_person_name_annotation_response import TextPersonNameAnnotationResponse
 
 
 class TextPersonNameAnnotationApi(object):
@@ -76,7 +76,7 @@ class TextPersonNameAnnotationApi(object):
                 async_req (bool): execute request asynchronously
 
             Returns:
-                TextPersonNameAnnotations
+                TextPersonNameAnnotationResponse
                     If the method is called asynchronously, returns the request
                     thread.
             """
@@ -103,7 +103,7 @@ class TextPersonNameAnnotationApi(object):
 
         self.create_text_person_name_annotations = Endpoint(
             settings={
-                'response_type': (TextPersonNameAnnotations,),
+                'response_type': (TextPersonNameAnnotationResponse,),
                 'auth': [],
                 'endpoint_path': '/textPersonNameAnnotations',
                 'operation_id': 'create_text_person_name_annotations',
