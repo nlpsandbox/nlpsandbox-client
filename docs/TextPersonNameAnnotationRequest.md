@@ -1,6 +1,6 @@
 # TextPersonNameAnnotationRequest
 
-An annotation request
+A request to annotate person names in a clinical note
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

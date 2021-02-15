@@ -252,8 +252,9 @@ def _annotate_person(api_client, note: dict) -> dict:
     Examples:
         >>> example_note = {
         >>>    "note": {
-        >>>        "noteType": "loinc:LP29684-5",
-        >>>        "patientId": "507f1f77bcf86cd799439011",
+        >>>        "identifier": "note-1",
+        >>>        "note_type": "loinc:LP29684-5",
+        >>>        "patient_id": "507f1f77bcf86cd799439011",
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
         >>> }
@@ -285,9 +286,10 @@ def _annotate_address(api_client, note: dict) -> dict:
     Examples:
         >>> example_note = {
         >>>    "note": {
-        >>>        "noteType": "loinc:LP29684-5",
-        >>>        "patientId": "507f1f77bcf86cd799439011",
-        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle."
+        >>>        "identifier": "note-1",
+        >>>        "note_type": "loinc:LP29684-5",
+        >>>        "patient_id": "507f1f77bcf86cd799439011",
+        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
         >>> }
         >>> host = "0.0.0.0:8080/api/v1"
@@ -318,8 +320,9 @@ def _annotate_date(api_client, note: dict) -> dict:
     Examples:
         >>> example_note = {
         >>>    "note": {
-        >>>        "noteType": "loinc:LP29684-5",
-        >>>        "patientId": "507f1f77bcf86cd799439011",
+        >>>        "identifier": "note-1",
+        >>>        "note_type": "loinc:LP29684-5",
+        >>>        "patient_id": "507f1f77bcf86cd799439011",
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
         >>> }
@@ -352,6 +355,7 @@ def annotate_note(host: str, note: dict, annotator_type: str) -> dict:
     Examples:
         >>> example_note = {
         >>>    "note": {
+        >>>        "identifier": "note-1",
         >>>        "noteType": "loinc:LP29684-5",
         >>>        "patientId": "507f1f77bcf86cd799439011",
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."

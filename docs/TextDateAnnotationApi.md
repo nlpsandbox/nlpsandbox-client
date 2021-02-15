@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_text_date_annotations**
-> TextDateAnnotations create_text_date_annotations()
+> TextDateAnnotationResponse create_text_date_annotations()
 
 Annotate dates in a clinical note
 
@@ -20,9 +20,9 @@ Return the date annotations found in a clinical note
 import time
 import annotator
 from annotator.api import text_date_annotation_api
-from annotator.model.text_date_annotations import TextDateAnnotations
 from annotator.model.text_date_annotation_request import TextDateAnnotationRequest
 from annotator.model.error import Error
+from annotator.model.text_date_annotation_response import TextDateAnnotationResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TextDateAnnotations**](TextDateAnnotations.md)
+[**TextDateAnnotationResponse**](TextDateAnnotationResponse.md)
 
 ### Authorization
 
