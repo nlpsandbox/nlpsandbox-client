@@ -22,7 +22,7 @@ class Evaluation(metaclass=ABCMeta):
     evaluation_type = None
     annotation = None
     col = None
-    ## noAddressType to check if participants' submission include "addressType", default is True, no addressType
+    # noAddressType to check if participants' submission include "addressType", default is True, no addressType
     noAddressType = True
 
     def __init__(self):
@@ -244,7 +244,7 @@ class Evaluation(metaclass=ABCMeta):
 
         print(str_fmt.format(type_lower, F1,
                              precision,
-                            recall))
+                             recall))
 
         print("\n")
         eval_dict = {"F1": F1, "precision": precision, "recall": recall}
