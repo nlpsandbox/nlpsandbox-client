@@ -1,38 +1,73 @@
-from __future__ import print_function
+"""
+Example code to push a dataset into the data node. A complete
+dataset includes
+"""
 import json
-import sys
-
-import synapseclient
 
 import datanode
+import datanode.apis
+import datanode.models
 from datanode.rest import ApiException
+import nlpsandboxclient.utils
 
 
-syn = synapseclient.login()
+def get_or_create_resource(get_func, create_func, *args, **kwargs):
+    """Get or create a data node resource
+
+    Args:
+        get_func: Function to get resource
+        create_func: Function to create resource
+        *args: Positional arguments for the get/create functions
+        **kwargs: Keyword arguments for the get/create functions
+
+    Returns:
+        resource object
+
+    """
+    try:
+        # get the dataset
+        resource = get_func(*args)
+    except ApiException as e:
+        if e.status == 404:
+            # create dataset if not found
+            try:
+                resource = create_func(
+                    *args,
+                    **kwargs
+                )
+            except ApiException as e:
+                print(f"Exception when calling {create_func}: {e}\n")
+                raise
+        else:
+            print(f"Exception when calling {get_func}: {e}\n")
+            raise
+    return resource
+
+
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-host = "http://10.23.54.142/api/v1"
-# host = "http://localhost:8080/api/v1"
+host = "http://localhost:8080/api/v1"
 configuration = datanode.Configuration(
     host=host
 )
 
-
-dataset_id = '2014-i2b2-20201203'
+dataset_id = 'test-dataset'
 fhir_store_id = 'evaluation'
 annotation_store_id = 'goldstandard'
-# Get evaluation-patient-bundles.json
-json_ent = syn.get("syn23593068")
-json_filename = json_ent.path
+json_filename = "example-patient-bundles.json"
+
 
 with datanode.ApiClient(configuration) as api_client:
-    dataset_api = datanode.DatasetApi(api_client)
-    fhir_store_api = datanode.FhirStoreApi(api_client)
-    annotation_store_api = datanode.AnnotationStoreApi(api_client)
-    patient_api = datanode.PatientApi(api_client)
-    note_api = datanode.NoteApi(api_client)
-    annotation_api = datanode.AnnotationApi(api_client)
+    dataset_api = datanode.apis.DatasetApi(api_client)
+    fhir_store_api = datanode.apis.FhirStoreApi(api_client)
+    annotation_store_api = datanode.apis.AnnotationStoreApi(api_client)
+    patient_api = datanode.apis.PatientApi(api_client)
+    note_api = datanode.apis.NoteApi(api_client)
+    annotation_api = datanode.apis.AnnotationApi(api_client)
 
+    # an example of how to create or get a dataset
+    # This logic is abstracted in the `get_or_create_resource`
+    # function above.
     try:
         # get the dataset
         dataset = dataset_api.get_dataset(dataset_id)
@@ -42,52 +77,30 @@ with datanode.ApiClient(configuration) as api_client:
             try:
                 dataset = dataset_api.create_dataset(
                     dataset_id,
-                    body=datanode.Dataset()
+                    body={}
                 )
             except ApiException as e:
                 print("Exception when calling DatasetApi->create_dataset: %s\n" % e)
-                sys.exit(-1)
+                raise
         else:
             print("Exception when calling DatasetApi->get_dataset: %s\n" % e)
-            sys.exit(-1)
+            raise
+    # Get or create FHIR store
+    fhir_store = get_or_create_resource(
+        fhir_store_api.get_fhir_store,
+        fhir_store_api.create_fhir_store,
+        dataset_id,
+        fhir_store_id,
+        body={}
+    )
 
-    try:
-        # get the FHIR store
-        fhir_store = fhir_store_api.get_fhir_store(dataset_id, fhir_store_id)
-    except ApiException as e:
-        if e.status == 404:
-            # create fhir store if not found
-            try:
-                fhir_store = fhir_store_api.create_fhir_store(
-                    dataset_id,
-                    fhir_store_id,
-                    body=datanode.FhirStore()
-                )
-            except ApiException as e:
-                print("Exception when calling FhirStoreApi->create_fhir_store: %s\n" % e)
-                sys.exit(-1)
-        else:
-            print("Exception when calling FhirStoreApi->get_fhir_store: %s\n" % e)
-            sys.exit(-1)
-
-    try:
-        # get the annotation store
-        annotation_store = annotation_store_api.get_annotation_store(dataset_id, annotation_store_id)
-    except ApiException as e:
-        if e.status == 404:
-            # create annotation store if not found
-            try:
-                annotation_store = annotation_store_api.create_annotation_store(
-                    dataset_id,
-                    annotation_store_id,
-                    body=datanode.AnnotationStore()
-                )
-            except ApiException as e:
-                print("Exception when calling AnnotationStoreApi->create_annotation_store: %s\n" % e)
-                sys.exit(-1)
-        else:
-            print("Exception when calling AnnotationStoreApi->get_annotation_store: %s\n" % e)
-            sys.exit(-1)
+    annotation_store = get_or_create_resource(
+        annotation_store_api.get_annotation_store,
+        annotation_store_api.create_annotation_store,
+        dataset_id,
+        annotation_store_id,
+        body={}
+    )
 
     print(f"dataset: {dataset}")
     print(f"fhir_store: {fhir_store}")
@@ -99,52 +112,68 @@ with datanode.ApiClient(configuration) as api_client:
         # patient_bundles = patient_bundles[:1]
 
     for patient_bundle in patient_bundles:
-        patient = patient_bundle['patient']
+        # Create or get a FHIR Patient
+        patient = nlpsandboxclient.utils.change_keys(
+            patient_bundle['patient'],
+            nlpsandboxclient.utils.camelcase_to_snakecase
+        )
+        patient_id = patient.pop("identifier")
+        patient = get_or_create_resource(
+            patient_api.get_patient,
+            patient_api.create_patient,
+            dataset_id,
+            fhir_store_id,
+            patient_id,
+            patient_create_request=patient
+        )
+        print(f"patient: {patient}")
 
-        try:
-            # Create a FHIR Patient
-            patient = patient_api.create_patient(
+        # Create the Note and Annotation objects linked to the patient
+        note_bundles = patient_bundle['note_bundles']
+        # note_bundles = note_bundles[:1]
+
+        for note_bundle in note_bundles:
+            # Determine note Id since noteId isn't part of the 'note'
+            annotation = note_bundle['annotation']
+            annotations_cols = ['textDateAnnotations',
+                                'textPhysicalAddressAnnotations',
+                                'textPersonNameAnnotations']
+            note_ids = set()
+            for col in annotations_cols:
+                for annot in annotation[col]:
+                    note_ids.add(annot['noteId'])
+            assert len(note_ids) == 1, "Must only have one noteId"
+            note_id = list(note_ids)[0]
+
+            # Create Note
+            note = nlpsandboxclient.utils.change_keys(
+                note_bundle['note'],
+                nlpsandboxclient.utils.camelcase_to_snakecase
+            )
+            note['patient_id'] = patient_id
+            note = get_or_create_resource(
+                note_api.get_note,
+                note_api.create_note,
                 dataset_id,
                 fhir_store_id,
-                patient_create_request=patient)
-            print(f"patient: {patient}")
-
-            # Create the Note and Annotation objects linked to the patient
-            note_bundles = patient_bundle['note_bundles']
-            # note_bundles = note_bundles[:1]
-
-            for note_bundle in note_bundles:
-                note = note_bundle['note']
-                note['patientId'] = patient.name.split("/")[-1]
-                try:
-                    note = note_api.create_note(
-                        dataset_id,
-                        fhir_store_id,
-                        note_create_request=note
-                    )
-                    print(f"note: {note}")
-                except ApiException as e:
-                    print("Exception when calling NoteApi->create_note: %s\n" % e)
-
-                annotation = note_bundle['annotation']
-                annotation['annotationSource']['resourceSource']['name'] = \
-                    "{fhir_store_name}/fhir/Note/{note_id}".format(
-                        fhir_store_name=fhir_store.name,
-                        note_id=note.name.split("/")[-1]
-                    )
-                try:
-                    annotation = annotation_api.create_annotation(
-                        dataset_id,
-                        annotation_store_id,
-                        annotation_create_request=annotation
-                    )
-                    print(f"annotation: {annotation}")
-                except ApiException as e:
-                    print("Exception when calling AnnotationApi->create_annotation: %s\n" % e)
-
-                # time.sleep(1)
-
-        except ApiException as e:
-            print("Exception when calling PatientApi->create_patient: %s\n" % e)
-
-        # time.sleep(1)
+                note_id,
+                note_create_request=note
+            )
+            # Create annotation
+            annotation['annotationSource']['resourceSource']['name'] = \
+                "{fhir_store_name}/fhir/Note/{note_id}".format(
+                    fhir_store_name=fhir_store.name,
+                    note_id=note_id
+                )
+            new_annotation = nlpsandboxclient.utils.change_keys(
+                annotation,
+                nlpsandboxclient.utils.camelcase_to_snakecase
+            )
+            annotation = get_or_create_resource(
+                annotation_api.get_annotation,
+                annotation_api.create_annotation,
+                dataset_id,
+                annotation_store_id,
+                note_id,
+                annotation_create_request=new_annotation
+            )

@@ -19,7 +19,7 @@ def cli():
               type=click.Path())
 @click.option('--eval_type', help='Type of evaluation.',
               type=click.Choice(['date', 'person', 'address'],
-                                case_sensitive=False))
+                                case_sensitive=False), required=True)
 def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
     """Evaluate the performance of a prediction file. Example prediction and
     goldstandard files are found in test/data/new_prediction.json and
@@ -52,7 +52,6 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
         notes = json.load(note_f)
     all_annotations = []
     for note in notes:
-        note.pop("id")
         note_name = note.pop("note_name")
         annotations = client.annotate_note(host=annotator_host,
                                            note={"note": note},
@@ -70,12 +69,17 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
 @click.option('--annotator_host', help='Annotator host', required=True)
 @click.option('--output', help='Specify output json path',
               type=click.Path())
-def get_annotator(annotator_host, output):
+def get_tool(annotator_host, output):
     """Get annotator tool endpoint"""
-    tool = client.get_annotator(
-        host=annotator_host
-    )
+    tool = client.get_tool(host=annotator_host)
     utils.stdout_or_json(tool.to_dict(), output)
+
+
+@cli.command(no_args_is_help=True)
+@click.option('--url', help='The url to check', required=True)
+def check_url(url):
+    """Checks if URL is implemented"""
+    utils.check_url(url=url)
 
 
 if __name__ == '__main__':

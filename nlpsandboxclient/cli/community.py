@@ -41,25 +41,27 @@ def list_notes(output, data_node_host, dataset_id, fhir_store_id):
 @click.option('--data_node_host', help='Data node host',
               default=DATA_NODE_HOST, show_default=True)
 @click.option('--dataset_id', help='Dataset id')
-@click.option('--annotation_store_id', help='Dataset id', required=True)
+@click.option('--annotation_store_id', help='Annotation store id',
+              required=True)
 @click.option('--annotation_json', help='Json file with annotations to store',
               type=click.Path(exists=True), required=True)
 def store_annotations(data_node_host, dataset_id, annotation_store_id,
                       annotation_json):
-    """Store annotations in an NLP data node annotation store."""
+    """Store annotations in an NLP data node annotation store.
+    The annotation store is deleted if it already exists.
+    Sets the annotation_id as the note id.
+    """
     with open(annotation_json, "r") as annot_f:
         annotations = json.load(annot_f)
     # If only one annotation is passed in, turn it into a list
     if isinstance(annotations, dict):
         annotations = [annotations]
-    # Create annotation store object
-    for annotation in annotations:
-        client.store_annotation(
-            host=data_node_host,
-            dataset_id=dataset_id,
-            annotation_store_id=annotation_store_id,
-            annotation=annotation
-        )
+    client.store_annotations(
+        host=data_node_host,
+        dataset_id=dataset_id,
+        annotation_store_id=annotation_store_id,
+        annotations=annotations
+    )
 
 
 @cli.command(no_args_is_help=True)
@@ -77,6 +79,24 @@ def get_annotation_store(data_node_host, dataset_id, annotation_store_id, create
         create_if_missing=create_if_missing
     )
     print(annotation_store.name)
+
+
+@cli.command(no_args_is_help=True)
+@click.option('--data_node_host', help='Data node host',
+              default=DATA_NODE_HOST, show_default=True)
+@click.option('--dataset_id', help='Dataset Id', required=True)
+@click.option('--annotation_store_id', help='Dataset Id', required=True)
+@click.option('--annotation_id', help='Annotation Id', required=True)
+@click.option('--output', help='Output json filepath', type=click.Path())
+def get_annotation(data_node_host, dataset_id, annotation_store_id,
+                   annotation_id, output):
+    """Get annotation for a NLP data node dataset."""
+    annotation = client.get_annotation(
+        host=data_node_host, dataset_id=dataset_id,
+        annotation_store_id=annotation_store_id,
+        annotation_id=annotation_id
+    )
+    utils.stdout_or_json(annotation.to_dict(), output)
 
 
 @cli.command(no_args_is_help=True)

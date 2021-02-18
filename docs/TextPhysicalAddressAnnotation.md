@@ -1,6 +1,6 @@
 # TextPhysicalAddressAnnotation
 
-A person name annotation in a text
+A physical address annotation in a text
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
