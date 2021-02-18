@@ -168,11 +168,18 @@
 <span></span><span class="sd">&quot;&quot;&quot;NLP data node client that interacts with the SDK datanodeclient&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Iterator</span>
 
+<span class="kn">import</span> <span class="nn">requests</span>
+
 <span class="kn">import</span> <span class="nn">datanode</span>
+<span class="kn">from</span> <span class="nn">datanode.api</span> <span class="kn">import</span> <span class="n">annotation_store_api</span><span class="p">,</span> <span class="n">annotation_api</span><span class="p">,</span> <span class="n">note_api</span>
 <span class="kn">from</span> <span class="nn">datanode.models</span> <span class="kn">import</span> <span class="n">Annotation</span><span class="p">,</span> <span class="n">AnnotationStore</span>
 <span class="kn">import</span> <span class="nn">annotator</span>
+<span class="kn">from</span> <span class="nn">annotator.api</span> <span class="kn">import</span> <span class="p">(</span><span class="n">text_date_annotation_api</span><span class="p">,</span>
+                           <span class="n">text_person_name_annotation_api</span><span class="p">,</span>
+                           <span class="n">text_physical_address_annotation_api</span><span class="p">,</span>
+                           <span class="n">tool_api</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">annotator.models</span> <span class="kn">import</span> <span class="n">Tool</span>
-
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">utils</span>
 
 <span class="n">DATA_NODE_HOST</span> <span class="o">=</span> <span class="s2">&quot;http://10.23.54.142/api/v1&quot;</span>
 
@@ -205,18 +212,20 @@
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">limit</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="k">with</span> <span class="n">datanode</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
-        <span class="n">note_api</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">NoteApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+        <span class="n">note_instance</span> <span class="o">=</span> <span class="n">note_api</span><span class="o">.</span><span class="n">NoteApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="c1"># Obtain all clinical notes</span>
         <span class="n">next_page</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">while</span> <span class="n">next_page</span><span class="p">:</span>
-            <span class="n">notes</span> <span class="o">=</span> <span class="n">note_api</span><span class="o">.</span><span class="n">list_notes</span><span class="p">(</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">,</span>
-                                        <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+            <span class="n">notes</span> <span class="o">=</span> <span class="n">note_instance</span><span class="o">.</span><span class="n">list_notes</span><span class="p">(</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">fhir_store_id</span><span class="p">,</span>
+                                             <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
             <span class="c1"># change from snake case to camel case</span>
             <span class="n">sanitized_notes</span> <span class="o">=</span> <span class="n">api_client</span><span class="o">.</span><span class="n">sanitize_for_serialization</span><span class="p">(</span>
                 <span class="n">notes</span><span class="o">.</span><span class="n">notes</span>
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">sanitized_notes</span><span class="p">:</span>
-                <span class="n">note</span><span class="p">[</span><span class="s2">&quot;note_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dataset/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/Note/</span><span class="si">{note[&#39;id&#39;]}</span><span class="s2">&quot;</span>
+                <span class="c1"># note_name is added for convenience for the controller as</span>
+                <span class="c1"># it is needed to store the annotations</span>
+                <span class="n">note</span><span class="p">[</span><span class="s2">&quot;note_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dataset/</span><span class="si">{dataset_id}</span><span class="s2">/fhirStores/</span><span class="si">{fhir_store_id}</span><span class="s2">/fhir/Note/</span><span class="si">{note[&#39;identifier&#39;]}</span><span class="s2">&quot;</span>
                 <span class="k">yield</span> <span class="n">note</span>
             <span class="n">next_page</span> <span class="o">=</span> <span class="n">notes</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">next</span>
             <span class="n">offset</span> <span class="o">+=</span> <span class="n">limit</span></div>
@@ -246,24 +255,60 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">configuration</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">datanode</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
-        <span class="n">annotation_store_api</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">AnnotationStoreApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+        <span class="n">annot_store_instance</span> <span class="o">=</span> <span class="n">annotation_store_api</span><span class="o">.</span><span class="n">AnnotationStoreApi</span><span class="p">(</span>
+            <span class="n">api_client</span>
+        <span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># get the annotation store</span>
-            <span class="n">annotation_store_obj</span> <span class="o">=</span> <span class="n">annotation_store_api</span><span class="o">.</span><span class="n">get_annotation_store</span><span class="p">(</span>
+            <span class="n">annotation_store_obj</span> <span class="o">=</span> <span class="n">annot_store_instance</span><span class="o">.</span><span class="n">get_annotation_store</span><span class="p">(</span>
                 <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="n">datanode</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">404</span> <span class="ow">and</span> <span class="n">create_if_missing</span><span class="p">:</span>
-                <span class="n">annotation_store_obj</span> <span class="o">=</span> <span class="n">annotation_store_api</span><span class="o">.</span><span class="n">create_annotation_store</span><span class="p">(</span>
-                    <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">,</span> <span class="n">annotation_store</span><span class="o">=</span><span class="p">{}</span>
+                <span class="n">annotation_store_obj</span> <span class="o">=</span> <span class="n">annot_store_instance</span><span class="o">.</span><span class="n">create_annotation_store</span><span class="p">(</span>
+                    <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="p">{}</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">err</span>
     <span class="k">return</span> <span class="n">annotation_store_obj</span></div>
 
 
-<div class="viewcode-block" id="store_annotation"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.store_annotation">[docs]</a><span class="k">def</span> <span class="nf">store_annotation</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                     <span class="n">annotation</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Annotation</span><span class="p">:</span>
+<div class="viewcode-block" id="get_annotation"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.get_annotation">[docs]</a><span class="k">def</span> <span class="nf">get_annotation</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">annotation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Annotation</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Gets an annotation</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        host: Data node host IP</span>
+<span class="sd">        dataset_id: Dataset Id</span>
+<span class="sd">        annotation_store_id: Annotation store Id</span>
+<span class="sd">        annotation_id: Annotation Id</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data node Annotation object</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; annotation = get_annotation(</span>
+<span class="sd">        &gt;&gt;&gt;     host=&quot;0.0.0.0/api/v1&quot;, dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;     annotation_store_id=&quot;awesome-annotation-store&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;     annotation_id=&quot;awesome-annotation&quot;</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">datanode</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+        <span class="n">annot_instance</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">AnnotationApi</span><span class="p">(</span>
+            <span class="n">api_client</span>
+        <span class="p">)</span>
+        <span class="c1"># get the annotation store</span>
+        <span class="n">annotation_store_obj</span> <span class="o">=</span> <span class="n">annot_instance</span><span class="o">.</span><span class="n">get_annotation</span><span class="p">(</span>
+            <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">,</span> <span class="n">annotation_id</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">annotation_store_obj</span></div>
+
+
+<span class="k">def</span> <span class="nf">_store_annotation</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                      <span class="n">annotation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">annotation</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Annotation</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Store annotation</span>
 
 <span class="sd">    Args:</span>
@@ -302,18 +347,24 @@
 <span class="sd">        &gt;&gt;&gt; annotation = store_annotation(host=&quot;0.0.0.0/api/v1&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;                               dataset_id=&quot;awesome-dataset&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;                               annotation_store_id=&quot;awesome-annotation-store&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                               annotation_id=&quot;awesome-id&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;                               annotation=example_annotation)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">configuration</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">datanode</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
-        <span class="n">annotation_api</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">AnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
-        <span class="n">annotation_obj</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">create_annotation</span><span class="p">(</span>
+        <span class="n">annotation_instance</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">AnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+        <span class="n">new_annotation</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">change_keys</span><span class="p">(</span><span class="n">annotation</span><span class="p">,</span>
+                                           <span class="n">utils</span><span class="o">.</span><span class="n">camelcase_to_snakecase</span><span class="p">)</span>
+        <span class="n">annotation_obj</span> <span class="o">=</span> <span class="n">annotation_instance</span><span class="o">.</span><span class="n">create_annotation</span><span class="p">(</span>
             <span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span>
             <span class="n">annotation_store_id</span><span class="o">=</span><span class="n">annotation_store_id</span><span class="p">,</span>
-            <span class="n">annotation_create_request</span><span class="o">=</span><span class="n">annotation</span>
+            <span class="n">annotation_id</span><span class="o">=</span><span class="n">annotation_id</span><span class="p">,</span>
+            <span class="n">annotation_create_request</span><span class="o">=</span><span class="n">new_annotation</span><span class="p">,</span>
+            <span class="n">async_req</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
-    <span class="k">return</span> <span class="n">annotation_obj</span></div>
+    <span class="k">return</span> <span class="n">annotation_obj</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="list_annotations"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.list_annotations">[docs]</a><span class="k">def</span> <span class="nf">list_annotations</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -329,19 +380,19 @@
 <span class="sd">        Data node annotation objects</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; annotations = get_annotations(host=&quot;0.0.0.0/api/v1&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                               dataset_id=&quot;awesome-dataset&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                               annotation_store_id=&quot;awesome-annotation-store&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; annotations = list_annotations(host=&quot;0.0.0.0/api/v1&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                                dataset_id=&quot;awesome-dataset&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                                annotation_store_id=&quot;awesome-annotation-store&quot;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">configuration</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">limit</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="k">with</span> <span class="n">datanode</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
-        <span class="n">annotation_api</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">AnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+        <span class="n">annotation_instance</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">AnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="n">next_page</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">while</span> <span class="n">next_page</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">list_annotations</span><span class="p">(</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">annotation_instance</span><span class="o">.</span><span class="n">list_annotations</span><span class="p">(</span>
                 <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">,</span>
                 <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span>
             <span class="p">)</span>
@@ -368,8 +419,9 @@
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; example_note = {</span>
 <span class="sd">        &gt;&gt;&gt;    &quot;note&quot;: {</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;noteType&quot;: &quot;loinc:LP29684-5&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;patientId&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;identifier&quot;: &quot;note-1&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;note_type&quot;: &quot;loinc:LP29684-5&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;patient_id&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
@@ -381,8 +433,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
-    <span class="n">annotation_api</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">TextPersonNameAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">create_text_person_name_annotations</span><span class="p">(</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">text_person_name_annotation_api</span><span class="o">.</span><span class="n">TextPersonNameAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">annotations</span> <span class="o">=</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">create_text_person_name_annotations</span><span class="p">(</span>
         <span class="n">text_person_name_annotation_request</span><span class="o">=</span><span class="n">note</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">annotations</span>
@@ -401,9 +453,10 @@
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; example_note = {</span>
 <span class="sd">        &gt;&gt;&gt;    &quot;note&quot;: {</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;noteType&quot;: &quot;loinc:LP29684-5&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;patientId&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.&quot;</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;identifier&quot;: &quot;note-1&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;note_type&quot;: &quot;loinc:LP29684-5&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;patient_id&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0:8080/api/v1&quot;</span>
@@ -414,8 +467,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
-    <span class="n">annotation_api</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">TextPhysicalAddressAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">create_text_physical_address_annotations</span><span class="p">(</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">text_physical_address_annotation_api</span><span class="o">.</span><span class="n">TextPhysicalAddressAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">annotations</span> <span class="o">=</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">create_text_physical_address_annotations</span><span class="p">(</span>
         <span class="n">text_physical_address_annotation_request</span><span class="o">=</span><span class="n">note</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">annotations</span>
@@ -434,8 +487,9 @@
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; example_note = {</span>
 <span class="sd">        &gt;&gt;&gt;    &quot;note&quot;: {</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;noteType&quot;: &quot;loinc:LP29684-5&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;patientId&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;identifier&quot;: &quot;note-1&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;note_type&quot;: &quot;loinc:LP29684-5&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;patient_id&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
@@ -447,8 +501,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
-    <span class="n">annotation_api</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">TextDateAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">create_text_date_annotations</span><span class="p">(</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">text_date_annotation_api</span><span class="o">.</span><span class="n">TextDateAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">annotations</span> <span class="o">=</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">create_text_date_annotations</span><span class="p">(</span>
         <span class="n">text_date_annotation_request</span><span class="o">=</span><span class="n">note</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">annotations</span>
@@ -468,6 +522,7 @@
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; example_note = {</span>
 <span class="sd">        &gt;&gt;&gt;    &quot;note&quot;: {</span>
+<span class="sd">        &gt;&gt;&gt;        &quot;identifier&quot;: &quot;note-1&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;noteType&quot;: &quot;loinc:LP29684-5&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;patientId&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
@@ -480,13 +535,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
     <span class="n">configuration</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">new_note</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">change_keys</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">camelcase_to_snakecase</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">annotator</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">annotator_type</span> <span class="o">==</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">note</span><span class="p">)</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">new_note</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">annotator_type</span> <span class="o">==</span> <span class="s2">&quot;person&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_person</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">note</span><span class="p">)</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_person</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">new_note</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">annotator_type</span> <span class="o">==</span> <span class="s2">&quot;address&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">note</span><span class="p">)</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">new_note</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid annotator_type: </span><span class="si">{annotator_type}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">sanitized_annotations</span> <span class="o">=</span> <span class="n">api_client</span><span class="o">.</span><span class="n">sanitize_for_serialization</span><span class="p">(</span>
@@ -495,8 +551,36 @@
     <span class="k">return</span> <span class="n">sanitized_annotations</span></div>
 
 
-<div class="viewcode-block" id="get_annotator"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.get_annotator">[docs]</a><span class="k">def</span> <span class="nf">get_annotator</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tool</span><span class="p">:</span>
+<div class="viewcode-block" id="get_tool"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.get_tool">[docs]</a><span class="k">def</span> <span class="nf">get_tool</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Get annotater service</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        host: Annotation Service host IP</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Service object</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If tool base URL isn&#39;t redirected to tool service endpoint</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; tool = get_tool(host=&quot;0.0.0.0/api/v1&quot;)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">annotator</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+        <span class="n">tool_instance</span> <span class="o">=</span> <span class="n">tool_api</span><span class="o">.</span><span class="n">ToolApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+        <span class="n">tool_info</span> <span class="o">=</span> <span class="n">tool_instance</span><span class="o">.</span><span class="n">get_tool</span><span class="p">()</span>
+    <span class="c1"># check if tool / redirects to /tool path</span>
+    <span class="n">redirect_info</span> <span class="o">=</span> <span class="n">_get_tool_redirect</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tool_info</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="o">!=</span> <span class="n">redirect_info</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Tool base URL must redirect to tool service&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tool_info</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_tool_redirect</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Make sure tool&#39;s base URL redirects to tool service</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        host: Annotation Service host IP</span>
@@ -508,12 +592,67 @@
 <span class="sd">        &gt;&gt;&gt; tool = get_annotator(host=&quot;0.0.0.0/api/v1&quot;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">annotator</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
-        <span class="n">tool_api</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">ToolApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
-        <span class="n">tool_info</span> <span class="o">=</span> <span class="n">tool_api</span><span class="o">.</span><span class="n">get_tool</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">tool_info</span></div>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">host</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;http://</span><span class="si">{host}</span><span class="s2">&quot;</span>
+    <span class="c1"># Remove /api/v1 string</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/api/v1&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">tool_response</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">change_keys</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span>
+                                      <span class="n">utils</span><span class="o">.</span><span class="n">camelcase_to_snakecase</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tool_response</span>
+
+
+<div class="viewcode-block" id="store_annotations"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.store_annotations">[docs]</a><span class="k">def</span> <span class="nf">store_annotations</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                      <span class="n">annotations</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+                      <span class="n">delete_existing_annotations</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Store submission annotated notes.  Delete an annotation store if</span>
+<span class="sd">    the annotation store exists, then create a new annotation store, then</span>
+<span class="sd">    store the annotation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        host: Data node host IP</span>
+<span class="sd">        dataset_id: Dataset Id</span>
+<span class="sd">        annotation_store_id: Annotation store Id</span>
+<span class="sd">        annotations: Data Node Annotations</span>
+<span class="sd">        delete_existing_annotations: To delete existing annotation store.</span>
+<span class="sd">                                     Default is True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">datanode</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+        <span class="n">annot_store_instance</span> <span class="o">=</span> <span class="n">annotation_store_api</span><span class="o">.</span><span class="n">AnnotationStoreApi</span><span class="p">(</span>
+            <span class="n">api_client</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Always try to delete the annotation store prior to</span>
+            <span class="c1"># storing predictions</span>
+            <span class="k">if</span> <span class="n">delete_existing_annotations</span><span class="p">:</span>
+                <span class="n">annot_store_instance</span><span class="o">.</span><span class="n">delete_annotation_store</span><span class="p">(</span>
+                    <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span>
+                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Deleted existing Annotation Store&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">datanode</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">annot_store_instance</span><span class="o">.</span><span class="n">create_annotation_store</span><span class="p">(</span>
+                <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="p">{}</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created Annotation Store&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">datanode</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using existing Annotation Store&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">:</span>
+        <span class="n">annotation_id</span> <span class="o">=</span> <span class="n">annotation</span><span class="p">[</span>
+            <span class="s1">&#39;annotationSource&#39;</span>
+        <span class="p">][</span><span class="s1">&#39;resourceSource&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">_store_annotation</span><span class="p">(</span>
+            <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
+            <span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span>
+            <span class="n">annotation_store_id</span><span class="o">=</span><span class="n">annotation_store_id</span><span class="p">,</span>
+            <span class="n">annotation_id</span><span class="o">=</span><span class="n">annotation_id</span><span class="p">,</span>
+            <span class="n">annotation</span><span class="o">=</span><span class="n">annotation</span>
+        <span class="p">)</span></div>
 </pre></div>
 
            </div>
