@@ -22,6 +22,8 @@ class Evaluation(metaclass=ABCMeta):
     evaluation_type = None
     annotation = None
     col = None
+    ## noAddressType to check if participants' submission include "addressType", default is True, no addressType
+    noAddressType = True
 
     def __init__(self):
         pass
@@ -62,10 +64,8 @@ class Evaluation(metaclass=ABCMeta):
 
         self.sys_dict_seq = self.json_dict_seq(sys)
         self.gs_dict_seq = self.json_dict_seq(gs)
-        # print(self.sys_dict_seq)
         self.sys_dict_token = self.json_dict_token(sys)
         self.gs_dict_token = self.json_dict_token(gs)
-        print(self.sys_dict_token)
 
     # load the json file and convert it to a untokenised dictionary
     # with key 'noteId-start-length'
@@ -95,6 +95,8 @@ class Evaluation(metaclass=ABCMeta):
             start = anno['start']
             text = anno['text']
             # dateFormat, personType, addressType
+            # is self.annotation(dateFormat, personType, addressType) not in the
+            # JSON file, use float('nan')
             annotation_format = anno.get(self.annotation, float('nan'))
             sub_text = re.split(r'\s+', text)
             for sub in sub_text:
@@ -112,7 +114,7 @@ class Evaluation(metaclass=ABCMeta):
         final_address_eval = dict()
         final_address_eval[f"{self.evaluation_type}_location"] = self.loc_list
         final_address_eval[f"{self.evaluation_type}_type"] = self.type_list
-        print(final_address_eval)
+        # print(final_address_eval)
         # expected json object for date
         # address_loc={
         #       "metric": “F1”/“precision”/“recall”,
@@ -166,7 +168,9 @@ class Evaluation(metaclass=ABCMeta):
         fp = 0
         fn = 0
         for key in sys_dict.keys():
-            if key in gs_dict.keys() and self.format_cond(key, sys_dict, gs_dict):
+            if type(sys_dict[key][1]) == str and len(sys_dict[key][1]) != 0:
+                self.noAddressType = False
+            elif key in gs_dict.keys() and self.format_cond(key, sys_dict, gs_dict):
                 tp = tp + 1
             else:
                 fp = fp + 1
@@ -175,6 +179,7 @@ class Evaluation(metaclass=ABCMeta):
                     (key in sys_dict.keys() and not self.format_cond(key, sys_dict, gs_dict)):
                 fn = fn + 1
         self.print_out(tp, fp, fn, self.evaluation_type, "strict")
+        self.noAddressType = True
 
     def relax_cond(self, key, sys_dict, gs_dict):
         return abs(sys_dict[key][2]-gs_dict[key][2]) <= 2
@@ -208,12 +213,22 @@ class Evaluation(metaclass=ABCMeta):
             precision = float('nan')
             recall = float('nan')
             F1 = float('nan')
+        elif type_up == "address" and self.noAddressType is True:
+            precision = float('nan')
+            recall = float('nan')
+            F1 = float('nan')
         else:
             # precision (P): TP / (TP + FP)
             # Recall (R): TP / (TP + FN)
             # F1 score: 2 * ((P * R) / (P + R))
-            precision = round(tp / (tp + fp), 2)
-            recall = round(tp / (tp + fn), 2)
+            if tp + fp == 0:
+                precision = 0
+            else:
+                precision = round(tp / (tp + fp), 2)
+            if tp + fn == 0:
+                recall = 0
+            else:
+                recall = round(tp / (tp + fn), 2)
             if precision + recall == 0:
                 F1 = 0
             else:
@@ -229,7 +244,7 @@ class Evaluation(metaclass=ABCMeta):
 
         print(str_fmt.format(type_lower, F1,
                              precision,
-                             recall))
+                            recall))
 
         print("\n")
         eval_dict = {"F1": F1, "precision": precision, "recall": recall}
