@@ -303,6 +303,28 @@ doesn’t exist</p></li>
 </dd></dl>
 
 <dl class="function">
+<dt id="nlpsandboxclient.client.list_datasets">
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">list_datasets</code><span class="sig-paren">(</span><em class="sig-param">host: str</em><span class="sig-paren">)</span> &#x2192; List[dict]<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#list_datasets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.list_datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all datasets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>host</strong> – Data node host IP</p>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p>list of datasets.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">datasets</span> <span class="o">=</span> <span class="n">list_datasets</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">datasets</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;datasets/testing&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="nlpsandboxclient.client.list_notes">
 <code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">list_notes</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">fhir_store_id: str</em><span class="sig-paren">)</span> &#x2192; List[dict]<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#list_notes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.list_notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all clinical notes for a dataset</p>
