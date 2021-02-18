@@ -5,7 +5,7 @@ import requests
 
 import datanode
 from datanode.api import annotation_store_api, annotation_api, dataset_api, note_api
-from datanode.models import Annotation, AnnotationStore
+from datanode.models import Annotation, AnnotationStore, Dataset
 import annotator
 from annotator.api import (text_date_annotation_api,
                            text_person_name_annotation_api,
@@ -521,3 +521,25 @@ def store_annotations(host: str, dataset_id: str, annotation_store_id: str,
             annotation_id=annotation_id,
             annotation=annotation
         )
+
+
+def store_dataset(host: str, dataset_id: str) -> Dataset:
+    """Creates a dataset"""
+    configuration = datanode.Configuration(host=host)
+    # Enter a context with an instance of the API client
+    with datanode.ApiClient(configuration) as api_client:
+        # Create an instance of the API class
+        api_instance = dataset_api.DatasetApi(api_client)
+        body = {}
+        dataset = api_instance.create_dataset(dataset_id, body=body)
+    return dataset
+
+
+def delete_dataset(host: str, dataset_id: str):
+    """Deletes a dataset"""
+    configuration = datanode.Configuration(host=host)
+    # Enter a context with an instance of the API client
+    with datanode.ApiClient(configuration) as api_client:
+        # Create an instance of the API class
+        api_instance = dataset_api.DatasetApi(api_client)
+        api_instance.delete_dataset(dataset_id)
