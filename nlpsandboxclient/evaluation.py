@@ -170,7 +170,7 @@ class Evaluation(metaclass=ABCMeta):
         for key in sys_dict.keys():
             if type(sys_dict[key][1]) == str and len(sys_dict[key][1]) != 0:
                 self.noAddressType = False
-            elif key in gs_dict.keys() and self.format_cond(key, sys_dict, gs_dict):
+            if key in gs_dict.keys() and self.format_cond(key, sys_dict, gs_dict):
                 tp = tp + 1
             else:
                 fp = fp + 1
@@ -209,11 +209,8 @@ class Evaluation(metaclass=ABCMeta):
         self.print_out(tp, fp, fn, "token", "strict")
 
     def print_out(self, tp, fp, fn, type_up, type_lower):
-        if type_up == self.evaluation_type and (self.evaluation_type == "date" or self.evaluation_type == "person"):
-            precision = float('nan')
-            recall = float('nan')
-            F1 = float('nan')
-        elif type_up == "address" and self.noAddressType is True:
+        if (type_up == "date" or type_up == "person") or \
+         (type_up == "address" and self.noAddressType is True):
             precision = float('nan')
             recall = float('nan')
             F1 = float('nan')
