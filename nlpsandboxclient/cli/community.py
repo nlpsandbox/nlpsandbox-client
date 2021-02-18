@@ -128,6 +128,29 @@ def list_datasets(data_node_host, output):
     utils.stdout_or_json(list(datasets), output)
 
 
+@cli.command(no_args_is_help=True)
+@click.option('--data_node_host', help='Data node host',
+              default=DATA_NODE_HOST, show_default=True)
+@click.option('--dataset_id', help='Dataset id', required=True)
+@click.option('--output', help='Output json filepath', type=click.Path())
+def store_dataset(data_node_host, dataset_id, output):
+    """Create a dataset in the data node"""
+    # Create dataset
+    dataset = client.store_dataset(host=data_node_host,
+                                   dataset_id=dataset_id)
+    utils.stdout_or_json(dataset.to_dict(), output)
+
+
+@cli.command(no_args_is_help=True)
+@click.option('--data_node_host', help='Data node host',
+              default=DATA_NODE_HOST, show_default=True)
+@click.option('--dataset_id', help='Dataset id', required=True)
+def delete_dataset(data_node_host, dataset_id):
+    """Create a dataset in the data node"""
+    # Create dataset
+    client.delete_dataset(host=data_node_host,
+                          dataset_id=dataset_id)
+
 # @cli.command()
 # @click.argument('noteid', type=click.INT)
 # @click.option('--output', help='Output json filepath', type=click.Path())
