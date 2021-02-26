@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     # basic
     name='nlpsandbox-client',
-    version='0.3.1',
+    version='1.0.0',
     # packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     # py_modules=['hello'],
     # scripts=['bin/nlp-evaluate'],
@@ -44,7 +44,7 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/nlpsandbox/nlpsandbox-client/issues",
     },
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',

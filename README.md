@@ -15,7 +15,7 @@ NLP Sandbox Client Library for Python
 
 1. Create the file that contains the future environment variables
 
-        cp .env.sample .env
+        cp .env.example .env
 
 2. Update the configuration values in *.env*. Set the values of `SYNAPSE_USERNAME`
    and `SYNAPSE_APIKEY` with the credentials of your Synapse account.
