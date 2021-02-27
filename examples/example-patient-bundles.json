@@ -24,35 +24,40 @@
                 "start": 16,
                 "length": 10,
                 "text": "2069-04-07",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-01",
                 "start": 89,
                 "length": 8,
                 "text": "November",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-01",
                 "start": 1708,
                 "length": 8,
                 "text": "04/07/69",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-01",
                 "start": 1721,
                 "length": 8,
                 "text": "04/15/69",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-01",
                 "start": 1734,
                 "length": 8,
                 "text": "04/07/69",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               }
             ],
             "textPersonNameAnnotations": [
@@ -60,25 +65,29 @@
                 "noteId": "110-01",
                 "start": 38,
                 "length": 8,
-                "text": "Villegas"
+                "text": "Villegas",
+                "confidence": 95
               },
               {
                 "noteId": "110-01",
                 "start": 1666,
                 "length": 18,
-                "text": "Xzavian G. Tavares"
+                "text": "Xzavian G. Tavares",
+                "confidence": 95
               },
               {
                 "noteId": "110-01",
                 "start": 1691,
                 "length": 3,
-                "text": "XGT"
+                "text": "XGT",
+                "confidence": 95
               },
               {
                 "noteId": "110-01",
                 "start": 1695,
                 "length": 6,
-                "text": "holmes"
+                "text": "holmes",
+                "confidence": 95
               }
             ],
             "textPhysicalAddressAnnotations": []
@@ -102,7 +111,8 @@
                 "start": 16,
                 "length": 10,
                 "text": "2075-01-07",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               }
             ],
             "textPersonNameAnnotations": [
@@ -110,37 +120,43 @@
                 "noteId": "110-02",
                 "start": 41,
                 "length": 15,
-                "text": "Villegas, Yosef"
+                "text": "Villegas, Yosef",
+                "confidence": 95
               },
               {
                 "noteId": "110-02",
                 "start": 1258,
                 "length": 5,
-                "text": "Hobbs"
+                "text": "Hobbs",
+                "confidence": 95
               },
               {
                 "noteId": "110-02",
                 "start": 1284,
                 "length": 16,
-                "text": "Gilbert P. Perez"
+                "text": "Gilbert P. Perez",
+                "confidence": 95
               },
               {
                 "noteId": "110-02",
                 "start": 1310,
                 "length": 3,
-                "text": "GPP"
+                "text": "GPP",
+                "confidence": 95
               },
               {
                 "noteId": "110-02",
                 "start": 1314,
                 "length": 6,
-                "text": "church"
+                "text": "church",
+                "confidence": 95
               },
               {
                 "noteId": "110-02",
                 "start": 1321,
                 "length": 7,
-                "text": "olinger"
+                "text": "olinger",
+                "confidence": 95
               }
             ],
             "textPhysicalAddressAnnotations": []
@@ -164,28 +180,32 @@
                 "start": 16,
                 "length": 10,
                 "text": "2080-02-18",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-03",
                 "start": 97,
                 "length": 7,
                 "text": "2/17/80",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-03",
                 "start": 300,
                 "length": 4,
                 "text": "2/03",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-03",
                 "start": 3329,
                 "length": 4,
                 "text": "2/18",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               }
             ],
             "textPersonNameAnnotations": [
@@ -193,25 +213,29 @@
                 "noteId": "110-03",
                 "start": 63,
                 "length": 14,
-                "text": "Yosef Villegas"
+                "text": "Yosef Villegas",
+                "confidence": 95
               },
               {
                 "noteId": "110-03",
                 "start": 111,
                 "length": 13,
-                "text": "Gilbert Perez"
+                "text": "Gilbert Perez",
+                "confidence": 95
               },
               {
                 "noteId": "110-03",
                 "start": 136,
                 "length": 6,
-                "text": "YBARRA"
+                "text": "YBARRA",
+                "confidence": 95
               },
               {
                 "noteId": "110-03",
                 "start": 3583,
                 "length": 9,
-                "text": "Mike Ivan"
+                "text": "Mike Ivan",
+                "confidence": 95
               }
             ],
             "textPhysicalAddressAnnotations": [
@@ -220,7 +244,8 @@
                 "start": 3598,
                 "length": 4,
                 "text": "EHMS",
-                "addressType": "hospital"
+                "addressType": "hospital",
+                "confidence": 95
               }
             ]
           }
@@ -243,35 +268,40 @@
                 "start": 16,
                 "length": 10,
                 "text": "2080-10-01",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-04",
                 "start": 127,
                 "length": 4,
                 "text": "3/80",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-04",
                 "start": 194,
                 "length": 6,
                 "text": "Monday",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-04",
                 "start": 1053,
                 "length": 4,
                 "text": "3/80",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               },
               {
                 "noteId": "110-04",
                 "start": 2910,
                 "length": 4,
                 "text": "8/79",
-                "dateFormat": ""
+                "dateFormat": "",
+                "confidence": 95
               }
             ],
             "textPersonNameAnnotations": [
@@ -279,25 +309,29 @@
                 "noteId": "110-04",
                 "start": 3559,
                 "length": 11,
-                "text": "Xavier Rush"
+                "text": "Xavier Rush",
+                "confidence": 95
               },
               {
                 "noteId": "110-04",
                 "start": 3829,
                 "length": 6,
-                "text": "Thorne"
+                "text": "Thorne",
+                "confidence": 95
               },
               {
                 "noteId": "110-04",
                 "start": 3872,
                 "length": 5,
-                "text": "Perez"
+                "text": "Perez",
+                "confidence": 95
               },
               {
                 "noteId": "110-04",
                 "start": 4064,
                 "length": 16,
-                "text": "Owen M Gallagher"
+                "text": "Owen M Gallagher",
+                "confidence": 95
               }
             ],
             "textPhysicalAddressAnnotations": []
