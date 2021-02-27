@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 import click
 
+from .. import __version__
 from . import community, evaluate
 
 
 @click.group()
+@click.version_option(__version__)
+@click.pass_context
 def cli():
     """NLP Sandbox Client"""
 
