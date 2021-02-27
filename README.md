@@ -16,10 +16,9 @@ NLP Sandbox Client Library for Python.  This repository consists of 3 packages
 
 ## Specification
 - API version: 1.0.1
-- Tool version: 0.5.1
-- Docker image: nlpsandbox/cli
+- Docker image: `nlpsandbox/cli`
 
-
+<!-- 
 ## Usage
 
 1. Create the file that contains the future environment variables
@@ -31,13 +30,13 @@ NLP Sandbox Client Library for Python.  This repository consists of 3 packages
 
 3. Export the variables defined in .env to environment variables
 
-        export $(grep -v '^#' .env | xargs -d '\n')
+        export $(grep -v '^#' .env | xargs -d '\n') -->
 
-### Documentation
+## Documentation
 
 `nlpsandboxclient` functionality is documented [here](https://nlpsandbox.github.io/nlpsandbox-client/)
 
-### Installation
+## Installation
 
 ```
 pip install nlpsandbox-client
@@ -46,4 +45,3 @@ pip install nlpsandbox-client
 ## Contributing and developing
 
 Thinking about contributing to `nlpsandbox-client`? Get started by reading our [Contributor Guide](CONTRIBUTING.md).
-
