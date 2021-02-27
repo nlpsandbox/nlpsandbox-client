@@ -7,10 +7,8 @@ for NLP sandbox data node, annotation services, and evaluation of annotation res
 This repository consists of 3 packages:
 
 - **datanode**: Python SDK client that wraps `data-node API`_
-- **annotator**: Python SDK client for the NLP annotators `date-annotator API`_,
-`person-name-annotator API`_, `physical-address-annotator API`_
-- **nlpsandboxclient**: Uses **datanode**, **annotator** to interact with NLP services
-and the synapseclient_ library to pull information from Synapse (account required).
+- **annotator**: Python SDK client for the NLP annotators `date-annotator API`_, `person-name-annotator API`_, `physical-address-annotator API`_
+- **nlpsandboxclient**: Uses **datanode**, **annotator** to interact with NLP services and the synapseclient_ library to pull information from Synapse (account required).
 
 .. _Synapse: https://www.synapse.org/
 .. _synapseclient: https://python-docs.synapse.org/build/html/index.html
@@ -40,7 +38,8 @@ There are two main ways of running this code, and each way has its preferred met
 of setting Synapse credentials.
 
 (1) Local Python Installation: Please learn more about `Synapse client configuration`_.
-(2) Docker: The client will read environmental variables for your Synapse credentials. 
+(2) Docker: The client will read environmental variables for your Synapse credentials.
+
    a. Create the file that contains the future environment variables
 
     .. code:: console

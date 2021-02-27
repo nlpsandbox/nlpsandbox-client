@@ -1,6 +1,6 @@
-**********
-NLP Client
-**********
+****************
+nlpsandboxclient
+****************
 
 .. automodule:: nlpsandboxclient.client
     :members:
