@@ -18,20 +18,6 @@ NLP Sandbox Client Library for Python.  This repository consists of 3 packages
 - API version: 1.0.1
 - Docker image: `nlpsandbox/cli`
 
-<!-- 
-## Usage
-
-1. Create the file that contains the future environment variables
-
-        cp .env.sample .env
-
-2. Update the configuration values in *.env*. Set the values of `SYNAPSE_USERNAME`
-   and `SYNAPSE_APIKEY` with the credentials of your Synapse account.
-
-3. Export the variables defined in .env to environment variables
-
-        export $(grep -v '^#' .env | xargs -d '\n') -->
-
 ## Documentation
 
 `nlpsandboxclient` functionality is documented [here](https://nlpsandbox.github.io/nlpsandbox-client/)

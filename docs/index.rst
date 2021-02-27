@@ -4,14 +4,13 @@
    :caption: Python Client
    :maxdepth: 2
 
-   python/api_client
    python/client
 
 .. toctree::
    :caption: Command-Line Client
    :maxdepth: 2
 
-   cli/overview.rst
+   cli/nlp-cli
 
 .. toctree::
    :caption: About
