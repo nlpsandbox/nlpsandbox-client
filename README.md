@@ -40,6 +40,7 @@ NLP Sandbox Client Library for Python.  This repository consists of 3 packages
 
 ```
 pip install nlpsandbox-client
+nlp-cli --version
 ```
 
 ## Contributing and developing
