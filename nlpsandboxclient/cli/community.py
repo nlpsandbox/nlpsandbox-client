@@ -14,12 +14,12 @@ def cli():
     """Community related commands"""
 
 
-@cli.command(no_args_is_help=True)
+@cli.command()
 def get_num_users():
     """Gets the number of NLP Sandbox users"""
-    syn = synapseclient.login()
+    syn = utils.synapse_login()
     res = syn.restGET("/teamMembers/count/3413388")
-    print(res)
+    print(f"Number of NLP sandbox users: {res['count']}")
 
 
 @cli.command(no_args_is_help=True)
