@@ -7,11 +7,20 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/nlpsandbox/cli.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/r/nlpsandbox/cli)
 [![Discord](https://img.shields.io/discord/770484164393828373.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=Discord&logo=discord)](https://discord.gg/Zb4ymtF "Realtime support / chat with the community and the team")
 
-NLP Sandbox Client Library for Python
+## Overview
+NLP Sandbox Client Library for Python.  This repository consists of 3 packages
+
+- `datanode`: Python SDK client that wraps [data-node API](https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/latest/openapi.json)
+- `annotator`: Python SDK client for the NLP annotators ([date-annotator API](https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/latest/openapi.json), [person-name-annotator API](https://nlpsandbox.github.io/nlpsandbox-schemas/person-name-annotator/latest/openapi.json), [physical-address-annotator API](https://nlpsandbox.github.io/nlpsandbox-schemas/physical-address-annotator/latest/openapi.json))
+- `nlpsandboxclient` - Convenience functions that infer user behavior of the above two SDK clients.
+
+## Specification
+- API version: 1.0.1
+- Tool version: 0.5.1
+- Docker image: nlpsandbox/cli
+
 
 ## Usage
-
-### Create configuration
 
 1. Create the file that contains the future environment variables
 
@@ -24,63 +33,17 @@ NLP Sandbox Client Library for Python
 
         export $(grep -v '^#' .env | xargs -d '\n')
 
-### Run the client using Docker
+### Documentation
 
-    docker run --rm nlpsandbox/cli
+`nlpsandboxclient` functionality is documented [here](https://nlpsandbox.github.io/nlpsandbox-client/)
 
-### Evaluate the performance of a local prediction file
-
-    docker run --rm nlpsandbox/cli evaluate
-
-## Development
-
-Create a new conda environment using the Python version listed in the
-[Dockerfile](Dockerfile) of this repository (currently Python 3.8.5).
-
-    conda create --name nlp-sandbox-client python=3.8.5
-    conda activate nlp-sandbox-client
-
-Install the project in *develop* mode. This command must be executed each time
-the content of *setup.py* is updated.
-
-<!-- currently not working: python setup.py develop --user -->
-    pip install -e .
-
-Run the program
-
-    $ nlp-cli
-    Usage: nlp-cli [OPTIONS] COMMAND [ARGS]...
-
-    NLP Sandbox client
-
-    Options:
-    --help  Show this message and exit.
-
-    Commands:
-    evaluate  Evaluate the performance of a local prediction file
-
-## Tests
+### Installation
 
 ```
-nlp-cli evaluate prediction --pred_filepath test/data/new_prediction.json --gold_filepath test/data/new_goldstandard.json --eval_type person
+pip install nlpsandbox-client
 ```
 
+## Contributing and developing
 
-## Create clients
+Thinking about contributing to `nlpsandbox-client`? Get started by reading our [Contributor Guide](CONTRIBUTING.md).
 
-Data node client
-```
-openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/edge/openapi.json
-```
-
-Annotator client
-
-Must merge the three NLP annotator specifications together:
-
-* [date](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/date-annotator)
-* [person](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/person-name-annotator)
-* [address](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/physical-address-annotator)
-
-```
-openapi-generator generate -g python -o . --package-name annotator -i openapi.yaml
-```
