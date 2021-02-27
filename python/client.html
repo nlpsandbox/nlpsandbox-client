@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>NLP Client &mdash; nlpsandboxclient 0.1.1 documentation</title>
+  <title>nlpsandboxclient &mdash; nlpsandboxclient 0.4.1 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Overview" href="../cli/overview.html" />
-    <link rel="prev" title="nlpsandboxclient" href="../index.html" /> 
+    <link rel="next" title="nlp-cli" href="../cli/nlp-cli.html" />
+    <link rel="prev" title="nlpsandbox-client" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.4.1
               </div>
             
           
@@ -91,11 +91,11 @@
             
               <p class="caption"><span class="caption-text">Python Client</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">NLP Client</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nlpsandboxclient</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Command-Line Client</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../cli/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli/nlp-cli.html">nlp-cli</a></li>
 </ul>
 <p class="caption"><span class="caption-text">About</span></p>
 <ul>
@@ -149,7 +149,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>NLP Client</li>
+      <li>nlpsandboxclient</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -169,7 +169,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-nlpsandboxclient.client">
-<span id="nlp-client"></span><h1>NLP Client<a class="headerlink" href="#module-nlpsandboxclient.client" title="Permalink to this headline">¶</a></h1>
+<span id="nlpsandboxclient"></span><h1>nlpsandboxclient<a class="headerlink" href="#module-nlpsandboxclient.client" title="Permalink to this headline">¶</a></h1>
 <p>NLP data node client that interacts with the SDK datanodeclient</p>
 <dl class="function">
 <dt id="nlpsandboxclient.client.annotate_note">
@@ -386,6 +386,52 @@ Default is True.</p></li>
 <dt id="nlpsandboxclient.client.store_dataset">
 <code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">store_dataset</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em><span class="sig-paren">)</span> &#x2192; datanode.model.dataset.Dataset<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#store_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.store_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a dataset</p>
+</dd></dl>
+
+<span class="target" id="module-nlpsandboxclient.utils"></span><p>Utility functions</p>
+<dl class="function">
+<dt id="nlpsandboxclient.utils.camelcase_to_snakecase">
+<code class="sig-prename descclassname">nlpsandboxclient.utils.</code><code class="sig-name descname">camelcase_to_snakecase</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/utils.html#camelcase_to_snakecase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.utils.camelcase_to_snakecase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change camelcase to snakecase</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="nlpsandboxclient.utils.change_keys">
+<code class="sig-prename descclassname">nlpsandboxclient.utils.</code><code class="sig-name descname">change_keys</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">convert</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/utils.html#change_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.utils.change_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursivly goes through the dictionnary obj and replaces keys with the
+convert function.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="nlpsandboxclient.utils.check_url">
+<code class="sig-prename descclassname">nlpsandboxclient.utils.</code><code class="sig-name descname">check_url</code><span class="sig-paren">(</span><em class="sig-param">url: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/utils.html#check_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.utils.check_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if url is implemented</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>url</strong> – The url to check</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If url is not implemented</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_url</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.google.com&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nlpsandboxclient.utils.stdout_or_json">
+<code class="sig-prename descclassname">nlpsandboxclient.utils.</code><code class="sig-name descname">stdout_or_json</code><span class="sig-paren">(</span><em class="sig-param">json_dict: dict</em>, <em class="sig-param">output: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/utils.html#stdout_or_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.utils.stdout_or_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write dict to json or stdout</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="nlpsandboxclient.utils.synapse_login">
+<code class="sig-prename descclassname">nlpsandboxclient.utils.</code><code class="sig-name descname">synapse_login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/utils.html#synapse_login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.utils.synapse_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log into synapse via two methods
+a. ~/.synapseConfig
+b. SYNAPSE_USERNAME and SYNAPSE_APIKEY environmental variables</p>
 </dd></dl>
 
 </div>

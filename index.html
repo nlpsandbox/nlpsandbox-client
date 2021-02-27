@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>nlpsandboxclient &mdash; nlpsandboxclient 0.1.1 documentation</title>
+  <title>nlpsandbox-client &mdash; nlpsandboxclient 0.4.1 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="NLP Client" href="python/client.html" /> 
+    <link rel="next" title="nlpsandboxclient" href="python/client.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.4.1
               </div>
             
           
@@ -90,11 +90,11 @@
             
               <p class="caption"><span class="caption-text">Python Client</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="python/client.html">NLP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/client.html">nlpsandboxclient</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Command-Line Client</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cli/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli/nlp-cli.html">nlp-cli</a></li>
 </ul>
 <p class="caption"><span class="caption-text">About</span></p>
 <ul>
@@ -148,7 +148,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>nlpsandboxclient</li>
+      <li>nlpsandbox-client</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,12 +167,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nlpsandboxclient">
-<h1>nlpsandboxclient<a class="headerlink" href="#nlpsandboxclient" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="nlpsandbox-client">
+<h1>nlpsandbox-client<a class="headerlink" href="#nlpsandbox-client" title="Permalink to this headline">¶</a></h1>
 <p><strong>nlpsandboxclient</strong> is a set of tools and commands that provides an interface
-for NLP sandbox data node, annotation services, and evaluation of annotation results.</p>
-<p><strong>nlpsandboxclient</strong> is written in Python and uses the <a class="reference external" href="https://python-docs.synapse.org/build/html/index.html">synapseclient</a> library to
-pull information from Synapse (account required).</p>
+for NLP sandbox data node, annotation services, and evaluation of annotation results.
+This repository consists of 3 packages:</p>
+<ul class="simple">
+<li><p><strong>datanode</strong>: Python SDK client that wraps <a class="reference external" href="https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/latest/openapi.json">data-node API</a></p></li>
+<li><p><strong>annotator</strong>: Python SDK client for the NLP annotators <a class="reference external" href="https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/latest/openapi.json">date-annotator API</a>, <a class="reference external" href="https://nlpsandbox.github.io/nlpsandbox-schemas/person-name-annotator/latest/openapi.json">person-name-annotator API</a>, <a class="reference external" href="https://nlpsandbox.github.io/nlpsandbox-schemas/physical-address-annotator/latest/openapi.json">physical-address-annotator API</a></p></li>
+<li><p><strong>nlpsandboxclient</strong>: Uses <strong>datanode</strong>, <strong>annotator</strong> to interact with NLP services and the <a class="reference external" href="https://python-docs.synapse.org/build/html/index.html">synapseclient</a> library to pull information from Synapse (account required).</p></li>
+</ul>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>To install from pypi:</p>
@@ -184,20 +188,56 @@ pull information from Synapse (account required).</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>This client interfaces with the <a class="reference external" href="https://github.com/nlpsandbox/data-node">data-node</a> or annotators such as <a class="reference external" href="https://github.com/nlpsandbox/date-annotator-example">date-annotator-example</a>.
+There are two main ways of running this code, and each way has its preferred method
+of setting Synapse credentials.</p>
+<ol class="arabic simple">
+<li><p>Local Python Installation: Please learn more about <a class="reference external" href="https://docs.synapse.org/articles/client_configuration.html">Synapse client configuration</a>.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">nlp-cli --version</span>
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p>Docker: The client will read environmental variables for your Synapse credentials.</p>
+<ol class="loweralpha simple">
+<li><p>Create the file that contains the future environment variables</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cp .env.sample .env</span>
+</pre></div>
+</div>
+<p>b. Update the configuration values in <em>.env</em>. Set the values of <strong>SYNAPSE_USERNAME</strong>
+and <strong>SYNAPSE_APIKEY</strong> with the credentials of your Synapse account.</p>
+<ol class="loweralpha simple" start="3">
+<li><p>Run docker command</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker run --rm --env-file .env nlpsandbox/cli</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
 <div class="section" id="contributing">
 <h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
 <p>Interested in contributing? <strong>Awesome!</strong> We follow the typical <a class="reference external" href="https://guides.github.com/introduction/flow/">GitHub workflow</a>
-of forking a repo, creating a branch, and opening pull requests.</p>
+of forking a repo, creating a branch, and opening pull requests.  For more
+information on how you can add or propose a change, visit our <a class="reference external" href="https://github.com/nlpsandbox/nlpsandbox-client/blob/develop/CONTRIBUTING.md">contributing guide</a>.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Python Client</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="python/client.html">NLP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/client.html">nlpsandboxclient</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Command-Line Client</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cli/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli/nlp-cli.html">nlp-cli</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli/nlp-cli.html#nlp-cli">nlp-cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli/nlp-cli.html#nlp-cli-community">nlp-cli community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli/nlp-cli.html#nlp-cli-evaluate">nlp-cli evaluate</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
