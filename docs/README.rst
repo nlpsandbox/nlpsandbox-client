@@ -38,23 +38,27 @@ There are two main ways of running this code, and each way has its preferred met
 of setting Synapse credentials.
 
 (1) Local Python Installation: Please learn more about `Synapse client configuration`_.
+
+.. code:: console
+
+    nlp-cli --version
+
 (2) Docker: The client will read environmental variables for your Synapse credentials.
 
-   a. Create the file that contains the future environment variables
+    a. Create the file that contains the future environment variables
 
     .. code:: console
 
         cp .env.sample .env
 
-   b. Update the configuration values in *.env*. Set the values of **SYNAPSE_USERNAME**
-   and **SYNAPSE_APIKEY** with the credentials of your Synapse account.
+    b. Update the configuration values in *.env*. Set the values of **SYNAPSE_USERNAME**
+    and **SYNAPSE_APIKEY** with the credentials of your Synapse account.
 
-   c. Export the variables defined in .env to environment variables
+    c. Run docker command
 
     .. code:: console
 
-        export $(grep -v '^#' .env | xargs -d '\n')
-
+        docker run --rm --env-file .env nlpsandbox/cli
 
 .. _data-node: https://github.com/nlpsandbox/data-node
 .. _date-annotator-example: https://github.com/nlpsandbox/date-annotator-example
