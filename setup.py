@@ -1,13 +1,37 @@
-#!/usr/bin/env python
+import os
 import setuptools
+
+
+def read(rel_path: str) -> str:
+    """Read file"""
+    # type: (str) -> str
+    here = os.path.abspath(os.path.dirname(__file__))
+    # intentionally *not* adding an encoding option to open, See:
+    #   https://github.com/pypa/virtualenv/issues/201#issuecomment-3145690
+    with open(os.path.join(here, rel_path)) as fp:
+        return fp.read()
+
+
+def get_version(rel_path: str) -> str:
+    """Get version from __init__.py: following pip setup.py example
+    https://github.com/pypa/pip/blob/master/setup.py#L11
+    """
+    for line in read(rel_path).splitlines():
+        if line.startswith('__version__'):
+            # __version__ = "0.9"
+            delim = '"' if '"' in line else "'"
+            return line.split(delim)[1]
+    raise RuntimeError("Unable to find version string.")
+
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+
 setuptools.setup(
     # basic
     name='nlpsandbox-client',
-    version='1.0.0',
+    version=get_version("nlpsandboxclient/__init__.py"),
     # packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     # py_modules=['hello'],
     # scripts=['bin/nlp-evaluate'],

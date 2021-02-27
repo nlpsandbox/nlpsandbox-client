@@ -1,8 +1,11 @@
 """Utility functions"""
 import json
+import os
 import re
 
 import requests
+
+import synapseclient
 
 
 def stdout_or_json(json_dict: dict, output: str):
@@ -56,3 +59,17 @@ def check_url(url: str):
     response = requests.get(url)
     if not response.ok:
         raise ValueError(f"{url} not implemented")
+
+
+def synapse_login():
+    """Log into synapse via two methods
+    a. ~/.synapseConfig
+    b. SYNAPSE_USERNAME and SYNAPSE_APIKEY environmental variables
+    """
+    try:
+        syn = synapseclient.login()
+    except Exception:
+        username = os.getenv("SYNAPSE_USERNAME")
+        apikey = os.getenv("SYNAPSE_APIKEY")
+        syn = synapseclient.login(email=username, apiKey=apikey)
+    return syn
