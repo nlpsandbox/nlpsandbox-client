@@ -373,6 +373,7 @@ def annotate_note(host: str, note: List[dict, Note],
     """
     # host = "http://10.23.55.45:9000/api/v1"
     configuration = annotator.Configuration(host=host)
+    # Change clinical note into text annotation request format
     if isinstance(note, Note):
         text_annotator_req = {"note": note.to_dict()}
     else:
