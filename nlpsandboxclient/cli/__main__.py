@@ -2,7 +2,7 @@
 import click
 
 from .. import __version__
-from . import annotator_cli, community, datanode_cli, evaluate
+from . import community, datanode_cli, evaluate, tool
 
 
 @click.group()
@@ -15,5 +15,5 @@ def main():
     cli.add_command(community.cli)
     cli.add_command(evaluate.evaluate_prediction)
     cli.add_command(datanode_cli.cli)
-    cli.add_command(annotator_cli.cli)
+    cli.add_command(tool.cli)
     cli()
