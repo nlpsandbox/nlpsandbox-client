@@ -10,7 +10,7 @@ from nlpsandboxclient.client import DATA_NODE_HOST
 # Command Group
 @click.group(name='datanode', no_args_is_help=True)
 def cli():
-    """Commands to interact with NLP Data Node"""
+    """Commands to interact with NLP Data Node."""
 
 
 @cli.command(no_args_is_help=True)

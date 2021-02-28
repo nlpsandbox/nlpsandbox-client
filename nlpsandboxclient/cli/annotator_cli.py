@@ -7,7 +7,7 @@ from nlpsandboxclient import client, utils
 
 @click.group(name='annotator', no_args_is_help=True)
 def cli():
-    """Commands to interact with NLP annotators"""
+    """Commands to interact with NLP annotators."""
 
 
 @cli.command(no_args_is_help=True)

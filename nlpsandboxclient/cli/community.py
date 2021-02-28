@@ -7,7 +7,7 @@ from nlpsandboxclient import utils
 # Command Group
 @click.group(name='community', no_args_is_help=True)
 def cli():
-    """Commands for NLP Sandbox users"""
+    """Commands for NLP Sandbox users."""
 
 
 @cli.command()
