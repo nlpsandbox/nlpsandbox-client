@@ -307,7 +307,7 @@ def _annotate_address(api_client, note: dict) -> dict:
     return annotations
 
 
-def _annotate_date(api_client, note: dict) -> dict:
+def _annotate_date(api_client, note: dict, async_req: bool = False) -> dict:
     """Annotate notes with date
 
     Args:
@@ -336,7 +336,8 @@ def _annotate_date(api_client, note: dict) -> dict:
     # host = "http://10.23.55.45:9000/api/v1"
     api_instance = text_date_annotation_api.TextDateAnnotationApi(api_client)
     annotations = api_instance.create_text_date_annotations(
-        text_date_annotation_request=note
+        text_date_annotation_request=note,
+        async_req=async_req
     )
     return annotations
 
