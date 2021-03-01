@@ -1,5 +1,5 @@
 """NLP data node client that interacts with the SDK datanodeclient"""
-from typing import List, Iterator
+from typing import List, Iterator, Union
 
 import requests
 
@@ -347,7 +347,7 @@ def _annotate_date(api_client, text_annotation_request: dict) -> dict:
     return annotations
 
 
-def annotate_note(host: str, note: List[dict, Note],
+def annotate_note(host: str, note: Union[dict, Note],
                   annotator_type: str) -> dict:
     """Annotate notes
 
