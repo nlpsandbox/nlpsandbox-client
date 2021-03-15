@@ -3,8 +3,13 @@ Example code to push a dataset into the data node. A complete
 dataset includes "Dataset", "Fhir Store", "Annotation Store",
 "Annotation", "Patient", "Note"
 
-To run this code, please follow instructions here:
-https://github.com/nlpsandbox/data-node to start the data-node locally
+To run this code, here are the requirements:
+
+- Install the nlpsandbox-client (`pip install nlpsandbox-client`)
+- Start the Data Node locally - Follow instructions here:
+https://github.com/nlpsandbox/data-node
+- python push_dataset.py
+
 """
 import json
 
