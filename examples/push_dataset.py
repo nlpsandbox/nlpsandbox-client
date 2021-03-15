@@ -23,9 +23,7 @@ import nlpsandboxclient.utils
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 host = "http://localhost:8080/api/v1"
-configuration = datanode.Configuration(
-    host=host
-)
+configuration = datanode.Configuration(host=host)
 
 dataset_id = 'test-dataset'
 fhir_store_id = 'evaluation'
