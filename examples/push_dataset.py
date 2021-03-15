@@ -65,14 +65,9 @@ with datanode.ApiClient(configuration) as api_client:
         body={}
     )
 
-    # print(f"dataset: {dataset}")
-    # print(f"fhir_store: {fhir_store}")
-    # print(f"annotation_store: {annotation_store}")
-
     with open(json_filename) as f:
         data = json.load(f)
         patient_bundles = data['patient_bundles']
-        # patient_bundles = patient_bundles[:1]
 
     for patient_bundle in patient_bundles:
         # Create or get a FHIR Patient
@@ -86,11 +81,9 @@ with datanode.ApiClient(configuration) as api_client:
             dataset_id, fhir_store_id, patient_id,
             patient_create_request=patient
         )
-        # print(f"patient: {patient}")
 
         # Create the Note and Annotation objects linked to the patient
         note_bundles = patient_bundle['note_bundles']
-        # note_bundles = note_bundles[:1]
 
         for note_bundle in note_bundles:
             # Determine note Id since noteId isn't part of the 'note'
