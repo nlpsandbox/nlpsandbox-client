@@ -16,10 +16,12 @@ def cli():
               type=click.Path(exists=True), required=True)
 @click.option('--output', help='Specify output json path',
               type=click.Path())
-@click.option('--annotator_type', help='Type of annotator.',
-              type=click.Choice(['date', 'person', 'address'],
+@click.option('--tool_type', help='The type of tool.',
+              type=click.Choice(['nlpsandbox:date-annotator',
+                                 'nlpsandbox:person-name-annotator',
+                                 'nlpsandbox:physical-address-annotator'],
                                 case_sensitive=False), required=True)
-def annotate_note(annotator_host, note_json, output, annotator_type):
+def annotate_note(annotator_host, note_json, output, tool_type):
     """Annotate a note with specified annotator"""
     with open(note_json, "r") as note_f:
         notes = json.load(note_f)
@@ -27,7 +29,7 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
     for note in notes:
         note_name = note.pop("note_name")
         annotations = client.annotate_note(host=annotator_host, note=note,
-                                           annotator_type=annotator_type)
+                                           tool_type=tool_type)
         annotations['annotationSource'] = {
             "resourceSource": {
                 "name": note_name
