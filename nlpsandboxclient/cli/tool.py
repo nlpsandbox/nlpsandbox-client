@@ -26,8 +26,7 @@ def annotate_note(annotator_host, note_json, output, annotator_type):
     all_annotations = []
     for note in notes:
         note_name = note.pop("note_name")
-        annotations = client.annotate_note(host=annotator_host,
-                                           note={"note": note},
+        annotations = client.annotate_note(host=annotator_host, note=note,
                                            annotator_type=annotator_type)
         annotations['annotationSource'] = {
             "resourceSource": {
