@@ -16,20 +16,22 @@ def cli():
               type=click.Path(exists=True), required=True)
 @click.option('--output', help='Specify output json path',
               type=click.Path())
-@click.option('--eval_type', help='Type of evaluation.',
-              type=click.Choice(['date', 'person', 'address'],
+@click.option('--tool_type', help='The type of tool to evaluate.',
+              type=click.Choice(['nlpsandbox:date-annotator',
+                                 'nlpsandbox:person-name-annotator',
+                                 'nlpsandbox:physical-address-annotator'],
                                 case_sensitive=False), required=True)
-def evaluate_prediction(pred_filepath, gold_filepath, output, eval_type):
+def evaluate_prediction(pred_filepath, gold_filepath, output, tool_type):
     """Evaluate the performance of a prediction file. Example prediction and
     goldstandard files are found in test/data/new_prediction.json and
     test/data/new_goldstandard.json respectively.
     """
     eval_mapping = {
-        "date": evaluation.DateEvaluation,
-        "person": evaluation.PersonNameEvaluation,
-        "address": evaluation.PhysicalAddressEvaluation
+        "nlpsandbox:date-annotator": evaluation.DateEvaluation,
+        "nlpsandbox:person-name-annotator": evaluation.PersonNameEvaluation,
+        "nlpsandbox:physical-address-annotator": evaluation.PhysicalAddressEvaluation
     }
-    evaluator = eval_mapping[eval_type]()
+    evaluator = eval_mapping[tool_type]()
 
     evaluator.convert_dict(pred_filepath, gold_filepath)
     results = evaluator.eval()

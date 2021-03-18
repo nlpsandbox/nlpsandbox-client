@@ -348,13 +348,13 @@ def _annotate_date(api_client, text_annotation_request: dict) -> dict:
 
 
 def annotate_note(host: str, note: Union[dict, Note],
-                  annotator_type: str) -> dict:
+                  tool_type: str) -> dict:
     """Annotate notes
 
     Args:
         host: Data node host IP
         note: Clinical note
-        annotator_type: Type of annotator
+        tool_type: Type of annotator
 
     Yields:
         Annotated notes
@@ -368,7 +368,7 @@ def annotate_note(host: str, note: Union[dict, Note],
         >>> }
         >>> annotations = annotate_note(host="0.0.0.0/api/v1",
         >>>                             note=example_note,
-        >>>                             annotator_type="date")
+        >>>                             tool_type="date")
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
@@ -381,14 +381,14 @@ def annotate_note(host: str, note: Union[dict, Note],
             "note": utils.change_keys(note, utils.camelcase_to_snakecase)
         }
     with annotator.ApiClient(configuration) as api_client:
-        if annotator_type == "date":
+        if tool_type == "nlpsandbox:date-annotator":
             annotations = _annotate_date(api_client, text_annotator_req)
-        elif annotator_type == "person":
+        elif tool_type == "nlpsandbox:person-name-annotator":
             annotations = _annotate_person(api_client, text_annotator_req)
-        elif annotator_type == "address":
+        elif tool_type == "nlpsandbox:physical-address-annotator":
             annotations = _annotate_address(api_client, text_annotator_req)
         else:
-            raise ValueError(f"Invalid annotator_type: {annotator_type}")
+            raise ValueError(f"Invalid annotator_type: {tool_type}")
         sanitized_annotations = api_client.sanitize_for_serialization(
             annotations
         )
