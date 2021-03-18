@@ -9,6 +9,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/github/nlpsandbox/nlpsandbox-client.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=coverage&logo=Coveralls)](https://coveralls.io/github/nlpsandbox/nlpsandbox-client?branch=)
 
 ## Overview
+
 NLP Sandbox Client Library for Python.  This repository consists of 3 packages
 
 - `datanode`: Python SDK client that wraps [data-node API](https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/latest/openapi.json)
@@ -16,6 +17,7 @@ NLP Sandbox Client Library for Python.  This repository consists of 3 packages
 - `nlpsandboxclient` - Convenience functions that infer user behavior of the above two SDK clients.
 
 ## Specification
+
 - API version: 1.0.1
 - Docker image: `nlpsandbox/cli`
 
