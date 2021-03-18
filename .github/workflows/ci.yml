@@ -24,7 +24,7 @@ jobs:
       with:
         entrypoint: hadolint
         args: Dockerfile
-    - name: Lint Python requirements*.txt files
+    - name: Lint Python requirements files
       run: |
         sort -f --check requirements.txt
         sort -f --check test-requirements.txt
