@@ -57,9 +57,7 @@ jobs:
         COVERALLS_FLAG_NAME: ${{ env.PYTHON_ENV }}
         COVERALLS_PARALLEL: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        cd server
-        coveralls --service=github
+      run: coveralls --service=github
 
   finish-coveralls:
     needs: [test]
