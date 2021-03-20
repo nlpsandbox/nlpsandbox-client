@@ -11,10 +11,8 @@
 
 import unittest
 from unittest.mock import patch
-from unittest import mock
 
 import datanode
-# import datanode.rest import RESTClientObject
 from datanode.api.annotation_api import AnnotationApi  # noqa: E501
 from datanode.models import AnnotationCreateRequest, AnnotationSource, ResourceSource
 

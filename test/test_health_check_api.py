@@ -10,6 +10,7 @@
 
 
 import unittest
+from unittest.mock import patch
 
 import datanode
 from datanode.api.health_check_api import HealthCheckApi  # noqa: E501
@@ -20,16 +21,18 @@ class TestHealthCheckApi(unittest.TestCase):
 
     def setUp(self):
         self.api = HealthCheckApi()  # noqa: E501
+        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.mock_foo = self.patcher.start()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_get_health_check(self):
         """Test case for get_health_check
 
         Get health check information  # noqa: E501
         """
-        pass
+        self.api.get_health_check()
 
 
 if __name__ == '__main__':

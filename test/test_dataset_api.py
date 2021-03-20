@@ -10,6 +10,7 @@
 
 
 import unittest
+from unittest.mock import patch
 
 import datanode
 from datanode.api.dataset_api import DatasetApi  # noqa: E501
@@ -20,37 +21,46 @@ class TestDatasetApi(unittest.TestCase):
 
     def setUp(self):
         self.api = DatasetApi()  # noqa: E501
+        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.mock_foo = self.patcher.start()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_create_dataset(self):
         """Test case for create_dataset
 
         Create a dataset  # noqa: E501
         """
-        pass
+        self.api.create_dataset(
+            dataset_id="foo",
+            body={}
+        )
 
     def test_delete_dataset(self):
         """Test case for delete_dataset
 
         Delete a dataset by ID  # noqa: E501
         """
-        pass
+        self.api.delete_dataset(
+            dataset_id="foo"
+        )
 
     def test_get_dataset(self):
         """Test case for get_dataset
 
         Get a dataset by ID  # noqa: E501
         """
-        pass
+        self.api.get_dataset(
+            dataset_id="foo"
+        )
 
     def test_list_datasets(self):
         """Test case for list_datasets
 
         Get all datasets  # noqa: E501
         """
-        pass
+        self.api.list_datasets()
 
 
 if __name__ == '__main__':

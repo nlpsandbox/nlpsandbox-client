@@ -15,6 +15,7 @@ import unittest
 import datanode
 from datanode.model.annotation_name import AnnotationName
 from datanode.model.annotation_source import AnnotationSource
+from datanode.model.resource_source import ResourceSource
 from datanode.model.text_date_annotation import TextDateAnnotation
 from datanode.model.text_person_name_annotation import TextPersonNameAnnotation
 from datanode.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
@@ -38,8 +39,19 @@ class TestAnnotation(unittest.TestCase):
     def testAnnotation(self):
         """Test Annotation"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = Annotation()  # noqa: E501
-        pass
+        model = Annotation(
+            name=AnnotationName("name"),
+            annotation_source=AnnotationSource(resource_source=ResourceSource(name="foo")),
+            text_date_annotations=[
+                TextDateAnnotation(start=1, length=32, text='foo', confidence=95.5)
+            ],
+            text_person_name_annotations=[
+                TextPersonNameAnnotation(start=1, length=32, text='foo', confidence=95.5)
+            ],
+            text_physical_address_annotations=[
+                TextPhysicalAddressAnnotation(start=1, length=32, text='foo', confidence=95.5)
+            ]
+        )
 
 
 if __name__ == '__main__':

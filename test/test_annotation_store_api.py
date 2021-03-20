@@ -10,6 +10,7 @@
 
 
 import unittest
+from unittest.mock import patch, Mock
 
 import datanode
 from datanode.api.annotation_store_api import AnnotationStoreApi  # noqa: E501
@@ -20,37 +21,51 @@ class TestAnnotationStoreApi(unittest.TestCase):
 
     def setUp(self):
         self.api = AnnotationStoreApi()  # noqa: E501
+        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.mock_foo = self.patcher.start()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_create_annotation_store(self):
         """Test case for create_annotation_store
 
         Create an annotation store  # noqa: E501
         """
-        pass
+        self.api.create_annotation_store(
+            dataset_id="dataset",
+            annotation_store_id="store",
+            body={}
+        )
 
     def test_delete_annotation_store(self):
         """Test case for delete_annotation_store
 
         Delete an annotation store  # noqa: E501
         """
-        pass
+        self.api.delete_annotation_store(
+            dataset_id="dataset",
+            annotation_store_id="store"
+        )
 
     def test_get_annotation_store(self):
         """Test case for get_annotation_store
 
         Get an annotation store  # noqa: E501
         """
-        pass
+        self.api.get_annotation_store(
+            dataset_id="dataset",
+            annotation_store_id="store"
+        )
 
     def test_list_annotation_stores(self):
         """Test case for list_annotation_stores
 
         List the annotation stores in a dataset  # noqa: E501
         """
-        pass
+        self.api.list_annotation_stores(
+            dataset_id="dataset"
+        )
 
 
 if __name__ == '__main__':

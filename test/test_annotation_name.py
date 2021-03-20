@@ -29,7 +29,7 @@ class TestAnnotationName(unittest.TestCase):
         """Test AnnotationName"""
         # FIXME: construct object with mandatory attributes with example values
         # model = AnnotationName()  # noqa: E501
-        pass
+        name = AnnotationName("name")
 
 
 if __name__ == '__main__':

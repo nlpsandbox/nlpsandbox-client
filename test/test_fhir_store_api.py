@@ -10,6 +10,7 @@
 
 
 import unittest
+from unittest.mock import patch
 
 import datanode
 from datanode.api.fhir_store_api import FhirStoreApi  # noqa: E501
@@ -20,37 +21,49 @@ class TestFhirStoreApi(unittest.TestCase):
 
     def setUp(self):
         self.api = FhirStoreApi()  # noqa: E501
+        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.mock_foo = self.patcher.start()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_create_fhir_store(self):
         """Test case for create_fhir_store
 
         Create a FHIR store  # noqa: E501
         """
-        pass
+        self.api.create_fhir_store(
+            dataset_id="awesome-dataset",
+            fhir_store_id="awesome-fhir-store",
+            body={}
+        )
 
     def test_delete_fhir_store(self):
         """Test case for delete_fhir_store
 
         Delete a FHIR store  # noqa: E501
         """
-        pass
+        self.api.delete_fhir_store(
+            dataset_id="awesome-dataset",
+            fhir_store_id="awesome-fhir-store",
+        )
 
     def test_get_fhir_store(self):
         """Test case for get_fhir_store
 
         Get a FHIR store  # noqa: E501
         """
-        pass
+        self.api.get_fhir_store(
+            dataset_id="awesome-dataset",
+            fhir_store_id="awesome-fhir-store",
+        )
 
     def test_list_fhir_stores(self):
         """Test case for list_fhir_stores
 
         List the FHIR stores in a dataset  # noqa: E501
         """
-        pass
+        self.api.list_fhir_stores(dataset_id="awesome-dataset")
 
 
 if __name__ == '__main__':

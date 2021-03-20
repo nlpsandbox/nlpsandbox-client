@@ -31,7 +31,7 @@ class TestAnnotationStore(unittest.TestCase):
         """Test AnnotationStore"""
         # FIXME: construct object with mandatory attributes with example values
         # model = AnnotationStore()  # noqa: E501
-        pass
+        model = AnnotationStore(name=AnnotationStoreName("test"))
 
 
 if __name__ == '__main__':
