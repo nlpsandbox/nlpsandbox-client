@@ -14,7 +14,7 @@ from unittest.mock import patch
 
 import datanode
 from datanode.api.annotation_api import AnnotationApi  # noqa: E501
-from datanode.models import AnnotationCreateRequest, AnnotationSource, ResourceSource
+from datanode.models import ResourceSource
 
 
 class TestAnnotationApi(unittest.TestCase):
@@ -34,13 +34,15 @@ class TestAnnotationApi(unittest.TestCase):
         Create an annotation  # noqa: E501
         """
         self.api.create_annotation(
-            dataset_id="data",
-            annotation_store_id="data",
-            annotation_id="data",
-            annotation_create_request=AnnotationCreateRequest(
-                annotation_source=AnnotationSource(resource_source=ResourceSource("foo")),
-                text_date_annotations=[]
-            )
+            dataset_id="awesome-dataset",
+            annotation_store_id="awesome-annotation-store",
+            annotation_id="awesome-annotation",
+            annotation_create_request={
+                "annotation_source": {
+                    "resource_source": ResourceSource("source")
+                },
+                "text_date_annotations": []
+            }
         )
 
     def test_delete_annotation(self):

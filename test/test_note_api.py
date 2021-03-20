@@ -10,6 +10,7 @@
 
 
 import unittest
+from unittest.mock import patch
 
 import datanode
 from datanode.api.note_api import NoteApi  # noqa: E501
@@ -20,16 +21,27 @@ class TestNoteApi(unittest.TestCase):
 
     def setUp(self):
         self.api = NoteApi()  # noqa: E501
+        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.mock_foo = self.patcher.start()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_create_note(self):
         """Test case for create_note
 
         Create a note  # noqa: E501
         """
-        pass
+        self.api.create_note(
+            dataset_id="awesome-dataset",
+            fhir_store_id="awesome-fhir-store",
+            note_id="awesome-note",
+            note_create_request={
+                "text": "texting foo",
+                "type": "loinc:LP29684-5",
+                "patient_id": "awesome-patient"
+            }
+        )
 
     def test_delete_note(self):
         """Test case for delete_note
