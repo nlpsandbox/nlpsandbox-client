@@ -31,7 +31,11 @@ class TestNoteCreateRequest(unittest.TestCase):
         """Test NoteCreateRequest"""
         # FIXME: construct object with mandatory attributes with example values
         # model = NoteCreateRequest()  # noqa: E501
-        pass
+        NoteCreateRequest(
+            text="amazing text",
+            type="type note",
+            patient_id=PatientId("patient_id")
+        )
 
 
 if __name__ == '__main__':

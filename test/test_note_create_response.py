@@ -31,7 +31,7 @@ class TestNoteCreateResponse(unittest.TestCase):
         """Test NoteCreateResponse"""
         # FIXME: construct object with mandatory attributes with example values
         # model = NoteCreateResponse()  # noqa: E501
-        pass
+        NoteCreateResponse(name=NoteResourceName("name"))
 
 
 if __name__ == '__main__':
