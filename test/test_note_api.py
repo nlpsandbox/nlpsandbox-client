@@ -48,21 +48,32 @@ class TestNoteApi(unittest.TestCase):
 
         Delete a note  # noqa: E501
         """
-        pass
+        self.api.delete_note(
+            dataset_id="awesome-dataset",
+            fhir_store_id="awesome-fhir-store",
+            note_id="awesome-note"
+        )
 
     def test_get_note(self):
         """Test case for get_note
 
         Get a note  # noqa: E501
         """
-        pass
+        self.api.get_note(
+            dataset_id="awesome-dataset",
+            fhir_store_id="awesome-fhir-store",
+            note_id="awesome-note"
+        )
 
     def test_list_notes(self):
         """Test case for list_notes
 
         List notes  # noqa: E501
         """
-        pass
+        self.api.list_notes(
+            dataset_id="awesome-dataset",
+            fhir_store_id="awesome-fhir-store"
+        )
 
 
 if __name__ == '__main__':

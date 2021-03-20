@@ -29,7 +29,7 @@ class TestLicense(unittest.TestCase):
         """Test License"""
         # FIXME: construct object with mandatory attributes with example values
         # model = License()  # noqa: E501
-        pass
+        License("apache-2.0")
 
 
 if __name__ == '__main__':

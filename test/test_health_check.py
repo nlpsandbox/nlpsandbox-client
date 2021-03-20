@@ -29,7 +29,7 @@ class TestHealthCheck(unittest.TestCase):
         """Test HealthCheck"""
         # FIXME: construct object with mandatory attributes with example values
         # model = HealthCheck()  # noqa: E501
-        pass
+        HealthCheck(status="pass")
 
 
 if __name__ == '__main__':
