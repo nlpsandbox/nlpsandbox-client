@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_text_person_name_annotations**
-> TextPersonNameAnnotations create_text_person_name_annotations()
+> TextPersonNameAnnotationResponse create_text_person_name_annotations()
 
 Annotate person names in a clinical note
 
@@ -20,9 +20,9 @@ Return the person name annotations found in a clinical note
 import time
 import annotator
 from annotator.api import text_person_name_annotation_api
-from annotator.model.text_person_name_annotations import TextPersonNameAnnotations
 from annotator.model.error import Error
 from annotator.model.text_person_name_annotation_request import TextPersonNameAnnotationRequest
+from annotator.model.text_person_name_annotation_response import TextPersonNameAnnotationResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -37,10 +37,10 @@ with annotator.ApiClient() as api_client:
     api_instance = text_person_name_annotation_api.TextPersonNameAnnotationApi(api_client)
     text_person_name_annotation_request = TextPersonNameAnnotationRequest(
         note=Note(
-            id="id_example",
-            text="On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.",
-            note_type="loinc:LP29684-5",
-            patient_id="507f1f77bcf86cd799439011",
+            identifier=NoteId("awesome-note"),
+            text="text_example",
+            type="type_example",
+            patient_id=PatientId("awesome-patient"),
         ),
     ) # TextPersonNameAnnotationRequest |  (optional)
 
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TextPersonNameAnnotations**](TextPersonNameAnnotations.md)
+[**TextPersonNameAnnotationResponse**](TextPersonNameAnnotationResponse.md)
 
 ### Authorization
 
@@ -77,7 +77,8 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**403** | Unauthorized |  -  |
+**400** | Invalid request |  -  |
+**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

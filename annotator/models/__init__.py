@@ -10,17 +10,23 @@
 # sys.setrecursionlimit(n)
 
 from annotator.model.error import Error
+from annotator.model.health_check import HealthCheck
+from annotator.model.license import License
 from annotator.model.note import Note
-from annotator.model.service import Service
+from annotator.model.note_id import NoteId
+from annotator.model.patient_id import PatientId
 from annotator.model.text_annotation import TextAnnotation
 from annotator.model.text_date_annotation import TextDateAnnotation
 from annotator.model.text_date_annotation_all_of import TextDateAnnotationAllOf
 from annotator.model.text_date_annotation_request import TextDateAnnotationRequest
-from annotator.model.text_date_annotations import TextDateAnnotations
+from annotator.model.text_date_annotation_response import TextDateAnnotationResponse
 from annotator.model.text_person_name_annotation import TextPersonNameAnnotation
 from annotator.model.text_person_name_annotation_request import TextPersonNameAnnotationRequest
-from annotator.model.text_person_name_annotations import TextPersonNameAnnotations
+from annotator.model.text_person_name_annotation_response import TextPersonNameAnnotationResponse
 from annotator.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
 from annotator.model.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
 from annotator.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
-from annotator.model.text_physical_address_annotations import TextPhysicalAddressAnnotations
+from annotator.model.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
+from annotator.model.tool import Tool
+from annotator.model.tool_dependencies import ToolDependencies
+from annotator.model.tool_type import ToolType
