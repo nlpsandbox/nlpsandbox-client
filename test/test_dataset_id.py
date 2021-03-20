@@ -29,7 +29,7 @@ class TestDatasetId(unittest.TestCase):
         """Test DatasetId"""
         # FIXME: construct object with mandatory attributes with example values
         # model = DatasetId()  # noqa: E501
-        pass
+        DatasetId("datasetid")
 
 
 if __name__ == '__main__':

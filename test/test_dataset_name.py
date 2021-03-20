@@ -29,7 +29,7 @@ class TestDatasetName(unittest.TestCase):
         """Test DatasetName"""
         # FIXME: construct object with mandatory attributes with example values
         # model = DatasetName()  # noqa: E501
-        pass
+        DatasetName("name")
 
 
 if __name__ == '__main__':
