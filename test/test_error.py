@@ -29,7 +29,7 @@ class TestError(unittest.TestCase):
         """Test Error"""
         # FIXME: construct object with mandatory attributes with example values
         # model = Error()  # noqa: E501
-        pass
+        Error(title="foo", status=200)
 
 
 if __name__ == '__main__':

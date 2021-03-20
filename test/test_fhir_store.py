@@ -31,7 +31,7 @@ class TestFhirStore(unittest.TestCase):
         """Test FhirStore"""
         # FIXME: construct object with mandatory attributes with example values
         # model = FhirStore()  # noqa: E501
-        pass
+        FhirStore(name=FhirStoreName("name"))
 
 
 if __name__ == '__main__':
