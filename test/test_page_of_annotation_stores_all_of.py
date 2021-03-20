@@ -14,6 +14,7 @@ import unittest
 
 import datanode
 from datanode.model.annotation_store import AnnotationStore
+from datanode.models import AnnotationStoreName
 globals()['AnnotationStore'] = AnnotationStore
 from datanode.model.page_of_annotation_stores_all_of import PageOfAnnotationStoresAllOf
 
@@ -31,7 +32,9 @@ class TestPageOfAnnotationStoresAllOf(unittest.TestCase):
         """Test PageOfAnnotationStoresAllOf"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PageOfAnnotationStoresAllOf()  # noqa: E501
-        pass
+        PageOfAnnotationStoresAllOf(
+            annotation_stores=[AnnotationStore(name=AnnotationStoreName("name"))]
+        )
 
 
 if __name__ == '__main__':

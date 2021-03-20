@@ -29,7 +29,7 @@ class TestPageLimit(unittest.TestCase):
         """Test PageLimit"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PageLimit()  # noqa: E501
-        pass
+        PageLimit(10)
 
 
 if __name__ == '__main__':

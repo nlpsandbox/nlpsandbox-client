@@ -19,6 +19,7 @@ from datanode.model.page_of_annotation_stores_all_of import PageOfAnnotationStor
 from datanode.model.page_offset import PageOffset
 from datanode.model.response_page_metadata import ResponsePageMetadata
 from datanode.model.response_page_metadata_links import ResponsePageMetadataLinks
+from datanode.models import AnnotationStoreName
 globals()['AnnotationStore'] = AnnotationStore
 globals()['PageLimit'] = PageLimit
 globals()['PageOfAnnotationStoresAllOf'] = PageOfAnnotationStoresAllOf
@@ -41,7 +42,13 @@ class TestPageOfAnnotationStores(unittest.TestCase):
         """Test PageOfAnnotationStores"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PageOfAnnotationStores()  # noqa: E501
-        pass
+        PageOfAnnotationStores(
+            offset=PageOffset(3),
+            limit=PageLimit(10),
+            total_results=4,
+            links=ResponsePageMetadataLinks(next="next"),
+            annotation_stores=[AnnotationStore(name=AnnotationStoreName("name"))]
+        )
 
 
 if __name__ == '__main__':
