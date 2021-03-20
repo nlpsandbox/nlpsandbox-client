@@ -10,6 +10,7 @@
 
 
 import unittest
+from unittest.mock import patch
 
 import datanode
 from datanode.api.patient_api import PatientApi  # noqa: E501
@@ -20,37 +21,55 @@ class TestPatientApi(unittest.TestCase):
 
     def setUp(self):
         self.api = PatientApi()  # noqa: E501
+        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.mock_foo = self.patcher.start()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_create_patient(self):
         """Test case for create_patient
 
         Create a FHIR patient  # noqa: E501
         """
-        pass
+        self.api.create_patient(
+            dataset_id="awesome-dataset-id",
+            fhir_store_id="awesome-fhir-store",
+            patient_id="awesome-patient",
+            patient_create_request={"gender": "female"}
+        )
 
     def test_delete_patient(self):
         """Test case for delete_patient
 
         Delete a FHIR patient  # noqa: E501
         """
-        pass
+        self.api.delete_patient(
+            dataset_id="awesome-dataset-id",
+            fhir_store_id="awesome-fhir-store",
+            patient_id="awesome-patient"
+        )
 
     def test_get_patient(self):
         """Test case for get_patient
 
         Get a FHIR patient  # noqa: E501
         """
-        pass
+        self.api.get_patient(
+            dataset_id="awesome-dataset-id",
+            fhir_store_id="awesome-fhir-store",
+            patient_id="awesome-patient"
+        )
 
     def test_list_patients(self):
         """Test case for list_patients
 
         List the Patients in a FHIR store  # noqa: E501
         """
-        pass
+        self.api.list_patients(
+            dataset_id="awesome-dataset-id",
+            fhir_store_id="awesome-fhir-store"
+        )
 
 
 if __name__ == '__main__':
