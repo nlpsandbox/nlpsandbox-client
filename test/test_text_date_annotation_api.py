@@ -10,6 +10,7 @@
 
 
 import unittest
+from unittest.mock import patch
 
 import annotator
 from annotator.api.text_date_annotation_api import TextDateAnnotationApi  # noqa: E501
@@ -20,16 +21,27 @@ class TestTextDateAnnotationApi(unittest.TestCase):
 
     def setUp(self):
         self.api = TextDateAnnotationApi()  # noqa: E501
+        self.patcher = patch('annotator.api_client.ApiClient.call_api')
+        self.mock_foo = self.patcher.start()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_create_text_date_annotations(self):
         """Test case for create_text_date_annotations
 
         Annotate dates in a clinical note  # noqa: E501
         """
-        pass
+        self.api.create_text_date_annotations(
+            text_date_annotation_request={
+                "note": {
+                    "identifier": "note-1",
+                    "type": "note-type",
+                    "text": "my text here",
+                    "patient_id": "patient-1"
+                }
+            }
+        )
 
 
 if __name__ == '__main__':
