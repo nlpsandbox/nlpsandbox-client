@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **create_text_physical_address_annotations**
-> TextPhysicalAddressAnnotationResponse create_text_physical_address_annotations()
+> TextPhysicalAddressAnnotations create_text_physical_address_annotations()
 
 Annotate physical addresses in a clinical note
 
@@ -20,7 +20,7 @@ Return the physical addresse annotations found in a clinical note
 import time
 import annotator
 from annotator.api import text_physical_address_annotation_api
-from annotator.model.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
+from annotator.model.text_physical_address_annotations import TextPhysicalAddressAnnotations
 from annotator.model.error import Error
 from annotator.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
 from pprint import pprint
@@ -37,10 +37,10 @@ with annotator.ApiClient() as api_client:
     api_instance = text_physical_address_annotation_api.TextPhysicalAddressAnnotationApi(api_client)
     text_physical_address_annotation_request = TextPhysicalAddressAnnotationRequest(
         note=Note(
-            identifier=NoteId("awesome-note"),
-            text="text_example",
-            note_type="note_type_example",
-            patient_id=PatientId("awesome-patient"),
+            id="id_example",
+            text="On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.",
+            note_type="loinc:LP29684-5",
+            patient_id="507f1f77bcf86cd799439011",
         ),
     ) # TextPhysicalAddressAnnotationRequest |  (optional)
 
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TextPhysicalAddressAnnotationResponse**](TextPhysicalAddressAnnotationResponse.md)
+[**TextPhysicalAddressAnnotations**](TextPhysicalAddressAnnotations.md)
 
 ### Authorization
 
@@ -77,8 +77,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
-**400** | Invalid request |  -  |
-**500** | The request cannot be fulfilled due to an unexpected server error |  -  |
+**403** | Unauthorized |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

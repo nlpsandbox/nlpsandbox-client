@@ -1,10 +1,10 @@
 # TextPhysicalAddressAnnotationRequest
 
-A request to annotate physical addresses in a clinical note
+An annotation request
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**note** | [**Note**](Note.md) |  | 
+**note** | [**Note**](Note.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
