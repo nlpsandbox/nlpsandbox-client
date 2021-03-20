@@ -13,6 +13,7 @@ import sys
 import unittest
 
 import datanode
+from datanode.model.resource_source import ResourceSource
 from datanode.model.annotation_source import AnnotationSource
 from datanode.model.text_date_annotation import TextDateAnnotation
 from datanode.model.text_person_name_annotation import TextPersonNameAnnotation
@@ -37,7 +38,18 @@ class TestAnnotationCreateRequest(unittest.TestCase):
         """Test AnnotationCreateRequest"""
         # FIXME: construct object with mandatory attributes with example values
         # model = AnnotationCreateRequest()  # noqa: E501
-        pass
+        model = AnnotationCreateRequest(
+            annotation_source=AnnotationSource(resource_source=ResourceSource("foo")),
+            text_date_annotations=[
+                TextDateAnnotation(start=10, length=10, text="foobar", confidence=95.5)
+            ],
+            text_person_name_annotations=[
+                TextPersonNameAnnotation(start=10, length=10, text="foobar", confidence=95.5)
+            ],
+            text_physical_address_annotations=[
+                TextPhysicalAddressAnnotation(start=10, length=10, text="foobar", confidence=95.5)
+            ]
+        )
 
 
 if __name__ == '__main__':
