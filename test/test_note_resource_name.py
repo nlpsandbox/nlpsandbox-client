@@ -29,7 +29,7 @@ class TestNoteResourceName(unittest.TestCase):
         """Test NoteResourceName"""
         # FIXME: construct object with mandatory attributes with example values
         # model = NoteResourceName()  # noqa: E501
-        pass
+        NoteResourceName("notename")
 
 
 if __name__ == '__main__':

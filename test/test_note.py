@@ -33,7 +33,11 @@ class TestNote(unittest.TestCase):
         """Test Note"""
         # FIXME: construct object with mandatory attributes with example values
         # model = Note()  # noqa: E501
-        pass
+        Note(
+            identifier=NoteId("identifier"),
+            text="text", type="type",
+            patient_id=PatientId('patient-1')
+        )
 
 
 if __name__ == '__main__':

@@ -29,7 +29,7 @@ class TestNoteId(unittest.TestCase):
         """Test NoteId"""
         # FIXME: construct object with mandatory attributes with example values
         # model = NoteId()  # noqa: E501
-        pass
+        NoteId("foo")
 
 
 if __name__ == '__main__':
