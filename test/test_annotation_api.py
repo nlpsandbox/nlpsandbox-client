@@ -10,9 +10,13 @@
 
 
 import unittest
+from unittest.mock import patch
+from unittest import mock
 
 import datanode
+# import datanode.rest import RESTClientObject
 from datanode.api.annotation_api import AnnotationApi  # noqa: E501
+from datanode.models import AnnotationCreateRequest, AnnotationSource, ResourceSource
 
 
 class TestAnnotationApi(unittest.TestCase):
@@ -20,37 +24,58 @@ class TestAnnotationApi(unittest.TestCase):
 
     def setUp(self):
         self.api = AnnotationApi()  # noqa: E501
+        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.mock_foo = self.patcher.start()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_create_annotation(self):
         """Test case for create_annotation
 
         Create an annotation  # noqa: E501
         """
-        pass
+        self.api.create_annotation(
+            dataset_id="data",
+            annotation_store_id="data",
+            annotation_id="data",
+            annotation_create_request=AnnotationCreateRequest(
+                annotation_source=AnnotationSource(resource_source=ResourceSource("foo")),
+                text_date_annotations=[]
+            )
+        )
 
     def test_delete_annotation(self):
         """Test case for delete_annotation
 
         Delete an annotation  # noqa: E501
         """
-        pass
+        self.api.delete_annotation(
+            dataset_id="data",
+            annotation_store_id="data",
+            annotation_id="data"
+        )
 
     def test_get_annotation(self):
         """Test case for get_annotation
 
         Get an annotation  # noqa: E501
         """
-        pass
+        self.api.get_annotation(
+            dataset_id="data",
+            annotation_store_id="data",
+            annotation_id="data"
+        )
 
     def test_list_annotations(self):
         """Test case for list_annotations
 
         List the annotations in an annotation store  # noqa: E501
         """
-        pass
+        self.api.list_annotations(
+            dataset_id="data",
+            annotation_store_id="data"
+        )
 
 
 if __name__ == '__main__':
