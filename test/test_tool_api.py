@@ -10,6 +10,7 @@
 
 
 import unittest
+from unittest.mock import patch
 
 import annotator
 from annotator.api.tool_api import ToolApi  # noqa: E501
@@ -20,23 +21,25 @@ class TestToolApi(unittest.TestCase):
 
     def setUp(self):
         self.api = ToolApi()  # noqa: E501
+        self.patcher = patch('annotator.api_client.ApiClient.call_api')
+        self.mock_foo = self.patcher.start()
 
     def tearDown(self):
-        pass
+        self.patcher.stop()
 
     def test_get_tool(self):
         """Test case for get_tool
 
         Get tool information  # noqa: E501
         """
-        pass
+        self.api.get_tool()
 
     def test_get_tool_dependencies(self):
         """Test case for get_tool_dependencies
 
         Get tool dependencies  # noqa: E501
         """
-        pass
+        self.api.get_tool_dependencies()
 
 
 if __name__ == '__main__':
