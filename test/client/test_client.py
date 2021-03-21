@@ -4,13 +4,14 @@ from unittest.mock import Mock, patch
 import pytest
 
 import datanode
-from datanode.api import note_api, annotation_store_api
+from datanode.api import note_api, annotation_api, annotation_store_api
 from datanode.models import (
-    Annotation, AnnotationStore, AnnotationStoreName,
-    PageLimit,
-    PageOfAnnotations,
+    Annotation, AnnotationName, AnnotationSource,
+    AnnotationStore, AnnotationStoreName,
+    PageLimit, PageOfAnnotations,
     PageOfNotes, PageOffset, PatientId, Note, NoteId,
-    ResponsePageMetadataLinks
+    ResourceSource,
+    ResponsePageMetadataLinks,
 )
 from datanode.rest import ApiException
 from nlpsandboxclient import client
@@ -198,36 +199,44 @@ class TestClient:
                                               self.fhir_store_id)
             assert store == store_example
 
-    # def test_list_annotations(self):
-    #     """Test creating of annotation store if create_if_missing is True"""
-    #     annotation_example = PageOfAnnotations(
-    #         annotations=[Annotation(
-    #             name="12344"
-    #         )],
-    #         offset=0, limit=3, links=Mock(next="")
-    #     )
+    def test_list_annotations(self):
+        """Test creating of annotation store if create_if_missing is True"""
+        annotation_example = PageOfAnnotations(
+            annotations=[
+                Annotation(
+                    name=AnnotationName("12344"),
+                    annotation_source=AnnotationSource(resource_source=ResourceSource(name="foo")),
+                )
+            ],
+            offset=PageOffset(10),
+            limit=PageLimit(10),
+            links=ResponsePageMetadataLinks(next=""),
+            total_results=30
+        )
 
-    #     with self.config as config,\
-    #          self.api_client as api_client,\
-    #          patch.object(datanode, "AnnotationApi",
-    #                       return_value=self.mock_api) as resource_api,\
-    #          patch.object(self.mock_api, "list_annotations",
-    #                       return_value=annotation_example) as list_annotations:
+        with self.config as config,\
+             self.api_client as api_client,\
+             patch.object(annotation_api, "AnnotationApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "list_annotations",
+                          return_value=annotation_example) as list_annotations:
 
-    #         api_client.return_value = api_client
-    #         api_client.__enter__ = Mock(return_value=self.api)
-    #         api_client.__exit__ = Mock(return_value=None)
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
 
-    #         annotations = client.list_annotations(
-    #             host=self.host, dataset_id = self.dataset_id,
-    #             annotation_store_id = self.annotation_store_id
-    #         )
-    #         assert list(annotations) == [{'name': '12344'}]
+            annotations = client.list_annotations(
+                host=self.host, dataset_id = self.dataset_id,
+                annotation_store_id = self.annotation_store_id
+            )
+            assert list(annotations) == [
+                {'name': '12344', 'annotationSource': {'resourceSource': {'name': 'foo'}}}
+            ]
 
-    #         config.assert_called_once_with(host=self.host)
-    #         api_client.assert_called_once_with(self.configuration)
-    #         resource_api.assert_called_once_with(self.api)
-    #         list_annotations.assert_called_once_with(
-    #             self.dataset_id, self.annotation_store_id,
-    #             offset=0, limit=10
-    #         )
+            config.assert_called_once_with(host=self.host)
+            api_client.assert_called_once_with(self.configuration)
+            resource_api.assert_called_once_with(self.api)
+            list_annotations.assert_called_once_with(
+                self.dataset_id, self.annotation_store_id,
+                offset=0, limit=10
+            )
