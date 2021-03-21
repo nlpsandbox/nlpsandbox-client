@@ -4,9 +4,10 @@ from unittest.mock import Mock, patch
 import pytest
 
 import datanode
-from datanode.api import note_api
+from datanode.api import note_api, annotation_store_api
 from datanode.models import (
-    Annotation, AnnotationStore, PageLimit,
+    Annotation, AnnotationStore, AnnotationStoreName,
+    PageLimit,
     PageOfAnnotations,
     PageOfNotes, PageOffset, PatientId, Note, NoteId,
     ResponsePageMetadataLinks
@@ -117,85 +118,85 @@ class TestClient:
                 'note_name': f'dataset/{self.dataset_id}/fhirStores/{self.fhir_store_id}/fhir/Note/12344'
             }]
 
-    # def test_get_annotation_store__get(self):
-    #     """Test getting of annotation store"""
-    #     store_example = AnnotationStore(name="fooo")
+    def test_get_annotation_store__get(self):
+        """Test getting of annotation store"""
+        store_example = AnnotationStore(name=AnnotationStoreName("fooo"))
 
-    #     with self.config as config,\
-    #         self.api_client as api_client,\
-    #         patch.object(datanode, "AnnotationStoreApi",
-    #                       return_value=self.mock_api) as resource_api,\
-    #         patch.object(self.mock_api, "get_annotation_store",
-    #                      return_value=store_example) as get_store:
+        with self.config as config,\
+            self.api_client as api_client,\
+            patch.object(annotation_store_api, "AnnotationStoreApi",
+                         return_value=self.mock_api) as resource_api,\
+            patch.object(self.mock_api, "get_annotation_store",
+                         return_value=store_example) as get_store:
 
-    #         api_client.return_value = api_client
-    #         api_client.__enter__ = Mock(return_value=self.api)
-    #         api_client.__exit__ = Mock(return_value=None)
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
 
-    #         store = client.get_annotation_store(
-    #             host=self.host,
-    #             dataset_id =self.dataset_id,
-    #             annotation_store_id = self.fhir_store_id
-    #         )
-    #         config.assert_called_once_with(host=self.host)
-    #         api_client.assert_called_once_with(self.configuration)
-    #         resource_api.assert_called_once_with(self.api)
-    #         get_store.assert_called_once_with(self.dataset_id,
-    #                                           self.fhir_store_id)
-    #         assert store == store_example
+            store = client.get_annotation_store(
+                host=self.host,
+                dataset_id =self.dataset_id,
+                annotation_store_id = self.fhir_store_id
+            )
+            config.assert_called_once_with(host=self.host)
+            api_client.assert_called_once_with(self.configuration)
+            resource_api.assert_called_once_with(self.api)
+            get_store.assert_called_once_with(self.dataset_id,
+                                              self.fhir_store_id)
+            assert store == store_example
 
-    # def test_get_annotation_store__not_create(self):
-    #     """Test creating of annotation store if create_if_missing is False"""
-    #     with self.config as config,\
-    #          self.api_client as api_client,\
-    #          patch.object(datanode, "AnnotationStoreApi",
-    #                       return_value=self.mock_api) as resource_api,\
-    #          patch.object(self.mock_api, "get_annotation_store",
-    #                       side_effect=ApiException(status=404)) as get_store,\
-    #          pytest.raises(ApiException):
+    def test_get_annotation_store__not_create(self):
+        """Test creating of annotation store if create_if_missing is False"""
+        with self.config as config,\
+             self.api_client as api_client,\
+             patch.object(annotation_store_api, "AnnotationStoreApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "get_annotation_store",
+                          side_effect=ApiException(status=404)) as get_store,\
+             pytest.raises(ApiException):
 
-    #         api_client.return_value = api_client
-    #         api_client.__enter__ = Mock(return_value=self.api)
-    #         api_client.__exit__ = Mock(return_value=None)
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
 
-    #         client.get_annotation_store(
-    #             host=self.host,
-    #             dataset_id = self.dataset_id,
-    #             annotation_store_id = self.annotation_store_id,
-    #         )
-    #         config.assert_called_once_with(host=self.host)
-    #         api_client.assert_called_once_with(self.configuration)
-    #         resource_api.assert_called_once_with(self.api)
+            client.get_annotation_store(
+                host=self.host,
+                dataset_id = self.dataset_id,
+                annotation_store_id = self.annotation_store_id,
+            )
+            config.assert_called_once_with(host=self.host)
+            api_client.assert_called_once_with(self.configuration)
+            resource_api.assert_called_once_with(self.api)
 
-    # def test_get_annotation_store__create(self):
-    #     """Test creating of annotation store if create_if_missing is True"""
-    #     store_example = AnnotationStore(name="fooo")
+    def test_get_annotation_store__create(self):
+        """Test creating of annotation store if create_if_missing is True"""
+        store_example = AnnotationStore(name=AnnotationStoreName("fooo"))
 
-    #     with self.config as config,\
-    #          self.api_client as api_client,\
-    #          patch.object(datanode, "AnnotationStoreApi",
-    #                       return_value=self.mock_api) as resource_api,\
-    #          patch.object(self.mock_api, "get_annotation_store",
-    #                       side_effect=ApiException(status=404)) as get_store,\
-    #          patch.object(self.mock_api, "create_annotation_store",
-    #                       return_value=store_example) as create_store:
+        with self.config as config,\
+             self.api_client as api_client,\
+             patch.object(annotation_store_api, "AnnotationStoreApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "get_annotation_store",
+                          side_effect=ApiException(status=404)) as get_store,\
+             patch.object(self.mock_api, "create_annotation_store",
+                          return_value=store_example) as create_store:
 
-    #         api_client.return_value = api_client
-    #         api_client.__enter__ = Mock(return_value=self.api)
-    #         api_client.__exit__ = Mock(return_value=None)
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
 
-    #         store = client.get_annotation_store(
-    #             host=self.host, dataset_id = self.dataset_id,
-    #             annotation_store_id = self.fhir_store_id,
-    #             create_if_missing = True
-    #         )
+            store = client.get_annotation_store(
+                host=self.host, dataset_id = self.dataset_id,
+                annotation_store_id = self.fhir_store_id,
+                create_if_missing = True
+            )
 
-    #         config.assert_called_once_with(host=self.host)
-    #         api_client.assert_called_once_with(self.configuration)
-    #         resource_api.assert_called_once_with(self.api)
-    #         get_store.assert_called_once_with(self.dataset_id,
-    #                                           self.fhir_store_id)
-    #         assert store == store_example
+            config.assert_called_once_with(host=self.host)
+            api_client.assert_called_once_with(self.configuration)
+            resource_api.assert_called_once_with(self.api)
+            get_store.assert_called_once_with(self.dataset_id,
+                                              self.fhir_store_id)
+            assert store == store_example
 
     # def test_list_annotations(self):
     #     """Test creating of annotation store if create_if_missing is True"""
