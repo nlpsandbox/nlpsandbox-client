@@ -3,6 +3,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
+import annotator
+from annotator.api import text_date_annotation_api
 import datanode
 from datanode.api import note_api, annotation_api, annotation_store_api
 from datanode.models import (
@@ -63,7 +65,7 @@ from nlpsandboxclient import client
 #         }]
 
 
-class TestClient:
+class TestDataNodeClient:
 
     def setup_method(self):
         self.configuration = datanode.Configuration()
@@ -240,3 +242,54 @@ class TestClient:
                 self.dataset_id, self.annotation_store_id,
                 offset=0, limit=10
             )
+
+
+class TestAnnotatorClient:
+
+    def setup_method(self):
+        self.configuration = annotator.Configuration()
+        self.api = annotator.ApiClient()
+        self.mock_api = Mock()
+        self.host = "0.0.0.0"
+        self.config = patch.object(annotator, "Configuration",
+                                   return_value=self.configuration)
+        self.api_client = patch.object(annotator, "ApiClient")
+        self.example_request = {
+            "note": {
+                "identifier": "note-1",
+                "note_type": "loinc:LP29684-5",
+                "patient_id": "507f1f77bcf86cd799439011",
+                "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+            }
+        }
+
+    def test__annotate_date(self):
+        """Test annotating date"""
+        with patch.object(text_date_annotation_api, "TextDateAnnotationApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "create_text_date_annotations",
+                          return_value="foo") as create_annotations:
+            annotated = client._annotate_date(self.api, self.example_request)
+            assert annotated == "foo"
+            resource_api.assert_called_once_with(self.api)
+            create_annotations.assert_called_once_with(
+                text_date_annotation_request=self.example_request
+            )
+
+    # def test__annotate_person(self):
+    #     """Test annotating person"""
+    #     with patch.object(text_date_annotation_api, "TextDateAnnotationApi",
+    #                       return_value=self.mock_api) as resource_api,\
+    #          patch.object(self.mock_api, "create_text_date_annotations",
+    #                       return_value="foo") as list_annotations:
+    #         annotated = client._annotate_date(self.api, self.example_request)
+    #         assert annotated == "foo"
+
+    # def test__annotate_physical_address(self):
+    #     """Test annotating physical address"""
+    #     with patch.object(text_date_annotation_api, "TextDateAnnotationApi",
+    #                       return_value=self.mock_api) as resource_api,\
+    #          patch.object(self.mock_api, "create_text_date_annotations",
+    #                       return_value="foo") as list_annotations:
+    #         annotated = client._annotate_date(self.api, self.example_request)
+    #         assert annotated == "foo"
