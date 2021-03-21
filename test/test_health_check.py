@@ -14,6 +14,7 @@ import unittest
 
 import datanode
 from datanode.model.health_check import HealthCheck
+from annotator.model import health_check
 
 
 class TestHealthCheck(unittest.TestCase):
@@ -30,6 +31,7 @@ class TestHealthCheck(unittest.TestCase):
         # FIXME: construct object with mandatory attributes with example values
         # model = HealthCheck()  # noqa: E501
         HealthCheck(status="pass")
+        health_check.HealthCheck(status="pass")
 
 
 if __name__ == '__main__':

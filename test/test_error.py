@@ -14,7 +14,7 @@ import unittest
 
 import datanode
 from datanode.model.error import Error
-
+from annotator.model import error
 
 class TestError(unittest.TestCase):
     """Error unit test stubs"""
@@ -30,7 +30,7 @@ class TestError(unittest.TestCase):
         # FIXME: construct object with mandatory attributes with example values
         # model = Error()  # noqa: E501
         Error(title="foo", status=200)
-
+        error.Error(title="foo", status=200)
 
 if __name__ == '__main__':
     unittest.main()
