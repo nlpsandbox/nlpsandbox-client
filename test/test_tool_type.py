@@ -27,9 +27,7 @@ class TestToolType(unittest.TestCase):
 
     def testToolType(self):
         """Test ToolType"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = ToolType()  # noqa: E501
-        pass
+        ToolType("type")
 
 
 if __name__ == '__main__':

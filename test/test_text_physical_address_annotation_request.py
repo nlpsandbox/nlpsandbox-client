@@ -14,6 +14,7 @@ import unittest
 
 import annotator
 from annotator.model.note import Note
+from annotator.models import NoteId, PatientId
 globals()['Note'] = Note
 from annotator.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
 
@@ -29,9 +30,13 @@ class TestTextPhysicalAddressAnnotationRequest(unittest.TestCase):
 
     def testTextPhysicalAddressAnnotationRequest(self):
         """Test TextPhysicalAddressAnnotationRequest"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextPhysicalAddressAnnotationRequest()  # noqa: E501
-        pass
+        TextPhysicalAddressAnnotationRequest(
+            note=Note(
+                identifier=NoteId("identifier"),
+                text="text", type="type",
+                patient_id=PatientId('patient-1')
+            )
+        )
 
 
 if __name__ == '__main__':

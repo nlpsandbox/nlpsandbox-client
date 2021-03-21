@@ -29,9 +29,12 @@ class TestTextPhysicalAddressAnnotationResponse(unittest.TestCase):
 
     def testTextPhysicalAddressAnnotationResponse(self):
         """Test TextPhysicalAddressAnnotationResponse"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextPhysicalAddressAnnotationResponse()  # noqa: E501
-        pass
+        TextPhysicalAddressAnnotationResponse(
+            text_physical_address_annotations=[
+                TextPhysicalAddressAnnotation(start=10, length=10, text="foobar", confidence=95.5)
+            ]
+        )
+
 
 
 if __name__ == '__main__':

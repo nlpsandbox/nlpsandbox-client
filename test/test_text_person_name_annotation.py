@@ -13,8 +13,6 @@ import sys
 import unittest
 
 import datanode
-from datanode.model.text_annotation import TextAnnotation
-globals()['TextAnnotation'] = TextAnnotation
 from datanode.model.text_person_name_annotation import TextPersonNameAnnotation
 
 

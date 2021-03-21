@@ -31,9 +31,10 @@ class TestTool(unittest.TestCase):
 
     def testTool(self):
         """Test Tool"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = Tool()  # noqa: E501
-        pass
+        Tool(name="foo", version="1.0.0", license=License("apache-2.0"),
+             repository="www.google.com", description="foobar",
+             author="Bob", author_email="email@email.com", url="www.google.com",
+             type=ToolType("tool"), api_version="1.0.0")
 
 
 if __name__ == '__main__':

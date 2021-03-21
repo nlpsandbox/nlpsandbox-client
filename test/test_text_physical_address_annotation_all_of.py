@@ -27,9 +27,7 @@ class TestTextPhysicalAddressAnnotationAllOf(unittest.TestCase):
 
     def testTextPhysicalAddressAnnotationAllOf(self):
         """Test TextPhysicalAddressAnnotationAllOf"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextPhysicalAddressAnnotationAllOf()  # noqa: E501
-        pass
+        TextPhysicalAddressAnnotationAllOf(address_type="city")
 
 
 if __name__ == '__main__':

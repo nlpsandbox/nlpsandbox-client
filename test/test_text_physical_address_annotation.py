@@ -13,10 +13,6 @@ import sys
 import unittest
 
 import datanode
-from datanode.model.text_annotation import TextAnnotation
-from datanode.model.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
-globals()['TextAnnotation'] = TextAnnotation
-globals()['TextPhysicalAddressAnnotationAllOf'] = TextPhysicalAddressAnnotationAllOf
 from datanode.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
 
 
@@ -31,9 +27,7 @@ class TestTextPhysicalAddressAnnotation(unittest.TestCase):
 
     def testTextPhysicalAddressAnnotation(self):
         """Test TextPhysicalAddressAnnotation"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextPhysicalAddressAnnotation()  # noqa: E501
-        pass
+        TextPhysicalAddressAnnotation(start=10, length=10, text="foobar", confidence=95.5)
 
 
 if __name__ == '__main__':

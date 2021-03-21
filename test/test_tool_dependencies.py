@@ -14,6 +14,7 @@ import unittest
 
 import annotator
 from annotator.model.tool import Tool
+from annotator.models import License, ToolType
 globals()['Tool'] = Tool
 from annotator.model.tool_dependencies import ToolDependencies
 
@@ -29,9 +30,14 @@ class TestToolDependencies(unittest.TestCase):
 
     def testToolDependencies(self):
         """Test ToolDependencies"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = ToolDependencies()  # noqa: E501
-        pass
+        ToolDependencies(
+            tool_dependencies=[
+                Tool(name="foo", version="1.0.0", license=License("apache-2.0"),
+                     repository="www.google.com", description="foobar",
+                     author="Bob", author_email="email@email.com", url="www.google.com",
+                     type=ToolType("tool"), api_version="1.0.0")
+            ]
+        )
 
 
 if __name__ == '__main__':
