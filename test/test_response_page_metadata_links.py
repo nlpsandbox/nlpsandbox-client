@@ -29,7 +29,7 @@ class TestResponsePageMetadataLinks(unittest.TestCase):
         """Test ResponsePageMetadataLinks"""
         # FIXME: construct object with mandatory attributes with example values
         # model = ResponsePageMetadataLinks()  # noqa: E501
-        pass
+        ResponsePageMetadataLinks(next="foo")
 
 
 if __name__ == '__main__':

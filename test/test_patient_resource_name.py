@@ -29,7 +29,7 @@ class TestPatientResourceName(unittest.TestCase):
         """Test PatientResourceName"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PatientResourceName()  # noqa: E501
-        pass
+        PatientResourceName("name")
 
 
 if __name__ == '__main__':

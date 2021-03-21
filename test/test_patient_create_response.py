@@ -29,9 +29,7 @@ class TestPatientCreateResponse(unittest.TestCase):
 
     def testPatientCreateResponse(self):
         """Test PatientCreateResponse"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = PatientCreateResponse()  # noqa: E501
-        pass
+        PatientCreateResponse(name=PatientResourceName("name"))
 
 
 if __name__ == '__main__':

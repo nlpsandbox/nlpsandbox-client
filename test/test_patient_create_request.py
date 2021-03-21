@@ -29,7 +29,7 @@ class TestPatientCreateRequest(unittest.TestCase):
         """Test PatientCreateRequest"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PatientCreateRequest()  # noqa: E501
-        pass
+        PatientCreateRequest(gender="female")
 
 
 if __name__ == '__main__':

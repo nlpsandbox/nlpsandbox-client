@@ -29,7 +29,7 @@ class TestResourceSource(unittest.TestCase):
         """Test ResourceSource"""
         # FIXME: construct object with mandatory attributes with example values
         # model = ResourceSource()  # noqa: E501
-        pass
+        ResourceSource("source")
 
 
 if __name__ == '__main__':

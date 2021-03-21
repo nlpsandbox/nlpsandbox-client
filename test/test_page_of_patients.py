@@ -14,13 +14,12 @@ import unittest
 
 import datanode
 from datanode.model.page_limit import PageLimit
-from datanode.model.page_of_patients_all_of import PageOfPatientsAllOf
 from datanode.model.page_offset import PageOffset
 from datanode.model.patient import Patient
 from datanode.model.response_page_metadata import ResponsePageMetadata
 from datanode.model.response_page_metadata_links import ResponsePageMetadataLinks
+from datanode.models import PatientId
 globals()['PageLimit'] = PageLimit
-globals()['PageOfPatientsAllOf'] = PageOfPatientsAllOf
 globals()['PageOffset'] = PageOffset
 globals()['Patient'] = Patient
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
@@ -39,9 +38,13 @@ class TestPageOfPatients(unittest.TestCase):
 
     def testPageOfPatients(self):
         """Test PageOfPatients"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = PageOfPatients()  # noqa: E501
-        pass
+        PageOfPatients(
+            offset=PageOffset(10),
+            limit=PageLimit(10),
+            links=ResponsePageMetadataLinks(next="next"),
+            total_results=30,
+            patients=[Patient(identifier=PatientId("note-id"))]
+        )
 
 
 if __name__ == '__main__':

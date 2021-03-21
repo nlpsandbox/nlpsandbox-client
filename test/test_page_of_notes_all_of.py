@@ -14,6 +14,8 @@ import unittest
 
 import datanode
 from datanode.model.note import Note
+from datanode.model.note_id import NoteId
+from datanode.model.patient_id import PatientId
 globals()['Note'] = Note
 from datanode.model.page_of_notes_all_of import PageOfNotesAllOf
 
@@ -31,7 +33,11 @@ class TestPageOfNotesAllOf(unittest.TestCase):
         """Test PageOfNotesAllOf"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PageOfNotesAllOf()  # noqa: E501
-        pass
+        PageOfNotesAllOf(
+            notes=[Note(identifier=NoteId("identifier"),
+                        text="text", type="type",
+                        patient_id=PatientId('patient-1'))]
+        )
 
 
 if __name__ == '__main__':

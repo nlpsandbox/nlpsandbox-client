@@ -29,7 +29,7 @@ class TestPageOffset(unittest.TestCase):
         """Test PageOffset"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PageOffset()  # noqa: E501
-        pass
+        PageOffset(10)
 
 
 if __name__ == '__main__':

@@ -31,7 +31,10 @@ class TestPatient(unittest.TestCase):
         """Test Patient"""
         # FIXME: construct object with mandatory attributes with example values
         # model = Patient()  # noqa: E501
-        pass
+        Patient(
+            identifier=PatientId("patient-id"),
+            gender="male"
+        )
 
 
 if __name__ == '__main__':

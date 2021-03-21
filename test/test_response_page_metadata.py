@@ -35,7 +35,12 @@ class TestResponsePageMetadata(unittest.TestCase):
         """Test ResponsePageMetadata"""
         # FIXME: construct object with mandatory attributes with example values
         # model = ResponsePageMetadata()  # noqa: E501
-        pass
+        ResponsePageMetadata(
+            offset=PageOffset(10),
+            limit=PageLimit(10),
+            links=ResponsePageMetadataLinks(next="next"),
+            total_results=30
+        )
 
 
 if __name__ == '__main__':

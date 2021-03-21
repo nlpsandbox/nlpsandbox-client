@@ -14,6 +14,7 @@ import unittest
 
 import datanode
 from datanode.model.patient import Patient
+from datanode.models import PatientId
 globals()['Patient'] = Patient
 from datanode.model.page_of_patients_all_of import PageOfPatientsAllOf
 
@@ -29,9 +30,9 @@ class TestPageOfPatientsAllOf(unittest.TestCase):
 
     def testPageOfPatientsAllOf(self):
         """Test PageOfPatientsAllOf"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = PageOfPatientsAllOf()  # noqa: E501
-        pass
+        PageOfPatientsAllOf(
+            patients=[Patient(identifier=PatientId("note-id"))]
+        )
 
 
 if __name__ == '__main__':
