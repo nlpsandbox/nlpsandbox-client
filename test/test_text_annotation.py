@@ -27,8 +27,6 @@ class TestTextAnnotation(unittest.TestCase):
 
     def testTextAnnotation(self):
         """Test TextAnnotation"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextAnnotation()  # noqa: E501
         TextAnnotation(start=10, length=20, text="text now", confidence=95.5)
 
 

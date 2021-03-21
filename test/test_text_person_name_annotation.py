@@ -29,9 +29,8 @@ class TestTextPersonNameAnnotation(unittest.TestCase):
 
     def testTextPersonNameAnnotation(self):
         """Test TextPersonNameAnnotation"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextPersonNameAnnotation()  # noqa: E501
-        pass
+        TextPersonNameAnnotation(start=10, length=10, text="foobar", confidence=95.5)
+
 
 
 if __name__ == '__main__':

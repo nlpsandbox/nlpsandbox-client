@@ -33,8 +33,6 @@ class TestResponsePageMetadata(unittest.TestCase):
 
     def testResponsePageMetadata(self):
         """Test ResponsePageMetadata"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = ResponsePageMetadata()  # noqa: E501
         ResponsePageMetadata(
             offset=PageOffset(10),
             limit=PageLimit(10),

@@ -28,8 +28,6 @@ class TestTextDateAnnotationAllOf(unittest.TestCase):
 
     def testTextDateAnnotationAllOf(self):
         """Test TextDateAnnotationAllOf"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextDateAnnotationAllOf()  # noqa: E501
         TextDateAnnotationAllOf(date_format="foo")
 
 

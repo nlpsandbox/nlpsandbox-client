@@ -14,6 +14,7 @@ import unittest
 
 import annotator
 from annotator.model.note import Note
+from annotator.models import NoteId, PatientId
 globals()['Note'] = Note
 from annotator.model.text_person_name_annotation_request import TextPersonNameAnnotationRequest
 
@@ -29,9 +30,13 @@ class TestTextPersonNameAnnotationRequest(unittest.TestCase):
 
     def testTextPersonNameAnnotationRequest(self):
         """Test TextPersonNameAnnotationRequest"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextPersonNameAnnotationRequest()  # noqa: E501
-        pass
+        TextPersonNameAnnotationRequest(
+            note=Note(
+                identifier=NoteId("identifier"),
+                text="text", type="type",
+                patient_id=PatientId('patient-1')
+            )
+        )
 
 
 if __name__ == '__main__':

@@ -30,8 +30,6 @@ class TestTextDateAnnotationRequest(unittest.TestCase):
 
     def testTextDateAnnotationRequest(self):
         """Test TextDateAnnotationRequest"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextDateAnnotationRequest()  # noqa: E501
         TextDateAnnotationRequest(
             note=Note(
                 identifier=NoteId("identifier"),
