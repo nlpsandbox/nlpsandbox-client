@@ -14,6 +14,7 @@ import unittest
 
 import datanode
 from datanode.model.text_date_annotation_all_of import TextDateAnnotationAllOf
+from datanode.models import TextDateAnnotation
 
 
 class TestTextDateAnnotationAllOf(unittest.TestCase):
@@ -29,7 +30,7 @@ class TestTextDateAnnotationAllOf(unittest.TestCase):
         """Test TextDateAnnotationAllOf"""
         # FIXME: construct object with mandatory attributes with example values
         # model = TextDateAnnotationAllOf()  # noqa: E501
-        pass
+        TextDateAnnotationAllOf(date_format="foo")
 
 
 if __name__ == '__main__':

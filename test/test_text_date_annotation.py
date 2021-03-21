@@ -31,9 +31,9 @@ class TestTextDateAnnotation(unittest.TestCase):
 
     def testTextDateAnnotation(self):
         """Test TextDateAnnotation"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = TextDateAnnotation()  # noqa: E501
-        pass
+        TextDateAnnotation(
+            start=10, length=10, text="foobar", confidence=95.5
+        )
 
 
 if __name__ == '__main__':

@@ -29,7 +29,7 @@ class TestTextAnnotation(unittest.TestCase):
         """Test TextAnnotation"""
         # FIXME: construct object with mandatory attributes with example values
         # model = TextAnnotation()  # noqa: E501
-        pass
+        TextAnnotation(start=10, length=20, text="text now", confidence=95.5)
 
 
 if __name__ == '__main__':
