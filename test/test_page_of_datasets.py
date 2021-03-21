@@ -15,13 +15,12 @@ import unittest
 import datanode
 from datanode.model.dataset import Dataset
 from datanode.model.page_limit import PageLimit
-from datanode.model.page_of_datasets_all_of import PageOfDatasetsAllOf
 from datanode.model.page_offset import PageOffset
 from datanode.model.response_page_metadata import ResponsePageMetadata
 from datanode.model.response_page_metadata_links import ResponsePageMetadataLinks
+from datanode.models import DatasetName
 globals()['Dataset'] = Dataset
 globals()['PageLimit'] = PageLimit
-globals()['PageOfDatasetsAllOf'] = PageOfDatasetsAllOf
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
@@ -39,9 +38,13 @@ class TestPageOfDatasets(unittest.TestCase):
 
     def testPageOfDatasets(self):
         """Test PageOfDatasets"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = PageOfDatasets()  # noqa: E501
-        pass
+        PageOfDatasets(
+            offset=PageOffset(10),
+            limit=PageLimit(10),
+            links=ResponsePageMetadataLinks(next="next"),
+            total_results=30,
+            datasets=[Dataset(name=DatasetName("foo"))]
+        )
 
 
 if __name__ == '__main__':

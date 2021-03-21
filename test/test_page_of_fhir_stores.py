@@ -15,13 +15,12 @@ import unittest
 import datanode
 from datanode.model.fhir_store import FhirStore
 from datanode.model.page_limit import PageLimit
-from datanode.model.page_of_fhir_stores_all_of import PageOfFhirStoresAllOf
 from datanode.model.page_offset import PageOffset
 from datanode.model.response_page_metadata import ResponsePageMetadata
 from datanode.model.response_page_metadata_links import ResponsePageMetadataLinks
+from datanode.models import FhirStoreName
 globals()['FhirStore'] = FhirStore
 globals()['PageLimit'] = PageLimit
-globals()['PageOfFhirStoresAllOf'] = PageOfFhirStoresAllOf
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
@@ -39,9 +38,13 @@ class TestPageOfFhirStores(unittest.TestCase):
 
     def testPageOfFhirStores(self):
         """Test PageOfFhirStores"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = PageOfFhirStores()  # noqa: E501
-        pass
+        PageOfFhirStores(
+            offset=PageOffset(10),
+            limit=PageLimit(10),
+            links=ResponsePageMetadataLinks(next="next"),
+            total_results=30,
+            fhir_stores=[FhirStore(name=FhirStoreName("foo"))]
+        )
 
 
 if __name__ == '__main__':

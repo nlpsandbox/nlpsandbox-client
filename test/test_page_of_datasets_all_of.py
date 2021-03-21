@@ -14,6 +14,7 @@ import unittest
 
 import datanode
 from datanode.model.dataset import Dataset
+from datanode.models import DatasetName
 globals()['Dataset'] = Dataset
 from datanode.model.page_of_datasets_all_of import PageOfDatasetsAllOf
 
@@ -31,7 +32,9 @@ class TestPageOfDatasetsAllOf(unittest.TestCase):
         """Test PageOfDatasetsAllOf"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PageOfDatasetsAllOf()  # noqa: E501
-        pass
+        PageOfDatasetsAllOf(
+            datasets=[Dataset(name=DatasetName("foo"))]
+        )
 
 
 if __name__ == '__main__':

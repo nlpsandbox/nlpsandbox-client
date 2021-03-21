@@ -14,6 +14,7 @@ import unittest
 
 import datanode
 from datanode.model.fhir_store import FhirStore
+from datanode.models import FhirStoreName
 globals()['FhirStore'] = FhirStore
 from datanode.model.page_of_fhir_stores_all_of import PageOfFhirStoresAllOf
 
@@ -31,7 +32,9 @@ class TestPageOfFhirStoresAllOf(unittest.TestCase):
         """Test PageOfFhirStoresAllOf"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PageOfFhirStoresAllOf()  # noqa: E501
-        pass
+        PageOfFhirStoresAllOf(
+            fhir_stores=[FhirStore(name=FhirStoreName("foo"))]
+        )
 
 
 if __name__ == '__main__':
