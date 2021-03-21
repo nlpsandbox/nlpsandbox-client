@@ -14,14 +14,16 @@ import unittest
 
 import datanode
 from datanode.model.annotation import Annotation
+from datanode.model.annotation_name import AnnotationName
+from datanode.model.annotation_source import AnnotationSource
+from datanode.model.resource_source import ResourceSource
+from datanode.model.text_date_annotation import TextDateAnnotation
 from datanode.model.page_limit import PageLimit
-from datanode.model.page_of_annotations_all_of import PageOfAnnotationsAllOf
 from datanode.model.page_offset import PageOffset
 from datanode.model.response_page_metadata import ResponsePageMetadata
 from datanode.model.response_page_metadata_links import ResponsePageMetadataLinks
 globals()['Annotation'] = Annotation
 globals()['PageLimit'] = PageLimit
-globals()['PageOfAnnotationsAllOf'] = PageOfAnnotationsAllOf
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
@@ -41,7 +43,21 @@ class TestPageOfAnnotations(unittest.TestCase):
         """Test PageOfAnnotations"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PageOfAnnotations()  # noqa: E501
-        pass
+        model = Annotation(
+            name=AnnotationName("name"),
+            annotation_source=AnnotationSource(resource_source=ResourceSource(name="foo")),
+            text_date_annotations=[
+                TextDateAnnotation(start=1, length=32, text='foo', confidence=95.5)
+            ]
+        )
+        PageOfAnnotations(
+            offset=PageOffset(10),
+            limit=PageLimit(10),
+            links=ResponsePageMetadataLinks(next="next"),
+            total_results=30,
+            annotations=[model]
+        )
+
 
 
 if __name__ == '__main__':

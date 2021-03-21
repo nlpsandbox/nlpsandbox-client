@@ -14,6 +14,10 @@ import unittest
 
 import datanode
 from datanode.model.annotation import Annotation
+from datanode.model.annotation_name import AnnotationName
+from datanode.model.annotation_source import AnnotationSource
+from datanode.model.resource_source import ResourceSource
+from datanode.model.text_date_annotation import TextDateAnnotation
 globals()['Annotation'] = Annotation
 from datanode.model.page_of_annotations_all_of import PageOfAnnotationsAllOf
 
@@ -31,7 +35,16 @@ class TestPageOfAnnotationsAllOf(unittest.TestCase):
         """Test PageOfAnnotationsAllOf"""
         # FIXME: construct object with mandatory attributes with example values
         # model = PageOfAnnotationsAllOf()  # noqa: E501
-        pass
+        model = Annotation(
+            name=AnnotationName("name"),
+            annotation_source=AnnotationSource(resource_source=ResourceSource(name="foo")),
+            text_date_annotations=[
+                TextDateAnnotation(start=1, length=32, text='foo', confidence=95.5)
+            ]
+        )
+        PageOfAnnotationsAllOf(
+            annotations=[model]
+        )
 
 
 if __name__ == '__main__':
