@@ -9,6 +9,9 @@ from annotator.api import (
     text_person_name_annotation_api,
     text_physical_address_annotation_api,
 )
+from annotator.models import (
+    TextDateAnnotation, TextDateAnnotationResponse,
+)
 import datanode
 from datanode.api import note_api, annotation_api, annotation_store_api
 from datanode.models import (
@@ -16,8 +19,7 @@ from datanode.models import (
     AnnotationStore, AnnotationStoreName,
     PageLimit, PageOfAnnotations,
     PageOfNotes, PageOffset, PatientId, Note, NoteId,
-    ResourceSource,
-    ResponsePageMetadataLinks,
+    ResourceSource, ResponsePageMetadataLinks,
 )
 from datanode.rest import ApiException
 from nlpsandboxclient import client
@@ -258,14 +260,26 @@ class TestAnnotatorClient:
         self.config = patch.object(annotator, "Configuration",
                                    return_value=self.configuration)
         self.api_client = patch.object(annotator, "ApiClient")
+        self.example_note = {
+            "identifier": "note-1",
+            "type": "loinc:LP29684-5",
+            "patientId": "507f1f77bcf86cd799439011",
+            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+        }
         self.example_request = {
             "note": {
                 "identifier": "note-1",
-                "note_type": "loinc:LP29684-5",
+                "type": "loinc:LP29684-5",
                 "patient_id": "507f1f77bcf86cd799439011",
                 "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
             }
         }
+        self.date_response = TextDateAnnotationResponse(
+            text_date_annotations=[
+                TextDateAnnotation(start=10, length=10, text="foobar", confidence=95.5)
+            ]
+        )
+
 
     def test__annotate_date(self):
         """Test annotating date"""
@@ -305,3 +319,32 @@ class TestAnnotatorClient:
             create_annotations.assert_called_once_with(
                 text_physical_address_annotation_request=self.example_request
             )
+
+    def test_annotate_note__wrong_tool_type(self):
+        """Wrong tool type"""
+        with pytest.raises(ValueError):
+            client.annotate_note(host=self.host, note=self.example_note,
+                                 tool_type="foo")
+
+    @pytest.mark.parametrize("tool_type,tool_func", [
+        ("nlpsandbox:date-annotator", "_annotate_date"),
+        ("nlpsandbox:person-name-annotator", "_annotate_person"),
+        ("nlpsandbox:physical-address-annotator", "_annotate_address"),
+    ])
+    def test_annotate_note__date(self, tool_type, tool_func):
+        """Wrong tool type"""
+        with self.config as config,\
+             self.api_client as api_client,\
+             patch.object(client, tool_func, return_value=self.date_response):
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
+
+            result = client.annotate_note(
+                host=self.host, note=self.example_note, tool_type=tool_type
+            )
+            assert result == {
+                'textDateAnnotations': [
+                    {'start': 10, 'length': 10, 'text': 'foobar', 'confidence': 95.5}
+                ]
+            }
