@@ -12,7 +12,7 @@ This is the NLP sandbox command line client.
   :prog: nlp-cli community
   :nested: full
 
-.. click:: nlpsandboxclient.cli.evaluate:evaluate-prediction
+.. click:: nlpsandboxclient.cli.evaluate:evaluate_prediction
   :prog: nlp-cli evaluate-prediction
   :nested: full
 
