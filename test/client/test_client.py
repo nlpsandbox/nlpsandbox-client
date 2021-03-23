@@ -285,15 +285,23 @@ class TestAnnotatorClient:
         with patch.object(text_person_name_annotation_api, "TextPersonNameAnnotationApi",
                           return_value=self.mock_api) as resource_api,\
              patch.object(self.mock_api, "create_text_person_name_annotations",
-                          return_value="foo") as list_annotations:
+                          return_value="foo") as create_annotations:
             annotated = client._annotate_person(self.api, self.example_request)
             assert annotated == "foo"
+            resource_api.assert_called_once_with(self.api)
+            create_annotations.assert_called_once_with(
+                text_person_name_annotation_request=self.example_request
+            )
 
     def test__annotate_physical_address(self):
         """Test annotating physical address"""
         with patch.object(text_physical_address_annotation_api, "TextPhysicalAddressAnnotationApi",
                           return_value=self.mock_api) as resource_api,\
              patch.object(self.mock_api, "create_text_physical_address_annotations",
-                          return_value="foo") as list_annotations:
+                          return_value="foo") as create_annotations:
             annotated = client._annotate_address(self.api, self.example_request)
             assert annotated == "foo"
+            resource_api.assert_called_once_with(self.api)
+            create_annotations.assert_called_once_with(
+                text_physical_address_annotation_request=self.example_request
+            )
