@@ -4,7 +4,11 @@ from unittest.mock import Mock, patch
 import pytest
 
 import annotator
-from annotator.api import text_date_annotation_api
+from annotator.api import (
+    text_date_annotation_api,
+    text_person_name_annotation_api,
+    text_physical_address_annotation_api,
+)
 import datanode
 from datanode.api import note_api, annotation_api, annotation_store_api
 from datanode.models import (
@@ -276,20 +280,20 @@ class TestAnnotatorClient:
                 text_date_annotation_request=self.example_request
             )
 
-    # def test__annotate_person(self):
-    #     """Test annotating person"""
-    #     with patch.object(text_date_annotation_api, "TextDateAnnotationApi",
-    #                       return_value=self.mock_api) as resource_api,\
-    #          patch.object(self.mock_api, "create_text_date_annotations",
-    #                       return_value="foo") as list_annotations:
-    #         annotated = client._annotate_date(self.api, self.example_request)
-    #         assert annotated == "foo"
+    def test__annotate_person(self):
+        """Test annotating person"""
+        with patch.object(text_person_name_annotation_api, "TextPersonNameAnnotationApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "create_text_person_name_annotations",
+                          return_value="foo") as list_annotations:
+            annotated = client._annotate_person(self.api, self.example_request)
+            assert annotated == "foo"
 
-    # def test__annotate_physical_address(self):
-    #     """Test annotating physical address"""
-    #     with patch.object(text_date_annotation_api, "TextDateAnnotationApi",
-    #                       return_value=self.mock_api) as resource_api,\
-    #          patch.object(self.mock_api, "create_text_date_annotations",
-    #                       return_value="foo") as list_annotations:
-    #         annotated = client._annotate_date(self.api, self.example_request)
-    #         assert annotated == "foo"
+    def test__annotate_physical_address(self):
+        """Test annotating physical address"""
+        with patch.object(text_physical_address_annotation_api, "TextPhysicalAddressAnnotationApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "create_text_physical_address_annotations",
+                          return_value="foo") as list_annotations:
+            annotated = client._annotate_address(self.api, self.example_request)
+            assert annotated == "foo"
