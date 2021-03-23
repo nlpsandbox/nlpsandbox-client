@@ -8,9 +8,10 @@ from annotator.api import (
     text_date_annotation_api,
     text_person_name_annotation_api,
     text_physical_address_annotation_api,
+    tool_api,
 )
 from annotator.models import (
-    TextDateAnnotation, TextDateAnnotationResponse,
+    License, TextDateAnnotation, TextDateAnnotationResponse, Tool, ToolType
 )
 import datanode
 from datanode.api import note_api, annotation_api, annotation_store_api
@@ -321,7 +322,7 @@ class TestAnnotatorClient:
 
     def test_annotate_note__wrong_tool_type(self):
         """Wrong tool type"""
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match="Invalid annotator_type: foo"):
             client.annotate_note(host=self.host, note=self.example_note,
                                  tool_type="foo")
 
@@ -330,11 +331,12 @@ class TestAnnotatorClient:
         ("nlpsandbox:person-name-annotator", "_annotate_person"),
         ("nlpsandbox:physical-address-annotator", "_annotate_address"),
     ])
-    def test_annotate_note__date(self, tool_type, tool_func):
-        """Wrong tool type"""
+    def test_annotate_note(self, tool_type, tool_func):
+        """Test annotate note"""
         with self.config as config,\
              self.api_client as api_client,\
-             patch.object(client, tool_func, return_value=self.date_response) as patch_annot:
+             patch.object(client, tool_func,
+                          return_value=self.date_response) as patch_annot:
             api_client.return_value = api_client
             api_client.__enter__ = Mock(return_value=self.api)
             api_client.__exit__ = Mock(return_value=None)
@@ -350,3 +352,47 @@ class TestAnnotatorClient:
                     {'start': 10, 'length': 10, 'text': 'foobar', 'confidence': 95.5}
                 ]
             }
+
+    def test_get_tool(self):
+        """Get tool"""
+        tool_example = Tool(
+            name="foo", version="1.0.0", license=License("apache-2.0"),
+            repository="www.google.com", description="foobar",
+            author="Bob", author_email="email@email.com", url="www.google.com",
+            type=ToolType("tool"), api_version="1.0.0"
+        )
+        with self.config as config,\
+             self.api_client as api_client,\
+             patch.object(tool_api, "ToolApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "get_tool",
+                          return_value=tool_example) as get_tool,\
+             patch.object(client, "_get_tool_redirect",
+                          return_value=tool_example.to_dict()):
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
+            tool = client.get_tool(host=self.host)
+            assert tool == tool_example
+
+    def test_get_tool__invalid(self):
+        """Tool and redirect don't match"""
+        tool_example = Tool(
+            name="foo", version="1.0.0", license=License("apache-2.0"),
+            repository="www.google.com", description="foobar",
+            author="Bob", author_email="email@email.com", url="www.google.com",
+            type=ToolType("tool"), api_version="1.0.0"
+        )
+        with self.config as config,\
+             self.api_client as api_client,\
+             patch.object(tool_api, "ToolApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "get_tool",
+                          return_value=tool_example) as get_tool,\
+             patch.object(client, "_get_tool_redirect",
+                          return_value={}),\
+             pytest.raises(ValueError, match="Tool base URL must redirect*"):
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
+            tool = client.get_tool(host=self.host)
