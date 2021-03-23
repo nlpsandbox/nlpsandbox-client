@@ -137,7 +137,7 @@ def store_dataset(data_node_host, dataset_id, output):
               default=DATA_NODE_HOST, show_default=True)
 @click.option('--dataset_id', help='Dataset id', required=True)
 def delete_dataset(data_node_host, dataset_id):
-    """Create a dataset in the data node"""
+    """Delete a dataset in the data node"""
     # Create dataset
     client.delete_dataset(host=data_node_host,
                           dataset_id=dataset_id)
