@@ -280,7 +280,6 @@ class TestAnnotatorClient:
             ]
         )
 
-
     def test__annotate_date(self):
         """Test annotating date"""
         with patch.object(text_date_annotation_api, "TextDateAnnotationApi",
@@ -335,7 +334,7 @@ class TestAnnotatorClient:
         """Wrong tool type"""
         with self.config as config,\
              self.api_client as api_client,\
-             patch.object(client, tool_func, return_value=self.date_response):
+             patch.object(client, tool_func, return_value=self.date_response) as patch_annot:
             api_client.return_value = api_client
             api_client.__enter__ = Mock(return_value=self.api)
             api_client.__exit__ = Mock(return_value=None)
@@ -343,6 +342,9 @@ class TestAnnotatorClient:
             result = client.annotate_note(
                 host=self.host, note=self.example_note, tool_type=tool_type
             )
+            config.assert_called_once_with(host=self.host)
+            api_client.assert_called_once_with(self.configuration)
+            patch_annot.assert_called_once_with(self.api, self.example_request)
             assert result == {
                 'textDateAnnotations': [
                     {'start': 10, 'length': 10, 'text': 'foobar', 'confidence': 95.5}
