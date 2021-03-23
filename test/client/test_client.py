@@ -14,11 +14,14 @@ from annotator.models import (
     License, TextDateAnnotation, TextDateAnnotationResponse, Tool, ToolType
 )
 import datanode
-from datanode.api import note_api, annotation_api, annotation_store_api
+from datanode.api import (
+    annotation_api, annotation_store_api,
+    dataset_api, note_api,
+)
 from datanode.models import (
     Annotation, AnnotationName, AnnotationSource,
-    AnnotationStore, AnnotationStoreName,
-    PageLimit, PageOfAnnotations,
+    AnnotationStore, AnnotationStoreName, Dataset, DatasetName,
+    PageLimit, PageOfAnnotations, PageOfDatasets,
     PageOfNotes, PageOffset, PatientId, Note, NoteId,
     ResourceSource, ResponsePageMetadataLinks,
 )
@@ -209,7 +212,7 @@ class TestDataNodeClient:
             assert store == store_example
 
     def test_list_annotations(self):
-        """Test creating of annotation store if create_if_missing is True"""
+        """Test listing of annotations"""
         annotation_example = PageOfAnnotations(
             annotations=[
                 Annotation(
@@ -249,6 +252,38 @@ class TestDataNodeClient:
                 self.dataset_id, self.annotation_store_id,
                 offset=0, limit=10
             )
+
+    def test_list_datasets(self):
+        """Test listing of datasets"""
+        example_datasets = PageOfDatasets(
+            datasets=[
+                Dataset(name=DatasetName("foo"))
+            ],
+            offset=PageOffset(10),
+            limit=PageLimit(10),
+            links=ResponsePageMetadataLinks(next=""),
+            total_results=30
+        )
+
+        with self.config as config,\
+             self.api_client as api_client,\
+             patch.object(dataset_api, "DatasetApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "list_datasets",
+                          return_value=example_datasets) as list_datasets:
+
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
+
+            datasets = client.list_datasets(host=self.host)
+            assert list(datasets) == [
+                {'name': 'foo'}
+            ]
+            config.assert_called_once_with(host=self.host)
+            api_client.assert_called_once_with(self.configuration)
+            resource_api.assert_called_once_with(self.api)
+            list_datasets.assert_called_once_with(limit=10, offset=0)
 
 
 class TestAnnotatorClient:
