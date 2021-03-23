@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>nlpsandboxclient.client &mdash; nlpsandboxclient 0.4.1 documentation</title>
+  <title>nlpsandboxclient.client &mdash; nlpsandboxclient 1.0 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.4.1
+                1.0
               </div>
             
           
@@ -166,13 +166,13 @@
             
   <h1>Source code for nlpsandboxclient.client</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;NLP data node client that interacts with the SDK datanodeclient&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Iterator</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="kn">import</span> <span class="nn">datanode</span>
 <span class="kn">from</span> <span class="nn">datanode.api</span> <span class="kn">import</span> <span class="n">annotation_store_api</span><span class="p">,</span> <span class="n">annotation_api</span><span class="p">,</span> <span class="n">dataset_api</span><span class="p">,</span> <span class="n">note_api</span>
-<span class="kn">from</span> <span class="nn">datanode.models</span> <span class="kn">import</span> <span class="n">Annotation</span><span class="p">,</span> <span class="n">AnnotationStore</span><span class="p">,</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">datanode.models</span> <span class="kn">import</span> <span class="n">Annotation</span><span class="p">,</span> <span class="n">AnnotationStore</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">Note</span>
 <span class="kn">import</span> <span class="nn">annotator</span>
 <span class="kn">from</span> <span class="nn">annotator.api</span> <span class="kn">import</span> <span class="p">(</span><span class="n">text_date_annotation_api</span><span class="p">,</span>
                            <span class="n">text_person_name_annotation_api</span><span class="p">,</span>
@@ -406,18 +406,18 @@
             <span class="n">offset</span> <span class="o">+=</span> <span class="n">limit</span></div>
 
 
-<span class="k">def</span> <span class="nf">_annotate_person</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">_annotate_person</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotation_request</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Annotate notes with date</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        host: Data node host IP</span>
-<span class="sd">        note: Clinical note</span>
+<span class="sd">        text_annotation_request: Text person name annotation request</span>
 
 <span class="sd">    Yields:</span>
 <span class="sd">        Annotated notes</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; example_note = {</span>
+<span class="sd">        &gt;&gt;&gt; example_request = {</span>
 <span class="sd">        &gt;&gt;&gt;    &quot;note&quot;: {</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;identifier&quot;: &quot;note-1&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;note_type&quot;: &quot;loinc:LP29684-5&quot;,</span>
@@ -428,30 +428,32 @@
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0:8080/api/v1&quot;</span>
 <span class="sd">        &gt;&gt;&gt; configuration = annotator.Configuration(host=host)</span>
 <span class="sd">        &gt;&gt;&gt; with annotator.ApiClient(configuration) as api_client:</span>
-<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_person(api_client=api_client,</span>
-<span class="sd">        &gt;&gt;&gt;                                    note=example_note)</span>
+<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_person(</span>
+<span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
+<span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
     <span class="n">api_instance</span> <span class="o">=</span> <span class="n">text_person_name_annotation_api</span><span class="o">.</span><span class="n">TextPersonNameAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
     <span class="n">annotations</span> <span class="o">=</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">create_text_person_name_annotations</span><span class="p">(</span>
-        <span class="n">text_person_name_annotation_request</span><span class="o">=</span><span class="n">note</span>
+        <span class="n">text_person_name_annotation_request</span><span class="o">=</span><span class="n">text_annotation_request</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">annotations</span>
 
 
-<span class="k">def</span> <span class="nf">_annotate_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">_annotate_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotation_request</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Annotate notes with date</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        host: Data node host IP</span>
-<span class="sd">        note: Clinical note</span>
+<span class="sd">        text_annotation_request: Text physical address annotation request</span>
 
 <span class="sd">    Yields:</span>
 <span class="sd">        Annotated notes</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; example_note = {</span>
+<span class="sd">        &gt;&gt;&gt; example_request = {</span>
 <span class="sd">        &gt;&gt;&gt;    &quot;note&quot;: {</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;identifier&quot;: &quot;note-1&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;note_type&quot;: &quot;loinc:LP29684-5&quot;,</span>
@@ -462,30 +464,32 @@
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0:8080/api/v1&quot;</span>
 <span class="sd">        &gt;&gt;&gt; configuration = annotator.Configuration(host=host)</span>
 <span class="sd">        &gt;&gt;&gt; with annotator.ApiClient(configuration) as api_client:</span>
-<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_address(api_client=api_client,</span>
-<span class="sd">        &gt;&gt;&gt;                                     note=example_note)</span>
+<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_person(</span>
+<span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
+<span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
     <span class="n">api_instance</span> <span class="o">=</span> <span class="n">text_physical_address_annotation_api</span><span class="o">.</span><span class="n">TextPhysicalAddressAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
     <span class="n">annotations</span> <span class="o">=</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">create_text_physical_address_annotations</span><span class="p">(</span>
-        <span class="n">text_physical_address_annotation_request</span><span class="o">=</span><span class="n">note</span>
+        <span class="n">text_physical_address_annotation_request</span><span class="o">=</span><span class="n">text_annotation_request</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">annotations</span>
 
 
-<span class="k">def</span> <span class="nf">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotation_request</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Annotate notes with date</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        host: Data node host IP</span>
-<span class="sd">        note: Clinical note</span>
+<span class="sd">        text_annotation_request: Text date annotation request</span>
 
 <span class="sd">    Yields:</span>
 <span class="sd">        Annotated notes</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; example_note = {</span>
+<span class="sd">        &gt;&gt;&gt; example_request = {</span>
 <span class="sd">        &gt;&gt;&gt;    &quot;note&quot;: {</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;identifier&quot;: &quot;note-1&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;        &quot;note_type&quot;: &quot;loinc:LP29684-5&quot;,</span>
@@ -496,55 +500,62 @@
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0:8080/api/v1&quot;</span>
 <span class="sd">        &gt;&gt;&gt; configuration = annotator.Configuration(host=host)</span>
 <span class="sd">        &gt;&gt;&gt; with annotator.ApiClient(configuration) as api_client:</span>
-<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_date(api_client=api_client,</span>
-<span class="sd">        &gt;&gt;&gt;                                  note=example_note)</span>
+<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_person(</span>
+<span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
+<span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
     <span class="n">api_instance</span> <span class="o">=</span> <span class="n">text_date_annotation_api</span><span class="o">.</span><span class="n">TextDateAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
     <span class="n">annotations</span> <span class="o">=</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">create_text_date_annotations</span><span class="p">(</span>
-        <span class="n">text_date_annotation_request</span><span class="o">=</span><span class="n">note</span>
+        <span class="n">text_date_annotation_request</span><span class="o">=</span><span class="n">text_annotation_request</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">annotations</span>
 
 
-<div class="viewcode-block" id="annotate_note"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.annotate_note">[docs]</a><span class="k">def</span> <span class="nf">annotate_note</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">annotator_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="annotate_note"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.annotate_note">[docs]</a><span class="k">def</span> <span class="nf">annotate_note</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">Note</span><span class="p">],</span>
+                  <span class="n">tool_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Annotate notes</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        host: Data node host IP</span>
 <span class="sd">        note: Clinical note</span>
-<span class="sd">        annotator_type: Type of annotator</span>
+<span class="sd">        tool_type: Type of annotator</span>
 
 <span class="sd">    Yields:</span>
 <span class="sd">        Annotated notes</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; example_note = {</span>
-<span class="sd">        &gt;&gt;&gt;    &quot;note&quot;: {</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;identifier&quot;: &quot;note-1&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;noteType&quot;: &quot;loinc:LP29684-5&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;patientId&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;        &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
-<span class="sd">        &gt;&gt;&gt;    }</span>
+<span class="sd">        &gt;&gt;&gt;    &quot;identifier&quot;: &quot;note-1&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;    &quot;noteType&quot;: &quot;loinc:LP29684-5&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;    &quot;patientId&quot;: &quot;507f1f77bcf86cd799439011&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;    &quot;text&quot;: &quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; annotations = annotate_note(host=&quot;0.0.0.0/api/v1&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;                             note=example_note,</span>
-<span class="sd">        &gt;&gt;&gt;                             annotator_type=&quot;date&quot;)</span>
+<span class="sd">        &gt;&gt;&gt;                             tool_type=&quot;date&quot;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
     <span class="n">configuration</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
-    <span class="n">new_note</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">change_keys</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">camelcase_to_snakecase</span><span class="p">)</span>
+    <span class="c1"># Change clinical note into text annotation request format</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">Note</span><span class="p">):</span>
+        <span class="n">text_annotator_req</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text_annotator_req</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="n">utils</span><span class="o">.</span><span class="n">change_keys</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">camelcase_to_snakecase</span><span class="p">)</span>
+        <span class="p">}</span>
     <span class="k">with</span> <span class="n">annotator</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">annotator_type</span> <span class="o">==</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">new_note</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">annotator_type</span> <span class="o">==</span> <span class="s2">&quot;person&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_person</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">new_note</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">annotator_type</span> <span class="o">==</span> <span class="s2">&quot;address&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">new_note</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:date-annotator&quot;</span><span class="p">:</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:person-name-annotator&quot;</span><span class="p">:</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_person</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:physical-address-annotator&quot;</span><span class="p">:</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid annotator_type: </span><span class="si">{annotator_type}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid annotator_type: </span><span class="si">{tool_type}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">sanitized_annotations</span> <span class="o">=</span> <span class="n">api_client</span><span class="o">.</span><span class="n">sanitize_for_serialization</span><span class="p">(</span>
             <span class="n">annotations</span>
         <span class="p">)</span>

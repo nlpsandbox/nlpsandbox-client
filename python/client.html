@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>nlpsandboxclient &mdash; nlpsandboxclient 0.4.1 documentation</title>
+  <title>nlpsandboxclient &mdash; nlpsandboxclient 1.0 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.4.1
+                1.0
               </div>
             
           
@@ -173,14 +173,14 @@
 <p>NLP data node client that interacts with the SDK datanodeclient</p>
 <dl class="function">
 <dt id="nlpsandboxclient.client.annotate_note">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">annotate_note</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">note: dict</em>, <em class="sig-param">annotator_type: str</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#annotate_note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.annotate_note" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">annotate_note</code><span class="sig-paren">(</span><em class="sig-param">host: str, note: Union[dict, datanode.model.note.Note], tool_type: str</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#annotate_note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.annotate_note" title="Permalink to this definition">¶</a></dt>
 <dd><p>Annotate notes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>host</strong> – Data node host IP</p></li>
 <li><p><strong>note</strong> – Clinical note</p></li>
-<li><p><strong>annotator_type</strong> – Type of annotator</p></li>
+<li><p><strong>tool_type</strong> – Type of annotator</p></li>
 </ul>
 </dd>
 <dt class="field-even">Yields</dt>
@@ -189,16 +189,14 @@
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example_note</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="p">{</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;note-1&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="s2">&quot;noteType&quot;</span><span class="p">:</span> <span class="s2">&quot;loinc:LP29684-5&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="s2">&quot;patientId&quot;</span><span class="p">:</span> <span class="s2">&quot;507f1f77bcf86cd799439011&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;note-1&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="s2">&quot;noteType&quot;</span><span class="p">:</span> <span class="s2">&quot;loinc:LP29684-5&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="s2">&quot;patientId&quot;</span><span class="p">:</span> <span class="s2">&quot;507f1f77bcf86cd799439011&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">annotations</span> <span class="o">=</span> <span class="n">annotate_note</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0/api/v1&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                            <span class="n">note</span><span class="o">=</span><span class="n">example_note</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">annotator_type</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">tool_type</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -432,6 +430,146 @@ convert function.</p>
 <dd><p>Log into synapse via two methods
 a. ~/.synapseConfig
 b. SYNAPSE_USERNAME and SYNAPSE_APIKEY environmental variables</p>
+</dd></dl>
+
+<span class="target" id="module-nlpsandboxclient.evaluation"></span><dl class="class">
+<dt id="nlpsandboxclient.evaluation.DateEvaluation">
+<em class="property">class </em><code class="sig-prename descclassname">nlpsandboxclient.evaluation.</code><code class="sig-name descname">DateEvaluation</code><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#DateEvaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.DateEvaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nlpsandboxclient.evaluation.Evaluation" title="nlpsandboxclient.evaluation.Evaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">nlpsandboxclient.evaluation.Evaluation</span></code></a></p>
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.DateEvaluation.annotation">
+<code class="sig-name descname">annotation</code><em class="property"> = 'dateFormat'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.DateEvaluation.annotation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.DateEvaluation.col">
+<code class="sig-name descname">col</code><em class="property"> = 'date_annotations'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.DateEvaluation.col" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.DateEvaluation.evaluation_type">
+<code class="sig-name descname">evaluation_type</code><em class="property"> = 'date'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.DateEvaluation.evaluation_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nlpsandboxclient.evaluation.Evaluation">
+<em class="property">class </em><code class="sig-prename descclassname">nlpsandboxclient.evaluation.</code><code class="sig-name descname">Evaluation</code><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Evaluate the different types</p>
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.Evaluation.annotation">
+<code class="sig-name descname">annotation</code><em class="property"> = None</em><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.annotation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.Evaluation.col">
+<code class="sig-name descname">col</code><em class="property"> = None</em><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.col" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.convert_annotations">
+<code class="sig-name descname">convert_annotations</code><span class="sig-paren">(</span><em class="sig-param">annotations</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.convert_annotations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.convert_annotations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.convert_dict">
+<code class="sig-name descname">convert_dict</code><span class="sig-paren">(</span><em class="sig-param">sys_file</em>, <em class="sig-param">gs_file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.convert_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.convert_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.eval">
+<code class="sig-name descname">eval</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.eval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.eval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.eval_category_instance">
+<code class="sig-name descname">eval_category_instance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.eval_category_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.eval_category_instance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.eval_category_token">
+<code class="sig-name descname">eval_category_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.eval_category_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.eval_category_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.Evaluation.evaluation_type">
+<code class="sig-name descname">evaluation_type</code><em class="property"> = None</em><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.evaluation_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.format_cond">
+<code class="sig-name descname">format_cond</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">sys_dict</em>, <em class="sig-param">gs_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.format_cond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.format_cond" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.json_dict_seq">
+<code class="sig-name descname">json_dict_seq</code><span class="sig-paren">(</span><em class="sig-param">input</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.json_dict_seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.json_dict_seq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.json_dict_token">
+<code class="sig-name descname">json_dict_token</code><span class="sig-paren">(</span><em class="sig-param">input</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.json_dict_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.json_dict_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.print_out">
+<code class="sig-name descname">print_out</code><span class="sig-paren">(</span><em class="sig-param">tp</em>, <em class="sig-param">fp</em>, <em class="sig-param">fn</em>, <em class="sig-param">type_up</em>, <em class="sig-param">type_lower</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.print_out"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.print_out" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.relax_cond">
+<code class="sig-name descname">relax_cond</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">sys_dict</em>, <em class="sig-param">gs_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.relax_cond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.relax_cond" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nlpsandboxclient.evaluation.Evaluation.strict_cond">
+<code class="sig-name descname">strict_cond</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">sys_dict</em>, <em class="sig-param">gs_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#Evaluation.strict_cond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.Evaluation.strict_cond" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nlpsandboxclient.evaluation.PersonNameEvaluation">
+<em class="property">class </em><code class="sig-prename descclassname">nlpsandboxclient.evaluation.</code><code class="sig-name descname">PersonNameEvaluation</code><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#PersonNameEvaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.PersonNameEvaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nlpsandboxclient.evaluation.Evaluation" title="nlpsandboxclient.evaluation.Evaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">nlpsandboxclient.evaluation.Evaluation</span></code></a></p>
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.PersonNameEvaluation.annotation">
+<code class="sig-name descname">annotation</code><em class="property"> = 'personType'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PersonNameEvaluation.annotation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.PersonNameEvaluation.col">
+<code class="sig-name descname">col</code><em class="property"> = 'person_name_annotations'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PersonNameEvaluation.col" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.PersonNameEvaluation.evaluation_type">
+<code class="sig-name descname">evaluation_type</code><em class="property"> = 'person'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PersonNameEvaluation.evaluation_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nlpsandboxclient.evaluation.PhysicalAddressEvaluation">
+<em class="property">class </em><code class="sig-prename descclassname">nlpsandboxclient.evaluation.</code><code class="sig-name descname">PhysicalAddressEvaluation</code><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#PhysicalAddressEvaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.PhysicalAddressEvaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nlpsandboxclient.evaluation.Evaluation" title="nlpsandboxclient.evaluation.Evaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">nlpsandboxclient.evaluation.Evaluation</span></code></a></p>
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.PhysicalAddressEvaluation.annotation">
+<code class="sig-name descname">annotation</code><em class="property"> = 'addressType'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PhysicalAddressEvaluation.annotation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.PhysicalAddressEvaluation.col">
+<code class="sig-name descname">col</code><em class="property"> = 'physical_location_annotations'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PhysicalAddressEvaluation.col" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.PhysicalAddressEvaluation.evaluation_type">
+<code class="sig-name descname">evaluation_type</code><em class="property"> = 'address'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PhysicalAddressEvaluation.evaluation_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
