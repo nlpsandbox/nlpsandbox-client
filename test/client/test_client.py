@@ -87,6 +87,7 @@ class TestDataNodeClient:
         self.api_client = patch.object(datanode, "ApiClient")
         self.dataset_id = "awesome-dataset"
         self.annotation_store_id = "annotation-store"
+        self.annotation_id = "awesome-annotation"
         self.fhir_store_id = "fhir-store"
         # To mock context manager
 
@@ -285,6 +286,36 @@ class TestDataNodeClient:
             resource_api.assert_called_once_with(self.api)
             list_datasets.assert_called_once_with(limit=10, offset=0)
 
+    def test_get_annotation(self):
+        """Test getting of annotation"""
+        example_annotation = Annotation(
+            name=AnnotationName("12344"),
+            annotation_source=AnnotationSource(resource_source=ResourceSource(name="foo")),
+        )
+        with self.config as config,\
+             self.api_client as api_client,\
+             patch.object(annotation_api, "AnnotationApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "get_annotation",
+                          return_value=example_annotation) as get_annotation:
+
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
+
+            annotation = client.get_annotation(
+                host=self.host, dataset_id=self.dataset_id,
+                annotation_store_id=self.annotation_store_id,
+                annotation_id=self.annotation_id
+            )
+            assert annotation == example_annotation
+            config.assert_called_once_with(host=self.host)
+            api_client.assert_called_once_with(self.configuration)
+            resource_api.assert_called_once_with(self.api)
+            get_annotation.assert_called_once_with(
+                self.dataset_id, self.annotation_store_id,
+                self.annotation_id
+            )
 
 class TestAnnotatorClient:
 
