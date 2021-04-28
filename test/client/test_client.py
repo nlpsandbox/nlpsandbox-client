@@ -317,6 +317,40 @@ class TestDataNodeClient:
                 self.annotation_id
             )
 
+    def test__store_annotations(self):
+        return_obj = Mock()
+        example_annotation = Annotation(
+            name=AnnotationName("12344"),
+            annotation_source=AnnotationSource(resource_source=ResourceSource(name="foo")),
+        )
+        with self.config as config,\
+             self.api_client as api_client,\
+             patch.object(annotation_api, "AnnotationApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "create_annotation",
+                          return_value=return_obj) as patch_store:
+
+            api_client.return_value = api_client
+            api_client.__enter__ = Mock(return_value=self.api)
+            api_client.__exit__ = Mock(return_value=None)
+
+            annotation = client._store_annotation(
+                host=self.host, dataset_id=self.dataset_id,
+                annotation_store_id=self.annotation_store_id,
+                annotation_id=self.annotation_id,
+                annotation=example_annotation
+            )
+            config.assert_called_once_with(host=self.host)
+            api_client.assert_called_once_with(self.configuration)
+            resource_api.assert_called_once_with(self.api)
+            patch_store.assert_called_once_with(
+                annotation_create_request=example_annotation,
+                annotation_id='awesome-annotation',
+                annotation_store_id='annotation-store',
+                async_req=True, dataset_id='awesome-dataset'
+            )
+
+
 class TestAnnotatorClient:
 
     def setup_method(self):
