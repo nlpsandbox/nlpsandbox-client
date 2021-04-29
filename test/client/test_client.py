@@ -27,7 +27,7 @@ from nlpsandboxclient import client
 #     configuration = Mock()
 #     note_example = PageOfNotes(
 #         notes=[Note(
-#             id="12344", note_type="foo", patient_id="pat1", text="foobarbaz"
+#             id="12344", type="foo", patient_id="pat1", text="foobarbaz"
 #         )],
 #         offset=0, limit=3, links=Mock(next="")
 #     )
@@ -257,7 +257,7 @@ class TestAnnotatorClient:
         self.example_request = {
             "note": {
                 "identifier": "note-1",
-                "note_type": "loinc:LP29684-5",
+                "type": "loinc:LP29684-5",
                 "patient_id": "507f1f77bcf86cd799439011",
                 "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
             }
