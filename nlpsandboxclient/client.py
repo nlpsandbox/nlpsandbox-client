@@ -253,7 +253,7 @@ def _annotate_person(api_client, text_annotation_request: dict) -> dict:
         >>> example_request = {
         >>>    "note": {
         >>>        "identifier": "note-1",
-        >>>        "note_type": "loinc:LP29684-5",
+        >>>        "type": "loinc:LP29684-5",
         >>>        "patient_id": "507f1f77bcf86cd799439011",
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
@@ -289,7 +289,7 @@ def _annotate_address(api_client, text_annotation_request: dict) -> dict:
         >>> example_request = {
         >>>    "note": {
         >>>        "identifier": "note-1",
-        >>>        "note_type": "loinc:LP29684-5",
+        >>>        "type": "loinc:LP29684-5",
         >>>        "patient_id": "507f1f77bcf86cd799439011",
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
@@ -325,7 +325,7 @@ def _annotate_date(api_client, text_annotation_request: dict) -> dict:
         >>> example_request = {
         >>>    "note": {
         >>>        "identifier": "note-1",
-        >>>        "note_type": "loinc:LP29684-5",
+        >>>        "type": "loinc:LP29684-5",
         >>>        "patient_id": "507f1f77bcf86cd799439011",
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }

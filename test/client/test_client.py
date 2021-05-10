@@ -37,7 +37,7 @@ from nlpsandboxclient import client
 #     configuration = Mock()
 #     note_example = PageOfNotes(
 #         notes=[Note(
-#             id="12344", note_type="foo", patient_id="pat1", text="foobarbaz"
+#             id="12344", type="foo", patient_id="pat1", text="foobarbaz"
 #         )],
 #         offset=0, limit=3, links=Mock(next="")
 #     )

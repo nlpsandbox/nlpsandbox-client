@@ -59,9 +59,9 @@ setuptools.setup(
     description='NLP Sandbox Client Library for Python',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/nlpsandbox',
+    url='https://nlpsandbox.io',
     author='The NLP Sandbox Team',
-    author_email='thomas.schaffter@sagebionetworks.org',
+    author_email='team@nlpsandox.io',
     license='Apache',
     project_urls={
         "Source Code": "https://github.com/nlpsandbox/nlpsandbox-client",
