@@ -15,6 +15,8 @@
 
 # Import APIs into API package:
 from annotator.api.health_check_api import HealthCheckApi
+from annotator.api.text_contact_annotation_api import TextContactAnnotationApi
+from annotator.api.text_covid_symptom_annotation_api import TextCovidSymptomAnnotationApi
 from annotator.api.text_date_annotation_api import TextDateAnnotationApi
 from annotator.api.text_person_name_annotation_api import TextPersonNameAnnotationApi
 from annotator.api.text_physical_address_annotation_api import TextPhysicalAddressAnnotationApi

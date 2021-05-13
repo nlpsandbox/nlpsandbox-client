@@ -1,10 +1,10 @@
-# ToolDependencies
+# TextCovidSymptomAnnotationResponse
 
-A list of tool dependencies
+The response to a COVID symptoms annotation request
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tools** | [**[Tool]**](Tool.md) | A list of tools | 
+**text_covid_symptom_annotations** | [**[TextCovidSymptomAnnotation]**](TextCovidSymptomAnnotation.md) | A list of COVID symptom annotations | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
