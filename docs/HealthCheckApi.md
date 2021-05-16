@@ -1,4 +1,4 @@
-# datanode.HealthCheckApi
+# annotator.HealthCheckApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -18,20 +18,20 @@ Get information about the health of the service
 
 ```python
 import time
-import datanode
-from datanode.api import health_check_api
-from datanode.model.health_check import HealthCheck
-from datanode.model.error import Error
+import annotator
+from annotator.api import health_check_api
+from annotator.model.health_check import HealthCheck
+from annotator.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = annotator.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with annotator.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = health_check_api.HealthCheckApi(api_client)
 
@@ -40,7 +40,7 @@ with datanode.ApiClient() as api_client:
         # Get health check information
         api_response = api_instance.get_health_check()
         pprint(api_response)
-    except datanode.ApiException as e:
+    except annotator.ApiException as e:
         print("Exception when calling HealthCheckApi->get_health_check: %s\n" % e)
 ```
 
