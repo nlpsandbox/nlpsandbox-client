@@ -114,12 +114,14 @@ The SDK clients have to be updated when the API version is updated.  Here are th
   ```
 
 - `annotator` package
-  Must merge the three NLP annotator specifications together into one `openapi.yaml`:
-  - [date](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/date-annotator)
-  - [person](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/person-name-annotator)
-  - [address](https://github.com/nlpsandbox/nlpsandbox-schemas/tree/develop/openapi/physical-address-annotator)
+  Use the `merge-annotator` branch in the `nlpsandbox-schemas` to view a merged [openapi.yaml](https://github.com/nlpsandbox/nlpsandbox-schemas/blob/merge-annotators/openapi/annotator/openapi.yaml).  Follow instructions in the schemas github repository to validate the `annotators` folder. This file merges all of the annotators together.
   ```
-  openapi-generator generate -g python -o . --package-name annotator -i openapi.yaml
+  # Create merged openapi.yaml
+  git clone -b merge-annotator https://github.com/nlpsandbox/nlpsandbox-schemas.git
+  cd nlpsandbox-schemas
+  npm run validate --api=annotator  # This command will create a complete openapi.yaml
+  # navigate back into the nlpsandbox-client directory
+  openapi-generator generate -g python -o . --package-name annotator -i nlpsandbox-schemas/openapi.yaml
   ```
 
 ### Testing
