@@ -8,7 +8,9 @@ from datanode.api import annotation_store_api, annotation_api, dataset_api, note
 from datanode.models import Annotation, AnnotationStore, Dataset, Note
 import annotator
 from annotator.api import (text_contact_annotation_api,
+                           text_covid_symptom_annotation_api,
                            text_date_annotation_api,
+                           text_id_annotation_api,
                            text_person_name_annotation_api,
                            text_physical_address_annotation_api,
                            tool_api)
@@ -349,11 +351,11 @@ def _annotate_date(api_client, text_annotation_request: dict) -> dict:
 
 
 def _annotate_contact(api_client, text_annotation_request: dict) -> dict:
-    """Annotate notes with date
+    """Annotate notes with contact
 
     Args:
         host: Data node host IP
-        text_annotation_request: Text date annotation request
+        text_annotation_request: Text contact annotation request
 
     Yields:
         Annotated notes
@@ -382,6 +384,44 @@ def _annotate_contact(api_client, text_annotation_request: dict) -> dict:
     )
     annotations = api_instance.create_text_contact_annotations(
         text_contact_annotation_request=text_annotation_request
+    )
+    return annotations
+
+
+def _annotate_id(api_client, text_annotation_request: dict) -> dict:
+    """Annotate notes with id
+
+    Args:
+        host: Data node host IP
+        text_annotation_request: Text id annotation request
+
+    Yields:
+        Annotated notes
+
+    Examples:
+        >>> example_request = {
+        >>>    "note": {
+        >>>        "identifier": "note-1",
+        >>>        "type": "loinc:LP29684-5",
+        >>>        "patient_id": "507f1f77bcf86cd799439011",
+        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott. Her SSN is 123-45-6789."
+        >>>    }
+        >>> }
+        >>> host = "0.0.0.0/api/v1"
+        >>> configuration = annotator.Configuration(host=host)
+        >>> with annotator.ApiClient(configuration) as api_client:
+        >>>     annotations = _annotate_id(
+        >>>         api_client=api_client,
+        >>>         text_annotation_request=example_request
+        >>>     )
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    api_instance = text_id_annotation_api.TextIdAnnotationApi(
+        api_client
+    )
+    annotations = api_instance.create_text_id_annotations(
+        text_id_annotation_request=text_annotation_request
     )
     return annotations
 
@@ -428,6 +468,8 @@ def annotate_note(host: str, note: Union[dict, Note],
             annotations = _annotate_address(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:contact-annotator":
             annotations = _annotate_contact(api_client, text_annotator_req)
+        elif tool_type == "nlpsandbox:id-annotator":
+            annotations = _annotate_id(api_client, text_annotator_req)
         else:
             raise ValueError(f"Invalid annotator_type: {tool_type}")
         sanitized_annotations = api_client.sanitize_for_serialization(

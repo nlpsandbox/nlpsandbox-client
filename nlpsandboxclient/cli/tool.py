@@ -20,7 +20,8 @@ def cli():
               type=click.Choice(['nlpsandbox:date-annotator',
                                  'nlpsandbox:person-name-annotator',
                                  'nlpsandbox:physical-address-annotator',
-                                 'nlpsandbox:contact-annotator'],
+                                 'nlpsandbox:contact-annotator',
+                                 'nlpsandbox:id-annotator'],
                                 case_sensitive=False), required=True)
 def annotate_note(annotator_host, note_json, output, tool_type):
     """Annotate a note with specified annotator"""
