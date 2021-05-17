@@ -7,7 +7,8 @@ import datanode
 from datanode.api import annotation_store_api, annotation_api, dataset_api, note_api
 from datanode.models import Annotation, AnnotationStore, Dataset, Note
 import annotator
-from annotator.api import (text_date_annotation_api,
+from annotator.api import (text_contact_annotation_api,
+                           text_date_annotation_api,
                            text_person_name_annotation_api,
                            text_physical_address_annotation_api,
                            tool_api)
@@ -347,6 +348,44 @@ def _annotate_date(api_client, text_annotation_request: dict) -> dict:
     return annotations
 
 
+def _annotate_contact(api_client, text_annotation_request: dict) -> dict:
+    """Annotate notes with date
+
+    Args:
+        host: Data node host IP
+        text_annotation_request: Text date annotation request
+
+    Yields:
+        Annotated notes
+
+    Examples:
+        >>> example_request = {
+        >>>    "note": {
+        >>>        "identifier": "note-1",
+        >>>        "type": "loinc:LP29684-5",
+        >>>        "patient_id": "507f1f77bcf86cd799439011",
+        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott. Her phone number is 203-555-4545."
+        >>>    }
+        >>> }
+        >>> host = "0.0.0.0/api/v1"
+        >>> configuration = annotator.Configuration(host=host)
+        >>> with annotator.ApiClient(configuration) as api_client:
+        >>>     annotations = _annotate_contact(
+        >>>         api_client=api_client,
+        >>>         text_annotation_request=example_request
+        >>>     )
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    api_instance = text_contact_annotation_api.TextContactAnnotationApi(
+        api_client
+    )
+    annotations = api_instance.create_text_contact_annotations(
+        text_contact_annotation_request=text_annotation_request
+    )
+    return annotations
+
+
 def annotate_note(host: str, note: Union[dict, Note],
                   tool_type: str) -> dict:
     """Annotate notes
@@ -387,6 +426,8 @@ def annotate_note(host: str, note: Union[dict, Note],
             annotations = _annotate_person(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:physical-address-annotator":
             annotations = _annotate_address(api_client, text_annotator_req)
+        elif tool_type == "nlpsandbox:contact-annotator":
+            annotations = _annotate_contact(api_client, text_annotator_req)
         else:
             raise ValueError(f"Invalid annotator_type: {tool_type}")
         sanitized_annotations = api_client.sanitize_for_serialization(
