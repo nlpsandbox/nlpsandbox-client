@@ -261,13 +261,13 @@ def _annotate_person(api_client, text_annotation_request: dict) -> dict:
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
         >>> }
-        >>> host = "0.0.0.0:8080/api/v1"
+        >>> host = "0.0.0.0/api/v1"
         >>> configuration = annotator.Configuration(host=host)
         >>> with annotator.ApiClient(configuration) as api_client:
         >>>     annotations = _annotate_person(
         >>>         api_client=api_client,
         >>>         text_annotation_request=example_request
-        >>> )
+        >>>     )
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
@@ -297,13 +297,13 @@ def _annotate_address(api_client, text_annotation_request: dict) -> dict:
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
         >>> }
-        >>> host = "0.0.0.0:8080/api/v1"
+        >>> host = "0.0.0.0/api/v1"
         >>> configuration = annotator.Configuration(host=host)
         >>> with annotator.ApiClient(configuration) as api_client:
         >>>     annotations = _annotate_person(
         >>>         api_client=api_client,
         >>>         text_annotation_request=example_request
-        >>> )
+        >>>     )
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
@@ -333,7 +333,7 @@ def _annotate_date(api_client, text_annotation_request: dict) -> dict:
         >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
         >>>    }
         >>> }
-        >>> host = "0.0.0.0:8080/api/v1"
+        >>> host = "0.0.0.0/api/v1"
         >>> configuration = annotator.Configuration(host=host)
         >>> with annotator.ApiClient(configuration) as api_client:
         >>>     annotations = _annotate_person(
@@ -426,6 +426,44 @@ def _annotate_id(api_client, text_annotation_request: dict) -> dict:
     return annotations
 
 
+def _annotate_covid_symptom(api_client, text_annotation_request: dict) -> dict:
+    """Annotate notes with covid symptom
+
+    Args:
+        host: Data node host IP
+        text_annotation_request: Text id annotation request
+
+    Yields:
+        Annotated notes
+
+    Examples:
+        >>> example_request = {
+        >>>    "note": {
+        >>>        "identifier": "note-1",
+        >>>        "type": "loinc:LP29684-5",
+        >>>        "patient_id": "507f1f77bcf86cd799439011",
+        >>>        "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott. She's had a dry cough for almost a week now."
+        >>>    }
+        >>> }
+        >>> host = "0.0.0.0/api/v1"
+        >>> configuration = annotator.Configuration(host=host)
+        >>> with annotator.ApiClient(configuration) as api_client:
+        >>>     annotations = _annotate_covid_symptom(
+        >>>         api_client=api_client,
+        >>>         text_annotation_request=example_request
+        >>>     )
+
+    """
+    # host = "http://10.23.55.45:9000/api/v1"
+    api_instance = text_covid_symptom_annotation_api.TextCovidSymptomAnnotationApi(
+        api_client
+    )
+    annotations = api_instance.create_text_covid_symptom_annotations(
+        text_covid_symptom_annotation_request=text_annotation_request
+    )
+    return annotations
+
+
 def annotate_note(host: str, note: Union[dict, Note],
                   tool_type: str) -> dict:
     """Annotate notes
@@ -470,6 +508,9 @@ def annotate_note(host: str, note: Union[dict, Note],
             annotations = _annotate_contact(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:id-annotator":
             annotations = _annotate_id(api_client, text_annotator_req)
+        elif tool_type == "nlpsandbox:covid-symptom-annotator":
+            annotations = _annotate_covid_symptom(api_client,
+                                                  text_annotator_req)
         else:
             raise ValueError(f"Invalid annotator_type: {tool_type}")
         sanitized_annotations = api_client.sanitize_for_serialization(
