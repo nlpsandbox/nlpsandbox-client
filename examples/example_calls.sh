@@ -6,26 +6,26 @@ cd examples
 python push_dataset.py
 
 # Get annotation store
-nlp-cli community get-annotation-store --dataset_id test-dataset --annotation_store_id goldstandard --data_node_host http://localhost:8080/api/v1
+nlp-cli datanode get-annotation-store --dataset_id test-dataset --annotation_store_id goldstandard --data_node_host http://localhost:8080/api/v1
 
 # List annotations
-nlp-cli community list-annotations --dataset_id test-dataset --annotation_store_id goldstandard --data_node_host http://localhost:8080/api/v1
+nlp-cli datanode list-annotations --dataset_id test-dataset --annotation_store_id goldstandard --data_node_host http://localhost:8080/api/v1
 
 # list notes
-nlp-cli community list-notes --dataset_id test-dataset \
+nlp-cli datanode list-notes --dataset_id test-dataset \
                              --fhir_store_id evaluation \
                              --data_node_host http://localhost:8080/api/v1
 
-nlp-cli community list-notes --dataset_id test-dataset --fhir_store_id evaluation --data_node_host http://localhost:8080/api/v1 --output example_note.json
+nlp-cli datanode list-notes --dataset_id test-dataset --fhir_store_id evaluation --data_node_host http://localhost:8080/api/v1 --output example_note.json
 
 # get annotation
-nlp-cli community get-annotation --annotation_id 110-01 \
+nlp-cli datanode get-annotation --annotation_id 110-01 \
                                  --dataset_id test-dataset \
                                  --annotation_store_id goldstandard \
                                  --data_node_host http://localhost:8080/api/v1 
 
 # Get json
-nlp-cli community get-annotation --annotation_id 110-01 \
+nlp-cli datanode get-annotation --annotation_id 110-01 \
                                  --dataset_id test-dataset \
                                  --annotation_store_id goldstandard \
                                  --data_node_host http://localhost:8080/api/v1 \
@@ -33,12 +33,15 @@ nlp-cli community get-annotation --annotation_id 110-01 \
 
 
 # Store annotations
-# Must remove "name" key from test.json
-nlp-cli community store-annotations --dataset_id test-dataset \
-                                    --annotation_store_id goldstandard \
-                                    --annotation_json test.json \
+nlp-cli datanode store-annotations --dataset_id test-dataset \
+                                    --annotation_store_id testing-more \
+                                    --annotation_json test_store_annotations.json \
                                     --data_node_host http://localhost:8080/api/v1
 
+nlp-cli datanode get-annotation --annotation_id name \
+                                 --dataset_id test-dataset \
+                                 --annotation_store_id testing-more \
+                                 --data_node_host http://localhost:8080/api/v1
 
 # Start date-annotator-example
 nlp-cli evaluate get-tool --annotator_host http://localhost:80/api/v1

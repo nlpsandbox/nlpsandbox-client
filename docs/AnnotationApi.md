@@ -59,6 +59,15 @@ with datanode.ApiClient() as api_client:
         text_physical_address_annotations=[
             TextPhysicalAddressAnnotation(),
         ],
+        text_id_annotations=[
+            TextIdAnnotation(),
+        ],
+        text_contact_annotations=[
+            TextContactAnnotation(),
+        ],
+        text_covid_symptom_annotations=[
+            TextCovidSymptomAnnotation(),
+        ],
     ) # AnnotationCreateRequest |  (optional)
 
     # example passing only required values which don't have defaults set
