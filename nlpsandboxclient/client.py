@@ -453,9 +453,9 @@ def _annotate_covid_symptom(api_client, text_annotation_request: dict) -> dict:
         >>>         text_annotation_request=example_request
         >>>     )
 
-    """
+    """  # noqa: E501
     # host = "http://10.23.55.45:9000/api/v1"
-    api_instance = text_covid_symptom_annotation_api.TextCovidSymptomAnnotationApi(
+    api_instance = text_covid_symptom_annotation_api.TextCovidSymptomAnnotationApi(  # noqa: E501
         api_client
     )
     annotations = api_instance.create_text_covid_symptom_annotations(
