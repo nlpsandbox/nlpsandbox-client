@@ -264,7 +264,7 @@ def _annotate_person_name(api_client, text_annotation_request: dict) -> dict:
         >>> host = "0.0.0.0/api/v1"
         >>> configuration = annotator.Configuration(host=host)
         >>> with annotator.ApiClient(configuration) as api_client:
-        >>>     annotations = _annotate_person(
+        >>>     annotations = _annotate_person_name(
         >>>         api_client=api_client,
         >>>         text_annotation_request=example_request
         >>>     )
@@ -300,7 +300,7 @@ def _annotate_physical_address(api_client, text_annotation_request: dict) -> dic
         >>> host = "0.0.0.0/api/v1"
         >>> configuration = annotator.Configuration(host=host)
         >>> with annotator.ApiClient(configuration) as api_client:
-        >>>     annotations = _annotate_person(
+        >>>     annotations = _annotate_physical_address(
         >>>         api_client=api_client,
         >>>         text_annotation_request=example_request
         >>>     )
