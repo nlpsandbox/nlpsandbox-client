@@ -5,7 +5,10 @@ import pytest
 
 import annotator
 from annotator.api import (
+    text_contact_annotation_api,
+    text_covid_symptom_annotation_api,
     text_date_annotation_api,
+    text_id_annotation_api,
     text_person_name_annotation_api,
     text_physical_address_annotation_api,
     tool_api,
@@ -418,6 +421,48 @@ class TestAnnotatorClient:
             resource_api.assert_called_once_with(self.api)
             create_annotations.assert_called_once_with(
                 text_physical_address_annotation_request=self.example_request
+            )
+
+    def test__annotate_id(self):
+        """Test annotating id"""
+        with patch.object(text_id_annotation_api, "TextIdAnnotationApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "create_text_id_annotations",
+                          return_value="foo") as create_annotations:
+            annotated = client._annotate_id(self.api, self.example_request)
+            assert annotated == "foo"
+            resource_api.assert_called_once_with(self.api)
+            create_annotations.assert_called_once_with(
+                text_id_annotation_request=self.example_request
+            )
+
+    def test__annotate_contact(self):
+        """Test annotating id"""
+        with patch.object(text_contact_annotation_api, "TextContactAnnotationApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api, "create_text_contact_annotations",
+                          return_value="foo") as create_annotations:
+            annotated = client._annotate_contact(self.api, self.example_request)
+            assert annotated == "foo"
+            resource_api.assert_called_once_with(self.api)
+            create_annotations.assert_called_once_with(
+                text_contact_annotation_request=self.example_request
+            )
+
+    def test__annotate_covid_symptom(self):
+        """Test annotating id"""
+        with patch.object(text_covid_symptom_annotation_api,
+                          "TextCovidSymptomAnnotationApi",
+                          return_value=self.mock_api) as resource_api,\
+             patch.object(self.mock_api,
+                          "create_text_covid_symptom_annotations",
+                          return_value="foo") as create_annotations:
+            annotated = client._annotate_covid_symptom(self.api,
+                                                       self.example_request)
+            assert annotated == "foo"
+            resource_api.assert_called_once_with(self.api)
+            create_annotations.assert_called_once_with(
+                text_covid_symptom_annotation_request=self.example_request
             )
 
     def test_annotate_note__wrong_tool_type(self):
