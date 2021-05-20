@@ -394,13 +394,13 @@ class TestAnnotatorClient:
                 text_date_annotation_request=self.example_request
             )
 
-    def test__annotate_person(self):
+    def test__annotate_person_name(self):
         """Test annotating person"""
         with patch.object(text_person_name_annotation_api, "TextPersonNameAnnotationApi",
                           return_value=self.mock_api) as resource_api,\
              patch.object(self.mock_api, "create_text_person_name_annotations",
                           return_value="foo") as create_annotations:
-            annotated = client._annotate_person(self.api, self.example_request)
+            annotated = client._annotate_person_name(self.api, self.example_request)
             assert annotated == "foo"
             resource_api.assert_called_once_with(self.api)
             create_annotations.assert_called_once_with(
@@ -413,7 +413,7 @@ class TestAnnotatorClient:
                           return_value=self.mock_api) as resource_api,\
              patch.object(self.mock_api, "create_text_physical_address_annotations",
                           return_value="foo") as create_annotations:
-            annotated = client._annotate_address(self.api, self.example_request)
+            annotated = client._annotate_physical_address(self.api, self.example_request)
             assert annotated == "foo"
             resource_api.assert_called_once_with(self.api)
             create_annotations.assert_called_once_with(
@@ -428,8 +428,9 @@ class TestAnnotatorClient:
 
     @pytest.mark.parametrize("tool_type,tool_func", [
         ("nlpsandbox:date-annotator", "_annotate_date"),
-        ("nlpsandbox:person-name-annotator", "_annotate_person"),
-        ("nlpsandbox:physical-address-annotator", "_annotate_address"),
+        ("nlpsandbox:person-name-annotator", "_annotate_person_name"),
+        ("nlpsandbox:physical-address-annotator",
+         "_annotate_physical_address"),
     ])
     def test_annotate_note(self, tool_type, tool_func):
         """Test annotate note"""

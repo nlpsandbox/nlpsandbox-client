@@ -242,7 +242,7 @@ def list_annotations(host: str, dataset_id: str,
             offset += limit
 
 
-def _annotate_person(api_client, text_annotation_request: dict) -> dict:
+def _annotate_person_name(api_client, text_annotation_request: dict) -> dict:
     """Annotate notes with date
 
     Args:
@@ -278,7 +278,7 @@ def _annotate_person(api_client, text_annotation_request: dict) -> dict:
     return annotations
 
 
-def _annotate_address(api_client, text_annotation_request: dict) -> dict:
+def _annotate_physical_address(api_client, text_annotation_request: dict) -> dict:
     """Annotate notes with date
 
     Args:
@@ -501,9 +501,9 @@ def annotate_note(host: str, note: Union[dict, Note],
         if tool_type == "nlpsandbox:date-annotator":
             annotations = _annotate_date(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:person-name-annotator":
-            annotations = _annotate_person(api_client, text_annotator_req)
+            annotations = _annotate_person_name(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:physical-address-annotator":
-            annotations = _annotate_address(api_client, text_annotator_req)
+            annotations = _annotate_physical_address(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:contact-annotator":
             annotations = _annotate_contact(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:id-annotator":
