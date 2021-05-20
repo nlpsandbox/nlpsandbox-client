@@ -476,6 +476,9 @@ class TestAnnotatorClient:
         ("nlpsandbox:person-name-annotator", "_annotate_person_name"),
         ("nlpsandbox:physical-address-annotator",
          "_annotate_physical_address"),
+        ("nlpsandbox:id-annotator", "_annotate_id"),
+        ("nlpsandbox:covid-symptom-annotator", "_annotate_covid_symptom"),
+        ("nlpsandbox:contact-annotator", "_annotate_contact"),
     ])
     def test_annotate_note(self, tool_type, tool_func):
         """Test annotate note"""
