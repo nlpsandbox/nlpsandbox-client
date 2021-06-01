@@ -1,4 +1,4 @@
-# datanode.AnnotationStoreApi
+# nlpsandboxsdk.AnnotationStoreApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -21,22 +21,22 @@ Create an annotation store with the ID specified
 
 ```python
 import time
-import datanode
-from datanode.api import annotation_store_api
-from datanode.model.annotation_store_create_response import AnnotationStoreCreateResponse
-from datanode.model.dataset_id import DatasetId
-from datanode.model.annotation_store_id import AnnotationStoreId
-from datanode.model.error import Error
+import nlpsandboxsdk
+from nlpsandboxsdk.api import annotation_store_api
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model.annotation_store_create_response import AnnotationStoreCreateResponse
+from nlpsandboxsdk.model.annotation_store_id import AnnotationStoreId
+from nlpsandboxsdk.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = annotation_store_api.AnnotationStoreApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -48,7 +48,7 @@ with datanode.ApiClient() as api_client:
         # Create an annotation store
         api_response = api_instance.create_annotation_store(dataset_id, annotation_store_id)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling AnnotationStoreApi->create_annotation_store: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -57,7 +57,7 @@ with datanode.ApiClient() as api_client:
         # Create an annotation store
         api_response = api_instance.create_annotation_store(dataset_id, annotation_store_id, body=body)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling AnnotationStoreApi->create_annotation_store: %s\n" % e)
 ```
 
@@ -103,21 +103,21 @@ Deletes the annotation store specified
 
 ```python
 import time
-import datanode
-from datanode.api import annotation_store_api
-from datanode.model.dataset_id import DatasetId
-from datanode.model.annotation_store_id import AnnotationStoreId
-from datanode.model.error import Error
+import nlpsandboxsdk
+from nlpsandboxsdk.api import annotation_store_api
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model.annotation_store_id import AnnotationStoreId
+from nlpsandboxsdk.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = annotation_store_api.AnnotationStoreApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -128,7 +128,7 @@ with datanode.ApiClient() as api_client:
         # Delete an annotation store
         api_response = api_instance.delete_annotation_store(dataset_id, annotation_store_id)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling AnnotationStoreApi->delete_annotation_store: %s\n" % e)
 ```
 
@@ -172,22 +172,22 @@ Returns the annotation store specified
 
 ```python
 import time
-import datanode
-from datanode.api import annotation_store_api
-from datanode.model.dataset_id import DatasetId
-from datanode.model.annotation_store import AnnotationStore
-from datanode.model.annotation_store_id import AnnotationStoreId
-from datanode.model.error import Error
+import nlpsandboxsdk
+from nlpsandboxsdk.api import annotation_store_api
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model.annotation_store_id import AnnotationStoreId
+from nlpsandboxsdk.model.annotation_store import AnnotationStore
+from nlpsandboxsdk.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = annotation_store_api.AnnotationStoreApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -198,7 +198,7 @@ with datanode.ApiClient() as api_client:
         # Get an annotation store
         api_response = api_instance.get_annotation_store(dataset_id, annotation_store_id)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling AnnotationStoreApi->get_annotation_store: %s\n" % e)
 ```
 
@@ -242,23 +242,23 @@ Returns the annotation stores
 
 ```python
 import time
-import datanode
-from datanode.api import annotation_store_api
-from datanode.model.page_of_annotation_stores import PageOfAnnotationStores
-from datanode.model.dataset_id import DatasetId
-from datanode.model.page_limit import PageLimit
-from datanode.model.page_offset import PageOffset
-from datanode.model.error import Error
+import nlpsandboxsdk
+from nlpsandboxsdk.api import annotation_store_api
+from nlpsandboxsdk.model.page_offset import PageOffset
+from nlpsandboxsdk.model.page_of_annotation_stores import PageOfAnnotationStores
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model.page_limit import PageLimit
+from nlpsandboxsdk.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = annotation_store_api.AnnotationStoreApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -270,7 +270,7 @@ with datanode.ApiClient() as api_client:
         # List the annotation stores in a dataset
         api_response = api_instance.list_annotation_stores(dataset_id)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling AnnotationStoreApi->list_annotation_stores: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -279,7 +279,7 @@ with datanode.ApiClient() as api_client:
         # List the annotation stores in a dataset
         api_response = api_instance.list_annotation_stores(dataset_id, limit=limit, offset=offset)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling AnnotationStoreApi->list_annotation_stores: %s\n" % e)
 ```
 

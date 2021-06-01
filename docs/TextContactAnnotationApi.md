@@ -1,4 +1,4 @@
-# annotator.TextContactAnnotationApi
+# nlpsandboxsdk.TextContactAnnotationApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -18,21 +18,21 @@ Return the contact annotations found in a clinical note
 
 ```python
 import time
-import annotator
-from annotator.api import text_contact_annotation_api
-from annotator.model.text_contact_annotation_response import TextContactAnnotationResponse
-from annotator.model.error import Error
-from annotator.model.text_contact_annotation_request import TextContactAnnotationRequest
+import nlpsandboxsdk
+from nlpsandboxsdk.api import text_contact_annotation_api
+from nlpsandboxsdk.model.text_contact_annotation_request import TextContactAnnotationRequest
+from nlpsandboxsdk.model.text_contact_annotation_response import TextContactAnnotationResponse
+from nlpsandboxsdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = annotator.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with annotator.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = text_contact_annotation_api.TextContactAnnotationApi(api_client)
     text_contact_annotation_request = TextContactAnnotationRequest(
@@ -50,7 +50,7 @@ with annotator.ApiClient() as api_client:
         # Annotate contact information in a clinical note
         api_response = api_instance.create_text_contact_annotations(text_contact_annotation_request=text_contact_annotation_request)
         pprint(api_response)
-    except annotator.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling TextContactAnnotationApi->create_text_contact_annotations: %s\n" % e)
 ```
 

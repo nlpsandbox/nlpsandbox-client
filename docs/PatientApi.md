@@ -1,4 +1,4 @@
-# datanode.PatientApi
+# nlpsandboxsdk.PatientApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -21,24 +21,24 @@ Create a FHIR patient
 
 ```python
 import time
-import datanode
-from datanode.api import patient_api
-from datanode.model.patient_create_response import PatientCreateResponse
-from datanode.model.fhir_store_id import FhirStoreId
-from datanode.model.dataset_id import DatasetId
-from datanode.model.patient_id import PatientId
-from datanode.model.patient_create_request import PatientCreateRequest
-from datanode.model.error import Error
+import nlpsandboxsdk
+from nlpsandboxsdk.api import patient_api
+from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
+from nlpsandboxsdk.model.patient_id import PatientId
+from nlpsandboxsdk.model.patient_create_response import PatientCreateResponse
+from nlpsandboxsdk.model.patient_create_request import PatientCreateRequest
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = patient_api.PatientApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -53,7 +53,7 @@ with datanode.ApiClient() as api_client:
         # Create a FHIR patient
         api_response = api_instance.create_patient(dataset_id, fhir_store_id, patient_id)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling PatientApi->create_patient: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -62,7 +62,7 @@ with datanode.ApiClient() as api_client:
         # Create a FHIR patient
         api_response = api_instance.create_patient(dataset_id, fhir_store_id, patient_id, patient_create_request=patient_create_request)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling PatientApi->create_patient: %s\n" % e)
 ```
 
@@ -109,22 +109,22 @@ Deletes the FHIR patient specified
 
 ```python
 import time
-import datanode
-from datanode.api import patient_api
-from datanode.model.fhir_store_id import FhirStoreId
-from datanode.model.dataset_id import DatasetId
-from datanode.model.patient_id import PatientId
-from datanode.model.error import Error
+import nlpsandboxsdk
+from nlpsandboxsdk.api import patient_api
+from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
+from nlpsandboxsdk.model.patient_id import PatientId
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = patient_api.PatientApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -136,7 +136,7 @@ with datanode.ApiClient() as api_client:
         # Delete a FHIR patient
         api_response = api_instance.delete_patient(dataset_id, fhir_store_id, patient_id)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling PatientApi->delete_patient: %s\n" % e)
 ```
 
@@ -181,23 +181,23 @@ Returns the FHIR patient specified
 
 ```python
 import time
-import datanode
-from datanode.api import patient_api
-from datanode.model.fhir_store_id import FhirStoreId
-from datanode.model.dataset_id import DatasetId
-from datanode.model.patient import Patient
-from datanode.model.patient_id import PatientId
-from datanode.model.error import Error
+import nlpsandboxsdk
+from nlpsandboxsdk.api import patient_api
+from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
+from nlpsandboxsdk.model.patient_id import PatientId
+from nlpsandboxsdk.model.patient import Patient
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = patient_api.PatientApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -209,7 +209,7 @@ with datanode.ApiClient() as api_client:
         # Get a FHIR patient
         api_response = api_instance.get_patient(dataset_id, fhir_store_id, patient_id)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling PatientApi->get_patient: %s\n" % e)
 ```
 
@@ -254,24 +254,24 @@ Returns the Patients in a FHIR store
 
 ```python
 import time
-import datanode
-from datanode.api import patient_api
-from datanode.model.fhir_store_id import FhirStoreId
-from datanode.model.dataset_id import DatasetId
-from datanode.model.page_limit import PageLimit
-from datanode.model.page_offset import PageOffset
-from datanode.model.page_of_patients import PageOfPatients
-from datanode.model.error import Error
+import nlpsandboxsdk
+from nlpsandboxsdk.api import patient_api
+from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
+from nlpsandboxsdk.model.page_offset import PageOffset
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model.page_limit import PageLimit
+from nlpsandboxsdk.model.page_of_patients import PageOfPatients
+from nlpsandboxsdk.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = datanode.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with datanode.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = patient_api.PatientApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -284,7 +284,7 @@ with datanode.ApiClient() as api_client:
         # List the Patients in a FHIR store
         api_response = api_instance.list_patients(dataset_id, fhir_store_id)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling PatientApi->list_patients: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -293,7 +293,7 @@ with datanode.ApiClient() as api_client:
         # List the Patients in a FHIR store
         api_response = api_instance.list_patients(dataset_id, fhir_store_id, limit=limit, offset=offset)
         pprint(api_response)
-    except datanode.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling PatientApi->list_patients: %s\n" % e)
 ```
 

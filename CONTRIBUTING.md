@@ -104,11 +104,16 @@ the content of *setup.py* is updated.
 
     pip install -e .
 
-### Updating the SDK clients
+### Updating the SDK client
 
-The SDK clients have to be updated when the API version is updated.  Here are the steps to updating the SDK clients:
+The SDK client has to be updated when the API version is updated.  Here are the steps to updating the `nlpsandboxsdk` client.
 
-- `data-node` package
+1. Generate SDK client with `openapi-generator`
+  ```
+  openapi-generator generate -g python -o . --package-name nlpsandboxsdk https://raw.githubusercontent.com/nlpsandbox/nlpsandbox-schemas/gh-pages/_internal/nlpsandbox/pr-216/openapi.json
+  ```
+
+<!-- - `datanode` package
   ```
   openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/edge/openapi.json
   ```
@@ -122,7 +127,7 @@ The SDK clients have to be updated when the API version is updated.  Here are th
   npm run validate --api=annotator  # This command will create a complete openapi.yaml
   # navigate back into the nlpsandbox-client directory
   openapi-generator generate -g python -o . --package-name annotator -i nlpsandbox-schemas/openapi.yaml
-  ```
+  ``` -->
 
 ### Testing
 
