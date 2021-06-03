@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.annotation_store_name import AnnotationStoreName
+import nlpsandboxsdk
+from nlpsandboxsdk.model.annotation_store_name import AnnotationStoreName
 
 
 class TestAnnotationStoreName(unittest.TestCase):

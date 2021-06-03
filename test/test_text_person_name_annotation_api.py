@@ -12,8 +12,8 @@
 import unittest
 from unittest.mock import patch
 
-import annotator
-from annotator.api.text_person_name_annotation_api import TextPersonNameAnnotationApi  # noqa: E501
+import nlpsandboxsdk
+from nlpsandboxsdk.api.text_person_name_annotation_api import TextPersonNameAnnotationApi  # noqa: E501
 
 
 class TestTextPersonNameAnnotationApi(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestTextPersonNameAnnotationApi(unittest.TestCase):
 
     def setUp(self):
         self.api = TextPersonNameAnnotationApi()  # noqa: E501
-        self.patcher = patch('annotator.api_client.ApiClient.call_api')
+        self.patcher = patch('nlpsandboxsdk.api_client.ApiClient.call_api')
         self.mock_foo = self.patcher.start()
 
     def tearDown(self):

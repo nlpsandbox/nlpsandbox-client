@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.text_id_annotation import TextIdAnnotation
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_id_annotation import TextIdAnnotation
 globals()['TextIdAnnotation'] = TextIdAnnotation
-from annotator.model.text_id_annotation_response import TextIdAnnotationResponse
+from nlpsandboxsdk.model.text_id_annotation_response import TextIdAnnotationResponse
 
 
 class TestTextIdAnnotationResponse(unittest.TestCase):

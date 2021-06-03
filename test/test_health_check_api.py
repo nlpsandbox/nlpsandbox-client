@@ -12,9 +12,9 @@
 import unittest
 from unittest.mock import patch
 
-import datanode
-from datanode.api.health_check_api import HealthCheckApi  # noqa: E501
-from annotator.api import health_check_api
+import nlpsandboxsdk
+from nlpsandboxsdk.api.health_check_api import HealthCheckApi  # noqa: E501
+from nlpsandboxsdk.api import health_check_api
 
 
 class TestHealthCheckApi(unittest.TestCase):
@@ -22,10 +22,10 @@ class TestHealthCheckApi(unittest.TestCase):
 
     def setUp(self):
         self.api = HealthCheckApi()  # noqa: E501
-        self.annotator_api = health_check_api.HealthCheckApi()  # noqa: E501
-        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.nlpsandboxsdk_api = health_check_api.HealthCheckApi()  # noqa: E501
+        self.patcher = patch('nlpsandboxsdk.api_client.ApiClient.call_api')
         self.mock_foo = self.patcher.start()
-        self.patcher_f = patch('annotator.api_client.ApiClient.call_api')
+        self.patcher_f = patch('nlpsandboxsdk.api_client.ApiClient.call_api')
         self.mock_annot = self.patcher_f.start()
 
     def tearDown(self):
@@ -38,12 +38,12 @@ class TestHealthCheckApi(unittest.TestCase):
         """
         self.api.get_health_check()
 
-    def test_get_annotator_health_check(self):
+    def test_get_nlpsandboxsdk_health_check(self):
         """Test case for get_health_check
 
         Get health check information  # noqa: E501
         """
-        self.annotator_api.get_health_check()
+        self.nlpsandboxsdk_api.get_health_check()
 
 if __name__ == '__main__':
     unittest.main()

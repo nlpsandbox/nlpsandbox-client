@@ -12,12 +12,12 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.note import Note
-from datanode.model.note_id import NoteId
-from datanode.model.patient_id import PatientId
+import nlpsandboxsdk
+from nlpsandboxsdk.model.note import Note
+from nlpsandboxsdk.model.note_id import NoteId
+from nlpsandboxsdk.model.patient_id import PatientId
 globals()['Note'] = Note
-from datanode.model.page_of_notes_all_of import PageOfNotesAllOf
+from nlpsandboxsdk.model.page_of_notes_all_of import PageOfNotesAllOf
 
 
 class TestPageOfNotesAllOf(unittest.TestCase):

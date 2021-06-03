@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.patient_resource_name import PatientResourceName
+import nlpsandboxsdk
+from nlpsandboxsdk.model.patient_resource_name import PatientResourceName
 globals()['PatientResourceName'] = PatientResourceName
-from datanode.model.patient_create_response import PatientCreateResponse
+from nlpsandboxsdk.model.patient_create_response import PatientCreateResponse
 
 
 class TestPatientCreateResponse(unittest.TestCase):

@@ -12,12 +12,12 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.text_annotation import TextAnnotation
-from datanode.model.text_id_annotation_all_of import TextIdAnnotationAllOf
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_annotation import TextAnnotation
+from nlpsandboxsdk.model.text_id_annotation_all_of import TextIdAnnotationAllOf
 globals()['TextAnnotation'] = TextAnnotation
 globals()['TextIdAnnotationAllOf'] = TextIdAnnotationAllOf
-from datanode.model.text_id_annotation import TextIdAnnotation
+from nlpsandboxsdk.model.text_id_annotation import TextIdAnnotation
 
 
 class TestTextIdAnnotation(unittest.TestCase):

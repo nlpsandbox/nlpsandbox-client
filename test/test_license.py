@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.license import License
+import nlpsandboxsdk
+from nlpsandboxsdk.model.license import License
 
 
 class TestLicense(unittest.TestCase):

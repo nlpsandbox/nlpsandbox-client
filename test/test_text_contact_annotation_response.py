@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.text_contact_annotation import TextContactAnnotation
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_contact_annotation import TextContactAnnotation
 globals()['TextContactAnnotation'] = TextContactAnnotation
-from annotator.model.text_contact_annotation_response import TextContactAnnotationResponse
+from nlpsandboxsdk.model.text_contact_annotation_response import TextContactAnnotationResponse
 
 
 class TestTextContactAnnotationResponse(unittest.TestCase):

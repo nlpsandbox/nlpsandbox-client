@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.text_id_annotation_all_of import TextIdAnnotationAllOf
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_id_annotation_all_of import TextIdAnnotationAllOf
 
 
 class TestTextIdAnnotationAllOf(unittest.TestCase):

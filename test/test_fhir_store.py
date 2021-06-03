@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.fhir_store_name import FhirStoreName
+import nlpsandboxsdk
+from nlpsandboxsdk.model.fhir_store_name import FhirStoreName
 globals()['FhirStoreName'] = FhirStoreName
-from datanode.model.fhir_store import FhirStore
+from nlpsandboxsdk.model.fhir_store import FhirStore
 
 
 class TestFhirStore(unittest.TestCase):

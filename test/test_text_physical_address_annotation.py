@@ -12,12 +12,12 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.text_annotation import TextAnnotation
-from datanode.model.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_annotation import TextAnnotation
+from nlpsandboxsdk.model.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
 globals()['TextAnnotation'] = TextAnnotation
 globals()['TextPhysicalAddressAnnotationAllOf'] = TextPhysicalAddressAnnotationAllOf
-from datanode.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+from nlpsandboxsdk.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
 
 
 class TestTextPhysicalAddressAnnotation(unittest.TestCase):

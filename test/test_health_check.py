@@ -12,9 +12,9 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.health_check import HealthCheck
-from annotator.model import health_check
+import nlpsandboxsdk
+from nlpsandboxsdk.model.health_check import HealthCheck
+from nlpsandboxsdk.model import health_check
 
 
 class TestHealthCheck(unittest.TestCase):

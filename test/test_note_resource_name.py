@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.note_resource_name import NoteResourceName
+import nlpsandboxsdk
+from nlpsandboxsdk.model.note_resource_name import NoteResourceName
 
 
 class TestNoteResourceName(unittest.TestCase):

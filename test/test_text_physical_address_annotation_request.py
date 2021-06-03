@@ -12,11 +12,11 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.note import Note
-from annotator.models import NoteId, PatientId
+import nlpsandboxsdk
+from nlpsandboxsdk.model.note import Note
+from nlpsandboxsdk.models import NoteId, PatientId
 globals()['Note'] = Note
-from annotator.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
+from nlpsandboxsdk.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
 
 
 class TestTextPhysicalAddressAnnotationRequest(unittest.TestCase):

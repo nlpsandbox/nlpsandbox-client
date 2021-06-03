@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.text_contact_annotation_all_of import TextContactAnnotationAllOf
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_contact_annotation_all_of import TextContactAnnotationAllOf
 
 
 class TestTextContactAnnotationAllOf(unittest.TestCase):

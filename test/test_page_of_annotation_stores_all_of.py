@@ -12,11 +12,11 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.annotation_store import AnnotationStore
-from datanode.models import AnnotationStoreName
+import nlpsandboxsdk
+from nlpsandboxsdk.model.annotation_store import AnnotationStore
+from nlpsandboxsdk.models import AnnotationStoreName
 globals()['AnnotationStore'] = AnnotationStore
-from datanode.model.page_of_annotation_stores_all_of import PageOfAnnotationStoresAllOf
+from nlpsandboxsdk.model.page_of_annotation_stores_all_of import PageOfAnnotationStoresAllOf
 
 
 class TestPageOfAnnotationStoresAllOf(unittest.TestCase):

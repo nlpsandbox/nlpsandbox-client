@@ -12,8 +12,8 @@
 import unittest
 from unittest.mock import patch, Mock
 
-import datanode
-from datanode.api.annotation_store_api import AnnotationStoreApi  # noqa: E501
+import nlpsandboxsdk
+from nlpsandboxsdk.api.annotation_store_api import AnnotationStoreApi  # noqa: E501
 
 
 class TestAnnotationStoreApi(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestAnnotationStoreApi(unittest.TestCase):
 
     def setUp(self):
         self.api = AnnotationStoreApi()  # noqa: E501
-        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.patcher = patch('nlpsandboxsdk.api_client.ApiClient.call_api')
         self.mock_foo = self.patcher.start()
 
     def tearDown(self):

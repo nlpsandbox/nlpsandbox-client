@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.text_covid_symptom_annotation_all_of import TextCovidSymptomAnnotationAllOf
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_covid_symptom_annotation_all_of import TextCovidSymptomAnnotationAllOf
 
 
 class TestTextCovidSymptomAnnotationAllOf(unittest.TestCase):

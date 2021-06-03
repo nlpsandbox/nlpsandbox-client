@@ -12,15 +12,15 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.annotation_name import AnnotationName
-from datanode.model.annotation_source import AnnotationSource
-from datanode.model.text_contact_annotation import TextContactAnnotation
-from datanode.model.text_covid_symptom_annotation import TextCovidSymptomAnnotation
-from datanode.model.text_date_annotation import TextDateAnnotation
-from datanode.model.text_id_annotation import TextIdAnnotation
-from datanode.model.text_person_name_annotation import TextPersonNameAnnotation
-from datanode.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+import nlpsandboxsdk
+from nlpsandboxsdk.model.annotation_name import AnnotationName
+from nlpsandboxsdk.model.annotation_source import AnnotationSource
+from nlpsandboxsdk.model.text_contact_annotation import TextContactAnnotation
+from nlpsandboxsdk.model.text_covid_symptom_annotation import TextCovidSymptomAnnotation
+from nlpsandboxsdk.model.text_date_annotation import TextDateAnnotation
+from nlpsandboxsdk.model.text_id_annotation import TextIdAnnotation
+from nlpsandboxsdk.model.text_person_name_annotation import TextPersonNameAnnotation
+from nlpsandboxsdk.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
 globals()['AnnotationName'] = AnnotationName
 globals()['AnnotationSource'] = AnnotationSource
 globals()['TextContactAnnotation'] = TextContactAnnotation
@@ -29,7 +29,7 @@ globals()['TextDateAnnotation'] = TextDateAnnotation
 globals()['TextIdAnnotation'] = TextIdAnnotation
 globals()['TextPersonNameAnnotation'] = TextPersonNameAnnotation
 globals()['TextPhysicalAddressAnnotation'] = TextPhysicalAddressAnnotation
-from datanode.model.annotation import Annotation
+from nlpsandboxsdk.model.annotation import Annotation
 
 
 class TestAnnotation(unittest.TestCase):

@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.note_id import NoteId
+import nlpsandboxsdk
+from nlpsandboxsdk.model.note_id import NoteId
 
 
 class TestNoteId(unittest.TestCase):

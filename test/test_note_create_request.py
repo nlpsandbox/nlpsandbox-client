@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.patient_id import PatientId
+import nlpsandboxsdk
+from nlpsandboxsdk.model.patient_id import PatientId
 globals()['PatientId'] = PatientId
-from datanode.model.note_create_request import NoteCreateRequest
+from nlpsandboxsdk.model.note_create_request import NoteCreateRequest
 
 
 class TestNoteCreateRequest(unittest.TestCase):

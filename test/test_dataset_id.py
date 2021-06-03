@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.dataset_id import DatasetId
+import nlpsandboxsdk
+from nlpsandboxsdk.model.dataset_id import DatasetId
 
 
 class TestDatasetId(unittest.TestCase):
