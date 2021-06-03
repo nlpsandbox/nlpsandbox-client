@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.patient_resource_name import PatientResourceName
+import nlpsandboxsdk
+from nlpsandboxsdk.model.patient_resource_name import PatientResourceName
 
 
 class TestPatientResourceName(unittest.TestCase):

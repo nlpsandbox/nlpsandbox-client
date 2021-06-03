@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
 globals()['TextPhysicalAddressAnnotation'] = TextPhysicalAddressAnnotation
-from annotator.model.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
+from nlpsandboxsdk.model.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
 
 
 class TestTextPhysicalAddressAnnotationResponse(unittest.TestCase):

@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.text_person_name_annotation import TextPersonNameAnnotation
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_person_name_annotation import TextPersonNameAnnotation
 globals()['TextPersonNameAnnotation'] = TextPersonNameAnnotation
-from annotator.model.text_person_name_annotation_response import TextPersonNameAnnotationResponse
+from nlpsandboxsdk.model.text_person_name_annotation_response import TextPersonNameAnnotationResponse
 
 
 class TestTextPersonNameAnnotationResponse(unittest.TestCase):

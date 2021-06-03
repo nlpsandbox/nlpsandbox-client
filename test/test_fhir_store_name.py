@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.fhir_store_name import FhirStoreName
+import nlpsandboxsdk
+from nlpsandboxsdk.model.fhir_store_name import FhirStoreName
 
 
 class TestFhirStoreName(unittest.TestCase):

@@ -31,7 +31,7 @@ jobs:
     - name: Lint with Flake8
       uses: docker://alpine/flake8:latest
       with:
-        args: . --exclude annotator,datanode,test
+        args: . --exclude nlpsandboxsdk,test
 
   test:
     needs: [lint]

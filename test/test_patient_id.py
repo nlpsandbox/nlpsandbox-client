@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.patient_id import PatientId
+import nlpsandboxsdk
+from nlpsandboxsdk.model.patient_id import PatientId
 
 
 class TestPatientId(unittest.TestCase):

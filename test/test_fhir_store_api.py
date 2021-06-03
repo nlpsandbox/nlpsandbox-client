@@ -12,8 +12,8 @@
 import unittest
 from unittest.mock import patch
 
-import datanode
-from datanode.api.fhir_store_api import FhirStoreApi  # noqa: E501
+import nlpsandboxsdk
+from nlpsandboxsdk.api.fhir_store_api import FhirStoreApi  # noqa: E501
 
 
 class TestFhirStoreApi(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestFhirStoreApi(unittest.TestCase):
 
     def setUp(self):
         self.api = FhirStoreApi()  # noqa: E501
-        self.patcher = patch('datanode.api_client.ApiClient.call_api')
+        self.patcher = patch('nlpsandboxsdk.api_client.ApiClient.call_api')
         self.mock_foo = self.patcher.start()
 
     def tearDown(self):

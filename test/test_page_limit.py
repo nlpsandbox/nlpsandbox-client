@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.page_limit import PageLimit
+import nlpsandboxsdk
+from nlpsandboxsdk.model.page_limit import PageLimit
 
 
 class TestPageLimit(unittest.TestCase):

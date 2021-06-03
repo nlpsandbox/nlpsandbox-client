@@ -12,9 +12,9 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.text_date_annotation_all_of import TextDateAnnotationAllOf
-from datanode.models import TextDateAnnotation
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_date_annotation_all_of import TextDateAnnotationAllOf
+from nlpsandboxsdk.models import TextDateAnnotation
 
 
 class TestTextDateAnnotationAllOf(unittest.TestCase):

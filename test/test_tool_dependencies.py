@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.tool import Tool
+import nlpsandboxsdk
+from nlpsandboxsdk.model.tool import Tool
 globals()['Tool'] = Tool
-from annotator.model.tool_dependencies import ToolDependencies
+from nlpsandboxsdk.model.tool_dependencies import ToolDependencies
 
 
 class TestToolDependencies(unittest.TestCase):

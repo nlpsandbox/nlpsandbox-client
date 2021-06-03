@@ -1,4 +1,4 @@
-# annotator.TextIdAnnotationApi
+# nlpsandboxsdk.TextIdAnnotationApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -18,21 +18,21 @@ Return the ID annotations found in a clinical note
 
 ```python
 import time
-import annotator
-from annotator.api import text_id_annotation_api
-from annotator.model.text_id_annotation_request import TextIdAnnotationRequest
-from annotator.model.text_id_annotation_response import TextIdAnnotationResponse
-from annotator.model.error import Error
+import nlpsandboxsdk
+from nlpsandboxsdk.api import text_id_annotation_api
+from nlpsandboxsdk.model.text_id_annotation_response import TextIdAnnotationResponse
+from nlpsandboxsdk.model.text_id_annotation_request import TextIdAnnotationRequest
+from nlpsandboxsdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = annotator.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with annotator.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = text_id_annotation_api.TextIdAnnotationApi(api_client)
     text_id_annotation_request = TextIdAnnotationRequest(
@@ -50,7 +50,7 @@ with annotator.ApiClient() as api_client:
         # Annotate IDs in a clinical note
         api_response = api_instance.create_text_id_annotations(text_id_annotation_request=text_id_annotation_request)
         pprint(api_response)
-    except annotator.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling TextIdAnnotationApi->create_text_id_annotations: %s\n" % e)
 ```
 

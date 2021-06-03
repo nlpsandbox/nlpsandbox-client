@@ -12,12 +12,12 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.license import License
-from annotator.model.tool_type import ToolType
+import nlpsandboxsdk
+from nlpsandboxsdk.model.license import License
+from nlpsandboxsdk.model.tool_type import ToolType
 globals()['License'] = License
 globals()['ToolType'] = ToolType
-from annotator.model.tool import Tool
+from nlpsandboxsdk.model.tool import Tool
 
 
 class TestTool(unittest.TestCase):

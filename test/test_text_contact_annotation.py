@@ -12,12 +12,12 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.text_annotation import TextAnnotation
-from datanode.model.text_contact_annotation_all_of import TextContactAnnotationAllOf
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_annotation import TextAnnotation
+from nlpsandboxsdk.model.text_contact_annotation_all_of import TextContactAnnotationAllOf
 globals()['TextAnnotation'] = TextAnnotation
 globals()['TextContactAnnotationAllOf'] = TextContactAnnotationAllOf
-from datanode.model.text_contact_annotation import TextContactAnnotation
+from nlpsandboxsdk.model.text_contact_annotation import TextContactAnnotation
 
 
 class TestTextContactAnnotation(unittest.TestCase):

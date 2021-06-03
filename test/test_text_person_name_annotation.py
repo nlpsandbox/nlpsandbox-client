@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.text_person_name_annotation import TextPersonNameAnnotation
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_person_name_annotation import TextPersonNameAnnotation
 
 
 class TestTextPersonNameAnnotation(unittest.TestCase):

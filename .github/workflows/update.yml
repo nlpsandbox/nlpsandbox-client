@@ -1,0 +1,49 @@
+name: Update Date Annotator stub
+
+on:
+  schedule:
+    - cron: '0 10 * * *' # everyday at 10am
+    # - cron: '0 0 * * 0'  # At 00:00 every Sunday
+
+env:
+  node_version: 12.x
+
+jobs:
+  check-and-update:
+    name: Check and update date annotator stub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get latest release version
+        uses: octokit/request-action@v2.x
+        id: get_latest_release
+        with:
+          route: GET /repos/:repository/releases/latest
+          repository: nlpsandbox/nlpsandbox-schemas
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Use Node.js ${{ env.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.node_version }}
+      - name: Update date annotator stub
+        run: |
+          npm install @openapitools/openapi-generator-cli
+          npx openapi-generator-cli generate -g python -o . --package-name nlpsandboxsdk -i https://nlpsandbox.github.io/nlpsandbox-schemas/_internal/nlpsandbox/edge/openapi.json
+
+          cur_ver=`grep "API version:" README.md | sed 's/- API version: //'`
+          new_ver=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}
+
+          # Escape dot characters so sed interprets them as literal dots
+          cur_ver="$(echo $cur_ver | sed 's/\./\\./g')"
+
+          for f in README.md; do
+            sed -i "s/${cur_ver}/${new_ver}/g" "$f"
+          done
+
+      - name: Send pull request to update to new version
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Update to ${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}
+          title: Update to ${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}
+          delete-branch: true

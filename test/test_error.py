@@ -12,9 +12,9 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.error import Error
-from annotator.model import error
+import nlpsandboxsdk
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model import error
 
 class TestError(unittest.TestCase):
     """Error unit test stubs"""

@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.resource_source import ResourceSource
+import nlpsandboxsdk
+from nlpsandboxsdk.model.resource_source import ResourceSource
 
 
 class TestResourceSource(unittest.TestCase):

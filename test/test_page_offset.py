@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.page_offset import PageOffset
+import nlpsandboxsdk
+from nlpsandboxsdk.model.page_offset import PageOffset
 
 
 class TestPageOffset(unittest.TestCase):

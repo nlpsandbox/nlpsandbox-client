@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
+import nlpsandboxsdk
+from nlpsandboxsdk.model.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
 
 
 class TestTextPhysicalAddressAnnotationAllOf(unittest.TestCase):

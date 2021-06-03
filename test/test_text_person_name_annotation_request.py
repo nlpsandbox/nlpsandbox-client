@@ -12,11 +12,11 @@
 import sys
 import unittest
 
-import annotator
-from annotator.model.note import Note
-from annotator.models import NoteId, PatientId
+import nlpsandboxsdk
+from nlpsandboxsdk.model.note import Note
+from nlpsandboxsdk.models import NoteId, PatientId
 globals()['Note'] = Note
-from annotator.model.text_person_name_annotation_request import TextPersonNameAnnotationRequest
+from nlpsandboxsdk.model.text_person_name_annotation_request import TextPersonNameAnnotationRequest
 
 
 class TestTextPersonNameAnnotationRequest(unittest.TestCase):

@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import datanode
-from datanode.model.dataset_name import DatasetName
+import nlpsandboxsdk
+from nlpsandboxsdk.model.dataset_name import DatasetName
 globals()['DatasetName'] = DatasetName
-from datanode.model.dataset import Dataset
+from nlpsandboxsdk.model.dataset import Dataset
 
 
 class TestDataset(unittest.TestCase):
