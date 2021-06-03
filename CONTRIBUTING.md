@@ -110,7 +110,7 @@ The SDK client has to be updated when the API version is updated.  Here are the 
 
 1. Generate SDK client with `openapi-generator`
   ```
-  openapi-generator generate -g python -o . --package-name nlpsandboxsdk -i https://raw.githubusercontent.com/nlpsandbox/nlpsandbox-schemas/gh-pages/_internal/nlpsandbox/pr-216/openapi.json
+  openapi-generator generate -g python -o . --package-name nlpsandboxsdk -i https://nlpsandbox.github.io/nlpsandbox-schemas/_internal/nlpsandbox/edge/openapi.json
   ```
 
 <!-- - `datanode` package
