@@ -1,4 +1,4 @@
-# annotator.ToolApi
+# nlpsandboxsdk.ToolApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -19,20 +19,20 @@ Get information about the tool
 
 ```python
 import time
-import annotator
-from annotator.api import tool_api
-from annotator.model.error import Error
-from annotator.model.tool import Tool
+import nlpsandboxsdk
+from nlpsandboxsdk.api import tool_api
+from nlpsandboxsdk.model.tool import Tool
+from nlpsandboxsdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = annotator.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with annotator.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = tool_api.ToolApi(api_client)
 
@@ -41,7 +41,7 @@ with annotator.ApiClient() as api_client:
         # Get tool information
         api_response = api_instance.get_tool()
         pprint(api_response)
-    except annotator.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling ToolApi->get_tool: %s\n" % e)
 ```
 
@@ -81,20 +81,20 @@ Get the dependencies of this tool
 
 ```python
 import time
-import annotator
-from annotator.api import tool_api
-from annotator.model.error import Error
-from annotator.model.tool_dependencies import ToolDependencies
+import nlpsandboxsdk
+from nlpsandboxsdk.api import tool_api
+from nlpsandboxsdk.model.error import Error
+from nlpsandboxsdk.model.tool_dependencies import ToolDependencies
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = annotator.Configuration(
+configuration = nlpsandboxsdk.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with annotator.ApiClient() as api_client:
+with nlpsandboxsdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = tool_api.ToolApi(api_client)
 
@@ -103,7 +103,7 @@ with annotator.ApiClient() as api_client:
         # Get tool dependencies
         api_response = api_instance.get_tool_dependencies()
         pprint(api_response)
-    except annotator.ApiException as e:
+    except nlpsandboxsdk.ApiException as e:
         print("Exception when calling ToolApi->get_tool_dependencies: %s\n" % e)
 ```
 
