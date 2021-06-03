@@ -90,7 +90,10 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": []
+            "textPhysicalAddressAnnotations": [],
+            "textIdAnnotations": [],
+            "textContactAnnotations": [],
+            "textCovidSymptomAnnotations": []
           }
         },
         {
@@ -159,7 +162,10 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": []
+            "textPhysicalAddressAnnotations": [],
+            "textIdAnnotations": [],
+            "textContactAnnotations": [],
+            "textCovidSymptomAnnotations": []
           }
         },
         {
@@ -247,7 +253,10 @@
                 "addressType": "hospital",
                 "confidence": 95
               }
-            ]
+            ],
+            "textIdAnnotations": [],
+            "textContactAnnotations": [],
+            "textCovidSymptomAnnotations": []
           }
         },
         {
@@ -334,7 +343,84 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": []
+            "textPhysicalAddressAnnotations": [],
+            "textIdAnnotations": [],
+            "textContactAnnotations": [],
+            "textCovidSymptomAnnotations": []
+          }
+        },
+        {
+          "note": {
+            "text": "Fake Note with Fake Truth",
+            "type": "",
+            "patientId": "PATIENT_ID"
+          },
+          "annotation": {
+            "annotationSource": {
+              "resourceSource": {
+                "name": "NOTE_NAME"
+              }
+            },
+            "textDateAnnotations": [
+              {
+                "noteId": "110-05",
+                "start": 16,
+                "length": 10,
+                "text": "2080-10-01",
+                "dateFormat": "",
+                "confidence": 95
+              }
+            ],
+            "textPersonNameAnnotations": [
+              {
+                "noteId": "110-05",
+                "start": 3559,
+                "length": 11,
+                "text": "Xavier Rush",
+                "confidence": 95
+              }
+            ],
+            "textPhysicalAddressAnnotations": [
+              {
+                "noteId": "110-05",
+                "start": 3598,
+                "length": 4,
+                "text": "EHMS",
+                "addressType": "hospital",
+                "confidence": 95
+              }
+            ],
+            "textIdAnnotations": [
+              {
+                "noteId": "110-05",
+                "start": 3598,
+                "length": 4,
+                "text": "555-55-5555",
+                "idType": "ssn",
+                "confidence": 95
+              }
+            ],
+            "textContactAnnotations": [
+              {
+                "noteId": "110-05",
+                "start": 3598,
+                "length": 4,
+                "text": "fake@fake.org",
+                "contactType": "email",
+                "confidence": 95
+              }
+            ],
+            "textCovidSymptomAnnotations": [
+              {
+                "noteId": "110-05",
+                "start": 3598,
+                "length": 4,
+                "text": "coughing",
+                "certainty": "positive",
+                "condition": "cough",
+                "confidence": 95
+              }
+            ]
           }
         }
       ]
