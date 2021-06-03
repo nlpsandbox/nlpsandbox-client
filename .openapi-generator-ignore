@@ -31,4 +31,5 @@ test-requirements.txt
 tox.ini
 setup.py
 setup.cfg
-datanode/rest.py
+.gitlab-ci.yml
+.travis.yml

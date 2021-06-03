@@ -44,6 +44,7 @@ jobs:
             sed -i "s/${cur_ver}/${new_ver}/g" "$f"
           done
 
+          rm -rf node_modules openapitools.json package-lock.json
       - name: Send pull request to update to new version
         uses: peter-evans/create-pull-request@v3
         with:
