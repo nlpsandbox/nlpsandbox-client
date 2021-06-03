@@ -12,15 +12,14 @@
 
 ## Overview
 
-NLP Sandbox Client Library for Python.  This repository consists of 3 packages
+NLP Sandbox Client Library for Python.  This repository consists of 2 packages
 
-- `datanode`: Python SDK client that wraps [data-node API](https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/latest/openapi.json)
-- `annotator`: Python SDK client for the NLP annotators ([date-annotator API](https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/latest/openapi.json), [person-name-annotator API](https://nlpsandbox.github.io/nlpsandbox-schemas/person-name-annotator/latest/openapi.json), [physical-address-annotator API](https://nlpsandbox.github.io/nlpsandbox-schemas/physical-address-annotator/latest/openapi.json))
-- `nlpsandboxclient` - Convenience functions that infer user behavior of the above two SDK clients.
+- `nlpsandboxsdk`: Python SDK client that wraps all the NLP Sandbox APIs
+- `nlpsandboxclient` - Convenience functions that infer user behavior of the SDK client.
 
 ## Specification
 
-- API version: 1.1.1
+- API version: 1.1.2
 - Docker image: `nlpsandbox/cli`
 
 ## Documentation
