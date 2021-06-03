@@ -1,6 +1,7 @@
 # TextContactAnnotationResponse
 
 The response to a contact annotation request
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

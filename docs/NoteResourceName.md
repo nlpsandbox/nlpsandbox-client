@@ -1,6 +1,7 @@
 # NoteResourceName
 
 The resource name of the clinical note, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Note/{NoteId}
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

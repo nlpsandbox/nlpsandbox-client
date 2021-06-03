@@ -1,6 +1,7 @@
 # TextPersonNameAnnotation
 
 A person name annotation in a text
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

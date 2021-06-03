@@ -54,6 +54,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         print("Exception when calling TextPhysicalAddressAnnotationApi->create_text_physical_address_annotations: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -72,6 +73,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

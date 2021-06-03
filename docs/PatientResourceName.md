@@ -1,6 +1,7 @@
 # PatientResourceName
 
 The resource name of the FHIR patient, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Patient/{PatientId}
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

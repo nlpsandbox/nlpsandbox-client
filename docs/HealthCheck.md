@@ -1,6 +1,7 @@
 # HealthCheck
 
 Represents the health of a service
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

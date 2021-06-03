@@ -54,6 +54,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         print("Exception when calling TextPersonNameAnnotationApi->create_text_person_name_annotations: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -72,6 +73,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

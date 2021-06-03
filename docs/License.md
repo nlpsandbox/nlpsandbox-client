@@ -1,6 +1,7 @@
 # License
 
 The license (license keyword used by GitHub)
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

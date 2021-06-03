@@ -1,6 +1,7 @@
 # TextDateAnnotation
 
 A date annotation in a text
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

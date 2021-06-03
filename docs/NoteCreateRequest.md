@@ -1,6 +1,7 @@
 # NoteCreateRequest
 
 A clinical note
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
