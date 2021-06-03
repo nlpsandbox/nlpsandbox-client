@@ -29,7 +29,7 @@ jobs:
       - name: Update date annotator stub
         run: |
           npm install @openapitools/openapi-generator-cli
-          npx openapi-generator-cli generate -g python -o . --package-name nlpsandboxsdk -i https://raw.githubusercontent.com/nlpsandbox/nlpsandbox-schemas/gh-pages/_internal/nlpsandbox/pr-216/openapi.json
+          npx openapi-generator-cli generate -g python -o . --package-name nlpsandboxsdk -i https://nlpsandbox.github.io/nlpsandbox-schemas/_internal/nlpsandbox/edge/openapi.json
 
           cur_ver=`grep "API version:" README.md | sed 's/- API version: //'`
           new_ver=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}
