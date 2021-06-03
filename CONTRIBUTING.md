@@ -106,7 +106,7 @@ the content of *setup.py* is updated.
 
 ### Updating the SDK client
 
-The SDK client has to be updated when the API version is updated.  Here are the steps to updating the `nlpsandboxsdk` client.
+The Python SDK client `nlpsandboxsdk` is now automatically updated when there is a new schemas release.  That being said, here are instructions on how to update the client manually.
 
 1. Generate SDK client with `openapi-generator`
   ```
