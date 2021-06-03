@@ -1,6 +1,7 @@
 # TextPersonNameAnnotationResponse
 
 The response to a person names annotation request
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

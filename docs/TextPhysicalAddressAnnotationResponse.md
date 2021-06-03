@@ -1,6 +1,7 @@
 # TextPhysicalAddressAnnotationResponse
 
 The response to a physical addresses annotation request
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # AnnotationSet
 
 Set of annotations of all types for a text
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

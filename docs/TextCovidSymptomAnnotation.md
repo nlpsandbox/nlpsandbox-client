@@ -1,6 +1,7 @@
 # TextCovidSymptomAnnotation
 
 A COVID symptom annotation in a text
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

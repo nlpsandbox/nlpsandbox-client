@@ -44,6 +44,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         print("Exception when calling HealthCheckApi->get_health_check: %s\n" % e)
 ```
 
+
 ### Parameters
 This endpoint does not need any parameter.
 
@@ -59,6 +60,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

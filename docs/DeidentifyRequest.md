@@ -1,6 +1,7 @@
 # DeidentifyRequest
 
 A request to de-identify a clinical note
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

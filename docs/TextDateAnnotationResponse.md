@@ -1,6 +1,7 @@
 # TextDateAnnotationResponse
 
 The response to a dates annotation request
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

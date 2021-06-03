@@ -1,6 +1,7 @@
 # TextIdAnnotationResponse
 
 The response to an ID annotation request
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

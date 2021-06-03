@@ -66,6 +66,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         print("Exception when calling PatientApi->create_patient: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -87,6 +88,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -140,6 +142,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         print("Exception when calling PatientApi->delete_patient: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -160,6 +163,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -213,6 +217,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         print("Exception when calling PatientApi->get_patient: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -233,6 +238,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -297,6 +303,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         print("Exception when calling PatientApi->list_patients: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -318,6 +325,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
