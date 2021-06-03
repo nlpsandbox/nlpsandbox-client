@@ -90,7 +90,10 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": []
+            "textPhysicalAddressAnnotations": [],
+            "textIdAnnotations": [],
+            "textContactAnnotations": [],
+            "textCovidSymptomAnnotations": []
           }
         },
         {
@@ -159,7 +162,10 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": []
+            "textPhysicalAddressAnnotations": [],
+            "textIdAnnotations": [],
+            "textContactAnnotations": [],
+            "textCovidSymptomAnnotations": []
           }
         },
         {
@@ -247,7 +253,10 @@
                 "addressType": "hospital",
                 "confidence": 95
               }
-            ]
+            ],
+            "textIdAnnotations": [],
+            "textContactAnnotations": [],
+            "textCovidSymptomAnnotations": []
           }
         },
         {
@@ -334,7 +343,10 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": []
+            "textPhysicalAddressAnnotations": [],
+            "textIdAnnotations": [],
+            "textContactAnnotations": [],
+            "textCovidSymptomAnnotations": []
           }
         }
       ]

@@ -13,17 +13,17 @@ https://github.com/nlpsandbox/data-node
 """
 import json
 
-import datanode
-import datanode.apis
-import datanode.models
-from datanode.rest import ApiException
+import nlpsandboxsdk
+import nlpsandboxsdk.apis
+import nlpsandboxsdk.models
+from nlpsandboxsdk.rest import ApiException
 import nlpsandboxclient.utils
 
 
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 host = "http://localhost:8080/api/v1"
-configuration = datanode.Configuration(host=host)
+configuration = nlpsandboxsdk.Configuration(host=host)
 
 dataset_id = 'test-dataset'
 fhir_store_id = 'evaluation'
@@ -31,13 +31,13 @@ annotation_store_id = 'goldstandard'
 json_filename = "example-patient-bundles.json"
 
 
-with datanode.ApiClient(configuration) as api_client:
-    dataset_api = datanode.apis.DatasetApi(api_client)
-    fhir_store_api = datanode.apis.FhirStoreApi(api_client)
-    annotation_store_api = datanode.apis.AnnotationStoreApi(api_client)
-    patient_api = datanode.apis.PatientApi(api_client)
-    note_api = datanode.apis.NoteApi(api_client)
-    annotation_api = datanode.apis.AnnotationApi(api_client)
+with nlpsandboxsdk.ApiClient(configuration) as api_client:
+    dataset_api = nlpsandboxsdk.apis.DatasetApi(api_client)
+    fhir_store_api = nlpsandboxsdk.apis.FhirStoreApi(api_client)
+    annotation_store_api = nlpsandboxsdk.apis.AnnotationStoreApi(api_client)
+    patient_api = nlpsandboxsdk.apis.PatientApi(api_client)
+    note_api = nlpsandboxsdk.apis.NoteApi(api_client)
+    annotation_api = nlpsandboxsdk.apis.AnnotationApi(api_client)
 
     # The example is always deleted
     try:
@@ -93,7 +93,10 @@ with datanode.ApiClient(configuration) as api_client:
             annotation = note_bundle['annotation']
             annotations_cols = ['textDateAnnotations',
                                 'textPhysicalAddressAnnotations',
-                                'textPersonNameAnnotations']
+                                'textPersonNameAnnotations',
+                                'textIdAnnotations',
+                                'textContactAnnotations',
+                                'textCovidSymptomAnnotations']
             note_ids = set()
             for col in annotations_cols:
                 for annot in annotation[col]:
