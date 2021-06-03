@@ -1,3 +1,5 @@
+[![nlpsandbox.io](https://nlpsandbox.github.io/nlpsandbox-themes/banner/Banner@3x.png)](https://nlpsandbox.io)
+
 # NLP Sandbox Client
 
 [![GitHub Release](https://img.shields.io/github/release/nlpsandbox/nlpsandbox-client.svg?include_prereleases&color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/nlpsandbox/nlpsandbox-client/releases)
