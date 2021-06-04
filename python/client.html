@@ -170,17 +170,17 @@
             
   <div class="section" id="module-nlpsandboxclient.client">
 <span id="nlpsandboxclient"></span><h1>nlpsandboxclient<a class="headerlink" href="#module-nlpsandboxclient.client" title="Permalink to this headline">¶</a></h1>
-<p>NLP data node client that interacts with the SDK datanodeclient</p>
+<p>NLP data node client that interacts with the NLP SDK client</p>
 <dl class="function">
 <dt id="nlpsandboxclient.client.annotate_note">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">annotate_note</code><span class="sig-paren">(</span><em class="sig-param">host: str, note: Union[dict, datanode.model.note.Note], tool_type: str</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#annotate_note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.annotate_note" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">annotate_note</code><span class="sig-paren">(</span><em class="sig-param">host: str, note: Union[dict, nlpsandboxsdk.model.note.Note], tool_type: str</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#annotate_note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.annotate_note" title="Permalink to this definition">¶</a></dt>
 <dd><p>Annotate notes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>host</strong> – Data node host IP</p></li>
 <li><p><strong>note</strong> – Clinical note</p></li>
-<li><p><strong>tool_type</strong> – Type of annotator</p></li>
+<li><p><strong>tool_type</strong> – Type of nlpsandboxsdk</p></li>
 </ul>
 </dd>
 <dt class="field-even">Yields</dt>
@@ -209,7 +209,7 @@
 
 <dl class="function">
 <dt id="nlpsandboxclient.client.get_annotation">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotation</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em>, <em class="sig-param">annotation_id: str</em><span class="sig-paren">)</span> &#x2192; datanode.model.annotation.Annotation<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotation</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em>, <em class="sig-param">annotation_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxsdk.model.annotation.Annotation<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets an annotation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -236,7 +236,7 @@
 
 <dl class="function">
 <dt id="nlpsandboxclient.client.get_annotation_store">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotation_store</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em>, <em class="sig-param">create_if_missing: bool = False</em><span class="sig-paren">)</span> &#x2192; datanode.model.annotation_store.AnnotationStore<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotation_store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotation_store" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_annotation_store</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em>, <em class="sig-param">annotation_store_id: str</em>, <em class="sig-param">create_if_missing: bool = False</em><span class="sig-paren">)</span> &#x2192; nlpsandboxsdk.model.annotation_store.AnnotationStore<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_annotation_store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_annotation_store" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an annotation store</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -263,7 +263,7 @@ doesn’t exist</p></li>
 
 <dl class="function">
 <dt id="nlpsandboxclient.client.get_tool">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_tool</code><span class="sig-paren">(</span><em class="sig-param">host: str</em><span class="sig-paren">)</span> &#x2192; annotator.model.tool.Tool<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_tool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_tool" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">get_tool</code><span class="sig-paren">(</span><em class="sig-param">host: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxsdk.model.tool.Tool<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#get_tool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.get_tool" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get annotater service</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -382,7 +382,7 @@ Default is True.</p></li>
 
 <dl class="function">
 <dt id="nlpsandboxclient.client.store_dataset">
-<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">store_dataset</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em><span class="sig-paren">)</span> &#x2192; datanode.model.dataset.Dataset<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#store_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.store_dataset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">nlpsandboxclient.client.</code><code class="sig-name descname">store_dataset</code><span class="sig-paren">(</span><em class="sig-param">host: str</em>, <em class="sig-param">dataset_id: str</em><span class="sig-paren">)</span> &#x2192; nlpsandboxsdk.model.dataset.Dataset<a class="reference internal" href="../_modules/nlpsandboxclient/client.html#store_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.client.store_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a dataset</p>
 </dd></dl>
 
