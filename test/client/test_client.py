@@ -467,13 +467,13 @@ class TestAnnotatorClient:
                                  tool_type="foo")
 
     @pytest.mark.parametrize("tool_type,tool_func", [
-        ("nlpsandbox:date-nlpsandboxsdk", "_annotate_date"),
-        ("nlpsandbox:person-name-nlpsandboxsdk", "_annotate_person_name"),
-        ("nlpsandbox:physical-address-nlpsandboxsdk",
+        ("nlpsandbox:date-annotator", "_annotate_date"),
+        ("nlpsandbox:person-name-annotator", "_annotate_person_name"),
+        ("nlpsandbox:physical-address-annotator",
          "_annotate_physical_address"),
-        ("nlpsandbox:id-nlpsandboxsdk", "_annotate_id"),
-        ("nlpsandbox:covid-symptom-nlpsandboxsdk", "_annotate_covid_symptom"),
-        ("nlpsandbox:contact-nlpsandboxsdk", "_annotate_contact"),
+        ("nlpsandbox:id-annotator", "_annotate_id"),
+        ("nlpsandbox:covid-symptom-annotator", "_annotate_covid_symptom"),
+        ("nlpsandbox:contact-annotator", "_annotate_contact"),
     ])
     def test_annotate_note(self, tool_type, tool_func):
         """Test annotate note"""

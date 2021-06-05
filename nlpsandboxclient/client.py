@@ -500,17 +500,17 @@ def annotate_note(host: str, note: Union[dict, Note],
             "note": utils.change_keys(note, utils.camelcase_to_snakecase)
         }
     with nlpsandboxsdk.ApiClient(configuration) as api_client:
-        if tool_type == "nlpsandbox:date-nlpsandboxsdk":
+        if tool_type == "nlpsandbox:date-annotator":
             annotations = _annotate_date(api_client, text_nlpsandboxsdk_req)
-        elif tool_type == "nlpsandbox:person-name-nlpsandboxsdk":
+        elif tool_type == "nlpsandbox:person-name-annotator":
             annotations = _annotate_person_name(api_client, text_nlpsandboxsdk_req)
-        elif tool_type == "nlpsandbox:physical-address-nlpsandboxsdk":
+        elif tool_type == "nlpsandbox:physical-address-annotator":
             annotations = _annotate_physical_address(api_client, text_nlpsandboxsdk_req)
-        elif tool_type == "nlpsandbox:contact-nlpsandboxsdk":
+        elif tool_type == "nlpsandbox:contact-annotator":
             annotations = _annotate_contact(api_client, text_nlpsandboxsdk_req)
-        elif tool_type == "nlpsandbox:id-nlpsandboxsdk":
+        elif tool_type == "nlpsandbox:id-annotator":
             annotations = _annotate_id(api_client, text_nlpsandboxsdk_req)
-        elif tool_type == "nlpsandbox:covid-symptom-nlpsandboxsdk":
+        elif tool_type == "nlpsandbox:covid-symptom-annotator":
             annotations = _annotate_covid_symptom(api_client,
                                                   text_nlpsandboxsdk_req)
         else:
