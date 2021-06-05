@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.annotation_store_id import AnnotationStoreId
+from nlpsandbox.models.annotation_store_id import AnnotationStoreId
 
 
 class TestAnnotationStoreId(unittest.TestCase):

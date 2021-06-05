@@ -23,9 +23,9 @@ Create a dataset with the name specified
 import time
 import nlpsandbox
 from nlpsandbox.api import dataset_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_create_response import DatasetCreateResponse
-from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.dataset_create_response import DatasetCreateResponse
+from nlpsandbox.models.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -104,8 +104,8 @@ Deletes the dataset for a given ID
 import time
 import nlpsandbox
 from nlpsandbox.api import dataset_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -172,9 +172,9 @@ Returns the dataset for a given ID
 import time
 import nlpsandbox
 from nlpsandbox.api import dataset_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.dataset import Dataset
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.dataset import Dataset
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -241,10 +241,10 @@ Returns the datasets
 import time
 import nlpsandbox
 from nlpsandbox.api import dataset_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.page_of_datasets import PageOfDatasets
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.page_of_datasets import PageOfDatasets
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.page_offset import PageOffset
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_annotation import TextAnnotation
+from nlpsandbox.models.text_annotation import TextAnnotation
 
 
 class TestTextAnnotation(unittest.TestCase):

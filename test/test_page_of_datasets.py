@@ -13,18 +13,18 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.dataset import Dataset
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.page_offset import PageOffset
-from nlpsandbox.model.response_page_metadata import ResponsePageMetadata
-from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
+from nlpsandbox.models.dataset import Dataset
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.page_offset import PageOffset
+from nlpsandbox.models.response_page_metadata import ResponsePageMetadata
+from nlpsandbox.models.response_page_metadata_links import ResponsePageMetadataLinks
 from nlpsandbox.models import DatasetName
 globals()['Dataset'] = Dataset
 globals()['PageLimit'] = PageLimit
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
-from nlpsandbox.model.page_of_datasets import PageOfDatasets
+from nlpsandbox.models.page_of_datasets import PageOfDatasets
 
 
 class TestPageOfDatasets(unittest.TestCase):

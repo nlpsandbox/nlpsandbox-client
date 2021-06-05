@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.note_id import NoteId
-from nlpsandbox.model.patient_id import PatientId
+from nlpsandbox.models.note_id import NoteId
+from nlpsandbox.models.patient_id import PatientId
 globals()['NoteId'] = NoteId
 globals()['PatientId'] = PatientId
-from nlpsandbox.model.note import Note
+from nlpsandbox.models.note import Note
 
 
 class TestNote(unittest.TestCase):

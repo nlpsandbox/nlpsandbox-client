@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_annotation import TextAnnotation
-from nlpsandbox.model.text_contact_annotation_all_of import TextContactAnnotationAllOf
+from nlpsandbox.models.text_annotation import TextAnnotation
+from nlpsandbox.models.text_contact_annotation_all_of import TextContactAnnotationAllOf
 globals()['TextAnnotation'] = TextAnnotation
 globals()['TextContactAnnotationAllOf'] = TextContactAnnotationAllOf
-from nlpsandbox.model.text_contact_annotation import TextContactAnnotation
+from nlpsandbox.models.text_contact_annotation import TextContactAnnotation
 
 
 class TestTextContactAnnotation(unittest.TestCase):

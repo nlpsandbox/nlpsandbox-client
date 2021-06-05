@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.patient_id import PatientId
+from nlpsandbox.models.patient_id import PatientId
 
 
 class TestPatientId(unittest.TestCase):

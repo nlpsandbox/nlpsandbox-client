@@ -13,18 +13,18 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.page_offset import PageOffset
-from nlpsandbox.model.patient import Patient
-from nlpsandbox.model.response_page_metadata import ResponsePageMetadata
-from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.page_offset import PageOffset
+from nlpsandbox.models.patient import Patient
+from nlpsandbox.models.response_page_metadata import ResponsePageMetadata
+from nlpsandbox.models.response_page_metadata_links import ResponsePageMetadataLinks
 from nlpsandbox.models import PatientId
 globals()['PageLimit'] = PageLimit
 globals()['PageOffset'] = PageOffset
 globals()['Patient'] = Patient
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
-from nlpsandbox.model.page_of_patients import PageOfPatients
+from nlpsandbox.models.page_of_patients import PageOfPatients
 
 
 class TestPageOfPatients(unittest.TestCase):

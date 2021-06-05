@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.deidentification_step import DeidentificationStep
-from nlpsandbox.model.note import Note
+from nlpsandbox.models.deidentification_step import DeidentificationStep
+from nlpsandbox.models.note import Note
 globals()['DeidentificationStep'] = DeidentificationStep
 globals()['Note'] = Note
-from nlpsandbox.model.deidentify_request import DeidentifyRequest
+from nlpsandbox.models.deidentify_request import DeidentifyRequest
 
 
 class TestDeidentifyRequest(unittest.TestCase):

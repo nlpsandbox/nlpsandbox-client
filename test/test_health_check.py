@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.health_check import HealthCheck
+from nlpsandbox.models.health_check import HealthCheck
 from nlpsandbox.model import health_check
 
 

@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.fhir_store_api import FhirStoreApi  # noqa: E501
+from nlpsandbox.apis.fhir_store_api import FhirStoreApi  # noqa: E501
 
 
 class TestFhirStoreApi(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestFhirStoreApi(unittest.TestCase):
 
         Create a FHIR store  # noqa: E501
         """
-        self.api.create_fhir_store(
+        self.apis.create_fhir_store(
             dataset_id="awesome-dataset",
             fhir_store_id="awesome-fhir-store",
             body={}
@@ -43,7 +43,7 @@ class TestFhirStoreApi(unittest.TestCase):
 
         Delete a FHIR store  # noqa: E501
         """
-        self.api.delete_fhir_store(
+        self.apis.delete_fhir_store(
             dataset_id="awesome-dataset",
             fhir_store_id="awesome-fhir-store",
         )
@@ -53,7 +53,7 @@ class TestFhirStoreApi(unittest.TestCase):
 
         Get a FHIR store  # noqa: E501
         """
-        self.api.get_fhir_store(
+        self.apis.get_fhir_store(
             dataset_id="awesome-dataset",
             fhir_store_id="awesome-fhir-store",
         )
@@ -63,7 +63,7 @@ class TestFhirStoreApi(unittest.TestCase):
 
         List the FHIR stores in a dataset  # noqa: E501
         """
-        self.api.list_fhir_stores(dataset_id="awesome-dataset")
+        self.apis.list_fhir_stores(dataset_id="awesome-dataset")
 
 
 if __name__ == '__main__':

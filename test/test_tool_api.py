@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.tool_api import ToolApi  # noqa: E501
+from nlpsandbox.apis.tool_api import ToolApi  # noqa: E501
 
 
 class TestToolApi(unittest.TestCase):
@@ -32,14 +32,14 @@ class TestToolApi(unittest.TestCase):
 
         Get tool information  # noqa: E501
         """
-        self.api.get_tool()
+        self.apis.get_tool()
 
     def test_get_tool_dependencies(self):
         """Test case for get_tool_dependencies
 
         Get tool dependencies  # noqa: E501
         """
-        self.api.get_tool_dependencies()
+        self.apis.get_tool_dependencies()
 
 
 if __name__ == '__main__':

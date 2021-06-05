@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.text_person_name_annotation_api import TextPersonNameAnnotationApi  # noqa: E501
+from nlpsandbox.apis.text_person_name_annotation_api import TextPersonNameAnnotationApi  # noqa: E501
 
 
 class TestTextPersonNameAnnotationApi(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestTextPersonNameAnnotationApi(unittest.TestCase):
 
         Annotate person names in a clinical note  # noqa: E501
         """
-        self.api.create_text_person_name_annotations(
+        self.apis.create_text_person_name_annotations(
             text_person_name_annotation_request={
                 "note": {
                     "identifier": "note-1",

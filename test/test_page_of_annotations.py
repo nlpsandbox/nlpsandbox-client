@@ -13,21 +13,21 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.annotation import Annotation
-from nlpsandbox.model.annotation_name import AnnotationName
-from nlpsandbox.model.annotation_source import AnnotationSource
-from nlpsandbox.model.resource_source import ResourceSource
-from nlpsandbox.model.text_date_annotation import TextDateAnnotation
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.page_offset import PageOffset
-from nlpsandbox.model.response_page_metadata import ResponsePageMetadata
-from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
+from nlpsandbox.models.annotation import Annotation
+from nlpsandbox.models.annotation_name import AnnotationName
+from nlpsandbox.models.annotation_source import AnnotationSource
+from nlpsandbox.models.resource_source import ResourceSource
+from nlpsandbox.models.text_date_annotation import TextDateAnnotation
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.page_offset import PageOffset
+from nlpsandbox.models.response_page_metadata import ResponsePageMetadata
+from nlpsandbox.models.response_page_metadata_links import ResponsePageMetadataLinks
 globals()['Annotation'] = Annotation
 globals()['PageLimit'] = PageLimit
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
-from nlpsandbox.model.page_of_annotations import PageOfAnnotations
+from nlpsandbox.models.page_of_annotations import PageOfAnnotations
 
 
 class TestPageOfAnnotations(unittest.TestCase):

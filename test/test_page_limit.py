@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.models.page_limit import PageLimit
 
 
 class TestPageLimit(unittest.TestCase):

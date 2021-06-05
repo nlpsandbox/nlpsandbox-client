@@ -12,7 +12,7 @@
 import unittest
 
 import nlpsandbox
-from nlpsandbox.api.text_contact_annotation_api import TextContactAnnotationApi  # noqa: E501
+from nlpsandbox.apis.text_contact_annotation_api import TextContactAnnotationApi  # noqa: E501
 
 
 class TestTextContactAnnotationApi(unittest.TestCase):

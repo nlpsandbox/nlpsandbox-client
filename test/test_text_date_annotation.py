@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_annotation import TextAnnotation
-from nlpsandbox.model.text_date_annotation_all_of import TextDateAnnotationAllOf
+from nlpsandbox.models.text_annotation import TextAnnotation
+from nlpsandbox.models.text_date_annotation_all_of import TextDateAnnotationAllOf
 globals()['TextAnnotation'] = TextAnnotation
 globals()['TextDateAnnotationAllOf'] = TextDateAnnotationAllOf
-from nlpsandbox.model.text_date_annotation import TextDateAnnotation
+from nlpsandbox.models.text_date_annotation import TextDateAnnotation
 
 
 class TestTextDateAnnotation(unittest.TestCase):

@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.dataset_name import DatasetName
+from nlpsandbox.models.dataset_name import DatasetName
 
 
 class TestDatasetName(unittest.TestCase):

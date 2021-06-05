@@ -20,9 +20,9 @@ Returns the deidentified note
 import time
 import nlpsandbox
 from nlpsandbox.api import deidentified_note_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.deidentify_response import DeidentifyResponse
-from nlpsandbox.model.deidentify_request import DeidentifyRequest
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.deidentify_response import DeidentifyResponse
+from nlpsandbox.models.deidentify_request import DeidentifyRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

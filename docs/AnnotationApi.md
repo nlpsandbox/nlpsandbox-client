@@ -23,12 +23,12 @@ Create an annotation
 import time
 import nlpsandbox
 from nlpsandbox.api import annotation_api
-from nlpsandbox.model.annotation_create_response import AnnotationCreateResponse
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.annotation_id import AnnotationId
-from nlpsandbox.model.annotation_store_id import AnnotationStoreId
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.annotation_create_request import AnnotationCreateRequest
+from nlpsandbox.models.annotation_create_response import AnnotationCreateResponse
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.annotation_id import AnnotationId
+from nlpsandbox.models.annotation_store_id import AnnotationStoreId
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.annotation_create_request import AnnotationCreateRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -135,10 +135,10 @@ Deletes the annotation specified
 import time
 import nlpsandbox
 from nlpsandbox.api import annotation_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.annotation_id import AnnotationId
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.annotation_id import AnnotationId
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -209,11 +209,11 @@ Returns the annotation specified
 import time
 import nlpsandbox
 from nlpsandbox.api import annotation_api
-from nlpsandbox.model.annotation import Annotation
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.annotation_id import AnnotationId
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.models.annotation import Annotation
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.annotation_id import AnnotationId
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -284,12 +284,12 @@ Returns the annotations in an annotation store
 import time
 import nlpsandbox
 from nlpsandbox.api import annotation_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.annotation_store_id import AnnotationStoreId
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.page_offset import PageOffset
-from nlpsandbox.model.page_of_annotations import PageOfAnnotations
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.annotation_store_id import AnnotationStoreId
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.page_offset import PageOffset
+from nlpsandbox.models.page_of_annotations import PageOfAnnotations
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

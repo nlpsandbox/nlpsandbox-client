@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.note_api import NoteApi  # noqa: E501
+from nlpsandbox.apis.note_api import NoteApi  # noqa: E501
 
 
 class TestNoteApi(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestNoteApi(unittest.TestCase):
 
         Create a note  # noqa: E501
         """
-        self.api.create_note(
+        self.apis.create_note(
             dataset_id="awesome-dataset",
             fhir_store_id="awesome-fhir-store",
             note_id="awesome-note",
@@ -48,7 +48,7 @@ class TestNoteApi(unittest.TestCase):
 
         Delete a note  # noqa: E501
         """
-        self.api.delete_note(
+        self.apis.delete_note(
             dataset_id="awesome-dataset",
             fhir_store_id="awesome-fhir-store",
             note_id="awesome-note"
@@ -59,7 +59,7 @@ class TestNoteApi(unittest.TestCase):
 
         Get a note  # noqa: E501
         """
-        self.api.get_note(
+        self.apis.get_note(
             dataset_id="awesome-dataset",
             fhir_store_id="awesome-fhir-store",
             note_id="awesome-note"
@@ -70,7 +70,7 @@ class TestNoteApi(unittest.TestCase):
 
         List notes  # noqa: E501
         """
-        self.api.list_notes(
+        self.apis.list_notes(
             dataset_id="awesome-dataset",
             fhir_store_id="awesome-fhir-store"
         )

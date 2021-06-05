@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.patient_resource_name import PatientResourceName
+from nlpsandbox.models.patient_resource_name import PatientResourceName
 
 
 class TestPatientResourceName(unittest.TestCase):

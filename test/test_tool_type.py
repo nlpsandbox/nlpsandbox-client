@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.tool_type import ToolType
+from nlpsandbox.models.tool_type import ToolType
 
 
 class TestToolType(unittest.TestCase):

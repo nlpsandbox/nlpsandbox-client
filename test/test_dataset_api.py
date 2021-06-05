@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.dataset_api import DatasetApi  # noqa: E501
+from nlpsandbox.apis.dataset_api import DatasetApi  # noqa: E501
 
 
 class TestDatasetApi(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestDatasetApi(unittest.TestCase):
 
         Create a dataset  # noqa: E501
         """
-        self.api.create_dataset(
+        self.apis.create_dataset(
             dataset_id="foo",
             body={}
         )
@@ -42,7 +42,7 @@ class TestDatasetApi(unittest.TestCase):
 
         Delete a dataset by ID  # noqa: E501
         """
-        self.api.delete_dataset(
+        self.apis.delete_dataset(
             dataset_id="foo"
         )
 
@@ -51,7 +51,7 @@ class TestDatasetApi(unittest.TestCase):
 
         Get a dataset by ID  # noqa: E501
         """
-        self.api.get_dataset(
+        self.apis.get_dataset(
             dataset_id="foo"
         )
 
@@ -60,7 +60,7 @@ class TestDatasetApi(unittest.TestCase):
 
         Get all datasets  # noqa: E501
         """
-        self.api.list_datasets()
+        self.apis.list_datasets()
 
 
 if __name__ == '__main__':

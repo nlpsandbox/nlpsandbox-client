@@ -20,9 +20,9 @@ Return the date annotations found in a clinical note
 import time
 import nlpsandbox
 from nlpsandbox.api import text_date_annotation_api
-from nlpsandbox.model.text_date_annotation_request import TextDateAnnotationRequest
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.text_date_annotation_response import TextDateAnnotationResponse
+from nlpsandbox.models.text_date_annotation_request import TextDateAnnotationRequest
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.text_date_annotation_response import TextDateAnnotationResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

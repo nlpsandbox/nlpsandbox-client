@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.error import Error
+from nlpsandbox.models.error import Error
 from nlpsandbox.model import error
 
 class TestError(unittest.TestCase):

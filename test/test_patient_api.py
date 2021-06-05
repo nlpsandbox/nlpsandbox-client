@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.patient_api import PatientApi  # noqa: E501
+from nlpsandbox.apis.patient_api import PatientApi  # noqa: E501
 
 
 class TestPatientApi(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestPatientApi(unittest.TestCase):
 
         Create a FHIR patient  # noqa: E501
         """
-        self.api.create_patient(
+        self.apis.create_patient(
             dataset_id="awesome-dataset-id",
             fhir_store_id="awesome-fhir-store",
             patient_id="awesome-patient",
@@ -44,7 +44,7 @@ class TestPatientApi(unittest.TestCase):
 
         Delete a FHIR patient  # noqa: E501
         """
-        self.api.delete_patient(
+        self.apis.delete_patient(
             dataset_id="awesome-dataset-id",
             fhir_store_id="awesome-fhir-store",
             patient_id="awesome-patient"
@@ -55,7 +55,7 @@ class TestPatientApi(unittest.TestCase):
 
         Get a FHIR patient  # noqa: E501
         """
-        self.api.get_patient(
+        self.apis.get_patient(
             dataset_id="awesome-dataset-id",
             fhir_store_id="awesome-fhir-store",
             patient_id="awesome-patient"
@@ -66,7 +66,7 @@ class TestPatientApi(unittest.TestCase):
 
         List the Patients in a FHIR store  # noqa: E501
         """
-        self.api.list_patients(
+        self.apis.list_patients(
             dataset_id="awesome-dataset-id",
             fhir_store_id="awesome-fhir-store"
         )

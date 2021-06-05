@@ -20,9 +20,9 @@ Return the physical addresse annotations found in a clinical note
 import time
 import nlpsandbox
 from nlpsandbox.api import text_physical_address_annotation_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
-from nlpsandbox.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
+from nlpsandbox.models.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

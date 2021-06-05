@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.models.page_offset import PageOffset
 
 
 class TestPageOffset(unittest.TestCase):

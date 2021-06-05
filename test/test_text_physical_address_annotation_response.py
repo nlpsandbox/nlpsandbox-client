@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+from nlpsandbox.models.text_physical_address_annotation import TextPhysicalAddressAnnotation
 globals()['TextPhysicalAddressAnnotation'] = TextPhysicalAddressAnnotation
-from nlpsandbox.model.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
+from nlpsandbox.models.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
 
 
 class TestTextPhysicalAddressAnnotationResponse(unittest.TestCase):

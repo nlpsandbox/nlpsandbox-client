@@ -23,10 +23,10 @@ Create a FHIR store with the ID specified
 import time
 import nlpsandbox
 from nlpsandbox.api import fhir_store_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_create_response import FhirStoreCreateResponse
-from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_create_response import FhirStoreCreateResponse
+from nlpsandbox.models.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -107,9 +107,9 @@ Deletes the FHIR store specified
 import time
 import nlpsandbox
 from nlpsandbox.api import fhir_store_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -178,10 +178,10 @@ Returns the FHIR store specified
 import time
 import nlpsandbox
 from nlpsandbox.api import fhir_store_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.fhir_store import FhirStore
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.fhir_store import FhirStore
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -250,11 +250,11 @@ Returns the FHIR stores
 import time
 import nlpsandbox
 from nlpsandbox.api import fhir_store_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.page_of_fhir_stores import PageOfFhirStores
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.page_of_fhir_stores import PageOfFhirStores
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.page_offset import PageOffset
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

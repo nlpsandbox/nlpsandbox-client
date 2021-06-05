@@ -13,13 +13,13 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.annotation_source import AnnotationSource
-from nlpsandbox.model.text_contact_annotation import TextContactAnnotation
-from nlpsandbox.model.text_covid_symptom_annotation import TextCovidSymptomAnnotation
-from nlpsandbox.model.text_date_annotation import TextDateAnnotation
-from nlpsandbox.model.text_id_annotation import TextIdAnnotation
-from nlpsandbox.model.text_person_name_annotation import TextPersonNameAnnotation
-from nlpsandbox.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+from nlpsandbox.models.annotation_source import AnnotationSource
+from nlpsandbox.models.text_contact_annotation import TextContactAnnotation
+from nlpsandbox.models.text_covid_symptom_annotation import TextCovidSymptomAnnotation
+from nlpsandbox.models.text_date_annotation import TextDateAnnotation
+from nlpsandbox.models.text_id_annotation import TextIdAnnotation
+from nlpsandbox.models.text_person_name_annotation import TextPersonNameAnnotation
+from nlpsandbox.models.text_physical_address_annotation import TextPhysicalAddressAnnotation
 globals()['AnnotationSource'] = AnnotationSource
 globals()['TextContactAnnotation'] = TextContactAnnotation
 globals()['TextCovidSymptomAnnotation'] = TextCovidSymptomAnnotation
@@ -27,7 +27,7 @@ globals()['TextDateAnnotation'] = TextDateAnnotation
 globals()['TextIdAnnotation'] = TextIdAnnotation
 globals()['TextPersonNameAnnotation'] = TextPersonNameAnnotation
 globals()['TextPhysicalAddressAnnotation'] = TextPhysicalAddressAnnotation
-from nlpsandbox.model.annotation_create_request import AnnotationCreateRequest
+from nlpsandbox.models.annotation_create_request import AnnotationCreateRequest
 
 
 class TestAnnotationCreateRequest(unittest.TestCase):

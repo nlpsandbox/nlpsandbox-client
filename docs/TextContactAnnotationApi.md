@@ -20,9 +20,9 @@ Return the contact annotations found in a clinical note
 import time
 import nlpsandbox
 from nlpsandbox.api import text_contact_annotation_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.text_contact_annotation_response import TextContactAnnotationResponse
-from nlpsandbox.model.text_contact_annotation_request import TextContactAnnotationRequest
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.text_contact_annotation_response import TextContactAnnotationResponse
+from nlpsandbox.models.text_contact_annotation_request import TextContactAnnotationRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

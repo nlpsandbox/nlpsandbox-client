@@ -20,9 +20,9 @@ Return the ID annotations found in a clinical note
 import time
 import nlpsandbox
 from nlpsandbox.api import text_id_annotation_api
-from nlpsandbox.model.text_id_annotation_request import TextIdAnnotationRequest
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.text_id_annotation_response import TextIdAnnotationResponse
+from nlpsandbox.models.text_id_annotation_request import TextIdAnnotationRequest
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.text_id_annotation_response import TextIdAnnotationResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_id_annotation_all_of import TextIdAnnotationAllOf
+from nlpsandbox.models.text_id_annotation_all_of import TextIdAnnotationAllOf
 
 
 class TestTextIdAnnotationAllOf(unittest.TestCase):

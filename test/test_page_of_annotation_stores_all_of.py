@@ -13,10 +13,10 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.annotation_store import AnnotationStore
+from nlpsandbox.models.annotation_store import AnnotationStore
 from nlpsandbox.models import AnnotationStoreName
 globals()['AnnotationStore'] = AnnotationStore
-from nlpsandbox.model.page_of_annotation_stores_all_of import PageOfAnnotationStoresAllOf
+from nlpsandbox.models.page_of_annotation_stores_all_of import PageOfAnnotationStoresAllOf
 
 
 class TestPageOfAnnotationStoresAllOf(unittest.TestCase):

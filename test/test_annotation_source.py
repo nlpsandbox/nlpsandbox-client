@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.resource_source import ResourceSource
+from nlpsandbox.models.resource_source import ResourceSource
 globals()['ResourceSource'] = ResourceSource
-from nlpsandbox.model.annotation_source import AnnotationSource
+from nlpsandbox.models.annotation_source import AnnotationSource
 
 
 class TestAnnotationSource(unittest.TestCase):

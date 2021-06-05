@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_date_annotation import TextDateAnnotation
+from nlpsandbox.models.text_date_annotation import TextDateAnnotation
 globals()['TextDateAnnotation'] = TextDateAnnotation
-from nlpsandbox.model.text_date_annotation_response import TextDateAnnotationResponse
+from nlpsandbox.models.text_date_annotation_response import TextDateAnnotationResponse
 
 
 class TestTextDateAnnotationResponse(unittest.TestCase):

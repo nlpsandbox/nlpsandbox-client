@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.patient_id import PatientId
+from nlpsandbox.models.patient_id import PatientId
 globals()['PatientId'] = PatientId
-from nlpsandbox.model.note_create_request import NoteCreateRequest
+from nlpsandbox.models.note_create_request import NoteCreateRequest
 
 
 class TestNoteCreateRequest(unittest.TestCase):

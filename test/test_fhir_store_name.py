@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.fhir_store_name import FhirStoreName
+from nlpsandbox.models.fhir_store_name import FhirStoreName
 
 
 class TestFhirStoreName(unittest.TestCase):

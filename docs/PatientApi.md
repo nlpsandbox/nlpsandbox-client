@@ -23,12 +23,12 @@ Create a FHIR patient
 import time
 import nlpsandbox
 from nlpsandbox.api import patient_api
-from nlpsandbox.model.patient_id import PatientId
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.patient_create_request import PatientCreateRequest
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
-from nlpsandbox.model.patient_create_response import PatientCreateResponse
+from nlpsandbox.models.patient_id import PatientId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.patient_create_request import PatientCreateRequest
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
+from nlpsandbox.models.patient_create_response import PatientCreateResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -113,10 +113,10 @@ Deletes the FHIR patient specified
 import time
 import nlpsandbox
 from nlpsandbox.api import patient_api
-from nlpsandbox.model.patient_id import PatientId
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.models.patient_id import PatientId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -187,11 +187,11 @@ Returns the FHIR patient specified
 import time
 import nlpsandbox
 from nlpsandbox.api import patient_api
-from nlpsandbox.model.patient_id import PatientId
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.patient import Patient
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.models.patient_id import PatientId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.patient import Patient
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -262,12 +262,12 @@ Returns the Patients in a FHIR store
 import time
 import nlpsandbox
 from nlpsandbox.api import patient_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.page_of_patients import PageOfPatients
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
-from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.page_of_patients import PageOfPatients
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
+from nlpsandbox.models.page_offset import PageOffset
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

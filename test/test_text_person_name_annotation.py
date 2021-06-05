@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_person_name_annotation import TextPersonNameAnnotation
+from nlpsandbox.models.text_person_name_annotation import TextPersonNameAnnotation
 
 
 class TestTextPersonNameAnnotation(unittest.TestCase):

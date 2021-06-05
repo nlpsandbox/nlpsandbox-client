@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.patient_create_request import PatientCreateRequest
+from nlpsandbox.models.patient_create_request import PatientCreateRequest
 
 
 class TestPatientCreateRequest(unittest.TestCase):

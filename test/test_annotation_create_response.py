@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.annotation_name import AnnotationName
+from nlpsandbox.models.annotation_name import AnnotationName
 globals()['AnnotationName'] = AnnotationName
-from nlpsandbox.model.annotation_create_response import AnnotationCreateResponse
+from nlpsandbox.models.annotation_create_response import AnnotationCreateResponse
 
 
 class TestAnnotationCreateResponse(unittest.TestCase):

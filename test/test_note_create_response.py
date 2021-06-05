@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.note_resource_name import NoteResourceName
+from nlpsandbox.models.note_resource_name import NoteResourceName
 globals()['NoteResourceName'] = NoteResourceName
-from nlpsandbox.model.note_create_response import NoteCreateResponse
+from nlpsandbox.models.note_create_response import NoteCreateResponse
 
 
 class TestNoteCreateResponse(unittest.TestCase):

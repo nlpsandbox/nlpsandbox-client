@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.tool import Tool
+from nlpsandbox.models.tool import Tool
 globals()['Tool'] = Tool
-from nlpsandbox.model.tool_dependencies import ToolDependencies
+from nlpsandbox.models.tool_dependencies import ToolDependencies
 
 
 class TestToolDependencies(unittest.TestCase):

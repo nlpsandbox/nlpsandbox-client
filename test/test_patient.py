@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.patient_id import PatientId
+from nlpsandbox.models.patient_id import PatientId
 globals()['PatientId'] = PatientId
-from nlpsandbox.model.patient import Patient
+from nlpsandbox.models.patient import Patient
 
 
 class TestPatient(unittest.TestCase):

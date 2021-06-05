@@ -13,10 +13,10 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.note import Note
+from nlpsandbox.models.note import Note
 from nlpsandbox.models import PatientId, NoteId
 globals()['Note'] = Note
-from nlpsandbox.model.text_date_annotation_request import TextDateAnnotationRequest
+from nlpsandbox.models.text_date_annotation_request import TextDateAnnotationRequest
 
 
 class TestTextDateAnnotationRequest(unittest.TestCase):

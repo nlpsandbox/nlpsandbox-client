@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.annotation_api import AnnotationApi  # noqa: E501
+from nlpsandbox.apis.annotation_api import AnnotationApi  # noqa: E501
 from nlpsandbox.models import ResourceSource
 
 
@@ -33,7 +33,7 @@ class TestAnnotationApi(unittest.TestCase):
 
         Create an annotation  # noqa: E501
         """
-        self.api.create_annotation(
+        self.apis.create_annotation(
             dataset_id="awesome-dataset",
             annotation_store_id="awesome-annotation-store",
             annotation_id="awesome-annotation",
@@ -50,7 +50,7 @@ class TestAnnotationApi(unittest.TestCase):
 
         Delete an annotation  # noqa: E501
         """
-        self.api.delete_annotation(
+        self.apis.delete_annotation(
             dataset_id="data",
             annotation_store_id="data",
             annotation_id="data"
@@ -61,7 +61,7 @@ class TestAnnotationApi(unittest.TestCase):
 
         Get an annotation  # noqa: E501
         """
-        self.api.get_annotation(
+        self.apis.get_annotation(
             dataset_id="data",
             annotation_store_id="data",
             annotation_id="data"
@@ -72,7 +72,7 @@ class TestAnnotationApi(unittest.TestCase):
 
         List the annotations in an annotation store  # noqa: E501
         """
-        self.api.list_annotations(
+        self.apis.list_annotations(
             dataset_id="data",
             annotation_store_id="data"
         )

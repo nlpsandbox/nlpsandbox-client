@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_date_annotation_all_of import TextDateAnnotationAllOf
+from nlpsandbox.models.text_date_annotation_all_of import TextDateAnnotationAllOf
 from nlpsandbox.models import TextDateAnnotation
 
 

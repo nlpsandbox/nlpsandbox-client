@@ -12,7 +12,7 @@
 import unittest
 
 import nlpsandbox
-from nlpsandbox.api.text_id_annotation_api import TextIdAnnotationApi  # noqa: E501
+from nlpsandbox.apis.text_id_annotation_api import TextIdAnnotationApi  # noqa: E501
 
 
 class TestTextIdAnnotationApi(unittest.TestCase):

@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.note import Note
+from nlpsandbox.models.note import Note
 globals()['Note'] = Note
-from nlpsandbox.model.text_covid_symptom_annotation_request import TextCovidSymptomAnnotationRequest
+from nlpsandbox.models.text_covid_symptom_annotation_request import TextCovidSymptomAnnotationRequest
 
 
 class TestTextCovidSymptomAnnotationRequest(unittest.TestCase):

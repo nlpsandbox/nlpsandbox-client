@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.annotation_set import AnnotationSet
-from nlpsandbox.model.note import Note
+from nlpsandbox.models.annotation_set import AnnotationSet
+from nlpsandbox.models.note import Note
 globals()['AnnotationSet'] = AnnotationSet
 globals()['Note'] = Note
-from nlpsandbox.model.deidentify_response import DeidentifyResponse
+from nlpsandbox.models.deidentify_response import DeidentifyResponse
 
 
 class TestDeidentifyResponse(unittest.TestCase):

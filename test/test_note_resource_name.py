@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.note_resource_name import NoteResourceName
+from nlpsandbox.models.note_resource_name import NoteResourceName
 
 
 class TestNoteResourceName(unittest.TestCase):

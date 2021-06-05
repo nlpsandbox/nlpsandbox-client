@@ -20,9 +20,9 @@ Return the COVID symptom annotations found in a clinical note
 import time
 import nlpsandbox
 from nlpsandbox.api import text_covid_symptom_annotation_api
-from nlpsandbox.model.text_covid_symptom_annotation_response import TextCovidSymptomAnnotationResponse
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.text_covid_symptom_annotation_request import TextCovidSymptomAnnotationRequest
+from nlpsandbox.models.text_covid_symptom_annotation_response import TextCovidSymptomAnnotationResponse
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.text_covid_symptom_annotation_request import TextCovidSymptomAnnotationRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

@@ -23,10 +23,10 @@ Create an annotation store with the ID specified
 import time
 import nlpsandbox
 from nlpsandbox.api import annotation_store_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.annotation_store_id import AnnotationStoreId
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.annotation_store_create_response import AnnotationStoreCreateResponse
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.annotation_store_id import AnnotationStoreId
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.annotation_store_create_response import AnnotationStoreCreateResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -107,9 +107,9 @@ Deletes the annotation store specified
 import time
 import nlpsandbox
 from nlpsandbox.api import annotation_store_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.annotation_store_id import AnnotationStoreId
-from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.annotation_store_id import AnnotationStoreId
+from nlpsandbox.models.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -178,10 +178,10 @@ Returns the annotation store specified
 import time
 import nlpsandbox
 from nlpsandbox.api import annotation_store_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.annotation_store_id import AnnotationStoreId
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.annotation_store import AnnotationStore
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.annotation_store_id import AnnotationStoreId
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.annotation_store import AnnotationStore
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -250,11 +250,11 @@ Returns the annotation stores
 import time
 import nlpsandbox
 from nlpsandbox.api import annotation_store_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.page_offset import PageOffset
-from nlpsandbox.model.page_of_annotation_stores import PageOfAnnotationStores
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.page_offset import PageOffset
+from nlpsandbox.models.page_of_annotation_stores import PageOfAnnotationStores
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

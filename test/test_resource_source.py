@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.resource_source import ResourceSource
+from nlpsandbox.models.resource_source import ResourceSource
 
 
 class TestResourceSource(unittest.TestCase):

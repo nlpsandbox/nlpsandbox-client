@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.license import License
+from nlpsandbox.models.license import License
 
 
 class TestLicense(unittest.TestCase):

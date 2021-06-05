@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_contact_annotation_all_of import TextContactAnnotationAllOf
+from nlpsandbox.models.text_contact_annotation_all_of import TextContactAnnotationAllOf
 
 
 class TestTextContactAnnotationAllOf(unittest.TestCase):

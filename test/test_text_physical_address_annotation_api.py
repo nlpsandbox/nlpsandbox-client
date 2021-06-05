@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.text_physical_address_annotation_api import TextPhysicalAddressAnnotationApi  # noqa: E501
+from nlpsandbox.apis.text_physical_address_annotation_api import TextPhysicalAddressAnnotationApi  # noqa: E501
 
 
 class TestTextPhysicalAddressAnnotationApi(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestTextPhysicalAddressAnnotationApi(unittest.TestCase):
 
         Annotate physical addresses in a clinical note  # noqa: E501
         """
-        self.api.create_text_physical_address_annotations(
+        self.apis.create_text_physical_address_annotations(
             text_physical_address_annotation_request={
                 "note": {
                     "identifier": "note-1",

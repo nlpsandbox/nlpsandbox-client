@@ -21,8 +21,8 @@ Get information about the tool
 import time
 import nlpsandbox
 from nlpsandbox.api import tool_api
-from nlpsandbox.model.tool import Tool
-from nlpsandbox.model.error import Error
+from nlpsandbox.models.tool import Tool
+from nlpsandbox.models.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -85,8 +85,8 @@ Get the dependencies of this tool
 import time
 import nlpsandbox
 from nlpsandbox.api import tool_api
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.tool_dependencies import ToolDependencies
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.tool_dependencies import ToolDependencies
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

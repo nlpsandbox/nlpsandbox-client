@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
+from nlpsandbox.models.response_page_metadata_links import ResponsePageMetadataLinks
 
 
 class TestResponsePageMetadataLinks(unittest.TestCase):

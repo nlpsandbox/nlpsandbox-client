@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.note_id import NoteId
+from nlpsandbox.models.note_id import NoteId
 
 
 class TestNoteId(unittest.TestCase):

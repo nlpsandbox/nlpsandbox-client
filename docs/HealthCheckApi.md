@@ -20,8 +20,8 @@ Get information about the health of the service
 import time
 import nlpsandbox
 from nlpsandbox.api import health_check_api
-from nlpsandbox.model.health_check import HealthCheck
-from nlpsandbox.model.error import Error
+from nlpsandbox.models.health_check import HealthCheck
+from nlpsandbox.models.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

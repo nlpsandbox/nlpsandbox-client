@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_annotation import TextAnnotation
-from nlpsandbox.model.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
+from nlpsandbox.models.text_annotation import TextAnnotation
+from nlpsandbox.models.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
 globals()['TextAnnotation'] = TextAnnotation
 globals()['TextPhysicalAddressAnnotationAllOf'] = TextPhysicalAddressAnnotationAllOf
-from nlpsandbox.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+from nlpsandbox.models.text_physical_address_annotation import TextPhysicalAddressAnnotation
 
 
 class TestTextPhysicalAddressAnnotation(unittest.TestCase):

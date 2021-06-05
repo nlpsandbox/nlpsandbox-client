@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.license import License
-from nlpsandbox.model.tool_type import ToolType
+from nlpsandbox.models.license import License
+from nlpsandbox.models.tool_type import ToolType
 globals()['License'] = License
 globals()['ToolType'] = ToolType
-from nlpsandbox.model.tool import Tool
+from nlpsandbox.models.tool import Tool
 
 
 class TestTool(unittest.TestCase):

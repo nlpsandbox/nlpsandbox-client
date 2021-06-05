@@ -23,12 +23,12 @@ Create a note
 import time
 import nlpsandbox
 from nlpsandbox.api import note_api
-from nlpsandbox.model.note_id import NoteId
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
-from nlpsandbox.model.note_create_request import NoteCreateRequest
-from nlpsandbox.model.note_create_response import NoteCreateResponse
+from nlpsandbox.models.note_id import NoteId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
+from nlpsandbox.models.note_create_request import NoteCreateRequest
+from nlpsandbox.models.note_create_response import NoteCreateResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -115,10 +115,10 @@ Deletes the note specified
 import time
 import nlpsandbox
 from nlpsandbox.api import note_api
-from nlpsandbox.model.note_id import NoteId
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.models.note_id import NoteId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -189,11 +189,11 @@ Returns the note specified
 import time
 import nlpsandbox
 from nlpsandbox.api import note_api
-from nlpsandbox.model.note_id import NoteId
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.note import Note
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.models.note_id import NoteId
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.note import Note
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -264,12 +264,12 @@ Returns the notes in a FHIR store
 import time
 import nlpsandbox
 from nlpsandbox.api import note_api
-from nlpsandbox.model.page_of_notes import PageOfNotes
-from nlpsandbox.model.error import Error
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
-from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.models.page_of_notes import PageOfNotes
+from nlpsandbox.models.error import Error
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.dataset_id import DatasetId
+from nlpsandbox.models.fhir_store_id import FhirStoreId
+from nlpsandbox.models.page_offset import PageOffset
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.

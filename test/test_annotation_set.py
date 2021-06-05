@@ -13,17 +13,17 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_contact_annotation import TextContactAnnotation
-from nlpsandbox.model.text_date_annotation import TextDateAnnotation
-from nlpsandbox.model.text_id_annotation import TextIdAnnotation
-from nlpsandbox.model.text_person_name_annotation import TextPersonNameAnnotation
-from nlpsandbox.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+from nlpsandbox.models.text_contact_annotation import TextContactAnnotation
+from nlpsandbox.models.text_date_annotation import TextDateAnnotation
+from nlpsandbox.models.text_id_annotation import TextIdAnnotation
+from nlpsandbox.models.text_person_name_annotation import TextPersonNameAnnotation
+from nlpsandbox.models.text_physical_address_annotation import TextPhysicalAddressAnnotation
 globals()['TextContactAnnotation'] = TextContactAnnotation
 globals()['TextDateAnnotation'] = TextDateAnnotation
 globals()['TextIdAnnotation'] = TextIdAnnotation
 globals()['TextPersonNameAnnotation'] = TextPersonNameAnnotation
 globals()['TextPhysicalAddressAnnotation'] = TextPhysicalAddressAnnotation
-from nlpsandbox.model.annotation_set import AnnotationSet
+from nlpsandbox.models.annotation_set import AnnotationSet
 
 
 class TestAnnotationSet(unittest.TestCase):

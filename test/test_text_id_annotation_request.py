@@ -13,9 +13,9 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.note import Note
+from nlpsandbox.models.note import Note
 globals()['Note'] = Note
-from nlpsandbox.model.text_id_annotation_request import TextIdAnnotationRequest
+from nlpsandbox.models.text_id_annotation_request import TextIdAnnotationRequest
 
 
 class TestTextIdAnnotationRequest(unittest.TestCase):

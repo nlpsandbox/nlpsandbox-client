@@ -13,13 +13,13 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.page_offset import PageOffset
-from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
+from nlpsandbox.models.page_limit import PageLimit
+from nlpsandbox.models.page_offset import PageOffset
+from nlpsandbox.models.response_page_metadata_links import ResponsePageMetadataLinks
 globals()['PageLimit'] = PageLimit
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
-from nlpsandbox.model.response_page_metadata import ResponsePageMetadata
+from nlpsandbox.models.response_page_metadata import ResponsePageMetadata
 
 
 class TestResponsePageMetadata(unittest.TestCase):

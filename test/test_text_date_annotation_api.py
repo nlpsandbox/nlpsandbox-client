@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.text_date_annotation_api import TextDateAnnotationApi  # noqa: E501
+from nlpsandbox.apis.text_date_annotation_api import TextDateAnnotationApi  # noqa: E501
 
 
 class TestTextDateAnnotationApi(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestTextDateAnnotationApi(unittest.TestCase):
 
         Annotate dates in a clinical note  # noqa: E501
         """
-        self.api.create_text_date_annotations(
+        self.apis.create_text_date_annotations(
             text_date_annotation_request={
                 "note": {
                     "identifier": "note-1",

@@ -13,7 +13,7 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_covid_symptom_annotation_all_of import TextCovidSymptomAnnotationAllOf
+from nlpsandbox.models.text_covid_symptom_annotation_all_of import TextCovidSymptomAnnotationAllOf
 
 
 class TestTextCovidSymptomAnnotationAllOf(unittest.TestCase):
