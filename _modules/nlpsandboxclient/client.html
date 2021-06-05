@@ -667,17 +667,17 @@
             <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="n">utils</span><span class="o">.</span><span class="n">change_keys</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">camelcase_to_snakecase</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:date-nlpsandboxsdk&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:date-annotator&quot;</span><span class="p">:</span>
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:person-name-nlpsandboxsdk&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:person-name-annotator&quot;</span><span class="p">:</span>
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_person_name</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:physical-address-nlpsandboxsdk&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:physical-address-annotator&quot;</span><span class="p">:</span>
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_physical_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:contact-nlpsandboxsdk&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:contact-annotator&quot;</span><span class="p">:</span>
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_contact</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:id-nlpsandboxsdk&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:id-annotator&quot;</span><span class="p">:</span>
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_id</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:covid-symptom-nlpsandboxsdk&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:covid-symptom-annotator&quot;</span><span class="p">:</span>
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_covid_symptom</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span>
                                                   <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
