@@ -13,17 +13,17 @@ https://github.com/nlpsandbox/data-node
 """
 import json
 
-import nlpsandboxsdk
-import nlpsandboxsdk.apis
-import nlpsandboxsdk.models
-from nlpsandboxsdk.rest import ApiException
+import nlpsandbox
+import nlpsandbox.apis
+import nlpsandbox.models
+from nlpsandbox.rest import ApiException
 import nlpsandboxclient.utils
 
 
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
 host = "http://localhost:8080/api/v1"
-configuration = nlpsandboxsdk.Configuration(host=host)
+configuration = nlpsandbox.Configuration(host=host)
 
 dataset_id = 'test-dataset'
 fhir_store_id = 'evaluation'
@@ -31,13 +31,13 @@ annotation_store_id = 'goldstandard'
 json_filename = "example-patient-bundles.json"
 
 
-with nlpsandboxsdk.ApiClient(configuration) as api_client:
-    dataset_api = nlpsandboxsdk.apis.DatasetApi(api_client)
-    fhir_store_api = nlpsandboxsdk.apis.FhirStoreApi(api_client)
-    annotation_store_api = nlpsandboxsdk.apis.AnnotationStoreApi(api_client)
-    patient_api = nlpsandboxsdk.apis.PatientApi(api_client)
-    note_api = nlpsandboxsdk.apis.NoteApi(api_client)
-    annotation_api = nlpsandboxsdk.apis.AnnotationApi(api_client)
+with nlpsandbox.ApiClient(configuration) as api_client:
+    dataset_api = nlpsandbox.apis.DatasetApi(api_client)
+    fhir_store_api = nlpsandbox.apis.FhirStoreApi(api_client)
+    annotation_store_api = nlpsandbox.apis.AnnotationStoreApi(api_client)
+    patient_api = nlpsandbox.apis.PatientApi(api_client)
+    note_api = nlpsandbox.apis.NoteApi(api_client)
+    annotation_api = nlpsandbox.apis.AnnotationApi(api_client)
 
     # The example is always deleted
     try:
