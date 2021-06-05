@@ -14,7 +14,7 @@
 
 NLP Sandbox Client Library for Python.  This repository consists of 2 packages
 
-- `nlpsandboxsdk`: Python SDK client that wraps all the NLP Sandbox APIs
+- `nlpsandbox`: Python SDK client that wraps all the NLP Sandbox APIs
 - `nlpsandboxclient` - Convenience functions that infer user behavior of the SDK client.
 
 ## Specification
