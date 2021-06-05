@@ -1,6 +1,7 @@
 # PageOfFhirStores
 
 A page of FHIR stores
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

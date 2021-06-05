@@ -1,6 +1,7 @@
 # AnnotationStoreCreateResponse
 
 The reference to the annotation store created
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

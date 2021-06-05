@@ -1,6 +1,7 @@
 # FhirStoreName
 
 The resource name of the FHIR store, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

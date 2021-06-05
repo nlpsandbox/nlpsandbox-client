@@ -1,6 +1,7 @@
 # TextCovidSymptomAnnotationRequest
 
 A request to annotate COVID symptoms in a clinical note
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

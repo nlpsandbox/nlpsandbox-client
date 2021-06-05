@@ -88,6 +88,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling AnnotationApi->create_annotation: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -109,6 +110,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -162,6 +164,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling AnnotationApi->delete_annotation: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -182,6 +185,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -235,6 +239,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling AnnotationApi->get_annotation: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -255,6 +260,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -319,6 +325,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling AnnotationApi->list_annotations: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -340,6 +347,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

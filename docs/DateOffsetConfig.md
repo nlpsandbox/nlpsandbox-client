@@ -1,6 +1,7 @@
 # DateOffsetConfig
 
 Configuration for the \"date offset\" strategy. E.g. \"John Smith visited on 1 January 2020\" -> \"John Smith visited on 29 October 2025\". Note, can only be set with the \"text_date\" annotation type.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,5 +1,6 @@
 # TextContactAnnotationAllOf
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

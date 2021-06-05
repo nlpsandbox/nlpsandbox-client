@@ -45,6 +45,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling ToolApi->get_tool: %s\n" % e)
 ```
 
+
 ### Parameters
 This endpoint does not need any parameter.
 
@@ -60,6 +61,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -107,6 +109,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling ToolApi->get_tool_dependencies: %s\n" % e)
 ```
 
+
 ### Parameters
 This endpoint does not need any parameter.
 
@@ -122,6 +125,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

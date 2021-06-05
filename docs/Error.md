@@ -1,6 +1,7 @@
 # Error
 
 Problem details (tools.ietf.org/html/rfc7807)
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # PatientCreateRequest
 
 A FHIR patient
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # NoteId
 
 The ID of the clinical note
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

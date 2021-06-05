@@ -59,6 +59,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling DatasetApi->create_dataset: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -78,6 +79,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -127,6 +129,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling DatasetApi->delete_dataset: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -145,6 +148,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -194,6 +198,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling DatasetApi->get_dataset: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -212,6 +217,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -264,6 +270,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling DatasetApi->list_datasets: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -283,6 +290,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

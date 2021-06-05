@@ -1,6 +1,7 @@
 # ResourceSource
 
 An API resource source
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,7 @@
 # MaskingCharConfig
 
 Configuration for the masking char strategy. E.g. \"John Smith lives at 123 Main St\" -> \"********* lives at ***********\".
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
