@@ -1,5 +1,6 @@
 # PageOfPatientsAllOf
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

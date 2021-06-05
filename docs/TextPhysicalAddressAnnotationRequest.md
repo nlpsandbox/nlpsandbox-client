@@ -1,6 +1,7 @@
 # TextPhysicalAddressAnnotationRequest
 
 A request to annotate physical addresses in a clinical note
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

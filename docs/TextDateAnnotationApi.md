@@ -54,6 +54,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling TextDateAnnotationApi->create_text_date_annotations: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -72,6 +73,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

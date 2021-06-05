@@ -1,5 +1,6 @@
 # TextDateAnnotationAllOf
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

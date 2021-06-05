@@ -113,22 +113,6 @@ The Python SDK client `nlpsandbox` is now automatically updated when there is a 
   openapi-generator generate -g python -o . --package-name nlpsandbox -i https://nlpsandbox.github.io/nlpsandbox-schemas/_internal/nlpsandbox/edge/openapi.json
   ```
 
-<!-- - `datanode` package
-  ```
-  openapi-generator generate -g python -o . --package-name datanode -i https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/edge/openapi.json
-  ```
-
-- `annotator` package
-  Use the `merge-annotator` branch in the `nlpsandbox-schemas` to view a merged [openapi.yaml](https://github.com/nlpsandbox/nlpsandbox-schemas/blob/merge-annotators/openapi/annotator/openapi.yaml).  Follow instructions in the schemas github repository to validate the `annotators` folder. This file merges all of the annotators together.
-  ```
-  # Create merged openapi.yaml
-  git clone -b merge-annotator https://github.com/nlpsandbox/nlpsandbox-schemas.git
-  cd nlpsandbox-schemas
-  npm run validate --api=annotator  # This command will create a complete openapi.yaml
-  # navigate back into the nlpsandbox-client directory
-  openapi-generator generate -g python -o . --package-name annotator -i nlpsandbox-schemas/openapi.yaml
-  ``` -->
-
 ### Testing
 
 Please add tests for new code. These might include unit tests (to test specific functionality of code that was added to support fixing the bug or feature), integration tests (to test that the feature is usable - e.g., it should have complete the expected behavior as reported in the feature request or bug report), or both.

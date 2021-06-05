@@ -199,6 +199,5 @@ nlpsandbox/model/tool_dependencies.py
 nlpsandbox/model/tool_type.py
 nlpsandbox/model_utils.py
 nlpsandbox/models/__init__.py
-nlpsandbox/models/__init__.py
 nlpsandbox/rest.py
 test/__init__.py

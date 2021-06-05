@@ -61,6 +61,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling FhirStoreApi->create_fhir_store: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -81,6 +82,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -132,6 +134,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling FhirStoreApi->delete_fhir_store: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -151,6 +154,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -202,6 +206,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling FhirStoreApi->get_fhir_store: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -221,6 +226,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -283,6 +289,7 @@ with nlpsandbox.ApiClient() as api_client:
         print("Exception when calling FhirStoreApi->list_fhir_stores: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -303,6 +310,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

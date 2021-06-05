@@ -1,6 +1,7 @@
 # Tool
 
 Information about an NLP tool
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

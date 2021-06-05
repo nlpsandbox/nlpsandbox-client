@@ -1,6 +1,7 @@
 # PatientCreateResponse
 
 The reference to the patient created
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
