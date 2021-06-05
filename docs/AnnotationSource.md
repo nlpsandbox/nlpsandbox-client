@@ -1,7 +1,6 @@
 # AnnotationSource
 
 The source of an annotation record
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

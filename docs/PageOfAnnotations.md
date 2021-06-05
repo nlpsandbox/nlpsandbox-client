@@ -1,7 +1,6 @@
 # PageOfAnnotations
 
 A page of annotations
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

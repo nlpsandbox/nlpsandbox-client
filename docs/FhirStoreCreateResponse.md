@@ -1,7 +1,6 @@
 # FhirStoreCreateResponse
 
 The reference to the FHIR store created
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,7 +1,6 @@
 # AnnotationCreateResponse
 
 The reference to the annotation created
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

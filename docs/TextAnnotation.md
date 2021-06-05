@@ -1,7 +1,6 @@
 # TextAnnotation
 
 An annotation in a text
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

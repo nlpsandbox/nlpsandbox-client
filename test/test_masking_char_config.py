@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.masking_char_config import MaskingCharConfig
+import nlpsandbox
+from nlpsandbox.model.masking_char_config import MaskingCharConfig
 
 
 class TestMaskingCharConfig(unittest.TestCase):

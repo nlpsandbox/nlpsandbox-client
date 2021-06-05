@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.text_date_annotation import TextDateAnnotation
+import nlpsandbox
+from nlpsandbox.model.text_date_annotation import TextDateAnnotation
 globals()['TextDateAnnotation'] = TextDateAnnotation
-from nlpsandboxsdk.model.text_date_annotation_response import TextDateAnnotationResponse
+from nlpsandbox.model.text_date_annotation_response import TextDateAnnotationResponse
 
 
 class TestTextDateAnnotationResponse(unittest.TestCase):

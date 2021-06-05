@@ -1,7 +1,6 @@
 # AnnotationStoreId
 
 The ID of the annotation store
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

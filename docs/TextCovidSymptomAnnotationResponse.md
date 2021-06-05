@@ -1,7 +1,6 @@
 # TextCovidSymptomAnnotationResponse
 
 The response to a COVID symptoms annotation request
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

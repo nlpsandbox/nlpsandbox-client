@@ -12,12 +12,12 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.deidentification_step import DeidentificationStep
-from nlpsandboxsdk.model.note import Note
+import nlpsandbox
+from nlpsandbox.model.deidentification_step import DeidentificationStep
+from nlpsandbox.model.note import Note
 globals()['DeidentificationStep'] = DeidentificationStep
 globals()['Note'] = Note
-from nlpsandboxsdk.model.deidentify_request import DeidentifyRequest
+from nlpsandbox.model.deidentify_request import DeidentifyRequest
 
 
 class TestDeidentifyRequest(unittest.TestCase):

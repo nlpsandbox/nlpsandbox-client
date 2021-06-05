@@ -1,7 +1,6 @@
 # FhirStore
 
 A FHIR store
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

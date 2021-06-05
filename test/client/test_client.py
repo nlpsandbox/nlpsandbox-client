@@ -3,8 +3,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.api import (
+import nlpsandbox
+from nlpsandbox.api import (
     annotation_api, annotation_store_api,
     dataset_api, note_api,
     text_contact_annotation_api,
@@ -15,7 +15,7 @@ from nlpsandboxsdk.api import (
     text_physical_address_annotation_api,
     tool_api,
 )
-from nlpsandboxsdk.models import (
+from nlpsandbox.models import (
     Annotation, AnnotationName, AnnotationSource,
     AnnotationStore, AnnotationStoreName, Dataset, DatasetName,
     License, PageLimit, PageOfAnnotations, PageOfDatasets,
@@ -23,7 +23,7 @@ from nlpsandboxsdk.models import (
     TextDateAnnotation, TextDateAnnotationResponse, Tool,
     ToolType, ResourceSource, ResponsePageMetadataLinks,
 )
-from nlpsandboxsdk.rest import ApiException
+from nlpsandbox.rest import ApiException
 from nlpsandboxclient import client
 
 
@@ -40,10 +40,10 @@ from nlpsandboxclient import client
 #         offset=0, limit=3, links=Mock(next="")
 #     )
 
-#     with patch.object(nlpsandboxsdk, "Configuration",
+#     with patch.object(nlpsandbox, "Configuration",
 #                       return_value=configuration) as config,\
-#          patch.object(nlpsandboxsdk, "ApiClient") as api_client,\
-#          patch.object(nlpsandboxsdk, "NoteApi",
+#          patch.object(nlpsandbox, "ApiClient") as api_client,\
+#          patch.object(nlpsandbox, "NoteApi",
 #                       return_value=note_api_mock) as note_api,\
 #          patch.object(note_api_mock, "list_notes",
 #                       return_value=note_example) as list_notes:
@@ -76,13 +76,13 @@ from nlpsandboxclient import client
 class TestDataNodeClient:
 
     def setup_method(self):
-        self.configuration = nlpsandboxsdk.Configuration()
-        self.api = nlpsandboxsdk.ApiClient()
+        self.configuration = nlpsandbox.Configuration()
+        self.api = nlpsandbox.ApiClient()
         self.mock_api = Mock()
         self.host = "0.0.0.0"
-        self.config = patch.object(nlpsandboxsdk, "Configuration",
+        self.config = patch.object(nlpsandbox, "Configuration",
                                    return_value=self.configuration)
-        self.api_client = patch.object(nlpsandboxsdk, "ApiClient")
+        self.api_client = patch.object(nlpsandbox, "ApiClient")
         self.dataset_id = "awesome-dataset"
         self.annotation_store_id = "annotation-store"
         self.annotation_id = "awesome-annotation"
@@ -352,13 +352,13 @@ class TestDataNodeClient:
 class TestAnnotatorClient:
 
     def setup_method(self):
-        self.configuration = nlpsandboxsdk.Configuration()
-        self.api = nlpsandboxsdk.ApiClient()
+        self.configuration = nlpsandbox.Configuration()
+        self.api = nlpsandbox.ApiClient()
         self.mock_api = Mock()
         self.host = "0.0.0.0"
-        self.config = patch.object(nlpsandboxsdk, "Configuration",
+        self.config = patch.object(nlpsandbox, "Configuration",
                                    return_value=self.configuration)
-        self.api_client = patch.object(nlpsandboxsdk, "ApiClient")
+        self.api_client = patch.object(nlpsandbox, "ApiClient")
         self.example_note = {
             "identifier": "note-1",
             "type": "loinc:LP29684-5",
@@ -462,7 +462,7 @@ class TestAnnotatorClient:
 
     def test_annotate_note__wrong_tool_type(self):
         """Wrong tool type"""
-        with pytest.raises(ValueError, match="Invalid nlpsandboxsdk_type: foo"):
+        with pytest.raises(ValueError, match="Invalid annotator_type: foo"):
             client.annotate_note(host=self.host, note=self.example_note,
                                  tool_type="foo")
 

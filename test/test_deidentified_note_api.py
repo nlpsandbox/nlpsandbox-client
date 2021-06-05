@@ -11,8 +11,8 @@
 
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.api.deidentified_note_api import DeidentifiedNoteApi  # noqa: E501
+import nlpsandbox
+from nlpsandbox.api.deidentified_note_api import DeidentifiedNoteApi  # noqa: E501
 
 
 class TestDeidentifiedNoteApi(unittest.TestCase):

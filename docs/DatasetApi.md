@@ -1,4 +1,4 @@
-# nlpsandboxsdk.DatasetApi
+# nlpsandbox.DatasetApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -21,21 +21,21 @@ Create a dataset with the name specified
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import dataset_api
-from nlpsandboxsdk.model.dataset_create_response import DatasetCreateResponse
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.dataset_id import DatasetId
+import nlpsandbox
+from nlpsandbox.api import dataset_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.dataset_create_response import DatasetCreateResponse
+from nlpsandbox.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dataset_api.DatasetApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset that is being created
@@ -46,7 +46,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Create a dataset
         api_response = api_instance.create_dataset(dataset_id)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling DatasetApi->create_dataset: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -55,10 +55,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Create a dataset
         api_response = api_instance.create_dataset(dataset_id, body=body)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling DatasetApi->create_dataset: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -79,7 +78,6 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -102,20 +100,20 @@ Deletes the dataset for a given ID
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import dataset_api
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.dataset_id import DatasetId
+import nlpsandbox
+from nlpsandbox.api import dataset_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.dataset_id import DatasetId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dataset_api.DatasetApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -125,10 +123,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Delete a dataset by ID
         api_response = api_instance.delete_dataset(dataset_id)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling DatasetApi->delete_dataset: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -148,7 +145,6 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -170,21 +166,21 @@ Returns the dataset for a given ID
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import dataset_api
-from nlpsandboxsdk.model.dataset import Dataset
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.dataset_id import DatasetId
+import nlpsandbox
+from nlpsandbox.api import dataset_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.model.dataset import Dataset
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dataset_api.DatasetApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -194,10 +190,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Get a dataset by ID
         api_response = api_instance.get_dataset(dataset_id)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling DatasetApi->get_dataset: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -217,7 +212,6 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -239,22 +233,22 @@ Returns the datasets
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import dataset_api
-from nlpsandboxsdk.model.page_offset import PageOffset
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.page_of_datasets import PageOfDatasets
-from nlpsandboxsdk.model.page_limit import PageLimit
+import nlpsandbox
+from nlpsandbox.api import dataset_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.page_of_datasets import PageOfDatasets
+from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.model.page_offset import PageOffset
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dataset_api.DatasetApi(api_client)
     limit = PageLimit(10) # PageLimit | Maximum number of results returned (optional)
@@ -266,10 +260,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Get all datasets
         api_response = api_instance.list_datasets(limit=limit, offset=offset)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling DatasetApi->list_datasets: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -290,7 +283,6 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |

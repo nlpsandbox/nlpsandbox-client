@@ -12,21 +12,21 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.annotation_store import AnnotationStore
-from nlpsandboxsdk.model.page_limit import PageLimit
-from nlpsandboxsdk.model.page_of_annotation_stores_all_of import PageOfAnnotationStoresAllOf
-from nlpsandboxsdk.model.page_offset import PageOffset
-from nlpsandboxsdk.model.response_page_metadata import ResponsePageMetadata
-from nlpsandboxsdk.model.response_page_metadata_links import ResponsePageMetadataLinks
-from nlpsandboxsdk.models import AnnotationStoreName
+import nlpsandbox
+from nlpsandbox.model.annotation_store import AnnotationStore
+from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.model.page_of_annotation_stores_all_of import PageOfAnnotationStoresAllOf
+from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.model.response_page_metadata import ResponsePageMetadata
+from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
+from nlpsandbox.models import AnnotationStoreName
 globals()['AnnotationStore'] = AnnotationStore
 globals()['PageLimit'] = PageLimit
 globals()['PageOfAnnotationStoresAllOf'] = PageOfAnnotationStoresAllOf
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
-from nlpsandboxsdk.model.page_of_annotation_stores import PageOfAnnotationStores
+from nlpsandbox.model.page_of_annotation_stores import PageOfAnnotationStores
 
 
 class TestPageOfAnnotationStores(unittest.TestCase):

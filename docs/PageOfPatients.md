@@ -1,7 +1,6 @@
 # PageOfPatients
 
 A page of FHIR patients
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

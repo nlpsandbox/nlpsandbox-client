@@ -12,12 +12,12 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.text_annotation import TextAnnotation
-from nlpsandboxsdk.model.text_covid_symptom_annotation_all_of import TextCovidSymptomAnnotationAllOf
+import nlpsandbox
+from nlpsandbox.model.text_annotation import TextAnnotation
+from nlpsandbox.model.text_covid_symptom_annotation_all_of import TextCovidSymptomAnnotationAllOf
 globals()['TextAnnotation'] = TextAnnotation
 globals()['TextCovidSymptomAnnotationAllOf'] = TextCovidSymptomAnnotationAllOf
-from nlpsandboxsdk.model.text_covid_symptom_annotation import TextCovidSymptomAnnotation
+from nlpsandbox.model.text_covid_symptom_annotation import TextCovidSymptomAnnotation
 
 
 class TestTextCovidSymptomAnnotation(unittest.TestCase):

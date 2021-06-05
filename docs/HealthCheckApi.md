@@ -1,4 +1,4 @@
-# nlpsandboxsdk.HealthCheckApi
+# nlpsandbox.HealthCheckApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -18,20 +18,20 @@ Get information about the health of the service
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import health_check_api
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.health_check import HealthCheck
+import nlpsandbox
+from nlpsandbox.api import health_check_api
+from nlpsandbox.model.health_check import HealthCheck
+from nlpsandbox.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = health_check_api.HealthCheckApi(api_client)
 
@@ -40,10 +40,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Get health check information
         api_response = api_instance.get_health_check()
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling HealthCheckApi->get_health_check: %s\n" % e)
 ```
-
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -60,7 +59,6 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |

@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.fhir_store_name import FhirStoreName
+import nlpsandbox
+from nlpsandbox.model.fhir_store_name import FhirStoreName
 globals()['FhirStoreName'] = FhirStoreName
-from nlpsandboxsdk.model.fhir_store_create_response import FhirStoreCreateResponse
+from nlpsandbox.model.fhir_store_create_response import FhirStoreCreateResponse
 
 
 class TestFhirStoreCreateResponse(unittest.TestCase):

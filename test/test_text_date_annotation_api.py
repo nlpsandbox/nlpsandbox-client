@@ -12,8 +12,8 @@
 import unittest
 from unittest.mock import patch
 
-import nlpsandboxsdk
-from nlpsandboxsdk.api.text_date_annotation_api import TextDateAnnotationApi  # noqa: E501
+import nlpsandbox
+from nlpsandbox.api.text_date_annotation_api import TextDateAnnotationApi  # noqa: E501
 
 
 class TestTextDateAnnotationApi(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestTextDateAnnotationApi(unittest.TestCase):
 
     def setUp(self):
         self.api = TextDateAnnotationApi()  # noqa: E501
-        self.patcher = patch('nlpsandboxsdk.api_client.ApiClient.call_api')
+        self.patcher = patch('nlpsandbox.api_client.ApiClient.call_api')
         self.mock_foo = self.patcher.start()
 
     def tearDown(self):

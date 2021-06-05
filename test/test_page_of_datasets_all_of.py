@@ -12,11 +12,11 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.dataset import Dataset
-from nlpsandboxsdk.models import DatasetName
+import nlpsandbox
+from nlpsandbox.model.dataset import Dataset
+from nlpsandbox.models import DatasetName
 globals()['Dataset'] = Dataset
-from nlpsandboxsdk.model.page_of_datasets_all_of import PageOfDatasetsAllOf
+from nlpsandbox.model.page_of_datasets_all_of import PageOfDatasetsAllOf
 
 
 class TestPageOfDatasetsAllOf(unittest.TestCase):

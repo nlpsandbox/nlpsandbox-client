@@ -1,6 +1,5 @@
 # PageOfAnnotationStoresAllOf
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,7 +1,6 @@
 # TextIdAnnotation
 
 An ID annotation in a text
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

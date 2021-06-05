@@ -1,6 +1,5 @@
 # PageOfFhirStoresAllOf
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

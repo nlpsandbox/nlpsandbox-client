@@ -1,4 +1,4 @@
-# nlpsandboxsdk.DeidentifiedNoteApi
+# nlpsandbox.DeidentifiedNoteApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -18,21 +18,21 @@ Returns the deidentified note
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import deidentified_note_api
-from nlpsandboxsdk.model.deidentify_response import DeidentifyResponse
-from nlpsandboxsdk.model.deidentify_request import DeidentifyRequest
-from nlpsandboxsdk.model.error import Error
+import nlpsandbox
+from nlpsandbox.api import deidentified_note_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.deidentify_response import DeidentifyResponse
+from nlpsandbox.model.deidentify_request import DeidentifyRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = deidentified_note_api.DeidentifiedNoteApi(api_client)
     deidentify_request = DeidentifyRequest(
@@ -66,10 +66,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Deidentify a clinical note
         api_response = api_instance.create_deidentified_notes(deidentify_request=deidentify_request)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling DeidentifiedNoteApi->create_deidentified_notes: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -89,7 +88,6 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |

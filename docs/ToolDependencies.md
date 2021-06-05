@@ -1,7 +1,6 @@
 # ToolDependencies
 
 A list of tool dependencies
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

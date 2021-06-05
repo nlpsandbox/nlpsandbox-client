@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.response_page_metadata_links import ResponsePageMetadataLinks
+import nlpsandbox
+from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
 
 
 class TestResponsePageMetadataLinks(unittest.TestCase):

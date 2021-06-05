@@ -12,19 +12,19 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.fhir_store import FhirStore
-from nlpsandboxsdk.model.page_limit import PageLimit
-from nlpsandboxsdk.model.page_offset import PageOffset
-from nlpsandboxsdk.model.response_page_metadata import ResponsePageMetadata
-from nlpsandboxsdk.model.response_page_metadata_links import ResponsePageMetadataLinks
-from nlpsandboxsdk.models import FhirStoreName
+import nlpsandbox
+from nlpsandbox.model.fhir_store import FhirStore
+from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.model.response_page_metadata import ResponsePageMetadata
+from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
+from nlpsandbox.models import FhirStoreName
 globals()['FhirStore'] = FhirStore
 globals()['PageLimit'] = PageLimit
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
-from nlpsandboxsdk.model.page_of_fhir_stores import PageOfFhirStores
+from nlpsandbox.model.page_of_fhir_stores import PageOfFhirStores
 
 
 class TestPageOfFhirStores(unittest.TestCase):

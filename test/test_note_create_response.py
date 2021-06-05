@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.note_resource_name import NoteResourceName
+import nlpsandbox
+from nlpsandbox.model.note_resource_name import NoteResourceName
 globals()['NoteResourceName'] = NoteResourceName
-from nlpsandboxsdk.model.note_create_response import NoteCreateResponse
+from nlpsandbox.model.note_create_response import NoteCreateResponse
 
 
 class TestNoteCreateResponse(unittest.TestCase):

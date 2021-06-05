@@ -106,11 +106,11 @@ the content of *setup.py* is updated.
 
 ### Updating the SDK client
 
-The Python SDK client `nlpsandboxsdk` is now automatically updated when there is a new schemas release.  That being said, here are instructions on how to update the client manually.
+The Python SDK client `nlpsandbox` is now automatically updated when there is a new schemas release.  That being said, here are instructions on how to update the client manually.
 
 1. Generate SDK client with `openapi-generator`
   ```
-  openapi-generator generate -g python -o . --package-name nlpsandboxsdk -i https://nlpsandbox.github.io/nlpsandbox-schemas/_internal/nlpsandbox/edge/openapi.json
+  openapi-generator generate -g python -o . --package-name nlpsandbox -i https://nlpsandbox.github.io/nlpsandbox-schemas/_internal/nlpsandbox/edge/openapi.json
   ```
 
 <!-- - `datanode` package

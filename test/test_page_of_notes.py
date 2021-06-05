@@ -12,20 +12,20 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.note import Note
-from nlpsandboxsdk.model.note_id import NoteId
-from nlpsandboxsdk.model.patient_id import PatientId
-from nlpsandboxsdk.model.page_limit import PageLimit
-from nlpsandboxsdk.model.page_offset import PageOffset
-from nlpsandboxsdk.model.response_page_metadata import ResponsePageMetadata
-from nlpsandboxsdk.model.response_page_metadata_links import ResponsePageMetadataLinks
+import nlpsandbox
+from nlpsandbox.model.note import Note
+from nlpsandbox.model.note_id import NoteId
+from nlpsandbox.model.patient_id import PatientId
+from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.model.response_page_metadata import ResponsePageMetadata
+from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
 globals()['Note'] = Note
 globals()['PageLimit'] = PageLimit
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
-from nlpsandboxsdk.model.page_of_notes import PageOfNotes
+from nlpsandbox.model.page_of_notes import PageOfNotes
 
 
 class TestPageOfNotes(unittest.TestCase):

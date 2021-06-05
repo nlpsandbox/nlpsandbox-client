@@ -1,4 +1,4 @@
-# nlpsandboxsdk.TextCovidSymptomAnnotationApi
+# nlpsandbox.TextCovidSymptomAnnotationApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -18,21 +18,21 @@ Return the COVID symptom annotations found in a clinical note
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import text_covid_symptom_annotation_api
-from nlpsandboxsdk.model.text_covid_symptom_annotation_response import TextCovidSymptomAnnotationResponse
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.text_covid_symptom_annotation_request import TextCovidSymptomAnnotationRequest
+import nlpsandbox
+from nlpsandbox.api import text_covid_symptom_annotation_api
+from nlpsandbox.model.text_covid_symptom_annotation_response import TextCovidSymptomAnnotationResponse
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.text_covid_symptom_annotation_request import TextCovidSymptomAnnotationRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = text_covid_symptom_annotation_api.TextCovidSymptomAnnotationApi(api_client)
     text_covid_symptom_annotation_request = TextCovidSymptomAnnotationRequest(
@@ -50,10 +50,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Annotate COVID symptoms in a clinical note
         api_response = api_instance.create_text_covid_symptom_annotations(text_covid_symptom_annotation_request=text_covid_symptom_annotation_request)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling TextCovidSymptomAnnotationApi->create_text_covid_symptom_annotations: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -73,7 +72,6 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |

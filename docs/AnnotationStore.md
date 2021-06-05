@@ -1,7 +1,6 @@
 # AnnotationStore
 
 An annotation store
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

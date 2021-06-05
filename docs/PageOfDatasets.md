@@ -1,7 +1,6 @@
 # PageOfDatasets
 
 A page of datasets
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

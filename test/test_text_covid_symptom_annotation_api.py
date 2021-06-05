@@ -11,8 +11,8 @@
 
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.api.text_covid_symptom_annotation_api import TextCovidSymptomAnnotationApi  # noqa: E501
+import nlpsandbox
+from nlpsandbox.api.text_covid_symptom_annotation_api import TextCovidSymptomAnnotationApi  # noqa: E501
 
 
 class TestTextCovidSymptomAnnotationApi(unittest.TestCase):

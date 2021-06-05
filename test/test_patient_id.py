@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.patient_id import PatientId
+import nlpsandbox
+from nlpsandbox.model.patient_id import PatientId
 
 
 class TestPatientId(unittest.TestCase):

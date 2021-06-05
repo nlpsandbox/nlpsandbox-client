@@ -1,7 +1,6 @@
 # FhirStoreId
 
 The ID of the FHIR store
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

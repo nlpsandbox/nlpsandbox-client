@@ -1,7 +1,6 @@
 # PageOfAnnotationStores
 
 A page of annotation stores
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

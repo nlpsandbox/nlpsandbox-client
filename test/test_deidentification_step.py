@@ -12,12 +12,12 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.date_offset_config import DateOffsetConfig
-from nlpsandboxsdk.model.masking_char_config import MaskingCharConfig
+import nlpsandbox
+from nlpsandbox.model.date_offset_config import DateOffsetConfig
+from nlpsandbox.model.masking_char_config import MaskingCharConfig
 globals()['DateOffsetConfig'] = DateOffsetConfig
 globals()['MaskingCharConfig'] = MaskingCharConfig
-from nlpsandboxsdk.model.deidentification_step import DeidentificationStep
+from nlpsandbox.model.deidentification_step import DeidentificationStep
 
 
 class TestDeidentificationStep(unittest.TestCase):

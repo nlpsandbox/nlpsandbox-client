@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.annotation_id import AnnotationId
+import nlpsandbox
+from nlpsandbox.model.annotation_id import AnnotationId
 
 
 class TestAnnotationId(unittest.TestCase):

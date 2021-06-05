@@ -1,7 +1,6 @@
 # AnnotationId
 
 The ID of the annotation
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
