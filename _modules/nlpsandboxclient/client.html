@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>nlpsandboxclient.client &mdash; nlpsandboxclient 1.0 documentation</title>
+  <title>nlpsandboxclient.client &mdash; nlpsandboxclient 3.0 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                1.0
+                3.0
               </div>
             
           
@@ -170,11 +170,11 @@
 
 <span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="kn">import</span> <span class="nn">nlpsandboxsdk</span>
-<span class="kn">from</span> <span class="nn">nlpsandboxsdk.models</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span> <span class="nn">nlpsandbox</span>
+<span class="kn">from</span> <span class="nn">nlpsandbox.models</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Annotation</span><span class="p">,</span> <span class="n">AnnotationStore</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">Note</span><span class="p">,</span> <span class="n">Tool</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">nlpsandboxsdk.api</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">nlpsandbox.api</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">annotation_store_api</span><span class="p">,</span> <span class="n">annotation_api</span><span class="p">,</span> <span class="n">dataset_api</span><span class="p">,</span> <span class="n">note_api</span><span class="p">,</span>
     <span class="n">text_contact_annotation_api</span><span class="p">,</span>
     <span class="n">text_covid_symptom_annotation_api</span><span class="p">,</span>
@@ -213,10 +213,10 @@
 <span class="sd">            &quot;note_name&quot;: &quot;dataset/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid&quot;</span>
 <span class="sd">        }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">limit</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="n">note_instance</span> <span class="o">=</span> <span class="n">note_api</span><span class="o">.</span><span class="n">NoteApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="c1"># Obtain all clinical notes</span>
         <span class="n">next_page</span> <span class="o">=</span> <span class="kc">True</span>
@@ -258,8 +258,8 @@
 <span class="sd">        &gt;&gt;&gt; )</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="n">annot_store_instance</span> <span class="o">=</span> <span class="n">annotation_store_api</span><span class="o">.</span><span class="n">AnnotationStoreApi</span><span class="p">(</span>
             <span class="n">api_client</span>
         <span class="p">)</span>
@@ -268,7 +268,7 @@
             <span class="n">annotation_store_obj</span> <span class="o">=</span> <span class="n">annot_store_instance</span><span class="o">.</span><span class="n">get_annotation_store</span><span class="p">(</span>
                 <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span>
             <span class="p">)</span>
-        <span class="k">except</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">except</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">404</span> <span class="ow">and</span> <span class="n">create_if_missing</span><span class="p">:</span>
                 <span class="n">annotation_store_obj</span> <span class="o">=</span> <span class="n">annot_store_instance</span><span class="o">.</span><span class="n">create_annotation_store</span><span class="p">(</span>
                     <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="p">{}</span>
@@ -300,8 +300,8 @@
 <span class="sd">        &gt;&gt;&gt; )</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="n">annot_instance</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">AnnotationApi</span><span class="p">(</span>
             <span class="n">api_client</span>
         <span class="p">)</span>
@@ -357,8 +357,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="n">annotation_instance</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">AnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="n">new_annotation</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">change_keys</span><span class="p">(</span><span class="n">annotation</span><span class="p">,</span>
                                            <span class="n">utils</span><span class="o">.</span><span class="n">camelcase_to_snakecase</span><span class="p">)</span>
@@ -390,10 +390,10 @@
 <span class="sd">        &gt;&gt;&gt;                                annotation_store_id=&quot;awesome-annotation-store&quot;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">limit</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="n">annotation_instance</span> <span class="o">=</span> <span class="n">annotation_api</span><span class="o">.</span><span class="n">AnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="n">next_page</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">while</span> <span class="n">next_page</span><span class="p">:</span>
@@ -431,8 +431,8 @@
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0/api/v1&quot;</span>
-<span class="sd">        &gt;&gt;&gt; configuration = nlpsandboxsdk.Configuration(host=host)</span>
-<span class="sd">        &gt;&gt;&gt; with nlpsandboxsdk.ApiClient(configuration) as api_client:</span>
+<span class="sd">        &gt;&gt;&gt; configuration = nlpsandbox.Configuration(host=host)</span>
+<span class="sd">        &gt;&gt;&gt; with nlpsandbox.ApiClient(configuration) as api_client:</span>
 <span class="sd">        &gt;&gt;&gt;     annotations = _annotate_person_name(</span>
 <span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
 <span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
@@ -467,8 +467,8 @@
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0/api/v1&quot;</span>
-<span class="sd">        &gt;&gt;&gt; configuration = nlpsandboxsdk.Configuration(host=host)</span>
-<span class="sd">        &gt;&gt;&gt; with nlpsandboxsdk.ApiClient(configuration) as api_client:</span>
+<span class="sd">        &gt;&gt;&gt; configuration = nlpsandbox.Configuration(host=host)</span>
+<span class="sd">        &gt;&gt;&gt; with nlpsandbox.ApiClient(configuration) as api_client:</span>
 <span class="sd">        &gt;&gt;&gt;     annotations = _annotate_physical_address(</span>
 <span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
 <span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
@@ -503,8 +503,8 @@
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0/api/v1&quot;</span>
-<span class="sd">        &gt;&gt;&gt; configuration = nlpsandboxsdk.Configuration(host=host)</span>
-<span class="sd">        &gt;&gt;&gt; with nlpsandboxsdk.ApiClient(configuration) as api_client:</span>
+<span class="sd">        &gt;&gt;&gt; configuration = nlpsandbox.Configuration(host=host)</span>
+<span class="sd">        &gt;&gt;&gt; with nlpsandbox.ApiClient(configuration) as api_client:</span>
 <span class="sd">        &gt;&gt;&gt;     annotations = _annotate_person(</span>
 <span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
 <span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
@@ -539,8 +539,8 @@
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0/api/v1&quot;</span>
-<span class="sd">        &gt;&gt;&gt; configuration = nlpsandboxsdk.Configuration(host=host)</span>
-<span class="sd">        &gt;&gt;&gt; with nlpsandboxsdk.ApiClient(configuration) as api_client:</span>
+<span class="sd">        &gt;&gt;&gt; configuration = nlpsandbox.Configuration(host=host)</span>
+<span class="sd">        &gt;&gt;&gt; with nlpsandbox.ApiClient(configuration) as api_client:</span>
 <span class="sd">        &gt;&gt;&gt;     annotations = _annotate_contact(</span>
 <span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
 <span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
@@ -577,8 +577,8 @@
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0/api/v1&quot;</span>
-<span class="sd">        &gt;&gt;&gt; configuration = nlpsandboxsdk.Configuration(host=host)</span>
-<span class="sd">        &gt;&gt;&gt; with nlpsandboxsdk.ApiClient(configuration) as api_client:</span>
+<span class="sd">        &gt;&gt;&gt; configuration = nlpsandbox.Configuration(host=host)</span>
+<span class="sd">        &gt;&gt;&gt; with nlpsandbox.ApiClient(configuration) as api_client:</span>
 <span class="sd">        &gt;&gt;&gt;     annotations = _annotate_id(</span>
 <span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
 <span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
@@ -615,8 +615,8 @@
 <span class="sd">        &gt;&gt;&gt;    }</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0/api/v1&quot;</span>
-<span class="sd">        &gt;&gt;&gt; configuration = nlpsandboxsdk.Configuration(host=host)</span>
-<span class="sd">        &gt;&gt;&gt; with nlpsandboxsdk.ApiClient(configuration) as api_client:</span>
+<span class="sd">        &gt;&gt;&gt; configuration = nlpsandbox.Configuration(host=host)</span>
+<span class="sd">        &gt;&gt;&gt; with nlpsandbox.ApiClient(configuration) as api_client:</span>
 <span class="sd">        &gt;&gt;&gt;     annotations = _annotate_covid_symptom(</span>
 <span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
 <span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
@@ -640,7 +640,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        host: Data node host IP</span>
 <span class="sd">        note: Clinical note</span>
-<span class="sd">        tool_type: Type of nlpsandboxsdk</span>
+<span class="sd">        tool_type: Type of annotator</span>
 
 <span class="sd">    Yields:</span>
 <span class="sd">        Annotated notes</span>
@@ -658,30 +658,30 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="c1"># Change clinical note into text annotation request format</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">Note</span><span class="p">):</span>
-        <span class="n">text_nlpsandboxsdk_req</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
+        <span class="n">text_annotator_req</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">text_nlpsandboxsdk_req</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">text_annotator_req</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="n">utils</span><span class="o">.</span><span class="n">change_keys</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">camelcase_to_snakecase</span><span class="p">)</span>
         <span class="p">}</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:date-annotator&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:person-name-annotator&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_person_name</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_person_name</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:physical-address-annotator&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_physical_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_physical_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:contact-annotator&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_contact</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_contact</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:id-annotator&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_id</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_id</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:covid-symptom-annotator&quot;</span><span class="p">:</span>
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_covid_symptom</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span>
-                                                  <span class="n">text_nlpsandboxsdk_req</span><span class="p">)</span>
+                                                  <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid nlpsandboxsdk_type: </span><span class="si">{tool_type}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid annotator_type: </span><span class="si">{tool_type}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">sanitized_annotations</span> <span class="o">=</span> <span class="n">api_client</span><span class="o">.</span><span class="n">sanitize_for_serialization</span><span class="p">(</span>
             <span class="n">annotations</span>
         <span class="p">)</span>
@@ -705,8 +705,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="n">tool_instance</span> <span class="o">=</span> <span class="n">tool_api</span><span class="o">.</span><span class="n">ToolApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="n">tool_info</span> <span class="o">=</span> <span class="n">tool_instance</span><span class="o">.</span><span class="n">get_tool</span><span class="p">()</span>
     <span class="c1"># check if tool / redirects to /tool path</span>
@@ -732,10 +732,10 @@
 <span class="sd">        &gt;&gt;&gt;    &quot;name&quot;: &quot;datasets/testing&quot;</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">limit</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="n">api_instance</span> <span class="o">=</span> <span class="n">dataset_api</span><span class="o">.</span><span class="n">DatasetApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="c1"># Obtain all clinical notes</span>
         <span class="n">next_page</span> <span class="o">=</span> <span class="kc">True</span>
@@ -761,7 +761,7 @@
 <span class="sd">        Service object</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; tool = get_nlpsandboxsdk(host=&quot;0.0.0.0/api/v1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tool = _get_tool_redirect(host=&quot;0.0.0.0/api/v1&quot;)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -791,8 +791,8 @@
 <span class="sd">        delete_existing_annotations: To delete existing annotation store.</span>
 <span class="sd">                                     Default is True.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="n">annot_store_instance</span> <span class="o">=</span> <span class="n">annotation_store_api</span><span class="o">.</span><span class="n">AnnotationStoreApi</span><span class="p">(</span>
             <span class="n">api_client</span>
         <span class="p">)</span>
@@ -804,14 +804,14 @@
                     <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span>
                 <span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Deleted existing Annotation Store&quot;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span><span class="p">:</span>
+        <span class="k">except</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">annot_store_instance</span><span class="o">.</span><span class="n">create_annotation_store</span><span class="p">(</span>
                 <span class="n">dataset_id</span><span class="p">,</span> <span class="n">annotation_store_id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="p">{}</span>
             <span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created Annotation Store&quot;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span><span class="p">:</span>
+        <span class="k">except</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiException</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using existing Annotation Store&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">:</span>
@@ -829,9 +829,9 @@
 
 <div class="viewcode-block" id="store_dataset"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.store_dataset">[docs]</a><span class="k">def</span> <span class="nf">store_dataset</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Creates a dataset&quot;&quot;&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="c1"># Enter a context with an instance of the API client</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="c1"># Create an instance of the API class</span>
         <span class="n">api_instance</span> <span class="o">=</span> <span class="n">dataset_api</span><span class="o">.</span><span class="n">DatasetApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="n">body</span> <span class="o">=</span> <span class="p">{}</span>
@@ -841,9 +841,9 @@
 
 <div class="viewcode-block" id="delete_dataset"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.client.delete_dataset">[docs]</a><span class="k">def</span> <span class="nf">delete_dataset</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Deletes a dataset&quot;&quot;&quot;</span>
-    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
     <span class="c1"># Enter a context with an instance of the API client</span>
-    <span class="k">with</span> <span class="n">nlpsandboxsdk</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">nlpsandbox</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
         <span class="c1"># Create an instance of the API class</span>
         <span class="n">api_instance</span> <span class="o">=</span> <span class="n">dataset_api</span><span class="o">.</span><span class="n">DatasetApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="n">api_instance</span><span class="o">.</span><span class="n">delete_dataset</span><span class="p">(</span><span class="n">dataset_id</span><span class="p">)</span></div>
