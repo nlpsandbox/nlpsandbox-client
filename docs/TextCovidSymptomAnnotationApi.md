@@ -19,7 +19,7 @@ Return the COVID symptom annotations found in a clinical note
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import text_covid_symptom_annotation_api
+from nlpsandbox.apis import text_covid_symptom_annotation_api
 from nlpsandbox.models.text_covid_symptom_annotation_response import TextCovidSymptomAnnotationResponse
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.text_covid_symptom_annotation_request import TextCovidSymptomAnnotationRequest

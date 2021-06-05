@@ -19,7 +19,7 @@ Returns the deidentified note
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import deidentified_note_api
+from nlpsandbox.apis import deidentified_note_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.deidentify_response import DeidentifyResponse
 from nlpsandbox.models.deidentify_request import DeidentifyRequest

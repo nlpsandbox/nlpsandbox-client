@@ -22,7 +22,7 @@ Create an annotation store with the ID specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import annotation_store_api
+from nlpsandbox.apis import annotation_store_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.annotation_store_id import AnnotationStoreId
 from nlpsandbox.models.dataset_id import DatasetId
@@ -106,7 +106,7 @@ Deletes the annotation store specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import annotation_store_api
+from nlpsandbox.apis import annotation_store_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.annotation_store_id import AnnotationStoreId
 from nlpsandbox.models.dataset_id import DatasetId
@@ -177,7 +177,7 @@ Returns the annotation store specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import annotation_store_api
+from nlpsandbox.apis import annotation_store_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.annotation_store_id import AnnotationStoreId
 from nlpsandbox.models.dataset_id import DatasetId
@@ -249,7 +249,7 @@ Returns the annotation stores
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import annotation_store_api
+from nlpsandbox.apis import annotation_store_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.page_limit import PageLimit
 from nlpsandbox.models.dataset_id import DatasetId

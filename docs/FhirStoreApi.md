@@ -22,7 +22,7 @@ Create a FHIR store with the ID specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import fhir_store_api
+from nlpsandbox.apis import fhir_store_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.dataset_id import DatasetId
 from nlpsandbox.models.fhir_store_create_response import FhirStoreCreateResponse
@@ -106,7 +106,7 @@ Deletes the FHIR store specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import fhir_store_api
+from nlpsandbox.apis import fhir_store_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.dataset_id import DatasetId
 from nlpsandbox.models.fhir_store_id import FhirStoreId
@@ -177,7 +177,7 @@ Returns the FHIR store specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import fhir_store_api
+from nlpsandbox.apis import fhir_store_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.fhir_store import FhirStore
 from nlpsandbox.models.dataset_id import DatasetId
@@ -249,7 +249,7 @@ Returns the FHIR stores
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import fhir_store_api
+from nlpsandbox.apis import fhir_store_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.page_of_fhir_stores import PageOfFhirStores
 from nlpsandbox.models.page_limit import PageLimit

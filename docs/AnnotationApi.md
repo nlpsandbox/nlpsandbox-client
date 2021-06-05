@@ -22,7 +22,7 @@ Create an annotation
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import annotation_api
+from nlpsandbox.apis import annotation_api
 from nlpsandbox.models.annotation_create_response import AnnotationCreateResponse
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.annotation_id import AnnotationId
@@ -134,7 +134,7 @@ Deletes the annotation specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import annotation_api
+from nlpsandbox.apis import annotation_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.annotation_id import AnnotationId
 from nlpsandbox.models.dataset_id import DatasetId
@@ -208,7 +208,7 @@ Returns the annotation specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import annotation_api
+from nlpsandbox.apis import annotation_api
 from nlpsandbox.models.annotation import Annotation
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.annotation_id import AnnotationId
@@ -283,7 +283,7 @@ Returns the annotations in an annotation store
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import annotation_api
+from nlpsandbox.apis import annotation_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.annotation_store_id import AnnotationStoreId
 from nlpsandbox.models.page_limit import PageLimit

@@ -22,7 +22,7 @@ Create a FHIR patient
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import patient_api
+from nlpsandbox.apis import patient_api
 from nlpsandbox.models.patient_id import PatientId
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.patient_create_request import PatientCreateRequest
@@ -112,7 +112,7 @@ Deletes the FHIR patient specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import patient_api
+from nlpsandbox.apis import patient_api
 from nlpsandbox.models.patient_id import PatientId
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.dataset_id import DatasetId
@@ -186,7 +186,7 @@ Returns the FHIR patient specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import patient_api
+from nlpsandbox.apis import patient_api
 from nlpsandbox.models.patient_id import PatientId
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.patient import Patient
@@ -261,7 +261,7 @@ Returns the Patients in a FHIR store
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import patient_api
+from nlpsandbox.apis import patient_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.page_of_patients import PageOfPatients
 from nlpsandbox.models.page_limit import PageLimit

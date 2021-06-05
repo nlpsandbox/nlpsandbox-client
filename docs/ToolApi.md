@@ -20,7 +20,7 @@ Get information about the tool
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import tool_api
+from nlpsandbox.apis import tool_api
 from nlpsandbox.models.tool import Tool
 from nlpsandbox.models.error import Error
 from pprint import pprint
@@ -84,7 +84,7 @@ Get the dependencies of this tool
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import tool_api
+from nlpsandbox.apis import tool_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.tool_dependencies import ToolDependencies
 from pprint import pprint

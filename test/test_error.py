@@ -14,7 +14,7 @@ import unittest
 
 import nlpsandbox
 from nlpsandbox.models.error import Error
-from nlpsandbox.model import error
+from nlpsandbox.models import error
 
 class TestError(unittest.TestCase):
     """Error unit test stubs"""

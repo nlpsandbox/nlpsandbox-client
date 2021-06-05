@@ -22,7 +22,7 @@ Create a dataset with the name specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import dataset_api
+from nlpsandbox.apis import dataset_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.dataset_create_response import DatasetCreateResponse
 from nlpsandbox.models.dataset_id import DatasetId
@@ -103,7 +103,7 @@ Deletes the dataset for a given ID
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import dataset_api
+from nlpsandbox.apis import dataset_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.dataset_id import DatasetId
 from pprint import pprint
@@ -171,7 +171,7 @@ Returns the dataset for a given ID
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import dataset_api
+from nlpsandbox.apis import dataset_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.dataset_id import DatasetId
 from nlpsandbox.models.dataset import Dataset
@@ -240,7 +240,7 @@ Returns the datasets
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import dataset_api
+from nlpsandbox.apis import dataset_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.page_of_datasets import PageOfDatasets
 from nlpsandbox.models.page_limit import PageLimit

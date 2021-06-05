@@ -14,7 +14,7 @@ import unittest
 
 import nlpsandbox
 from nlpsandbox.models.health_check import HealthCheck
-from nlpsandbox.model import health_check
+from nlpsandbox.models import health_check
 
 
 class TestHealthCheck(unittest.TestCase):

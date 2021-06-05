@@ -19,7 +19,7 @@ Return the physical addresse annotations found in a clinical note
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import text_physical_address_annotation_api
+from nlpsandbox.apis import text_physical_address_annotation_api
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
 from nlpsandbox.models.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest

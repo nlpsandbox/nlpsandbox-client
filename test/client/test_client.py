@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 import pytest
 
 import nlpsandbox
-from nlpsandbox.api import (
+from nlpsandbox.apis import (
     annotation_api, annotation_store_api,
     dataset_api, note_api,
     text_contact_annotation_api,

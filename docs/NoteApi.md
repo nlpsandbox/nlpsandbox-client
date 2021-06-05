@@ -22,7 +22,7 @@ Create a note
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import note_api
+from nlpsandbox.apis import note_api
 from nlpsandbox.models.note_id import NoteId
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.dataset_id import DatasetId
@@ -114,7 +114,7 @@ Deletes the note specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import note_api
+from nlpsandbox.apis import note_api
 from nlpsandbox.models.note_id import NoteId
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.dataset_id import DatasetId
@@ -188,7 +188,7 @@ Returns the note specified
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import note_api
+from nlpsandbox.apis import note_api
 from nlpsandbox.models.note_id import NoteId
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.note import Note
@@ -263,7 +263,7 @@ Returns the notes in a FHIR store
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import note_api
+from nlpsandbox.apis import note_api
 from nlpsandbox.models.page_of_notes import PageOfNotes
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.page_limit import PageLimit

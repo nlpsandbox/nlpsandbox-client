@@ -19,7 +19,7 @@ Return the ID annotations found in a clinical note
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import text_id_annotation_api
+from nlpsandbox.apis import text_id_annotation_api
 from nlpsandbox.models.text_id_annotation_request import TextIdAnnotationRequest
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.text_id_annotation_response import TextIdAnnotationResponse

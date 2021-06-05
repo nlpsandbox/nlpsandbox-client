@@ -7,7 +7,7 @@ import nlpsandbox
 from nlpsandbox.models import (
     Annotation, AnnotationStore, Dataset, Note, Tool
 )
-from nlpsandbox.api import (
+from nlpsandbox.apis import (
     annotation_store_api, annotation_api, dataset_api, note_api,
     text_contact_annotation_api,
     text_covid_symptom_annotation_api,

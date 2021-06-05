@@ -19,7 +19,7 @@ Return the date annotations found in a clinical note
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import text_date_annotation_api
+from nlpsandbox.apis import text_date_annotation_api
 from nlpsandbox.models.text_date_annotation_request import TextDateAnnotationRequest
 from nlpsandbox.models.error import Error
 from nlpsandbox.models.text_date_annotation_response import TextDateAnnotationResponse

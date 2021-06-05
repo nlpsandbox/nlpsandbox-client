@@ -14,7 +14,7 @@ from unittest.mock import patch
 
 import nlpsandbox
 from nlpsandbox.apis.health_check_api import HealthCheckApi  # noqa: E501
-from nlpsandbox.api import health_check_api
+from nlpsandbox.apis import health_check_api
 
 
 class TestHealthCheckApi(unittest.TestCase):

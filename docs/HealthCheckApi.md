@@ -19,7 +19,7 @@ Get information about the health of the service
 ```python
 import time
 import nlpsandbox
-from nlpsandbox.api import health_check_api
+from nlpsandbox.apis import health_check_api
 from nlpsandbox.models.health_check import HealthCheck
 from nlpsandbox.models.error import Error
 from pprint import pprint
