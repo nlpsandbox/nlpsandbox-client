@@ -1,7 +1,6 @@
 # DeidentificationStep
 
 The configuration of a deidentification step
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

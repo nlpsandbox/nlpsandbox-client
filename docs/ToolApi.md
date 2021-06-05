@@ -1,4 +1,4 @@
-# nlpsandboxsdk.ToolApi
+# nlpsandbox.ToolApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -19,20 +19,20 @@ Get information about the tool
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import tool_api
-from nlpsandboxsdk.model.tool import Tool
-from nlpsandboxsdk.model.error import Error
+import nlpsandbox
+from nlpsandbox.api import tool_api
+from nlpsandbox.model.tool import Tool
+from nlpsandbox.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = tool_api.ToolApi(api_client)
 
@@ -41,10 +41,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Get tool information
         api_response = api_instance.get_tool()
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling ToolApi->get_tool: %s\n" % e)
 ```
-
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -61,7 +60,6 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -83,20 +81,20 @@ Get the dependencies of this tool
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import tool_api
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.tool_dependencies import ToolDependencies
+import nlpsandbox
+from nlpsandbox.api import tool_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.tool_dependencies import ToolDependencies
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = tool_api.ToolApi(api_client)
 
@@ -105,10 +103,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Get tool dependencies
         api_response = api_instance.get_tool_dependencies()
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling ToolApi->get_tool_dependencies: %s\n" % e)
 ```
-
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -125,7 +122,6 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |

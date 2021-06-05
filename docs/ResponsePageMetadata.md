@@ -1,7 +1,6 @@
 # ResponsePageMetadata
 
 A page of results
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

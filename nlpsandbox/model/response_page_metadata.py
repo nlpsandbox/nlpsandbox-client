@@ -12,7 +12,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,9 +28,9 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
 )
 
 def lazy_import():
-    from nlpsandboxsdk.model.page_limit import PageLimit
-    from nlpsandboxsdk.model.page_offset import PageOffset
-    from nlpsandboxsdk.model.response_page_metadata_links import ResponsePageMetadataLinks
+    from nlpsandbox.model.page_limit import PageLimit
+    from nlpsandbox.model.page_offset import PageOffset
+    from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
     globals()['PageLimit'] = PageLimit
     globals()['PageOffset'] = PageOffset
     globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks

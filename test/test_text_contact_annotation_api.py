@@ -11,8 +11,8 @@
 
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.api.text_contact_annotation_api import TextContactAnnotationApi  # noqa: E501
+import nlpsandbox
+from nlpsandbox.api.text_contact_annotation_api import TextContactAnnotationApi  # noqa: E501
 
 
 class TestTextContactAnnotationApi(unittest.TestCase):

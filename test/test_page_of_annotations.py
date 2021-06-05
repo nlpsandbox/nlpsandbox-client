@@ -12,22 +12,22 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.annotation import Annotation
-from nlpsandboxsdk.model.annotation_name import AnnotationName
-from nlpsandboxsdk.model.annotation_source import AnnotationSource
-from nlpsandboxsdk.model.resource_source import ResourceSource
-from nlpsandboxsdk.model.text_date_annotation import TextDateAnnotation
-from nlpsandboxsdk.model.page_limit import PageLimit
-from nlpsandboxsdk.model.page_offset import PageOffset
-from nlpsandboxsdk.model.response_page_metadata import ResponsePageMetadata
-from nlpsandboxsdk.model.response_page_metadata_links import ResponsePageMetadataLinks
+import nlpsandbox
+from nlpsandbox.model.annotation import Annotation
+from nlpsandbox.model.annotation_name import AnnotationName
+from nlpsandbox.model.annotation_source import AnnotationSource
+from nlpsandbox.model.resource_source import ResourceSource
+from nlpsandbox.model.text_date_annotation import TextDateAnnotation
+from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.model.response_page_metadata import ResponsePageMetadata
+from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
 globals()['Annotation'] = Annotation
 globals()['PageLimit'] = PageLimit
 globals()['PageOffset'] = PageOffset
 globals()['ResponsePageMetadata'] = ResponsePageMetadata
 globals()['ResponsePageMetadataLinks'] = ResponsePageMetadataLinks
-from nlpsandboxsdk.model.page_of_annotations import PageOfAnnotations
+from nlpsandbox.model.page_of_annotations import PageOfAnnotations
 
 
 class TestPageOfAnnotations(unittest.TestCase):

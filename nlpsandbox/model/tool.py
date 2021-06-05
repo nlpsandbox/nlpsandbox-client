@@ -12,7 +12,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,8 +28,8 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
 )
 
 def lazy_import():
-    from nlpsandboxsdk.model.license import License
-    from nlpsandboxsdk.model.tool_type import ToolType
+    from nlpsandbox.model.license import License
+    from nlpsandbox.model.tool_type import ToolType
     globals()['License'] = License
     globals()['ToolType'] = ToolType
 

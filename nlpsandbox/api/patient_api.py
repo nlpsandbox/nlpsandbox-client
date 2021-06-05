@@ -12,8 +12,8 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.api_client import ApiClient, Endpoint as _Endpoint
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.api_client import ApiClient, Endpoint as _Endpoint
+from nlpsandbox.model_utils import (  # noqa: F401
     check_allowed_values,
     check_validations,
     date,
@@ -22,16 +22,16 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
-from nlpsandboxsdk.model.dataset_id import DatasetId
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
-from nlpsandboxsdk.model.page_limit import PageLimit
-from nlpsandboxsdk.model.page_of_patients import PageOfPatients
-from nlpsandboxsdk.model.page_offset import PageOffset
-from nlpsandboxsdk.model.patient import Patient
-from nlpsandboxsdk.model.patient_create_request import PatientCreateRequest
-from nlpsandboxsdk.model.patient_create_response import PatientCreateResponse
-from nlpsandboxsdk.model.patient_id import PatientId
+from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.model.page_of_patients import PageOfPatients
+from nlpsandbox.model.page_offset import PageOffset
+from nlpsandbox.model.patient import Patient
+from nlpsandbox.model.patient_create_request import PatientCreateRequest
+from nlpsandbox.model.patient_create_response import PatientCreateResponse
+from nlpsandbox.model.patient_id import PatientId
 
 
 class PatientApi(object):

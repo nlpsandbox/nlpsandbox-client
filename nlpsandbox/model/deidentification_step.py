@@ -12,7 +12,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,8 +28,8 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
 )
 
 def lazy_import():
-    from nlpsandboxsdk.model.date_offset_config import DateOffsetConfig
-    from nlpsandboxsdk.model.masking_char_config import MaskingCharConfig
+    from nlpsandbox.model.date_offset_config import DateOffsetConfig
+    from nlpsandbox.model.masking_char_config import MaskingCharConfig
     globals()['DateOffsetConfig'] = DateOffsetConfig
     globals()['MaskingCharConfig'] = MaskingCharConfig
 

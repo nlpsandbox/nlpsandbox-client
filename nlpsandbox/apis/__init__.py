@@ -14,18 +14,18 @@
 #   sys.setrecursionlimit(n)
 
 # Import APIs into API package:
-from nlpsandboxsdk.api.annotation_api import AnnotationApi
-from nlpsandboxsdk.api.annotation_store_api import AnnotationStoreApi
-from nlpsandboxsdk.api.dataset_api import DatasetApi
-from nlpsandboxsdk.api.deidentified_note_api import DeidentifiedNoteApi
-from nlpsandboxsdk.api.fhir_store_api import FhirStoreApi
-from nlpsandboxsdk.api.health_check_api import HealthCheckApi
-from nlpsandboxsdk.api.note_api import NoteApi
-from nlpsandboxsdk.api.patient_api import PatientApi
-from nlpsandboxsdk.api.text_contact_annotation_api import TextContactAnnotationApi
-from nlpsandboxsdk.api.text_covid_symptom_annotation_api import TextCovidSymptomAnnotationApi
-from nlpsandboxsdk.api.text_date_annotation_api import TextDateAnnotationApi
-from nlpsandboxsdk.api.text_id_annotation_api import TextIdAnnotationApi
-from nlpsandboxsdk.api.text_person_name_annotation_api import TextPersonNameAnnotationApi
-from nlpsandboxsdk.api.text_physical_address_annotation_api import TextPhysicalAddressAnnotationApi
-from nlpsandboxsdk.api.tool_api import ToolApi
+from nlpsandbox.api.annotation_api import AnnotationApi
+from nlpsandbox.api.annotation_store_api import AnnotationStoreApi
+from nlpsandbox.api.dataset_api import DatasetApi
+from nlpsandbox.api.deidentified_note_api import DeidentifiedNoteApi
+from nlpsandbox.api.fhir_store_api import FhirStoreApi
+from nlpsandbox.api.health_check_api import HealthCheckApi
+from nlpsandbox.api.note_api import NoteApi
+from nlpsandbox.api.patient_api import PatientApi
+from nlpsandbox.api.text_contact_annotation_api import TextContactAnnotationApi
+from nlpsandbox.api.text_covid_symptom_annotation_api import TextCovidSymptomAnnotationApi
+from nlpsandbox.api.text_date_annotation_api import TextDateAnnotationApi
+from nlpsandbox.api.text_id_annotation_api import TextIdAnnotationApi
+from nlpsandbox.api.text_person_name_annotation_api import TextPersonNameAnnotationApi
+from nlpsandbox.api.text_physical_address_annotation_api import TextPhysicalAddressAnnotationApi
+from nlpsandbox.api.tool_api import ToolApi

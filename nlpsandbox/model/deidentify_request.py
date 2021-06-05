@@ -12,7 +12,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,8 +28,8 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
 )
 
 def lazy_import():
-    from nlpsandboxsdk.model.deidentification_step import DeidentificationStep
-    from nlpsandboxsdk.model.note import Note
+    from nlpsandbox.model.deidentification_step import DeidentificationStep
+    from nlpsandbox.model.note import Note
     globals()['DeidentificationStep'] = DeidentificationStep
     globals()['Note'] = Note
 

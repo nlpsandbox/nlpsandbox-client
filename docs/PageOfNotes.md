@@ -1,7 +1,6 @@
 # PageOfNotes
 
 A page of notes
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -21,10 +21,10 @@ from urllib.parse import quote
 from urllib3.fields import RequestField
 
 
-from nlpsandboxsdk import rest
-from nlpsandboxsdk.configuration import Configuration
-from nlpsandboxsdk.exceptions import ApiTypeError, ApiValueError, ApiException
-from nlpsandboxsdk.model_utils import (
+from nlpsandbox import rest
+from nlpsandbox.configuration import Configuration
+from nlpsandbox.exceptions import ApiTypeError, ApiValueError, ApiException
+from nlpsandbox.model_utils import (
     ModelNormal,
     ModelSimple,
     ModelComposed,

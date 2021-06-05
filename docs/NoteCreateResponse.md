@@ -1,7 +1,6 @@
 # NoteCreateResponse
 
 The reference to the note created
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

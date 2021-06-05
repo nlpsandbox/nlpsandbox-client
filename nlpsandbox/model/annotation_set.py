@@ -12,7 +12,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,11 +28,11 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
 )
 
 def lazy_import():
-    from nlpsandboxsdk.model.text_contact_annotation import TextContactAnnotation
-    from nlpsandboxsdk.model.text_date_annotation import TextDateAnnotation
-    from nlpsandboxsdk.model.text_id_annotation import TextIdAnnotation
-    from nlpsandboxsdk.model.text_person_name_annotation import TextPersonNameAnnotation
-    from nlpsandboxsdk.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+    from nlpsandbox.model.text_contact_annotation import TextContactAnnotation
+    from nlpsandbox.model.text_date_annotation import TextDateAnnotation
+    from nlpsandbox.model.text_id_annotation import TextIdAnnotation
+    from nlpsandbox.model.text_person_name_annotation import TextPersonNameAnnotation
+    from nlpsandbox.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
     globals()['TextContactAnnotation'] = TextContactAnnotation
     globals()['TextDateAnnotation'] = TextDateAnnotation
     globals()['TextIdAnnotation'] = TextIdAnnotation

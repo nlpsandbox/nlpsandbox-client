@@ -1,7 +1,6 @@
 # TextDateAnnotationRequest
 
 A request to annotate dates in a clinical note
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

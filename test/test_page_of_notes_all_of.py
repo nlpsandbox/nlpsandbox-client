@@ -12,12 +12,12 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.note import Note
-from nlpsandboxsdk.model.note_id import NoteId
-from nlpsandboxsdk.model.patient_id import PatientId
+import nlpsandbox
+from nlpsandbox.model.note import Note
+from nlpsandbox.model.note_id import NoteId
+from nlpsandbox.model.patient_id import PatientId
 globals()['Note'] = Note
-from nlpsandboxsdk.model.page_of_notes_all_of import PageOfNotesAllOf
+from nlpsandbox.model.page_of_notes_all_of import PageOfNotesAllOf
 
 
 class TestPageOfNotesAllOf(unittest.TestCase):

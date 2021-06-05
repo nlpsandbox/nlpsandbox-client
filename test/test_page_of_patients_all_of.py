@@ -12,11 +12,11 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.patient import Patient
-from nlpsandboxsdk.models import PatientId
+import nlpsandbox
+from nlpsandbox.model.patient import Patient
+from nlpsandbox.models import PatientId
 globals()['Patient'] = Patient
-from nlpsandboxsdk.model.page_of_patients_all_of import PageOfPatientsAllOf
+from nlpsandbox.model.page_of_patients_all_of import PageOfPatientsAllOf
 
 
 class TestPageOfPatientsAllOf(unittest.TestCase):

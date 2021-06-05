@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.text_covid_symptom_annotation import TextCovidSymptomAnnotation
+import nlpsandbox
+from nlpsandbox.model.text_covid_symptom_annotation import TextCovidSymptomAnnotation
 globals()['TextCovidSymptomAnnotation'] = TextCovidSymptomAnnotation
-from nlpsandboxsdk.model.text_covid_symptom_annotation_response import TextCovidSymptomAnnotationResponse
+from nlpsandbox.model.text_covid_symptom_annotation_response import TextCovidSymptomAnnotationResponse
 
 
 class TestTextCovidSymptomAnnotationResponse(unittest.TestCase):

@@ -12,14 +12,14 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.annotation import Annotation
-from nlpsandboxsdk.model.annotation_name import AnnotationName
-from nlpsandboxsdk.model.annotation_source import AnnotationSource
-from nlpsandboxsdk.model.resource_source import ResourceSource
-from nlpsandboxsdk.model.text_date_annotation import TextDateAnnotation
+import nlpsandbox
+from nlpsandbox.model.annotation import Annotation
+from nlpsandbox.model.annotation_name import AnnotationName
+from nlpsandbox.model.annotation_source import AnnotationSource
+from nlpsandbox.model.resource_source import ResourceSource
+from nlpsandbox.model.text_date_annotation import TextDateAnnotation
 globals()['Annotation'] = Annotation
-from nlpsandboxsdk.model.page_of_annotations_all_of import PageOfAnnotationsAllOf
+from nlpsandbox.model.page_of_annotations_all_of import PageOfAnnotationsAllOf
 
 
 class TestPageOfAnnotationsAllOf(unittest.TestCase):

@@ -1,7 +1,6 @@
 # ToolType
 
 The type of this tool
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,7 +1,6 @@
 # TextIdAnnotationRequest
 
 A request to annotate IDs in a clinical note
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,6 +1,5 @@
 # TextIdAnnotationAllOf
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

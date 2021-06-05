@@ -12,11 +12,11 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.fhir_store import FhirStore
-from nlpsandboxsdk.models import FhirStoreName
+import nlpsandbox
+from nlpsandbox.model.fhir_store import FhirStore
+from nlpsandbox.models import FhirStoreName
 globals()['FhirStore'] = FhirStore
-from nlpsandboxsdk.model.page_of_fhir_stores_all_of import PageOfFhirStoresAllOf
+from nlpsandbox.model.page_of_fhir_stores_all_of import PageOfFhirStoresAllOf
 
 
 class TestPageOfFhirStoresAllOf(unittest.TestCase):

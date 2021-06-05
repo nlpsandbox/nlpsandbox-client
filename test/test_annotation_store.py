@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.annotation_store_name import AnnotationStoreName
+import nlpsandbox
+from nlpsandbox.model.annotation_store_name import AnnotationStoreName
 globals()['AnnotationStoreName'] = AnnotationStoreName
-from nlpsandboxsdk.model.annotation_store import AnnotationStore
+from nlpsandbox.model.annotation_store import AnnotationStore
 
 
 class TestAnnotationStore(unittest.TestCase):

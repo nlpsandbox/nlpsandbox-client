@@ -1,7 +1,6 @@
 # TextContactAnnotationRequest
 
 A request to annotate contacts in a clinical note
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,4 +1,4 @@
-# nlpsandboxsdk.FhirStoreApi
+# nlpsandbox.FhirStoreApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -21,22 +21,22 @@ Create a FHIR store with the ID specified
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import fhir_store_api
-from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.fhir_store_create_response import FhirStoreCreateResponse
-from nlpsandboxsdk.model.dataset_id import DatasetId
+import nlpsandbox
+from nlpsandbox.api import fhir_store_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.model.fhir_store_create_response import FhirStoreCreateResponse
+from nlpsandbox.model.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = fhir_store_api.FhirStoreApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -48,7 +48,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Create a FHIR store
         api_response = api_instance.create_fhir_store(dataset_id, fhir_store_id)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling FhirStoreApi->create_fhir_store: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -57,10 +57,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Create a FHIR store
         api_response = api_instance.create_fhir_store(dataset_id, fhir_store_id, body=body)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling FhirStoreApi->create_fhir_store: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -83,7 +82,6 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -105,21 +103,21 @@ Deletes the FHIR store specified
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import fhir_store_api
-from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.dataset_id import DatasetId
+import nlpsandbox
+from nlpsandbox.api import fhir_store_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.model.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = fhir_store_api.FhirStoreApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -130,10 +128,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Delete a FHIR store
         api_response = api_instance.delete_fhir_store(dataset_id, fhir_store_id)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling FhirStoreApi->delete_fhir_store: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -155,7 +152,6 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -176,22 +172,22 @@ Returns the FHIR store specified
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import fhir_store_api
-from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
-from nlpsandboxsdk.model.fhir_store import FhirStore
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.dataset_id import DatasetId
+import nlpsandbox
+from nlpsandbox.api import fhir_store_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.fhir_store import FhirStore
+from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.model.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = fhir_store_api.FhirStoreApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -202,10 +198,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Get a FHIR store
         api_response = api_instance.get_fhir_store(dataset_id, fhir_store_id)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling FhirStoreApi->get_fhir_store: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -227,7 +222,6 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -248,23 +242,23 @@ Returns the FHIR stores
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import fhir_store_api
-from nlpsandboxsdk.model.page_offset import PageOffset
-from nlpsandboxsdk.model.page_of_fhir_stores import PageOfFhirStores
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.page_limit import PageLimit
-from nlpsandboxsdk.model.dataset_id import DatasetId
+import nlpsandbox
+from nlpsandbox.api import fhir_store_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.page_of_fhir_stores import PageOfFhirStores
+from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.model.page_offset import PageOffset
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = fhir_store_api.FhirStoreApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -276,7 +270,7 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # List the FHIR stores in a dataset
         api_response = api_instance.list_fhir_stores(dataset_id)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling FhirStoreApi->list_fhir_stores: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -285,10 +279,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # List the FHIR stores in a dataset
         api_response = api_instance.list_fhir_stores(dataset_id, limit=limit, offset=offset)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling FhirStoreApi->list_fhir_stores: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -310,7 +303,6 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |

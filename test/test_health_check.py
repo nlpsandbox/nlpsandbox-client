@@ -12,9 +12,9 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.health_check import HealthCheck
-from nlpsandboxsdk.model import health_check
+import nlpsandbox
+from nlpsandbox.model.health_check import HealthCheck
+from nlpsandbox.model import health_check
 
 
 class TestHealthCheck(unittest.TestCase):

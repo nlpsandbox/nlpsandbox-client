@@ -12,7 +12,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,8 +28,8 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
 )
 
 def lazy_import():
-    from nlpsandboxsdk.model.note_id import NoteId
-    from nlpsandboxsdk.model.patient_id import PatientId
+    from nlpsandbox.model.note_id import NoteId
+    from nlpsandbox.model.patient_id import PatientId
     globals()['NoteId'] = NoteId
     globals()['PatientId'] = PatientId
 

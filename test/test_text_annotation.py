@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.text_annotation import TextAnnotation
+import nlpsandbox
+from nlpsandbox.model.text_annotation import TextAnnotation
 
 
 class TestTextAnnotation(unittest.TestCase):

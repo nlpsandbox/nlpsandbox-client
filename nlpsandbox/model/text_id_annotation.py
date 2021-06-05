@@ -12,7 +12,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,8 +28,8 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
 )
 
 def lazy_import():
-    from nlpsandboxsdk.model.text_annotation import TextAnnotation
-    from nlpsandboxsdk.model.text_id_annotation_all_of import TextIdAnnotationAllOf
+    from nlpsandbox.model.text_annotation import TextAnnotation
+    from nlpsandbox.model.text_id_annotation_all_of import TextIdAnnotationAllOf
     globals()['TextAnnotation'] = TextAnnotation
     globals()['TextIdAnnotationAllOf'] = TextIdAnnotationAllOf
 

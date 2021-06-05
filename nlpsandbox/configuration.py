@@ -16,7 +16,7 @@ import sys
 import urllib3
 
 from http import client as http_client
-from nlpsandboxsdk.exceptions import ApiValueError
+from nlpsandbox.exceptions import ApiValueError
 
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
@@ -133,7 +133,7 @@ class Configuration(object):
         self.logger = {}
         """Logging Settings
         """
-        self.logger["package_logger"] = logging.getLogger("nlpsandboxsdk")
+        self.logger["package_logger"] = logging.getLogger("nlpsandbox")
         self.logger["urllib3_logger"] = logging.getLogger("urllib3")
         self.logger_format = '%(asctime)s %(levelname)s %(message)s'
         """Log format

@@ -1,7 +1,6 @@
 # AnnotationCreateRequest
 
 An annotation record
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

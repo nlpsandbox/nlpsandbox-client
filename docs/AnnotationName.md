@@ -1,7 +1,6 @@
 # AnnotationName
 
 The resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

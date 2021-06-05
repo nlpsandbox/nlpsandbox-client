@@ -1,4 +1,4 @@
-# nlpsandboxsdk.TextContactAnnotationApi
+# nlpsandbox.TextContactAnnotationApi
 
 All URIs are relative to *http://example.com/api/v1*
 
@@ -18,21 +18,21 @@ Return the contact annotations found in a clinical note
 
 ```python
 import time
-import nlpsandboxsdk
-from nlpsandboxsdk.api import text_contact_annotation_api
-from nlpsandboxsdk.model.text_contact_annotation_request import TextContactAnnotationRequest
-from nlpsandboxsdk.model.text_contact_annotation_response import TextContactAnnotationResponse
-from nlpsandboxsdk.model.error import Error
+import nlpsandbox
+from nlpsandbox.api import text_contact_annotation_api
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.text_contact_annotation_response import TextContactAnnotationResponse
+from nlpsandbox.model.text_contact_annotation_request import TextContactAnnotationRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = nlpsandboxsdk.Configuration(
+configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with nlpsandboxsdk.ApiClient() as api_client:
+with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = text_contact_annotation_api.TextContactAnnotationApi(api_client)
     text_contact_annotation_request = TextContactAnnotationRequest(
@@ -50,10 +50,9 @@ with nlpsandboxsdk.ApiClient() as api_client:
         # Annotate contact information in a clinical note
         api_response = api_instance.create_text_contact_annotations(text_contact_annotation_request=text_contact_annotation_request)
         pprint(api_response)
-    except nlpsandboxsdk.ApiException as e:
+    except nlpsandbox.ApiException as e:
         print("Exception when calling TextContactAnnotationApi->create_text_contact_annotations: %s\n" % e)
 ```
-
 
 ### Parameters
 
@@ -73,7 +72,6 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 | Status code | Description | Response headers |

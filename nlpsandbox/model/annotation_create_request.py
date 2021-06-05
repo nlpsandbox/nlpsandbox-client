@@ -12,7 +12,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,13 +28,13 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
 )
 
 def lazy_import():
-    from nlpsandboxsdk.model.annotation_source import AnnotationSource
-    from nlpsandboxsdk.model.text_contact_annotation import TextContactAnnotation
-    from nlpsandboxsdk.model.text_covid_symptom_annotation import TextCovidSymptomAnnotation
-    from nlpsandboxsdk.model.text_date_annotation import TextDateAnnotation
-    from nlpsandboxsdk.model.text_id_annotation import TextIdAnnotation
-    from nlpsandboxsdk.model.text_person_name_annotation import TextPersonNameAnnotation
-    from nlpsandboxsdk.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+    from nlpsandbox.model.annotation_source import AnnotationSource
+    from nlpsandbox.model.text_contact_annotation import TextContactAnnotation
+    from nlpsandbox.model.text_covid_symptom_annotation import TextCovidSymptomAnnotation
+    from nlpsandbox.model.text_date_annotation import TextDateAnnotation
+    from nlpsandbox.model.text_id_annotation import TextIdAnnotation
+    from nlpsandbox.model.text_person_name_annotation import TextPersonNameAnnotation
+    from nlpsandbox.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
     globals()['AnnotationSource'] = AnnotationSource
     globals()['TextContactAnnotation'] = TextContactAnnotation
     globals()['TextCovidSymptomAnnotation'] = TextCovidSymptomAnnotation

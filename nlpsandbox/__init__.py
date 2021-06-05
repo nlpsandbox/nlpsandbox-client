@@ -14,15 +14,15 @@
 __version__ = "1.0.0"
 
 # import ApiClient
-from nlpsandboxsdk.api_client import ApiClient
+from nlpsandbox.api_client import ApiClient
 
 # import Configuration
-from nlpsandboxsdk.configuration import Configuration
+from nlpsandbox.configuration import Configuration
 
 # import exceptions
-from nlpsandboxsdk.exceptions import OpenApiException
-from nlpsandboxsdk.exceptions import ApiAttributeError
-from nlpsandboxsdk.exceptions import ApiTypeError
-from nlpsandboxsdk.exceptions import ApiValueError
-from nlpsandboxsdk.exceptions import ApiKeyError
-from nlpsandboxsdk.exceptions import ApiException
+from nlpsandbox.exceptions import OpenApiException
+from nlpsandbox.exceptions import ApiAttributeError
+from nlpsandbox.exceptions import ApiTypeError
+from nlpsandbox.exceptions import ApiValueError
+from nlpsandbox.exceptions import ApiKeyError
+from nlpsandbox.exceptions import ApiException

@@ -1,7 +1,6 @@
 # PatientId
 
 The ID of the FHIR patient
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

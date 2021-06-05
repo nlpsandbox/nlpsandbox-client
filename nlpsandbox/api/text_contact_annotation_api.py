@@ -12,8 +12,8 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.api_client import ApiClient, Endpoint as _Endpoint
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.api_client import ApiClient, Endpoint as _Endpoint
+from nlpsandbox.model_utils import (  # noqa: F401
     check_allowed_values,
     check_validations,
     date,
@@ -22,9 +22,9 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.text_contact_annotation_request import TextContactAnnotationRequest
-from nlpsandboxsdk.model.text_contact_annotation_response import TextContactAnnotationResponse
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.text_contact_annotation_request import TextContactAnnotationRequest
+from nlpsandbox.model.text_contact_annotation_response import TextContactAnnotationResponse
 
 
 class TextContactAnnotationApi(object):

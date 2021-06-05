@@ -1,7 +1,6 @@
 # PageOffset
 
 The index of the first result that must be returned
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

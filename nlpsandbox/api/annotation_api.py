@@ -12,8 +12,8 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.api_client import ApiClient, Endpoint as _Endpoint
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.api_client import ApiClient, Endpoint as _Endpoint
+from nlpsandbox.model_utils import (  # noqa: F401
     check_allowed_values,
     check_validations,
     date,
@@ -22,17 +22,17 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
-from nlpsandboxsdk.model.annotation import Annotation
-from nlpsandboxsdk.model.annotation_create_request import AnnotationCreateRequest
-from nlpsandboxsdk.model.annotation_create_response import AnnotationCreateResponse
-from nlpsandboxsdk.model.annotation_id import AnnotationId
-from nlpsandboxsdk.model.annotation_store_id import AnnotationStoreId
-from nlpsandboxsdk.model.dataset_id import DatasetId
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
-from nlpsandboxsdk.model.page_limit import PageLimit
-from nlpsandboxsdk.model.page_of_annotations import PageOfAnnotations
-from nlpsandboxsdk.model.page_offset import PageOffset
+from nlpsandbox.model.annotation import Annotation
+from nlpsandbox.model.annotation_create_request import AnnotationCreateRequest
+from nlpsandbox.model.annotation_create_response import AnnotationCreateResponse
+from nlpsandbox.model.annotation_id import AnnotationId
+from nlpsandbox.model.annotation_store_id import AnnotationStoreId
+from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.model.page_of_annotations import PageOfAnnotations
+from nlpsandbox.model.page_offset import PageOffset
 
 
 class AnnotationApi(object):

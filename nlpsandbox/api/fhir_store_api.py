@@ -12,8 +12,8 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from nlpsandboxsdk.api_client import ApiClient, Endpoint as _Endpoint
-from nlpsandboxsdk.model_utils import (  # noqa: F401
+from nlpsandbox.api_client import ApiClient, Endpoint as _Endpoint
+from nlpsandbox.model_utils import (  # noqa: F401
     check_allowed_values,
     check_validations,
     date,
@@ -22,14 +22,14 @@ from nlpsandboxsdk.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
-from nlpsandboxsdk.model.dataset_id import DatasetId
-from nlpsandboxsdk.model.error import Error
-from nlpsandboxsdk.model.fhir_store import FhirStore
-from nlpsandboxsdk.model.fhir_store_create_response import FhirStoreCreateResponse
-from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
-from nlpsandboxsdk.model.page_limit import PageLimit
-from nlpsandboxsdk.model.page_of_fhir_stores import PageOfFhirStores
-from nlpsandboxsdk.model.page_offset import PageOffset
+from nlpsandbox.model.dataset_id import DatasetId
+from nlpsandbox.model.error import Error
+from nlpsandbox.model.fhir_store import FhirStore
+from nlpsandbox.model.fhir_store_create_response import FhirStoreCreateResponse
+from nlpsandbox.model.fhir_store_id import FhirStoreId
+from nlpsandbox.model.page_limit import PageLimit
+from nlpsandbox.model.page_of_fhir_stores import PageOfFhirStores
+from nlpsandbox.model.page_offset import PageOffset
 
 
 class FhirStoreApi(object):

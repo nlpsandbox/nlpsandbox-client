@@ -12,9 +12,9 @@
 import unittest
 from unittest.mock import patch
 
-import nlpsandboxsdk
-from nlpsandboxsdk.api.annotation_api import AnnotationApi  # noqa: E501
-from nlpsandboxsdk.models import ResourceSource
+import nlpsandbox
+from nlpsandbox.api.annotation_api import AnnotationApi  # noqa: E501
+from nlpsandbox.models import ResourceSource
 
 
 class TestAnnotationApi(unittest.TestCase):
@@ -22,7 +22,7 @@ class TestAnnotationApi(unittest.TestCase):
 
     def setUp(self):
         self.api = AnnotationApi()  # noqa: E501
-        self.patcher = patch('nlpsandboxsdk.api_client.ApiClient.call_api')
+        self.patcher = patch('nlpsandbox.api_client.ApiClient.call_api')
         self.mock_foo = self.patcher.start()
 
     def tearDown(self):

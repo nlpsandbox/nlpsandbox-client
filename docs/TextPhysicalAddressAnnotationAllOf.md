@@ -1,6 +1,5 @@
 # TextPhysicalAddressAnnotationAllOf
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

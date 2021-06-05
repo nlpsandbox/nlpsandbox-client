@@ -1,7 +1,6 @@
 # TextPhysicalAddressAnnotation
 
 A physical address annotation in a text
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

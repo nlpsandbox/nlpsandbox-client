@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.text_person_name_annotation import TextPersonNameAnnotation
+import nlpsandbox
+from nlpsandbox.model.text_person_name_annotation import TextPersonNameAnnotation
 
 
 class TestTextPersonNameAnnotation(unittest.TestCase):

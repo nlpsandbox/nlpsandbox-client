@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.patient_create_request import PatientCreateRequest
+import nlpsandbox
+from nlpsandbox.model.patient_create_request import PatientCreateRequest
 
 
 class TestPatientCreateRequest(unittest.TestCase):

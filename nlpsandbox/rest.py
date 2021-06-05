@@ -18,7 +18,7 @@ from urllib.parse import urlencode
 
 import urllib3
 
-from nlpsandboxsdk.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError
+from nlpsandbox.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError
 
 
 logger = logging.getLogger(__name__)

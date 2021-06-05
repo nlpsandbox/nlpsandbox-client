@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.date_offset_config import DateOffsetConfig
+import nlpsandbox
+from nlpsandbox.model.date_offset_config import DateOffsetConfig
 
 
 class TestDateOffsetConfig(unittest.TestCase):

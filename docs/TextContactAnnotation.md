@@ -1,7 +1,6 @@
 # TextContactAnnotation
 
 A contact annotation in a text
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

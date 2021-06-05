@@ -1,6 +1,5 @@
 # TextCovidSymptomAnnotationAllOf
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

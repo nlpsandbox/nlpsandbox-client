@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.tool_type import ToolType
+import nlpsandbox
+from nlpsandbox.model.tool_type import ToolType
 
 
 class TestToolType(unittest.TestCase):

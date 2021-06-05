@@ -12,10 +12,10 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.tool import Tool
+import nlpsandbox
+from nlpsandbox.model.tool import Tool
 globals()['Tool'] = Tool
-from nlpsandboxsdk.model.tool_dependencies import ToolDependencies
+from nlpsandbox.model.tool_dependencies import ToolDependencies
 
 
 class TestToolDependencies(unittest.TestCase):

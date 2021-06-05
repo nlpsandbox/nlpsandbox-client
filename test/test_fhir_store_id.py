@@ -12,8 +12,8 @@
 import sys
 import unittest
 
-import nlpsandboxsdk
-from nlpsandboxsdk.model.fhir_store_id import FhirStoreId
+import nlpsandbox
+from nlpsandbox.model.fhir_store_id import FhirStoreId
 
 
 class TestFhirStoreId(unittest.TestCase):
