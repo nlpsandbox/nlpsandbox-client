@@ -10,9 +10,9 @@ class TestEvaluation:
     def setup_method(self):
         script_dir = os.path.dirname(os.path.realpath(__file__))
         self.pred_filepath = os.path.join(script_dir,
-                                          "../data/new_prediction.json")
+                                          "../data/prediction.json")
         self.gold_filepath = os.path.join(script_dir,
-                                          "../data/new_goldstandard.json")
+                                          "../data/goldstandard.json")
 
     def test_date(self):
         """Test date evaluation"""
