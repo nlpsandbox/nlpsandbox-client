@@ -32,7 +32,9 @@
                 "confidence": 100,
                 "addressType": "city"
             }
-        ]
+        ],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
     }, {
         "annotationSource": {
             "resourceSource": {
@@ -66,7 +68,9 @@
                 "confidence": 100,
                 "addressType": "state"
             }
-        ]
+        ],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
     }, {
         "annotationSource": {
             "resourceSource": {
@@ -92,7 +96,9 @@
                 "personType": "patient"
             }
         ],
-        "textPhysicalAddressAnnotations": []
+        "textPhysicalAddressAnnotations": [],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
     }, {
         "annotationSource": {
             "resourceSource": {
@@ -126,7 +132,9 @@
                 "confidence": 100,
                 "addressType": "hospitalization"
             }
-        ]
+        ],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
     }, {
         "annotationSource": {
             "resourceSource": {
@@ -143,6 +151,36 @@
                 "text": "David's",
                 "confidence": 100,
                 "addressType": "organization"
+            }
+        ],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
+    }, {
+        "annotationSource": {
+            "resourceSource": {
+                    "name": "5"
+            }
+        },
+        "name": "name",
+        "textDateAnnotations": [],
+        "textPersonNameAnnotations": [],
+        "textPhysicalAddressAnnotations": [],
+        "textIdAnnotations": [
+            {
+                "start": 25,
+                "length": 5,
+                "text": "555-55-5555",
+                "confidence": 95.5,
+                "idType": "ssn"
+            }
+        ],
+        "textContactAnnotations": [
+            {
+                "start": 25,
+                "length": 5,
+                "text": "test@test.org",
+                "confidence": 95.5,
+                "contactType": "email"
             }
         ]
     }
