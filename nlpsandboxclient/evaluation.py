@@ -27,20 +27,10 @@ class Evaluation(metaclass=ABCMeta):
         self.type_list = list()
         # noAddressType to check if participants' submission include "addressType", default is True, no addressType
         self.noAddressType = True
+        if self.evaluation_type is None:
+            raise ValueError("Must specify evaluation_type attribute")
 
     def convert_annotations(self, annotations):
-        # if self.evaluation_type == "date":
-        #     annotation_key = "date_annotations"
-        #     post_path = "textDateAnnotations"
-        # elif self.evaluation_type == "person":
-        #     annotation_key = "person_name_annotations"
-        #     post_path = "textPersonNameAnnotations"
-        # elif self.evaluation_type == "address":
-        #     annotation_key = "physical_location_annotations"
-        #     post_path = "textPhysicalAddressAnnotations"
-        # else:
-        #     raise ValueError("Must specify evaluation_type attribute")
-
         all_annotations = []
         for annotation in annotations:
             # print(annotation)
