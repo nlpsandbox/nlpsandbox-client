@@ -11,7 +11,7 @@
                 "start": 20,
                 "length": 10,
                 "text": "11/21/2019",
-                "confidence": 95.5,
+                "confidence": 100,
                 "dateFormat": "MM/DD/YYYY"
             }
         ],
@@ -20,7 +20,7 @@
                 "start": 20,
                 "length": 8,
                 "text": "Dr.Smith",
-                "confidence": 95.5,
+                "confidence": 100,
                 "personType": "doctor"
             }
         ],
@@ -29,10 +29,12 @@
                 "start": 40,
                 "length": 7,
                 "text": "Seattle",
-                "confidence": 95.5,
+                "confidence": 100,
                 "addressType": "city"
             }
-        ]
+        ],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
     }, {
         "annotationSource": {
             "resourceSource": {
@@ -45,7 +47,7 @@
                 "start": 45,
                 "length": 10,
                 "text": "12/25/2020",
-                "confidence": 95.5,
+                "confidence": 100,
                 "dateFormat": "MM/DD/YYYY"
             }
         ],
@@ -54,7 +56,7 @@
                 "start": 45,
                 "length": 9,
                 "text": "Jon Smith",
-                "confidence": 95.5,
+                "confidence": 100,
                 "personType": "patient"
             }
         ],
@@ -63,10 +65,12 @@
                 "start": 98,
                 "length": 2,
                 "text": "WA",
-                "confidence": 95.5,
+                "confidence": 100,
                 "addressType": "state"
             }
-        ]
+        ],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
     }, {
         "annotationSource": {
             "resourceSource": {
@@ -77,22 +81,24 @@
         "textDateAnnotations": [
             {
                 "start": 45,
-                "length": 8,
-                "text": "12/25/20",
-                "confidence": 95.5,
+                "length": 10,
+                "text": "12/25/2020",
+                "confidence": 100,
                 "dateFormat": "MM/DD/YYYY"
             }
         ],
         "textPersonNameAnnotations": [
             {
                 "start": 25,
-                "length": 3,
-                "text": "Jon",
-                "confidence": 95.5,
+                "length": 6,
+                "text": "Jon Ki",
+                "confidence": 100,
                 "personType": "patient"
             }
         ],
-        "textPhysicalAddressAnnotations": []
+        "textPhysicalAddressAnnotations": [],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
     }, {
         "annotationSource": {
             "resourceSource": {
@@ -102,31 +108,33 @@
         "name": "name",
         "textDateAnnotations": [
             {
-                "start": 42,
-                "length": 14,
-                "text": "This Wednesday",
-                "confidence": 95.5,
+                "start": 47,
+                "length": 9,
+                "text": "Wednesday",
+                "confidence": 100,
                 "dateFormat": "D"
             }
         ],
         "textPersonNameAnnotations": [
             {
-                "start": 22,
-                "length": 8,
-                "text": "Smith Ke",
-                "confidence": 95.5,
-                "personType": "patient"
+                "start": 20,
+                "length": 11,
+                "text": "DrSmith Ke",
+                "confidence": 100,
+                "personType": "doctor"
             }
         ],
         "textPhysicalAddressAnnotations": [
             {
                 "start": 22,
-                "length": 2,
-                "text": "UW",
-                "confidence": 95.5,
-                "addressType": "organization"
+                "length": 11,
+                "text": "UW medicine",
+                "confidence": 100,
+                "addressType": "hospitalization"
             }
-        ]
+        ],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
     }, {
         "annotationSource": {
             "resourceSource": {
@@ -139,10 +147,40 @@
         "textPhysicalAddressAnnotations": [
             {
                 "start": 25,
-                "length": 5,
-                "text": "David",
-                "confidence": 95.5,
+                "length": 7,
+                "text": "David's",
+                "confidence": 100,
                 "addressType": "organization"
+            }
+        ],
+        "textIdAnnotations": [],
+        "textContactAnnotations": []
+    }, {
+        "annotationSource": {
+            "resourceSource": {
+                    "name": "5"
+            }
+        },
+        "name": "name",
+        "textDateAnnotations": [],
+        "textPersonNameAnnotations": [],
+        "textPhysicalAddressAnnotations": [],
+        "textIdAnnotations": [
+            {
+                "start": 25,
+                "length": 5,
+                "text": "555-55-5555",
+                "confidence": 95.5,
+                "idType": "ssn"
+            }
+        ],
+        "textContactAnnotations": [
+            {
+                "start": 25,
+                "length": 5,
+                "text": "test@test.org",
+                "confidence": 95.5,
+                "contactType": "email"
             }
         ]
     }

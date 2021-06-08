@@ -19,7 +19,9 @@ def cli():
 @click.option('--tool_type', help='The type of tool to evaluate.',
               type=click.Choice(['nlpsandbox:date-annotator',
                                  'nlpsandbox:person-name-annotator',
-                                 'nlpsandbox:physical-address-annotator'],
+                                 'nlpsandbox:physical-address-annotator',
+                                 'nlpsandbox:id-annotator',
+                                 'nlpsandbox:contact-annotator'],
                                 case_sensitive=False), required=True)
 def evaluate_prediction(pred_filepath, gold_filepath, output, tool_type):
     """Evaluate the performance of a prediction file. Example prediction and
@@ -29,7 +31,9 @@ def evaluate_prediction(pred_filepath, gold_filepath, output, tool_type):
     eval_mapping = {
         "nlpsandbox:date-annotator": evaluation.DateEvaluation,
         "nlpsandbox:person-name-annotator": evaluation.PersonNameEvaluation,
-        "nlpsandbox:physical-address-annotator": evaluation.PhysicalAddressEvaluation
+        "nlpsandbox:physical-address-annotator": evaluation.PhysicalAddressEvaluation,
+        'nlpsandbox:id-annotator': evaluation.IdEvaluation,
+        'nlpsandbox:contact-annotator': evaluation.ContactEvaluation
     }
     evaluator = eval_mapping[tool_type]()
 

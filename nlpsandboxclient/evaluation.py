@@ -16,6 +16,7 @@ class Evaluation(metaclass=ABCMeta):
     evaluation_type = None
     annotation = None
     col = None
+    post_path = None
 
     def __init__(self):
         self.gs_dict_seq = dict()
@@ -26,29 +27,19 @@ class Evaluation(metaclass=ABCMeta):
         self.type_list = list()
         # noAddressType to check if participants' submission include "addressType", default is True, no addressType
         self.noAddressType = True
-
-    def convert_annotations(self, annotations):
-        if self.evaluation_type == "date":
-            annotation_key = "date_annotations"
-            post_path = "textDateAnnotations"
-        elif self.evaluation_type == "person":
-            annotation_key = "person_name_annotations"
-            post_path = "textPersonNameAnnotations"
-        elif self.evaluation_type == "address":
-            annotation_key = "physical_location_annotations"
-            post_path = "textPhysicalAddressAnnotations"
-        else:
+        if self.evaluation_type is None:
             raise ValueError("Must specify evaluation_type attribute")
 
+    def convert_annotations(self, annotations):
         all_annotations = []
         for annotation in annotations:
             # print(annotation)
             noteid = annotation['annotationSource']['resourceSource']['name']
-            for annots in annotation[post_path]:
+            for annots in annotation[self.post_path]:
                 annots['noteId'] = os.path.basename(noteid)
                 all_annotations.append(annots)
 
-        new_annotations = {annotation_key: all_annotations}
+        new_annotations = {self.col: all_annotations}
         return new_annotations
 
     def convert_dict(self, sys_file, gs_file):
@@ -264,15 +255,32 @@ class DateEvaluation(Evaluation):
     evaluation_type = "date"
     annotation = "dateFormat"
     col = "date_annotations"
+    post_path = "textDateAnnotations"
 
 
 class PersonNameEvaluation(Evaluation):
     evaluation_type = "person"
     annotation = "personType"
     col = "person_name_annotations"
+    post_path = "textPersonNameAnnotations"
 
 
 class PhysicalAddressEvaluation(Evaluation):
     evaluation_type = "address"
     annotation = "addressType"
     col = "physical_location_annotations"
+    post_path = "textPhysicalAddressAnnotations"
+
+
+class IdEvaluation(Evaluation):
+    evaluation_type = "id"
+    annotation = "idType"
+    col = "id_annotations"
+    post_path = "textIdAnnotations"
+
+
+class ContactEvaluation(Evaluation):
+    evaluation_type = "contact"
+    annotation = "contactType"
+    col = "contact_annotations"
+    post_path = "textContactAnnotations"

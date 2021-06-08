@@ -10,9 +10,9 @@ class TestEvaluation:
     def setup_method(self):
         script_dir = os.path.dirname(os.path.realpath(__file__))
         self.pred_filepath = os.path.join(script_dir,
-                                          "../data/new_prediction.json")
+                                          "../data/prediction.json")
         self.gold_filepath = os.path.join(script_dir,
-                                          "../data/new_goldstandard.json")
+                                          "../data/goldstandard.json")
 
     def test_date(self):
         """Test date evaluation"""
@@ -93,4 +93,62 @@ class TestEvaluation:
         evaluator = evaluation.PhysicalAddressEvaluation()
         evaluator.convert_dict(self.pred_filepath, self.gold_filepath)
         results = evaluator.eval()
+        assert results == expected_results
+
+
+    def test_id(self):
+        """Test id evaluation"""
+        expected_results = {
+            'id_location': [
+                {'metric': 'F1', 'value': 1, 'type': 'instance', 'mode': 'relax'},
+                {'metric': 'precision', 'value': 1, 'type': 'instance', 'mode': 'relax'},
+                {'metric': 'recall', 'value': 1, 'type': 'instance', 'mode': 'relax'},
+                {'metric': 'F1', 'value': 1, 'type': 'instance', 'mode': 'strict'},
+                {'metric': 'precision', 'value': 1, 'type': 'instance', 'mode': 'strict'},
+                {'metric': 'recall', 'value': 1, 'type': 'instance', 'mode': 'strict'},
+                {'metric': 'F1', 'value': 1, 'type': 'token', 'mode': 'strict'},
+                {'metric': 'precision', 'value': 1, 'type': 'token', 'mode': 'strict'},
+                {'metric': 'recall', 'value': 1, 'type': 'token', 'mode': 'strict'}
+            ],
+            'id_type': [
+                {'metric': 'F1', 'value': 1},
+                {'metric': 'precision', 'value': 1},
+                {'metric': 'recall', 'value': 1}
+            ]
+        }
+        evaluator = evaluation.IdEvaluation()
+        evaluator.convert_dict(self.pred_filepath, self.gold_filepath)
+        results = evaluator.eval()
+        for id_type in results['id_type']:
+            if math.isnan(id_type['value']):
+                id_type['value'] = None
+        assert results == expected_results
+
+
+    def test_contact(self):
+        """Test contact evaluation"""
+        expected_results = {
+            'contact_location': [
+                {'metric': 'F1', 'value': 1, 'type': 'instance', 'mode': 'relax'},
+                {'metric': 'precision', 'value': 1, 'type': 'instance', 'mode': 'relax'},
+                {'metric': 'recall', 'value': 1, 'type': 'instance', 'mode': 'relax'},
+                {'metric': 'F1', 'value': 1, 'type': 'instance', 'mode': 'strict'},
+                {'metric': 'precision', 'value': 1, 'type': 'instance', 'mode': 'strict'},
+                {'metric': 'recall', 'value': 1, 'type': 'instance', 'mode': 'strict'},
+                {'metric': 'F1', 'value': 1, 'type': 'token', 'mode': 'strict'},
+                {'metric': 'precision', 'value': 1, 'type': 'token', 'mode': 'strict'},
+                {'metric': 'recall', 'value': 1, 'type': 'token', 'mode': 'strict'}
+            ],
+            'contact_type': [
+                {'metric': 'F1', 'value': 1},
+                {'metric': 'precision', 'value': 1},
+                {'metric': 'recall', 'value': 1}
+            ]
+        }
+        evaluator = evaluation.ContactEvaluation()
+        evaluator.convert_dict(self.pred_filepath, self.gold_filepath)
+        results = evaluator.eval()
+        for contact_type in results['contact_type']:
+            if math.isnan(contact_type['value']):
+                contact_type['value'] = None
         assert results == expected_results
