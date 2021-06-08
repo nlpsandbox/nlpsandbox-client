@@ -1,4 +1,4 @@
-name: Update Date Annotator stub
+name: Update to latest NLP Sandbox version
 
 on:
   schedule:
@@ -10,7 +10,7 @@ env:
 
 jobs:
   check-and-update:
-    name: Check and update date annotator stub
+    name: Check and update to the latest NLP Sandbox version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.node_version }}
-      - name: Update date annotator stub
+      - name: Update the internal client library
         run: |
           # Remove code in case there are any deletions
           rm -rf nlpsandbox
