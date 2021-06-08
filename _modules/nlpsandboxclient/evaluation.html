@@ -183,6 +183,7 @@
     <span class="n">evaluation_type</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">annotation</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">col</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">post_path</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gs_dict_seq</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -193,29 +194,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">type_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
         <span class="c1"># noAddressType to check if participants&#39; submission include &quot;addressType&quot;, default is True, no addressType</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">noAddressType</span> <span class="o">=</span> <span class="kc">True</span>
-
-<div class="viewcode-block" id="Evaluation.convert_annotations"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.evaluation.Evaluation.convert_annotations">[docs]</a>    <span class="k">def</span> <span class="nf">convert_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotations</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation_type</span> <span class="o">==</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span>
-            <span class="n">annotation_key</span> <span class="o">=</span> <span class="s2">&quot;date_annotations&quot;</span>
-            <span class="n">post_path</span> <span class="o">=</span> <span class="s2">&quot;textDateAnnotations&quot;</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation_type</span> <span class="o">==</span> <span class="s2">&quot;person&quot;</span><span class="p">:</span>
-            <span class="n">annotation_key</span> <span class="o">=</span> <span class="s2">&quot;person_name_annotations&quot;</span>
-            <span class="n">post_path</span> <span class="o">=</span> <span class="s2">&quot;textPersonNameAnnotations&quot;</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation_type</span> <span class="o">==</span> <span class="s2">&quot;address&quot;</span><span class="p">:</span>
-            <span class="n">annotation_key</span> <span class="o">=</span> <span class="s2">&quot;physical_location_annotations&quot;</span>
-            <span class="n">post_path</span> <span class="o">=</span> <span class="s2">&quot;textPhysicalAddressAnnotations&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Must specify evaluation_type attribute&quot;</span><span class="p">)</span>
 
+<div class="viewcode-block" id="Evaluation.convert_annotations"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.evaluation.Evaluation.convert_annotations">[docs]</a>    <span class="k">def</span> <span class="nf">convert_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotations</span><span class="p">):</span>
         <span class="n">all_annotations</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">:</span>
             <span class="c1"># print(annotation)</span>
             <span class="n">noteid</span> <span class="o">=</span> <span class="n">annotation</span><span class="p">[</span><span class="s1">&#39;annotationSource&#39;</span><span class="p">][</span><span class="s1">&#39;resourceSource&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">annots</span> <span class="ow">in</span> <span class="n">annotation</span><span class="p">[</span><span class="n">post_path</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">annots</span> <span class="ow">in</span> <span class="n">annotation</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">post_path</span><span class="p">]:</span>
                 <span class="n">annots</span><span class="p">[</span><span class="s1">&#39;noteId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">noteid</span><span class="p">)</span>
                 <span class="n">all_annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">annots</span><span class="p">)</span>
 
-        <span class="n">new_annotations</span> <span class="o">=</span> <span class="p">{</span><span class="n">annotation_key</span><span class="p">:</span> <span class="n">all_annotations</span><span class="p">}</span>
+        <span class="n">new_annotations</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">:</span> <span class="n">all_annotations</span><span class="p">}</span>
         <span class="k">return</span> <span class="n">new_annotations</span></div>
 
 <div class="viewcode-block" id="Evaluation.convert_dict"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.evaluation.Evaluation.convert_dict">[docs]</a>    <span class="k">def</span> <span class="nf">convert_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sys_file</span><span class="p">,</span> <span class="n">gs_file</span><span class="p">):</span>
@@ -430,19 +421,36 @@
 <div class="viewcode-block" id="DateEvaluation"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.evaluation.DateEvaluation">[docs]</a><span class="k">class</span> <span class="nc">DateEvaluation</span><span class="p">(</span><span class="n">Evaluation</span><span class="p">):</span>
     <span class="n">evaluation_type</span> <span class="o">=</span> <span class="s2">&quot;date&quot;</span>
     <span class="n">annotation</span> <span class="o">=</span> <span class="s2">&quot;dateFormat&quot;</span>
-    <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;date_annotations&quot;</span></div>
+    <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;date_annotations&quot;</span>
+    <span class="n">post_path</span> <span class="o">=</span> <span class="s2">&quot;textDateAnnotations&quot;</span></div>
 
 
 <div class="viewcode-block" id="PersonNameEvaluation"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.evaluation.PersonNameEvaluation">[docs]</a><span class="k">class</span> <span class="nc">PersonNameEvaluation</span><span class="p">(</span><span class="n">Evaluation</span><span class="p">):</span>
     <span class="n">evaluation_type</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span>
     <span class="n">annotation</span> <span class="o">=</span> <span class="s2">&quot;personType&quot;</span>
-    <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;person_name_annotations&quot;</span></div>
+    <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;person_name_annotations&quot;</span>
+    <span class="n">post_path</span> <span class="o">=</span> <span class="s2">&quot;textPersonNameAnnotations&quot;</span></div>
 
 
 <div class="viewcode-block" id="PhysicalAddressEvaluation"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.evaluation.PhysicalAddressEvaluation">[docs]</a><span class="k">class</span> <span class="nc">PhysicalAddressEvaluation</span><span class="p">(</span><span class="n">Evaluation</span><span class="p">):</span>
     <span class="n">evaluation_type</span> <span class="o">=</span> <span class="s2">&quot;address&quot;</span>
     <span class="n">annotation</span> <span class="o">=</span> <span class="s2">&quot;addressType&quot;</span>
-    <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;physical_location_annotations&quot;</span></div>
+    <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;physical_location_annotations&quot;</span>
+    <span class="n">post_path</span> <span class="o">=</span> <span class="s2">&quot;textPhysicalAddressAnnotations&quot;</span></div>
+
+
+<div class="viewcode-block" id="IdEvaluation"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.evaluation.IdEvaluation">[docs]</a><span class="k">class</span> <span class="nc">IdEvaluation</span><span class="p">(</span><span class="n">Evaluation</span><span class="p">):</span>
+    <span class="n">evaluation_type</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
+    <span class="n">annotation</span> <span class="o">=</span> <span class="s2">&quot;idType&quot;</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;id_annotations&quot;</span>
+    <span class="n">post_path</span> <span class="o">=</span> <span class="s2">&quot;textIdAnnotations&quot;</span></div>
+
+
+<div class="viewcode-block" id="ContactEvaluation"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.evaluation.ContactEvaluation">[docs]</a><span class="k">class</span> <span class="nc">ContactEvaluation</span><span class="p">(</span><span class="n">Evaluation</span><span class="p">):</span>
+    <span class="n">evaluation_type</span> <span class="o">=</span> <span class="s2">&quot;contact&quot;</span>
+    <span class="n">annotation</span> <span class="o">=</span> <span class="s2">&quot;contactType&quot;</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;contact_annotations&quot;</span>
+    <span class="n">post_path</span> <span class="o">=</span> <span class="s2">&quot;textContactAnnotations&quot;</span></div>
 </pre></div>
 
            </div>
