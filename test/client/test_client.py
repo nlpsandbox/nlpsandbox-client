@@ -12,7 +12,7 @@ from nlpsandbox.api import (
     text_date_annotation_api,
     text_id_annotation_api,
     text_person_name_annotation_api,
-    text_physical_address_annotation_api,
+    text_location_annotation_api,
     tool_api,
 )
 from nlpsandbox.models import (
@@ -405,17 +405,17 @@ class TestAnnotatorClient:
                 text_person_name_annotation_request=self.example_request
             )
 
-    def test__annotate_physical_address(self):
-        """Test annotating physical address"""
-        with patch.object(text_physical_address_annotation_api, "TextPhysicalAddressAnnotationApi",
+    def test__annotate_location(self):
+        """Test annotating location"""
+        with patch.object(text_location_annotation_api, "TextLocationAnnotationApi",
                           return_value=self.mock_api) as resource_api,\
-             patch.object(self.mock_api, "create_text_physical_address_annotations",
+             patch.object(self.mock_api, "create_text_location_annotations",
                           return_value="foo") as create_annotations:
-            annotated = client._annotate_physical_address(self.api, self.example_request)
+            annotated = client._annotate_location(self.api, self.example_request)
             assert annotated == "foo"
             resource_api.assert_called_once_with(self.api)
             create_annotations.assert_called_once_with(
-                text_physical_address_annotation_request=self.example_request
+                text_location_annotation_request=self.example_request
             )
 
     def test__annotate_id(self):
@@ -469,8 +469,8 @@ class TestAnnotatorClient:
     @pytest.mark.parametrize("tool_type,tool_func", [
         ("nlpsandbox:date-annotator", "_annotate_date"),
         ("nlpsandbox:person-name-annotator", "_annotate_person_name"),
-        ("nlpsandbox:physical-address-annotator",
-         "_annotate_physical_address"),
+        ("nlpsandbox:location-annotator",
+         "_annotate_location"),
         ("nlpsandbox:id-annotator", "_annotate_id"),
         ("nlpsandbox:covid-symptom-annotator", "_annotate_covid_symptom"),
         ("nlpsandbox:contact-annotator", "_annotate_contact"),
@@ -503,7 +503,7 @@ class TestAnnotatorClient:
             name="foo", version="1.0.0", license=License("apache-2.0"),
             repository="www.google.com", description="foobar",
             author="Bob", author_email="email@email.com", url="www.google.com",
-            type=ToolType("tool"), api_version="1.0.0"
+            type=ToolType("nlpsandbox:date-annotator"), api_version="1.0.0"
         )
         with self.config as config,\
              self.api_client as api_client,\
@@ -525,7 +525,7 @@ class TestAnnotatorClient:
             name="foo", version="1.0.0", license=License("apache-2.0"),
             repository="www.google.com", description="foobar",
             author="Bob", author_email="email@email.com", url="www.google.com",
-            type=ToolType("tool"), api_version="1.0.0"
+            type=ToolType("nlpsandbox:date-annotator"), api_version="1.0.0"
         )
         with self.config as config,\
              self.api_client as api_client,\

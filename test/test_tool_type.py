@@ -27,7 +27,7 @@ class TestToolType(unittest.TestCase):
 
     def testToolType(self):
         """Test ToolType"""
-        ToolType("type")
+        ToolType("nlpsandbox:date-annotator")
 
 
 if __name__ == '__main__':

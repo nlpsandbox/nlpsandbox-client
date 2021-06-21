@@ -13,27 +13,27 @@ import unittest
 from unittest.mock import patch
 
 import nlpsandbox
-from nlpsandbox.api.text_physical_address_annotation_api import TextPhysicalAddressAnnotationApi  # noqa: E501
+from nlpsandbox.api.text_location_annotation_api import TextLocationAnnotationApi  # noqa: E501
 
 
-class TestTextPhysicalAddressAnnotationApi(unittest.TestCase):
-    """TextPhysicalAddressAnnotationApi unit test stubs"""
+class TestTextLocationAnnotationApi(unittest.TestCase):
+    """TextLocationAnnotationApi unit test stubs"""
 
     def setUp(self):
-        self.api = TextPhysicalAddressAnnotationApi()  # noqa: E501
+        self.api = TextLocationAnnotationApi()  # noqa: E501
         self.patcher = patch('nlpsandbox.api_client.ApiClient.call_api')
         self.mock_foo = self.patcher.start()
 
     def tearDown(self):
         self.patcher.stop()
 
-    def test_create_text_physical_address_annotations(self):
-        """Test case for create_text_physical_address_annotations
+    def test_create_text_location_annotations(self):
+        """Test case for create_text_location_annotations
 
         Annotate physical addresses in a clinical note  # noqa: E501
         """
-        self.api.create_text_physical_address_annotations(
-            text_physical_address_annotation_request={
+        self.api.create_text_location_annotations(
+            text_location_annotation_request={
                 "note": {
                     "identifier": "note-1",
                     "type": "note-type",

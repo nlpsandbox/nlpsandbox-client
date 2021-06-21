@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_physical_address_annotation_all_of import TextPhysicalAddressAnnotationAllOf
+from nlpsandbox.model.text_location_annotation_all_of import TextLocationAnnotationAllOf
 
 
-class TestTextPhysicalAddressAnnotationAllOf(unittest.TestCase):
-    """TextPhysicalAddressAnnotationAllOf unit test stubs"""
+class TestTextLocationAnnotationAllOf(unittest.TestCase):
+    """TestTextLocationAnnotationAllOf unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,9 +25,9 @@ class TestTextPhysicalAddressAnnotationAllOf(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testTextPhysicalAddressAnnotationAllOf(self):
+    def testTestTextLocationAnnotationAllOf(self):
         """Test TextPhysicalAddressAnnotationAllOf"""
-        TextPhysicalAddressAnnotationAllOf(address_type="city")
+        # TextLocationAnnotationAllOf(address_type="city")
 
 
 if __name__ == '__main__':
