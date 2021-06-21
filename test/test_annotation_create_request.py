@@ -19,14 +19,14 @@ from nlpsandbox.model.text_covid_symptom_annotation import TextCovidSymptomAnnot
 from nlpsandbox.model.text_date_annotation import TextDateAnnotation
 from nlpsandbox.model.text_id_annotation import TextIdAnnotation
 from nlpsandbox.model.text_person_name_annotation import TextPersonNameAnnotation
-from nlpsandbox.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
+from nlpsandbox.model.text_location_annotation import TextLocationAnnotation
 globals()['AnnotationSource'] = AnnotationSource
 globals()['TextContactAnnotation'] = TextContactAnnotation
 globals()['TextCovidSymptomAnnotation'] = TextCovidSymptomAnnotation
 globals()['TextDateAnnotation'] = TextDateAnnotation
 globals()['TextIdAnnotation'] = TextIdAnnotation
 globals()['TextPersonNameAnnotation'] = TextPersonNameAnnotation
-globals()['TextPhysicalAddressAnnotation'] = TextPhysicalAddressAnnotation
+globals()['TextLocationAnnotation'] = TextLocationAnnotation
 from nlpsandbox.model.annotation_create_request import AnnotationCreateRequest
 
 

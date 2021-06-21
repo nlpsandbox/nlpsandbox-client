@@ -14,7 +14,7 @@ from nlpsandbox.api import (
     text_date_annotation_api,
     text_id_annotation_api,
     text_person_name_annotation_api,
-    text_physical_address_annotation_api,
+    text_location_annotation_api,
     tool_api,
 )
 from . import utils
@@ -180,7 +180,7 @@ def _store_annotation(host: str, dataset_id: str, annotation_store_id: str,
         >>>         }
         >>>     ],
         >>>     "textPersonNameAnnotations": [],
-        >>>     "textPhysicalAddressAnnotations": []
+        >>>     "textLocationAnnotations": []
         >>> }
         >>> annotation = store_annotation(host="0.0.0.0/api/v1",
         >>>                               dataset_id="awesome-dataset",
@@ -280,12 +280,12 @@ def _annotate_person_name(api_client, text_annotation_request: dict) -> dict:
     return annotations
 
 
-def _annotate_physical_address(api_client, text_annotation_request: dict) -> dict:
+def _annotate_location(api_client, text_annotation_request: dict) -> dict:
     """Annotate notes with date
 
     Args:
         host: Data node host IP
-        text_annotation_request: Text physical address annotation request
+        text_annotation_request: Text location annotation request
 
     Yields:
         Annotated notes
@@ -302,16 +302,16 @@ def _annotate_physical_address(api_client, text_annotation_request: dict) -> dic
         >>> host = "0.0.0.0/api/v1"
         >>> configuration = nlpsandbox.Configuration(host=host)
         >>> with nlpsandbox.ApiClient(configuration) as api_client:
-        >>>     annotations = _annotate_physical_address(
+        >>>     annotations = _annotate_location(
         >>>         api_client=api_client,
         >>>         text_annotation_request=example_request
         >>>     )
 
     """
     # host = "http://10.23.55.45:9000/api/v1"
-    api_instance = text_physical_address_annotation_api.TextPhysicalAddressAnnotationApi(api_client)
-    annotations = api_instance.create_text_physical_address_annotations(
-        text_physical_address_annotation_request=text_annotation_request
+    api_instance = text_location_annotation_api.TextLocationAnnotationApi(api_client)
+    annotations = api_instance.create_text_location_annotations(
+        text_location_annotation_request=text_annotation_request
     )
     return annotations
 
@@ -504,8 +504,8 @@ def annotate_note(host: str, note: Union[dict, Note],
             annotations = _annotate_date(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:person-name-annotator":
             annotations = _annotate_person_name(api_client, text_annotator_req)
-        elif tool_type == "nlpsandbox:physical-address-annotator":
-            annotations = _annotate_physical_address(api_client, text_annotator_req)
+        elif tool_type == "nlpsandbox:location-annotator":
+            annotations = _annotate_location(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:contact-annotator":
             annotations = _annotate_contact(api_client, text_annotator_req)
         elif tool_type == "nlpsandbox:id-annotator":

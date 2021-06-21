@@ -13,13 +13,13 @@ import sys
 import unittest
 
 import nlpsandbox
-from nlpsandbox.model.text_physical_address_annotation import TextPhysicalAddressAnnotation
-globals()['TextPhysicalAddressAnnotation'] = TextPhysicalAddressAnnotation
-from nlpsandbox.model.text_physical_address_annotation_response import TextPhysicalAddressAnnotationResponse
+from nlpsandbox.model.text_location_annotation import TextLocationAnnotation
+globals()['TextLocationAnnotation'] = TextLocationAnnotation
+from nlpsandbox.model.text_location_annotation_response import TextLocationAnnotationResponse
 
 
-class TestTextPhysicalAddressAnnotationResponse(unittest.TestCase):
-    """TextPhysicalAddressAnnotationResponse unit test stubs"""
+class TestTextLocationAnnotationResponse(unittest.TestCase):
+    """TextLocationAnnotationResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,7 +27,7 @@ class TestTextPhysicalAddressAnnotationResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testTextPhysicalAddressAnnotationResponse(self):
+    def testTextLocationAnnotationResponse(self):
         """Test TextPhysicalAddressAnnotationResponse"""
         # FIXME: construct object with mandatory attributes with example values
         # model = TextPhysicalAddressAnnotationResponse()  # noqa: E501

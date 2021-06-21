@@ -19,7 +19,7 @@ NLP Sandbox Client Library for Python.  This repository consists of 2 packages
 
 ## Specification
 
-- API version: 1.1.2
+- API version: 1.2.0
 - Docker image: `nlpsandbox/cli`
 
 ## Documentation

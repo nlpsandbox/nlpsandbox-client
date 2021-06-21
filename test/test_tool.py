@@ -34,7 +34,7 @@ class TestTool(unittest.TestCase):
         Tool(name="foo", version="1.0.0", license=License("apache-2.0"),
              repository="www.google.com", description="foobar",
              author="Bob", author_email="email@email.com", url="www.google.com",
-             type=ToolType("tool"), api_version="1.0.0")
+             type=ToolType("nlpsandbox:date-annotator"), api_version="1.0.0")
 
 
 if __name__ == '__main__':

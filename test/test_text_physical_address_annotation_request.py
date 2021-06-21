@@ -16,11 +16,11 @@ import nlpsandbox
 from nlpsandbox.model.note import Note
 from nlpsandbox.models import NoteId, PatientId
 globals()['Note'] = Note
-from nlpsandbox.model.text_physical_address_annotation_request import TextPhysicalAddressAnnotationRequest
+from nlpsandbox.model.text_location_annotation_request import TextLocationAnnotationRequest
 
 
-class TestTextPhysicalAddressAnnotationRequest(unittest.TestCase):
-    """TextPhysicalAddressAnnotationRequest unit test stubs"""
+class TestTextLocationAnnotationRequest(unittest.TestCase):
+    """TextLocationAnnotationRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -28,9 +28,9 @@ class TestTextPhysicalAddressAnnotationRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testTextPhysicalAddressAnnotationRequest(self):
-        """Test TextPhysicalAddressAnnotationRequest"""
-        TextPhysicalAddressAnnotationRequest(
+    def testTextLocationAnnotationRequest(self):
+        """Test TextLocationAnnotationRequest"""
+        TextLocationAnnotationRequest(
             note=Note(
                 identifier=NoteId("identifier"),
                 text="text", type="type",
