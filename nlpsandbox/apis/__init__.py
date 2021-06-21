@@ -26,6 +26,6 @@ from nlpsandbox.api.text_contact_annotation_api import TextContactAnnotationApi
 from nlpsandbox.api.text_covid_symptom_annotation_api import TextCovidSymptomAnnotationApi
 from nlpsandbox.api.text_date_annotation_api import TextDateAnnotationApi
 from nlpsandbox.api.text_id_annotation_api import TextIdAnnotationApi
+from nlpsandbox.api.text_location_annotation_api import TextLocationAnnotationApi
 from nlpsandbox.api.text_person_name_annotation_api import TextPersonNameAnnotationApi
-from nlpsandbox.api.text_physical_address_annotation_api import TextPhysicalAddressAnnotationApi
 from nlpsandbox.api.tool_api import ToolApi

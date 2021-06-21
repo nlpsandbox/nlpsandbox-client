@@ -56,8 +56,8 @@ with nlpsandbox.ApiClient() as api_client:
         text_person_name_annotations=[
             TextPersonNameAnnotation(),
         ],
-        text_physical_address_annotations=[
-            TextPhysicalAddressAnnotation(),
+        text_location_annotations=[
+            TextLocationAnnotation(),
         ],
         text_id_annotations=[
             TextIdAnnotation(),
