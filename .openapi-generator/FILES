@@ -201,8 +201,3 @@ nlpsandbox/model_utils.py
 nlpsandbox/models/__init__.py
 nlpsandbox/rest.py
 test/__init__.py
-test/test_text_location_annotation.py
-test/test_text_location_annotation_all_of.py
-test/test_text_location_annotation_api.py
-test/test_text_location_annotation_request.py
-test/test_text_location_annotation_response.py
