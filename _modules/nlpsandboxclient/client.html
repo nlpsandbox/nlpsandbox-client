@@ -181,7 +181,7 @@
     <span class="n">text_date_annotation_api</span><span class="p">,</span>
     <span class="n">text_id_annotation_api</span><span class="p">,</span>
     <span class="n">text_person_name_annotation_api</span><span class="p">,</span>
-    <span class="n">text_physical_address_annotation_api</span><span class="p">,</span>
+    <span class="n">text_location_annotation_api</span><span class="p">,</span>
     <span class="n">tool_api</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">utils</span>
@@ -347,7 +347,7 @@
 <span class="sd">        &gt;&gt;&gt;         }</span>
 <span class="sd">        &gt;&gt;&gt;     ],</span>
 <span class="sd">        &gt;&gt;&gt;     &quot;textPersonNameAnnotations&quot;: [],</span>
-<span class="sd">        &gt;&gt;&gt;     &quot;textPhysicalAddressAnnotations&quot;: []</span>
+<span class="sd">        &gt;&gt;&gt;     &quot;textLocationAnnotations&quot;: []</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; annotation = store_annotation(host=&quot;0.0.0.0/api/v1&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;                               dataset_id=&quot;awesome-dataset&quot;,</span>
@@ -447,12 +447,12 @@
     <span class="k">return</span> <span class="n">annotations</span>
 
 
-<span class="k">def</span> <span class="nf">_annotate_physical_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotation_request</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">_annotate_location</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotation_request</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Annotate notes with date</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        host: Data node host IP</span>
-<span class="sd">        text_annotation_request: Text physical address annotation request</span>
+<span class="sd">        text_annotation_request: Text location annotation request</span>
 
 <span class="sd">    Yields:</span>
 <span class="sd">        Annotated notes</span>
@@ -469,16 +469,16 @@
 <span class="sd">        &gt;&gt;&gt; host = &quot;0.0.0.0/api/v1&quot;</span>
 <span class="sd">        &gt;&gt;&gt; configuration = nlpsandbox.Configuration(host=host)</span>
 <span class="sd">        &gt;&gt;&gt; with nlpsandbox.ApiClient(configuration) as api_client:</span>
-<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_physical_address(</span>
+<span class="sd">        &gt;&gt;&gt;     annotations = _annotate_location(</span>
 <span class="sd">        &gt;&gt;&gt;         api_client=api_client,</span>
 <span class="sd">        &gt;&gt;&gt;         text_annotation_request=example_request</span>
 <span class="sd">        &gt;&gt;&gt;     )</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># host = &quot;http://10.23.55.45:9000/api/v1&quot;</span>
-    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">text_physical_address_annotation_api</span><span class="o">.</span><span class="n">TextPhysicalAddressAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
-    <span class="n">annotations</span> <span class="o">=</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">create_text_physical_address_annotations</span><span class="p">(</span>
-        <span class="n">text_physical_address_annotation_request</span><span class="o">=</span><span class="n">text_annotation_request</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">text_location_annotation_api</span><span class="o">.</span><span class="n">TextLocationAnnotationApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">annotations</span> <span class="o">=</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">create_text_location_annotations</span><span class="p">(</span>
+        <span class="n">text_location_annotation_request</span><span class="o">=</span><span class="n">text_annotation_request</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">annotations</span>
 
@@ -671,8 +671,8 @@
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_date</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:person-name-annotator&quot;</span><span class="p">:</span>
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_person_name</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:physical-address-annotator&quot;</span><span class="p">:</span>
-            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_physical_address</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:location-annotator&quot;</span><span class="p">:</span>
+            <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_location</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:contact-annotator&quot;</span><span class="p">:</span>
             <span class="n">annotations</span> <span class="o">=</span> <span class="n">_annotate_contact</span><span class="p">(</span><span class="n">api_client</span><span class="p">,</span> <span class="n">text_annotator_req</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">tool_type</span> <span class="o">==</span> <span class="s2">&quot;nlpsandbox:id-annotator&quot;</span><span class="p">:</span>
