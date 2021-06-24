@@ -24,7 +24,7 @@ from nlpsandbox.models import (
     ToolType, ResourceSource, ResponsePageMetadataLinks,
 )
 from nlpsandbox.rest import ApiException
-from nlpsandboxclient import client
+from nlpsandboxclient import client, utils
 
 
 # def test_get_notes():
@@ -80,7 +80,7 @@ class TestDataNodeClient:
         self.api = nlpsandbox.ApiClient()
         self.mock_api = Mock()
         self.host = "0.0.0.0"
-        self.config = patch.object(nlpsandbox, "Configuration",
+        self.config = patch.object(utils, "get_api_configuration",
                                    return_value=self.configuration)
         self.api_client = patch.object(nlpsandbox, "ApiClient")
         self.dataset_id = "awesome-dataset"
@@ -356,7 +356,7 @@ class TestAnnotatorClient:
         self.api = nlpsandbox.ApiClient()
         self.mock_api = Mock()
         self.host = "0.0.0.0"
-        self.config = patch.object(nlpsandbox, "Configuration",
+        self.config = patch.object(utils, "get_api_configuration",
                                    return_value=self.configuration)
         self.api_client = patch.object(nlpsandbox, "ApiClient")
         self.example_note = {
@@ -462,7 +462,8 @@ class TestAnnotatorClient:
 
     def test_annotate_note__wrong_tool_type(self):
         """Wrong tool type"""
-        with pytest.raises(ValueError, match="Invalid annotator_type: foo"):
+        with self.config,\
+             pytest.raises(ValueError, match="Invalid annotator_type: foo"):
             client.annotate_note(host=self.host, note=self.example_note,
                                  tool_type="foo")
 
