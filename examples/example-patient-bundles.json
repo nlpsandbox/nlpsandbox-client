@@ -90,7 +90,7 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": [],
+            "textLocationAnnotations": [],
             "textIdAnnotations": [],
             "textContactAnnotations": [],
             "textCovidSymptomAnnotations": []
@@ -162,7 +162,7 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": [],
+            "textLocationAnnotations": [],
             "textIdAnnotations": [],
             "textContactAnnotations": [],
             "textCovidSymptomAnnotations": []
@@ -244,13 +244,13 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": [
+            "textLocationAnnotations": [
               {
                 "noteId": "110-03",
                 "start": 3598,
                 "length": 4,
                 "text": "EHMS",
-                "addressType": "hospital",
+                "locationType": "hospital",
                 "confidence": 95
               }
             ],
@@ -343,7 +343,7 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": [],
+            "textLocationAnnotations": [],
             "textIdAnnotations": [],
             "textContactAnnotations": [],
             "textCovidSymptomAnnotations": []
@@ -380,13 +380,13 @@
                 "confidence": 95
               }
             ],
-            "textPhysicalAddressAnnotations": [
+            "textLocationAnnotations": [
               {
                 "noteId": "110-05",
                 "start": 3598,
                 "length": 4,
                 "text": "EHMS",
-                "addressType": "hospital",
+                "locationType": "hospital",
                 "confidence": 95
               }
             ],

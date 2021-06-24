@@ -92,7 +92,7 @@ with nlpsandbox.ApiClient(configuration) as api_client:
             # Determine note Id since noteId isn't part of the 'note'
             annotation = note_bundle['annotation']
             annotations_cols = ['textDateAnnotations',
-                                'textPhysicalAddressAnnotations',
+                                'textLocationAnnotations',
                                 'textPersonNameAnnotations',
                                 'textIdAnnotations',
                                 'textContactAnnotations',
