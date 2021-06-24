@@ -19,7 +19,7 @@ from nlpsandbox.api import (
 )
 from . import utils
 
-DATA_NODE_HOST = "http://10.23.54.142/api/v1"
+DATA_NODE_HOST = "http://0.0.0.0:8080/api/v1"
 
 
 def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
@@ -46,7 +46,7 @@ def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
             "note_name": "dataset/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid"
         }
     """
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     offset = 0
     limit = 10
     with nlpsandbox.ApiClient(configuration) as api_client:
@@ -91,7 +91,7 @@ def get_annotation_store(host: str, dataset_id: str,
         >>> )
 
     """
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     with nlpsandbox.ApiClient(configuration) as api_client:
         annot_store_instance = annotation_store_api.AnnotationStoreApi(
             api_client
@@ -133,7 +133,7 @@ def get_annotation(host: str, dataset_id: str,
         >>> )
 
     """
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     with nlpsandbox.ApiClient(configuration) as api_client:
         annot_instance = annotation_api.AnnotationApi(
             api_client
@@ -190,7 +190,7 @@ def _store_annotation(host: str, dataset_id: str, annotation_store_id: str,
 
     """
 
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     with nlpsandbox.ApiClient(configuration) as api_client:
         annotation_instance = annotation_api.AnnotationApi(api_client)
         new_annotation = utils.change_keys(annotation,
@@ -223,7 +223,7 @@ def list_annotations(host: str, dataset_id: str,
         >>>                                annotation_store_id="awesome-annotation-store")
 
     """
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     offset = 0
     limit = 10
     with nlpsandbox.ApiClient(configuration) as api_client:
@@ -264,7 +264,7 @@ def _annotate_person_name(api_client, text_annotation_request: dict) -> dict:
         >>>    }
         >>> }
         >>> host = "0.0.0.0/api/v1"
-        >>> configuration = nlpsandbox.Configuration(host=host)
+        >>> configuration = utils.get_api_configuration(host=host)
         >>> with nlpsandbox.ApiClient(configuration) as api_client:
         >>>     annotations = _annotate_person_name(
         >>>         api_client=api_client,
@@ -272,7 +272,6 @@ def _annotate_person_name(api_client, text_annotation_request: dict) -> dict:
         >>>     )
 
     """
-    # host = "http://10.23.55.45:9000/api/v1"
     api_instance = text_person_name_annotation_api.TextPersonNameAnnotationApi(api_client)
     annotations = api_instance.create_text_person_name_annotations(
         text_person_name_annotation_request=text_annotation_request
@@ -300,7 +299,7 @@ def _annotate_location(api_client, text_annotation_request: dict) -> dict:
         >>>    }
         >>> }
         >>> host = "0.0.0.0/api/v1"
-        >>> configuration = nlpsandbox.Configuration(host=host)
+        >>> configuration = utils.get_api_configuration(host=host)
         >>> with nlpsandbox.ApiClient(configuration) as api_client:
         >>>     annotations = _annotate_location(
         >>>         api_client=api_client,
@@ -308,7 +307,6 @@ def _annotate_location(api_client, text_annotation_request: dict) -> dict:
         >>>     )
 
     """
-    # host = "http://10.23.55.45:9000/api/v1"
     api_instance = text_location_annotation_api.TextLocationAnnotationApi(api_client)
     annotations = api_instance.create_text_location_annotations(
         text_location_annotation_request=text_annotation_request
@@ -336,7 +334,7 @@ def _annotate_date(api_client, text_annotation_request: dict) -> dict:
         >>>    }
         >>> }
         >>> host = "0.0.0.0/api/v1"
-        >>> configuration = nlpsandbox.Configuration(host=host)
+        >>> configuration = utils.get_api_configuration(host=host)
         >>> with nlpsandbox.ApiClient(configuration) as api_client:
         >>>     annotations = _annotate_person(
         >>>         api_client=api_client,
@@ -344,7 +342,6 @@ def _annotate_date(api_client, text_annotation_request: dict) -> dict:
         >>> )
 
     """
-    # host = "http://10.23.55.45:9000/api/v1"
     api_instance = text_date_annotation_api.TextDateAnnotationApi(api_client)
     annotations = api_instance.create_text_date_annotations(
         text_date_annotation_request=text_annotation_request
@@ -372,7 +369,7 @@ def _annotate_contact(api_client, text_annotation_request: dict) -> dict:
         >>>    }
         >>> }
         >>> host = "0.0.0.0/api/v1"
-        >>> configuration = nlpsandbox.Configuration(host=host)
+        >>> configuration = utils.get_api_configuration(host=host)
         >>> with nlpsandbox.ApiClient(configuration) as api_client:
         >>>     annotations = _annotate_contact(
         >>>         api_client=api_client,
@@ -380,7 +377,6 @@ def _annotate_contact(api_client, text_annotation_request: dict) -> dict:
         >>>     )
 
     """
-    # host = "http://10.23.55.45:9000/api/v1"
     api_instance = text_contact_annotation_api.TextContactAnnotationApi(
         api_client
     )
@@ -410,7 +406,7 @@ def _annotate_id(api_client, text_annotation_request: dict) -> dict:
         >>>    }
         >>> }
         >>> host = "0.0.0.0/api/v1"
-        >>> configuration = nlpsandbox.Configuration(host=host)
+        >>> configuration = utils.get_api_configuration(host=host)
         >>> with nlpsandbox.ApiClient(configuration) as api_client:
         >>>     annotations = _annotate_id(
         >>>         api_client=api_client,
@@ -418,7 +414,6 @@ def _annotate_id(api_client, text_annotation_request: dict) -> dict:
         >>>     )
 
     """
-    # host = "http://10.23.55.45:9000/api/v1"
     api_instance = text_id_annotation_api.TextIdAnnotationApi(
         api_client
     )
@@ -448,7 +443,7 @@ def _annotate_covid_symptom(api_client, text_annotation_request: dict) -> dict:
         >>>    }
         >>> }
         >>> host = "0.0.0.0/api/v1"
-        >>> configuration = nlpsandbox.Configuration(host=host)
+        >>> configuration = utils.get_api_configuration(host=host)
         >>> with nlpsandbox.ApiClient(configuration) as api_client:
         >>>     annotations = _annotate_covid_symptom(
         >>>         api_client=api_client,
@@ -456,7 +451,6 @@ def _annotate_covid_symptom(api_client, text_annotation_request: dict) -> dict:
         >>>     )
 
     """  # noqa: E501
-    # host = "http://10.23.55.45:9000/api/v1"
     api_instance = text_covid_symptom_annotation_api.TextCovidSymptomAnnotationApi(  # noqa: E501
         api_client
     )
@@ -490,8 +484,7 @@ def annotate_note(host: str, note: Union[dict, Note],
         >>>                             tool_type="date")
 
     """
-    # host = "http://10.23.55.45:9000/api/v1"
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     # Change clinical note into text annotation request format
     if isinstance(note, Note):
         text_annotator_req = {"note": note.to_dict()}
@@ -537,8 +530,7 @@ def get_tool(host: str) -> Tool:
         >>> tool = get_tool(host="0.0.0.0/api/v1")
 
     """
-    # host = "http://10.23.55.45:9000/api/v1"
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     with nlpsandbox.ApiClient(configuration) as api_client:
         tool_instance = tool_api.ToolApi(api_client)
         tool_info = tool_instance.get_tool()
@@ -565,7 +557,7 @@ def list_datasets(host: str) -> List[dict]:
         >>>    "name": "datasets/testing"
         >>> }
     """
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     offset = 0
     limit = 10
     with nlpsandbox.ApiClient(configuration) as api_client:
@@ -598,7 +590,6 @@ def _get_tool_redirect(host: str) -> Tool:
 
     """
 
-    # host = "http://10.23.55.45:9000/api/v1"
     if not host.startswith("http"):
         host = f"http://{host}"
     # Remove /api/v1 string
@@ -624,7 +615,7 @@ def store_annotations(host: str, dataset_id: str, annotation_store_id: str,
         delete_existing_annotations: To delete existing annotation store.
                                      Default is True.
     """
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     with nlpsandbox.ApiClient(configuration) as api_client:
         annot_store_instance = annotation_store_api.AnnotationStoreApi(
             api_client
@@ -662,7 +653,7 @@ def store_annotations(host: str, dataset_id: str, annotation_store_id: str,
 
 def store_dataset(host: str, dataset_id: str) -> Dataset:
     """Creates a dataset"""
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     # Enter a context with an instance of the API client
     with nlpsandbox.ApiClient(configuration) as api_client:
         # Create an instance of the API class
@@ -674,7 +665,7 @@ def store_dataset(host: str, dataset_id: str) -> Dataset:
 
 def delete_dataset(host: str, dataset_id: str):
     """Deletes a dataset"""
-    configuration = nlpsandbox.Configuration(host=host)
+    configuration = utils.get_api_configuration(host=host)
     # Enter a context with an instance of the API client
     with nlpsandbox.ApiClient(configuration) as api_client:
         # Create an instance of the API class
