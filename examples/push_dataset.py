@@ -91,16 +91,12 @@ with nlpsandbox.ApiClient(configuration) as api_client:
         for note_bundle in note_bundles:
             # Determine note Id since noteId isn't part of the 'note'
             annotation = note_bundle['annotation']
-            annotations_cols = ['textDateAnnotations',
-                                'textLocationAnnotations',
-                                'textPersonNameAnnotations',
-                                'textIdAnnotations',
-                                'textContactAnnotations',
-                                'textCovidSymptomAnnotations']
             note_ids = set()
-            for col in annotations_cols:
-                for annot in annotation[col]:
-                    note_ids.add(annot['noteId'])
+            # Loop through annotations to get noteId
+            for key, value in annotation.items():
+                if key.startswith("text"):
+                    for annot in value:
+                        note_ids.add(annot['noteId'])
             assert len(note_ids) == 1, "Must only have one noteId"
             note_id = list(note_ids)[0]
 
