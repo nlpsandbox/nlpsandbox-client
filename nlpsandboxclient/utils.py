@@ -4,8 +4,9 @@ import os
 import re
 
 import requests
-
 import synapseclient
+
+import nlpsandbox
 
 
 def stdout_or_json(json_dict: dict, output: str):
@@ -73,3 +74,22 @@ def synapse_login():
         apikey = os.getenv("SYNAPSE_APIKEY")
         syn = synapseclient.login(email=username, apiKey=apikey)
     return syn
+
+
+def get_api_configuration(host: str):
+    """Get API configuration
+
+    Args:
+        host: Tool IP
+
+    Returns:
+        API configuration
+
+    Examples:
+        >>> get_api_configuration(host="http://0.0.0.0:8080/api/v1")
+
+    """
+    # Check if URL exists
+    check_url(url=os.path.join(host, "ui"))
+    configuration = nlpsandbox.Configuration(host=host)
+    return configuration
