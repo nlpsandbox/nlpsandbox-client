@@ -19,7 +19,7 @@ def cli():
 @click.option('--tool_type', help='The type of tool to evaluate.',
               type=click.Choice(['nlpsandbox:date-annotator',
                                  'nlpsandbox:person-name-annotator',
-                                 'nlpsandbox:physical-address-annotator',
+                                 'nlpsandbox:location-annotator',
                                  'nlpsandbox:id-annotator',
                                  'nlpsandbox:contact-annotator'],
                                 case_sensitive=False), required=True)
@@ -31,7 +31,7 @@ def evaluate_prediction(pred_filepath, gold_filepath, output, tool_type):
     eval_mapping = {
         "nlpsandbox:date-annotator": evaluation.DateEvaluation,
         "nlpsandbox:person-name-annotator": evaluation.PersonNameEvaluation,
-        "nlpsandbox:physical-address-annotator": evaluation.PhysicalAddressEvaluation,
+        "nlpsandbox:location-annotator": evaluation.LocationEvaluation,
         'nlpsandbox:id-annotator': evaluation.IdEvaluation,
         'nlpsandbox:contact-annotator': evaluation.ContactEvaluation
     }

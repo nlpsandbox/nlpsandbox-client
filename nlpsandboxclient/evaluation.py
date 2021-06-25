@@ -265,11 +265,11 @@ class PersonNameEvaluation(Evaluation):
     post_path = "textPersonNameAnnotations"
 
 
-class PhysicalAddressEvaluation(Evaluation):
-    evaluation_type = "address"
-    annotation = "addressType"
-    col = "physical_location_annotations"
-    post_path = "textPhysicalAddressAnnotations"
+class LocationEvaluation(Evaluation):
+    evaluation_type = "location"
+    annotation = "locationType"
+    col = "location_annotations"
+    post_path = "textLocationAnnotations"
 
 
 class IdEvaluation(Evaluation):
