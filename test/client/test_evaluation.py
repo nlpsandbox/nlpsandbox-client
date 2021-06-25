@@ -73,7 +73,7 @@ class TestEvaluation:
     def test_address(self):
         """Test person evaluation"""
         expected_results = {
-            'address_location': [
+            'location_location': [
                 {'metric': 'F1', 'value': 0.75, 'type': 'instance', 'mode': 'relax'},
                 {'metric': 'precision', 'value': 0.75, 'type': 'instance', 'mode': 'relax'},
                 {'metric': 'recall', 'value': 0.75, 'type': 'instance', 'mode': 'relax'},
@@ -84,13 +84,13 @@ class TestEvaluation:
                 {'metric': 'precision', 'value': 0.75, 'type': 'token', 'mode': 'strict'},
                 {'metric': 'recall', 'value': 0.6, 'type': 'token', 'mode': 'strict'}
             ],
-            'address_type': [
+            'location_type': [
                 {'metric': 'F1', 'value': 0.5},
                 {'metric': 'precision', 'value': 0.5},
                 {'metric': 'recall', 'value': 0.5}
             ]
         }
-        evaluator = evaluation.PhysicalAddressEvaluation()
+        evaluator = evaluation.LocationEvaluation()
         evaluator.convert_dict(self.pred_filepath, self.gold_filepath)
         results = evaluator.eval()
         assert results == expected_results
