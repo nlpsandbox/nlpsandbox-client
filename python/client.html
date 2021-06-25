@@ -419,6 +419,24 @@ convert function.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="nlpsandboxclient.utils.get_api_configuration">
+<code class="sig-prename descclassname">nlpsandboxclient.utils.</code><code class="sig-name descname">get_api_configuration</code><span class="sig-paren">(</span><em class="sig-param">host: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/utils.html#get_api_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.utils.get_api_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get API configuration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>host</strong> – Tool IP</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>API configuration</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_api_configuration</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;http://0.0.0.0:8080/api/v1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="nlpsandboxclient.utils.stdout_or_json">
 <code class="sig-prename descclassname">nlpsandboxclient.utils.</code><code class="sig-name descname">stdout_or_json</code><span class="sig-paren">(</span><em class="sig-param">json_dict: dict</em>, <em class="sig-param">output: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/utils.html#stdout_or_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.utils.stdout_or_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write dict to json or stdout</p>
@@ -593,6 +611,32 @@ b. SYNAPSE_USERNAME and SYNAPSE_APIKEY environmental variables</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="nlpsandboxclient.evaluation.LocationEvaluation">
+<em class="property">class </em><code class="sig-prename descclassname">nlpsandboxclient.evaluation.</code><code class="sig-name descname">LocationEvaluation</code><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#LocationEvaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.LocationEvaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nlpsandboxclient.evaluation.Evaluation" title="nlpsandboxclient.evaluation.Evaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">nlpsandboxclient.evaluation.Evaluation</span></code></a></p>
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.LocationEvaluation.annotation">
+<code class="sig-name descname">annotation</code><em class="property"> = 'locationType'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.LocationEvaluation.annotation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.LocationEvaluation.col">
+<code class="sig-name descname">col</code><em class="property"> = 'location_annotations'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.LocationEvaluation.col" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.LocationEvaluation.evaluation_type">
+<code class="sig-name descname">evaluation_type</code><em class="property"> = 'location'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.LocationEvaluation.evaluation_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nlpsandboxclient.evaluation.LocationEvaluation.post_path">
+<code class="sig-name descname">post_path</code><em class="property"> = 'textLocationAnnotations'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.LocationEvaluation.post_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="nlpsandboxclient.evaluation.PersonNameEvaluation">
 <em class="property">class </em><code class="sig-prename descclassname">nlpsandboxclient.evaluation.</code><code class="sig-name descname">PersonNameEvaluation</code><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#PersonNameEvaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.PersonNameEvaluation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nlpsandboxclient.evaluation.Evaluation" title="nlpsandboxclient.evaluation.Evaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">nlpsandboxclient.evaluation.Evaluation</span></code></a></p>
@@ -614,32 +658,6 @@ b. SYNAPSE_USERNAME and SYNAPSE_APIKEY environmental variables</p>
 <dl class="attribute">
 <dt id="nlpsandboxclient.evaluation.PersonNameEvaluation.post_path">
 <code class="sig-name descname">post_path</code><em class="property"> = 'textPersonNameAnnotations'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PersonNameEvaluation.post_path" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="nlpsandboxclient.evaluation.PhysicalAddressEvaluation">
-<em class="property">class </em><code class="sig-prename descclassname">nlpsandboxclient.evaluation.</code><code class="sig-name descname">PhysicalAddressEvaluation</code><a class="reference internal" href="../_modules/nlpsandboxclient/evaluation.html#PhysicalAddressEvaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.evaluation.PhysicalAddressEvaluation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#nlpsandboxclient.evaluation.Evaluation" title="nlpsandboxclient.evaluation.Evaluation"><code class="xref py py-class docutils literal notranslate"><span class="pre">nlpsandboxclient.evaluation.Evaluation</span></code></a></p>
-<dl class="attribute">
-<dt id="nlpsandboxclient.evaluation.PhysicalAddressEvaluation.annotation">
-<code class="sig-name descname">annotation</code><em class="property"> = 'addressType'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PhysicalAddressEvaluation.annotation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="nlpsandboxclient.evaluation.PhysicalAddressEvaluation.col">
-<code class="sig-name descname">col</code><em class="property"> = 'physical_location_annotations'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PhysicalAddressEvaluation.col" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="nlpsandboxclient.evaluation.PhysicalAddressEvaluation.evaluation_type">
-<code class="sig-name descname">evaluation_type</code><em class="property"> = 'address'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PhysicalAddressEvaluation.evaluation_type" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="nlpsandboxclient.evaluation.PhysicalAddressEvaluation.post_path">
-<code class="sig-name descname">post_path</code><em class="property"> = 'textPhysicalAddressAnnotations'</em><a class="headerlink" href="#nlpsandboxclient.evaluation.PhysicalAddressEvaluation.post_path" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
