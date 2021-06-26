@@ -19,7 +19,7 @@ def cli():
 @click.option('--tool_type', help='The type of tool.',
               type=click.Choice(['nlpsandbox:date-annotator',
                                  'nlpsandbox:person-name-annotator',
-                                 'nlpsandbox:physical-address-annotator',
+                                 'nlpsandbox:location-annotator',
                                  'nlpsandbox:contact-annotator',
                                  'nlpsandbox:id-annotator',
                                  'nlpsandbox:covid-symptom-annotator'],
