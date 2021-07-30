@@ -33,3 +33,4 @@ setup.py
 setup.cfg
 .gitlab-ci.yml
 .travis.yml
+nlpsandbox/rest.py
