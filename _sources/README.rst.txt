@@ -6,16 +6,12 @@ nlpsandbox-client
 for NLP sandbox data node, annotation services, and evaluation of annotation results.
 This repository consists of 3 packages:
 
-- **datanode**: Python SDK client that wraps `data-node API`_
-- **annotator**: Python SDK client for the NLP annotators `date-annotator API`_, `person-name-annotator API`_, `physical-address-annotator API`_
-- **nlpsandboxclient**: Uses **datanode**, **annotator** to interact with NLP services and the synapseclient_ library to pull information from Synapse (account required).
+- **nlpsandbox**: Python SDK client that wraps all the `NLP Sandbox APIs`_
+- **nlpsandboxclient**: - Convenience functions that infer user behavior of the SDK client.
 
 .. _Synapse: https://www.synapse.org/
 .. _synapseclient: https://python-docs.synapse.org/build/html/index.html
-.. _data-node API: https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/latest/openapi.json
-.. _date-annotator API: https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/latest/openapi.json
-.. _person-name-annotator API: https://nlpsandbox.github.io/nlpsandbox-schemas/person-name-annotator/latest/openapi.json
-.. _physical-address-annotator API: https://nlpsandbox.github.io/nlpsandbox-schemas/physical-address-annotator/latest/openapi.json
+.. _NLP sandbox APIs: https://github.com/nlpsandbox/nlpsandbox-schemas
 
 Installation
 ============
@@ -51,8 +47,7 @@ of setting Synapse credentials.
 
         cp .env.sample .env
 
-    b. Update the configuration values in *.env*. Set the values of **SYNAPSE_USERNAME**
-    and **SYNAPSE_APIKEY** with the credentials of your Synapse account.
+    b. Update the configuration values in *.env*. Set the values of **SYNAPSE_AUTH_TOKEN** to be your Synapse personal access token.
 
     c. Run docker command
 

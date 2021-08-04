@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>nlpsandboxclient &mdash; nlpsandboxclient 3.0 documentation</title>
+  <title>nlpsandboxclient &mdash; nlpsandboxclient 4.2 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                3.0
+                4.2
               </div>
             
           
@@ -444,10 +444,17 @@ convert function.</p>
 
 <dl class="function">
 <dt id="nlpsandboxclient.utils.synapse_login">
-<code class="sig-prename descclassname">nlpsandboxclient.utils.</code><code class="sig-name descname">synapse_login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/utils.html#synapse_login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.utils.synapse_login" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log into synapse via two methods
-a. ~/.synapseConfig
-b. SYNAPSE_USERNAME and SYNAPSE_APIKEY environmental variables</p>
+<code class="sig-prename descclassname">nlpsandboxclient.utils.</code><code class="sig-name descname">synapse_login</code><span class="sig-paren">(</span><em class="sig-param">synapse_config='/github/home/.synapseConfig'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nlpsandboxclient/utils.html#synapse_login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nlpsandboxclient.utils.synapse_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login to Synapse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>synapse_config</strong> – Path to synapse configuration file.
+Defaults to ~/.synapseConfig</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Synapse connection</p>
+</dd>
+</dl>
 </dd></dl>
 
 <span class="target" id="module-nlpsandboxclient.evaluation"></span><dl class="class">

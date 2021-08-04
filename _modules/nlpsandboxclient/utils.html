@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>nlpsandboxclient.utils &mdash; nlpsandboxclient 3.0 documentation</title>
+  <title>nlpsandboxclient.utils &mdash; nlpsandboxclient 4.2 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                3.0
+                4.2
               </div>
             
           
@@ -172,6 +172,10 @@
 
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">synapseclient</span>
+<span class="kn">from</span> <span class="nn">synapseclient.core.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SynapseNoCredentialsError</span><span class="p">,</span>
+    <span class="n">SynapseAuthenticationError</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">nlpsandbox</span>
 
@@ -229,17 +233,28 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{url}</span><span class="s2"> not implemented&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="synapse_login"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.utils.synapse_login">[docs]</a><span class="k">def</span> <span class="nf">synapse_login</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Log into synapse via two methods</span>
-<span class="sd">    a. ~/.synapseConfig</span>
-<span class="sd">    b. SYNAPSE_USERNAME and SYNAPSE_APIKEY environmental variables</span>
+<div class="viewcode-block" id="synapse_login"><a class="viewcode-back" href="../../python/client.html#nlpsandboxclient.utils.synapse_login">[docs]</a><span class="k">def</span> <span class="nf">synapse_login</span><span class="p">(</span><span class="n">synapse_config</span><span class="o">=</span><span class="n">synapseclient</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">CONFIG_FILE</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Login to Synapse</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        synapse_config: Path to synapse configuration file.</span>
+<span class="sd">                        Defaults to ~/.synapseConfig</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Synapse connection</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">syn</span> <span class="o">=</span> <span class="n">synapseclient</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="n">username</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;SYNAPSE_USERNAME&quot;</span><span class="p">)</span>
-        <span class="n">apikey</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;SYNAPSE_APIKEY&quot;</span><span class="p">)</span>
-        <span class="n">syn</span> <span class="o">=</span> <span class="n">synapseclient</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">apiKey</span><span class="o">=</span><span class="n">apikey</span><span class="p">)</span>
+        <span class="n">syn</span> <span class="o">=</span> <span class="n">synapseclient</span><span class="o">.</span><span class="n">Synapse</span><span class="p">(</span><span class="n">configPath</span><span class="o">=</span><span class="n">synapse_config</span><span class="p">)</span>
+        <span class="n">syn</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">SynapseNoCredentialsError</span><span class="p">,</span> <span class="n">SynapseAuthenticationError</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Login error: please make sure you have correctly &quot;</span>
+            <span class="s2">&quot;configured your client.  Instructions here: &quot;</span>
+            <span class="s2">&quot;https://help.synapse.org/docs/Client-Configuration.1985446156.html. &quot;</span>
+            <span class="s2">&quot;You can also create a Synapse Personal Access Token and set it &quot;</span>
+            <span class="s2">&quot;as an environmental variable: &quot;</span>
+            <span class="s2">&quot;SYNAPSE_AUTH_TOKEN=&#39;&lt;my_personal_access_token&gt;&#39;&quot;</span>
+        <span class="p">)</span>
     <span class="k">return</span> <span class="n">syn</span></div>
 
 

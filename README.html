@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>nlpsandbox-client &mdash; nlpsandboxclient 3.0 documentation</title>
+  <title>nlpsandbox-client &mdash; nlpsandboxclient 4.2 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                3.0
+                4.2
               </div>
             
           
@@ -172,9 +172,8 @@
 for NLP sandbox data node, annotation services, and evaluation of annotation results.
 This repository consists of 3 packages:</p>
 <ul class="simple">
-<li><p><strong>datanode</strong>: Python SDK client that wraps <a class="reference external" href="https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/latest/openapi.json">data-node API</a></p></li>
-<li><p><strong>annotator</strong>: Python SDK client for the NLP annotators <a class="reference external" href="https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/latest/openapi.json">date-annotator API</a>, <a class="reference external" href="https://nlpsandbox.github.io/nlpsandbox-schemas/person-name-annotator/latest/openapi.json">person-name-annotator API</a>, <a class="reference external" href="https://nlpsandbox.github.io/nlpsandbox-schemas/physical-address-annotator/latest/openapi.json">physical-address-annotator API</a></p></li>
-<li><p><strong>nlpsandboxclient</strong>: Uses <strong>datanode</strong>, <strong>annotator</strong> to interact with NLP services and the <a class="reference external" href="https://python-docs.synapse.org/build/html/index.html">synapseclient</a> library to pull information from Synapse (account required).</p></li>
+<li><p><strong>nlpsandbox</strong>: Python SDK client that wraps all the <a class="reference external" href="https://github.com/nlpsandbox/nlpsandbox-schemas">NLP Sandbox APIs</a></p></li>
+<li><p><strong>nlpsandboxclient</strong>: - Convenience functions that infer user behavior of the SDK client.</p></li>
 </ul>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -206,9 +205,8 @@ of setting Synapse credentials.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cp .env.sample .env</span>
 </pre></div>
 </div>
-<p>b. Update the configuration values in <em>.env</em>. Set the values of <strong>SYNAPSE_USERNAME</strong>
-and <strong>SYNAPSE_APIKEY</strong> with the credentials of your Synapse account.</p>
-<ol class="loweralpha simple" start="3">
+<ol class="loweralpha simple" start="2">
+<li><p>Update the configuration values in <em>.env</em>. Set the values of <strong>SYNAPSE_AUTH_TOKEN</strong> to be your Synapse personal access token.</p></li>
 <li><p>Run docker command</p></li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker run --rm --env-file .env nlpsandbox/cli</span>
