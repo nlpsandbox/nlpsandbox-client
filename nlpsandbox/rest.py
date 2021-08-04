@@ -17,6 +17,7 @@ import ssl
 from urllib.parse import urlencode
 
 import urllib3
+from urllib3 import Retry
 
 from nlpsandbox.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError
 
@@ -49,6 +50,7 @@ class RESTClientObject(object):
         # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/connectionpool.py#L680  # noqa: E501
         # maxsize is the number of requests to host that are allowed in parallel  # noqa: E501
         # Custom SSL certificates and client certificates: http://urllib3.readthedocs.io/en/latest/advanced-usage.html  # noqa: E501
+        retries = Retry(total=5, backoff_factor=2)
 
         # cert_reqs
         if configuration.verify_ssl:
@@ -83,6 +85,7 @@ class RESTClientObject(object):
                 key_file=configuration.key_file,
                 proxy_url=configuration.proxy,
                 proxy_headers=configuration.proxy_headers,
+                retries=retries,
                 **addition_pool_args
             )
         else:
@@ -93,6 +96,7 @@ class RESTClientObject(object):
                 ca_certs=configuration.ssl_ca_cert,
                 cert_file=configuration.cert_file,
                 key_file=configuration.key_file,
+                retries=retries,
                 **addition_pool_args
             )
 
