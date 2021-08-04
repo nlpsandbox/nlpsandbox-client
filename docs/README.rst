@@ -6,12 +6,12 @@ nlpsandbox-client
 for NLP sandbox data node, annotation services, and evaluation of annotation results.
 This repository consists of 3 packages:
 
-- **nlpsandbox**: Python SDK client that wraps all the NLP Sandbox APIs
+- **nlpsandbox**: Python SDK client that wraps all the `NLP Sandbox APIs`_
 - **nlpsandboxclient**: - Convenience functions that infer user behavior of the SDK client.
 
 .. _Synapse: https://www.synapse.org/
 .. _synapseclient: https://python-docs.synapse.org/build/html/index.html
-.. _NLP sandbox schemas: https://github.com/nlpsandbox/nlpsandbox-schemas
+.. _NLP sandbox APIs: https://github.com/nlpsandbox/nlpsandbox-schemas
 
 Installation
 ============
