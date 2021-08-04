@@ -5,6 +5,10 @@ import re
 
 import requests
 import synapseclient
+from synapseclient.core.exceptions import (
+    SynapseNoCredentialsError,
+    SynapseAuthenticationError,
+)
 
 import nlpsandbox
 
@@ -62,17 +66,28 @@ def check_url(url: str):
         raise ValueError(f"{url} not implemented")
 
 
-def synapse_login():
-    """Log into synapse via two methods
-    a. ~/.synapseConfig
-    b. SYNAPSE_USERNAME and SYNAPSE_APIKEY environmental variables
+def synapse_login(synapse_config=synapseclient.client.CONFIG_FILE):
+    """Login to Synapse
+
+    Args:
+        synapse_config: Path to synapse configuration file.
+                        Defaults to ~/.synapseConfig
+
+    Returns:
+        Synapse connection
     """
     try:
-        syn = synapseclient.login()
-    except Exception:
-        username = os.getenv("SYNAPSE_USERNAME")
-        apikey = os.getenv("SYNAPSE_APIKEY")
-        syn = synapseclient.login(email=username, apiKey=apikey)
+        syn = synapseclient.Synapse(configPath=synapse_config)
+        syn.login(silent=True)
+    except (SynapseNoCredentialsError, SynapseAuthenticationError):
+        raise ValueError(
+            "Login error: please make sure you have correctly "
+            "configured your client.  Instructions here: "
+            "https://help.synapse.org/docs/Client-Configuration.1985446156.html. "
+            "You can also create a Synapse Personal Access Token and set it "
+            "as an environmental variable: "
+            "SYNAPSE_AUTH_TOKEN='<my_personal_access_token>'"
+        )
     return syn
 
 
