@@ -43,7 +43,7 @@ def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
             "noteType": "",
             "patientId": "patient_id",
             "text": "Example text",
-            "note_name": "dataset/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid"
+            "note_name": "datasets/awesome-dataset/fhirStores/awesome-fhirstore/fhir/Note/noteid"
         }
     """
     configuration = utils.get_api_configuration(host=host)
@@ -63,7 +63,7 @@ def list_notes(host: str, dataset_id: str, fhir_store_id: str) -> List[dict]:
             for note in sanitized_notes:
                 # note_name is added for convenience for the controller as
                 # it is needed to store the annotations
-                note["note_name"] = f"dataset/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note['identifier']}"
+                note["note_name"] = f"datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Note/{note['identifier']}"
                 yield note
             next_page = notes.links.next
             offset += limit
