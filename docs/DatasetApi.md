@@ -19,6 +19,7 @@ Create a dataset with the name specified
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
@@ -82,6 +83,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Success |  -  |
@@ -99,6 +101,7 @@ Delete a dataset by ID
 Deletes the dataset for a given ID
 
 ### Example
+
 
 ```python
 import time
@@ -151,6 +154,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -167,6 +171,7 @@ Get a dataset by ID
 Returns the dataset for a given ID
 
 ### Example
+
 
 ```python
 import time
@@ -220,6 +225,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -236,6 +242,7 @@ Get all datasets
 Returns the datasets
 
 ### Example
+
 
 ```python
 import time
@@ -293,6 +300,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |

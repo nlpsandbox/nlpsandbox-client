@@ -19,6 +19,7 @@ Create a FHIR store with the ID specified
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
@@ -85,6 +86,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Success |  -  |
@@ -102,6 +104,7 @@ Delete a FHIR store
 Deletes the FHIR store specified
 
 ### Example
+
 
 ```python
 import time
@@ -157,6 +160,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -173,6 +177,7 @@ Get a FHIR store
 Returns the FHIR store specified
 
 ### Example
+
 
 ```python
 import time
@@ -229,6 +234,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -245,6 +251,7 @@ List the FHIR stores in a dataset
 Returns the FHIR stores
 
 ### Example
+
 
 ```python
 import time
@@ -313,6 +320,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |

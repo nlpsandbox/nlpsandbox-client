@@ -19,6 +19,7 @@ Create an annotation
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
@@ -113,6 +114,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Success |  -  |
@@ -130,6 +132,7 @@ Delete an annotation
 Deletes the annotation specified
 
 ### Example
+
 
 ```python
 import time
@@ -188,6 +191,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -204,6 +208,7 @@ Get an annotation
 Returns the annotation specified
 
 ### Example
+
 
 ```python
 import time
@@ -263,6 +268,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -279,6 +285,7 @@ List the annotations in an annotation store
 Returns the annotations in an annotation store
 
 ### Example
+
 
 ```python
 import time
@@ -350,6 +357,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |

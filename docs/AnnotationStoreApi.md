@@ -19,6 +19,7 @@ Create an annotation store with the ID specified
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
@@ -85,6 +86,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Success |  -  |
@@ -102,6 +104,7 @@ Delete an annotation store
 Deletes the annotation store specified
 
 ### Example
+
 
 ```python
 import time
@@ -157,6 +160,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -173,6 +177,7 @@ Get an annotation store
 Returns the annotation store specified
 
 ### Example
+
 
 ```python
 import time
@@ -229,6 +234,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -245,6 +251,7 @@ List the annotation stores in a dataset
 Returns the annotation stores
 
 ### Example
+
 
 ```python
 import time
@@ -313,6 +320,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |

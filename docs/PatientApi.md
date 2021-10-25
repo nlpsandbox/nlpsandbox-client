@@ -19,6 +19,7 @@ Create a FHIR patient
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
@@ -91,6 +92,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Success |  -  |
@@ -108,6 +110,7 @@ Delete a FHIR patient
 Deletes the FHIR patient specified
 
 ### Example
+
 
 ```python
 import time
@@ -166,6 +169,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -182,6 +186,7 @@ Get a FHIR patient
 Returns the FHIR patient specified
 
 ### Example
+
 
 ```python
 import time
@@ -241,6 +246,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -257,6 +263,7 @@ List the Patients in a FHIR store
 Returns the Patients in a FHIR store
 
 ### Example
+
 
 ```python
 import time
@@ -328,6 +335,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |

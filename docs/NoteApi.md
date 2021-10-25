@@ -19,6 +19,7 @@ Create a note
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
@@ -93,6 +94,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Success |  -  |
@@ -110,6 +112,7 @@ Delete a note
 Deletes the note specified
 
 ### Example
+
 
 ```python
 import time
@@ -168,6 +171,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -184,6 +188,7 @@ Get a note
 Returns the note specified
 
 ### Example
+
 
 ```python
 import time
@@ -243,6 +248,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -259,6 +265,7 @@ List notes
 Returns the notes in a FHIR store
 
 ### Example
+
 
 ```python
 import time
@@ -330,6 +337,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
