@@ -16,6 +16,7 @@ Return the COVID symptom annotations found in a clinical note
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
@@ -76,6 +77,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |

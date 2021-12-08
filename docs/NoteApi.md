@@ -19,6 +19,8 @@ Create a note
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
+
 ```python
 import time
 import nlpsandbox
@@ -36,9 +38,19 @@ configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with nlpsandbox.ApiClient() as api_client:
+with nlpsandbox.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = note_api.NoteApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -84,7 +96,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -93,6 +105,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Success |  -  |
@@ -111,6 +124,8 @@ Deletes the note specified
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
+
 ```python
 import time
 import nlpsandbox
@@ -126,9 +141,19 @@ configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with nlpsandbox.ApiClient() as api_client:
+with nlpsandbox.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = note_api.NoteApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -159,7 +184,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -168,6 +193,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -185,6 +211,8 @@ Returns the note specified
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
+
 ```python
 import time
 import nlpsandbox
@@ -201,9 +229,19 @@ configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with nlpsandbox.ApiClient() as api_client:
+with nlpsandbox.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = note_api.NoteApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -234,7 +272,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -243,6 +281,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -259,6 +298,8 @@ List notes
 Returns the notes in a FHIR store
 
 ### Example
+
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import time
@@ -277,9 +318,19 @@ configuration = nlpsandbox.Configuration(
     host = "http://example.com/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with nlpsandbox.ApiClient() as api_client:
+with nlpsandbox.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = note_api.NoteApi(api_client)
     dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
@@ -321,7 +372,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -330,6 +381,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
