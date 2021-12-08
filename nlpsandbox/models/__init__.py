@@ -60,6 +60,7 @@ from nlpsandbox.model.patient_create_request import PatientCreateRequest
 from nlpsandbox.model.patient_create_response import PatientCreateResponse
 from nlpsandbox.model.patient_id import PatientId
 from nlpsandbox.model.patient_resource_name import PatientResourceName
+from nlpsandbox.model.programming_language import ProgrammingLanguage
 from nlpsandbox.model.resource_source import ResourceSource
 from nlpsandbox.model.response_page_metadata import ResponsePageMetadata
 from nlpsandbox.model.response_page_metadata_links import ResponsePageMetadataLinks
