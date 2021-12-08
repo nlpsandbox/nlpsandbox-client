@@ -17,6 +17,7 @@ Get information about the tool
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
@@ -64,6 +65,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -80,6 +82,7 @@ Get tool dependencies
 Get the dependencies of this tool
 
 ### Example
+
 
 ```python
 import time
@@ -128,6 +131,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |

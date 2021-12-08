@@ -6,6 +6,7 @@ A list of tool dependencies
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tools** | [**[Tool]**](Tool.md) | A list of tools | 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

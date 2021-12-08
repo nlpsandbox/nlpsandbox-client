@@ -16,6 +16,7 @@ Get information about the health of the service
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
@@ -63,6 +64,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
