@@ -7,7 +7,7 @@
 from abc import ABCMeta
 import json
 import os
-import re
+from nltk.tokenize import TreebankWordTokenizer
 
 
 # take as input the location of
@@ -77,22 +77,23 @@ class Evaluation(metaclass=ABCMeta):
     # load the json file and convert it to a untokenised dictionary
     # with key 'noteId-start-length'
     # with value ["text"(untokened),"dateFormat","length"]
-
     def json_dict_token(self, input):
         json_dict = {}
         for anno in input:
             noteId = anno['noteId']
             start = anno['start']
             text = anno['text']
+            start_ind = 0
             # dateFormat, personType, addressType
             # is self.annotation(dateFormat, personType, addressType) not in the
             # JSON file, use float('nan')
             annotation_format = anno.get(self.annotation, float('nan'))
-            sub_text = re.split(r'\s+', text)
+            sub_text = TreebankWordTokenizer().tokenize(text)
             for sub in sub_text:
+                start_ind = text[start_ind:].find(sub) + start_ind
                 leng = len(sub)
-                data_loc = '{}-{}-{}'.format(noteId, start, leng)
-                start = start + leng + 1
+                data_loc = '{}-{}-{}'.format(noteId, (start_ind + start), leng)
+                start_ind = start_ind + leng
                 # [text, dateFormat,length]
                 date_list = [sub, annotation_format, leng]
                 json_dict[data_loc] = date_list
