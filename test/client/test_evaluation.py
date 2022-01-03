@@ -80,9 +80,9 @@ class TestEvaluation:
                 {'metric': 'F1', 'value': 0.5, 'type': 'instance', 'mode': 'strict'},
                 {'metric': 'precision', 'value': 0.5, 'type': 'instance', 'mode': 'strict'},
                 {'metric': 'recall', 'value': 0.5, 'type': 'instance', 'mode': 'strict'},
-                {'metric': 'F1', 'value': 0.67, 'type': 'token', 'mode': 'strict'},
-                {'metric': 'precision', 'value': 0.75, 'type': 'token', 'mode': 'strict'},
-                {'metric': 'recall', 'value': 0.6, 'type': 'token', 'mode': 'strict'}
+                {'metric': 'F1', 'value': 0.8, 'type': 'token', 'mode': 'strict'},
+                {'metric': 'precision', 'value': 1.0, 'type': 'token', 'mode': 'strict'},
+                {'metric': 'recall', 'value': 0.67, 'type': 'token', 'mode': 'strict'}
             ],
             'location_type': [
                 {'metric': 'F1', 'value': 0.5},
