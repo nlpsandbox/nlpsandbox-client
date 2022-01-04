@@ -8,6 +8,11 @@ For older releases, visit the `GitHub releases`_.
 
 .. _Github releases: https://github.com/nlpsandbox/nlpsandbox-client/releases
 
+4.3.0
+-----
+- Update tokenization for `evaluation.py`
+- Remove support for python 3.6 (EOL)
+
 4.2.0
 -----
 - Update synapse login utility

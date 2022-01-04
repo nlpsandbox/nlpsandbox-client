@@ -1,73 +1,33 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>datanode.DatasetApi &mdash; nlpsandboxclient 4.2 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>datanode.DatasetApi &mdash; nlpsandboxclient 4.3 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> nlpsandboxclient
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                4.2
+                4.3
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -75,18 +35,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Python Client</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="python/client.html">nlpsandboxclient</a></li>
@@ -101,73 +50,32 @@
 <li class="toctree-l1"><a class="reference internal" href="about/authors.html">Authors</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">nlpsandboxclient</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>datanode.DatasetApi</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/DatasetApi.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="datanode-datasetapi">
-<h1>datanode.DatasetApi<a class="headerlink" href="#datanode-datasetapi" title="Permalink to this headline">¶</a></h1>
+<h1>datanode.DatasetApi<a class="headerlink" href="#datanode-datasetapi" title="Permalink to this headline"></a></h1>
 <p>All URIs are relative to <em>http://example.com/api/v1</em></p>
 <table class="docutils align-default">
 <colgroup>
@@ -202,14 +110,14 @@
 </table>
 </div>
 <div class="section" id="id1">
-<h1><strong>create_dataset</strong><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1><strong>create_dataset</strong><a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
 <blockquote>
 <div><p>Dataset create_dataset(dataset_id, dataset=dataset)</p>
 </div></blockquote>
 <p>Create a dataset</p>
 <p>Create a dataset with the name specified</p>
 <div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">datanode</span>
@@ -239,7 +147,7 @@
 </div>
 </div>
 <div class="section" id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline"></a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25%" />
@@ -269,22 +177,22 @@
 </table>
 </div>
 <div class="section" id="return-type">
-<h2>Return type<a class="headerlink" href="#return-type" title="Permalink to this headline">¶</a></h2>
+<h2>Return type<a class="headerlink" href="#return-type" title="Permalink to this headline"></a></h2>
 <p><a class="reference external" href="Dataset.md">**Dataset**</a></p>
 </div>
 <div class="section" id="authorization">
-<h2>Authorization<a class="headerlink" href="#authorization" title="Permalink to this headline">¶</a></h2>
+<h2>Authorization<a class="headerlink" href="#authorization" title="Permalink to this headline"></a></h2>
 <p>No authorization required</p>
 </div>
 <div class="section" id="http-request-headers">
-<h2>HTTP request headers<a class="headerlink" href="#http-request-headers" title="Permalink to this headline">¶</a></h2>
+<h2>HTTP request headers<a class="headerlink" href="#http-request-headers" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><strong>Content-Type</strong>: application/json</p></li>
 <li><p><strong>Accept</strong>: application/json</p></li>
 </ul>
 </div>
 <div class="section" id="http-response-details">
-<h2>HTTP response details<a class="headerlink" href="#http-response-details" title="Permalink to this headline">¶</a></h2>
+<h2>HTTP response details<a class="headerlink" href="#http-response-details" title="Permalink to this headline"></a></h2>
 <p><strong>200</strong> | Success |  -  |
 <strong>403</strong> | Unauthorized |  -  |
 <strong>404</strong> | The specified resource was not found |  -  |
@@ -293,14 +201,14 @@
 </div>
 </div>
 <div class="section" id="id3">
-<h1><strong>delete_dataset</strong><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+<h1><strong>delete_dataset</strong><a class="headerlink" href="#id3" title="Permalink to this headline"></a></h1>
 <blockquote>
 <div><p>Dataset delete_dataset(dataset_id)</p>
 </div></blockquote>
 <p>Delete a dataset by ID</p>
 <p>Deletes the dataset for a given ID</p>
 <div class="section" id="id4">
-<h2>Example<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>Example<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">datanode</span>
@@ -329,7 +237,7 @@
 </div>
 </div>
 <div class="section" id="id5">
-<h2>Parameters<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2>Parameters<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25%" />
@@ -354,22 +262,22 @@
 </table>
 </div>
 <div class="section" id="id6">
-<h2>Return type<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<h2>Return type<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h2>
 <p><a class="reference external" href="Dataset.md">**Dataset**</a></p>
 </div>
 <div class="section" id="id8">
-<h2>Authorization<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<h2>Authorization<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h2>
 <p>No authorization required</p>
 </div>
 <div class="section" id="id9">
-<h2>HTTP request headers<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<h2>HTTP request headers<a class="headerlink" href="#id9" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><strong>Content-Type</strong>: Not defined</p></li>
 <li><p><strong>Accept</strong>: application/json</p></li>
 </ul>
 </div>
 <div class="section" id="id10">
-<h2>HTTP response details<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<h2>HTTP response details<a class="headerlink" href="#id10" title="Permalink to this headline"></a></h2>
 <p><strong>200</strong> | Success |  -  |
 <strong>403</strong> | Unauthorized |  -  |
 <strong>404</strong> | The specified resource was not found |  -  |</p>
@@ -377,14 +285,14 @@
 </div>
 </div>
 <div class="section" id="id15">
-<h1><strong>get_dataset</strong><a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h1>
+<h1><strong>get_dataset</strong><a class="headerlink" href="#id15" title="Permalink to this headline"></a></h1>
 <blockquote>
 <div><p>Dataset get_dataset(dataset_id)</p>
 </div></blockquote>
 <p>Get a dataset by ID</p>
 <p>Returns the dataset for a given ID</p>
 <div class="section" id="id16">
-<h2>Example<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<h2>Example<a class="headerlink" href="#id16" title="Permalink to this headline"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">datanode</span>
@@ -413,7 +321,7 @@
 </div>
 </div>
 <div class="section" id="id17">
-<h2>Parameters<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<h2>Parameters<a class="headerlink" href="#id17" title="Permalink to this headline"></a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25%" />
@@ -438,22 +346,22 @@
 </table>
 </div>
 <div class="section" id="id18">
-<h2>Return type<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
+<h2>Return type<a class="headerlink" href="#id18" title="Permalink to this headline"></a></h2>
 <p><a class="reference external" href="Dataset.md">**Dataset**</a></p>
 </div>
 <div class="section" id="id20">
-<h2>Authorization<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+<h2>Authorization<a class="headerlink" href="#id20" title="Permalink to this headline"></a></h2>
 <p>No authorization required</p>
 </div>
 <div class="section" id="id21">
-<h2>HTTP request headers<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
+<h2>HTTP request headers<a class="headerlink" href="#id21" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><strong>Content-Type</strong>: Not defined</p></li>
 <li><p><strong>Accept</strong>: application/json</p></li>
 </ul>
 </div>
 <div class="section" id="id22">
-<h2>HTTP response details<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
+<h2>HTTP response details<a class="headerlink" href="#id22" title="Permalink to this headline"></a></h2>
 <p><strong>200</strong> | Success |  -  |
 <strong>403</strong> | Unauthorized |  -  |
 <strong>404</strong> | The specified resource was not found |  -  |</p>
@@ -461,14 +369,14 @@
 </div>
 </div>
 <div class="section" id="id27">
-<h1><strong>list_datasets</strong><a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h1>
+<h1><strong>list_datasets</strong><a class="headerlink" href="#id27" title="Permalink to this headline"></a></h1>
 <blockquote>
 <div><p>PageOfDatasets list_datasets(limit=limit, offset=offset)</p>
 </div></blockquote>
 <p>Get all datasets</p>
 <p>Returns the datasets</p>
 <div class="section" id="id28">
-<h2>Example<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h2>
+<h2>Example<a class="headerlink" href="#id28" title="Permalink to this headline"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">datanode</span>
@@ -498,7 +406,7 @@
 </div>
 </div>
 <div class="section" id="id29">
-<h2>Parameters<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h2>
+<h2>Parameters<a class="headerlink" href="#id29" title="Permalink to this headline"></a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25%" />
@@ -528,22 +436,22 @@
 </table>
 </div>
 <div class="section" id="id30">
-<h2>Return type<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h2>
+<h2>Return type<a class="headerlink" href="#id30" title="Permalink to this headline"></a></h2>
 <p><a class="reference external" href="PageOfDatasets.md">**PageOfDatasets**</a></p>
 </div>
 <div class="section" id="id31">
-<h2>Authorization<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h2>
+<h2>Authorization<a class="headerlink" href="#id31" title="Permalink to this headline"></a></h2>
 <p>No authorization required</p>
 </div>
 <div class="section" id="id32">
-<h2>HTTP request headers<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h2>
+<h2>HTTP request headers<a class="headerlink" href="#id32" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><strong>Content-Type</strong>: Not defined</p></li>
 <li><p><strong>Accept</strong>: application/json</p></li>
 </ul>
 </div>
 <div class="section" id="id33">
-<h2>HTTP response details<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h2>
+<h2>HTTP response details<a class="headerlink" href="#id33" title="Permalink to this headline"></a></h2>
 <p><strong>200</strong> | Success |  -  |
 <strong>403</strong> | Unauthorized |  -  |
 <strong>404</strong> | The specified resource was not found |  -  |</p>
@@ -553,46 +461,30 @@
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Sage Bionetworks.
-
-    </p>
+    <p>&#169; Copyright 2020, Sage Bionetworks.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
