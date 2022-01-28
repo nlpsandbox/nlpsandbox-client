@@ -673,6 +673,7 @@ def delete_dataset(host: str, dataset_id: str):
         api_instance = dataset_api.DatasetApi(api_client)
         api_instance.delete_dataset(dataset_id)
 
+
 def evaluate(tool_type: str, host: str, dataset_id: str, annotation_store_id: str):
     """Evaluate submission annotated notes by comparing them to goldstandards
     Args:
