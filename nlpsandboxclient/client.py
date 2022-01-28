@@ -702,5 +702,4 @@ def evaluate(tool_type: str, host: str, dataset_id: str, annotation_store_id: st
     gs = list(gs)
     sys = list(sys)
     evaluator.convert_dict(sys=sys, gs=gs)
-    results = evaluator.eval()
-    #utils.stdout_or_json(results, output)
+    evaluator.eval()
