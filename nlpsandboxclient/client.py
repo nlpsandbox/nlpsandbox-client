@@ -17,7 +17,8 @@ from nlpsandbox.api import (
     text_location_annotation_api,
     tool_api,
 )
-from . import utils
+from . import utils, evaluation
+
 
 DATA_NODE_HOST = "http://0.0.0.0:8080/api/v1"
 
@@ -481,7 +482,7 @@ def annotate_note(host: str, note: Union[dict, Note],
         >>> }
         >>> annotations = annotate_note(host="0.0.0.0/api/v1",
         >>>                             note=example_note,
-        >>>                             tool_type="date")
+        >>>                             tool_type="nlpsandbox:date-annotator")
 
     """
     configuration = utils.get_api_configuration(host=host)
@@ -671,3 +672,35 @@ def delete_dataset(host: str, dataset_id: str):
         # Create an instance of the API class
         api_instance = dataset_api.DatasetApi(api_client)
         api_instance.delete_dataset(dataset_id)
+
+def evaluate(tool_type: str, host: str, dataset_id: str, annotation_store_id: str):
+    """Evaluate submission annotated notes by comparing them to goldstandards
+    Args:
+        tool_type: Type of annotator
+        host: Data node host IP
+        dataset_id: Dataset Id
+        annotation_store_id: Annotation store Id for the submission  annotations
+    Yields:
+        Performance scores
+
+    Examples:
+        >>> scores = evaluate(host="0.0.0.0/api/v1",
+        >>>                             dataset_id="awesome-dataset",
+        >>>                             annotation_store_id="awesome-store-id"
+        >>>                             tool_type="nlpsandbox:date-annotator")
+    """
+    eval_mapping = {
+        "nlpsandbox:date-annotator": evaluation.DateEvaluation,
+        "nlpsandbox:person-name-annotator": evaluation.PersonNameEvaluation,
+        "nlpsandbox:location-annotator": evaluation.LocationEvaluation,
+        'nlpsandbox:id-annotator': evaluation.IdEvaluation,
+        'nlpsandbox:contact-annotator': evaluation.ContactEvaluation
+    }
+    evaluator = eval_mapping[tool_type]()
+    sys = list_annotations(host, dataset_id, annotation_store_id)
+    gs = list_annotations(host, dataset_id=dataset_id, annotation_store_id="goldstandard")
+    gs = list(gs)
+    sys = list(sys)
+    evaluator.convert_dict(sys=sys, gs=gs)
+    results = evaluator.eval()
+    #utils.stdout_or_json(results, output)

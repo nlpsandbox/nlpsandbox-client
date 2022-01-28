@@ -47,6 +47,7 @@ setuptools.setup(
         'certifi >= 14.05.14',
         'click >= 7.1.2',
         'jsonschema >= 3.2.0',
+        'nltk >= 3.6.7',
         'python_dateutil >= 2.5.3',
         'setuptools >= 21.0.0',
         'six >= 1.10',

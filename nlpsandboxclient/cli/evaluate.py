@@ -37,7 +37,7 @@ def evaluate_prediction(pred_filepath, gold_filepath, output, tool_type):
     }
     evaluator = eval_mapping[tool_type]()
 
-    evaluator.convert_dict(pred_filepath, gold_filepath)
+    evaluator.convert_dict(sys_file=pred_filepath, gs_file=gold_filepath)
     results = evaluator.eval()
     utils.stdout_or_json(results, output)
 
