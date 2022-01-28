@@ -602,7 +602,7 @@ def _get_tool_redirect(host: str) -> Tool:
 
 
 def store_annotations(host: str, dataset_id: str, annotation_store_id: str,
-                      annotations: dict,
+                      annotations: List[dict],
                       delete_existing_annotations: bool = True):
     """Store submission annotated notes.  Delete an annotation store if
     the annotation store exists, then create a new annotation store, then
@@ -612,7 +612,7 @@ def store_annotations(host: str, dataset_id: str, annotation_store_id: str,
         host: Data node host IP
         dataset_id: Dataset Id
         annotation_store_id: Annotation store Id
-        annotations: Data Node Annotations
+        annotations: List of data node Annotations
         delete_existing_annotations: To delete existing annotation store.
                                      Default is True.
     """

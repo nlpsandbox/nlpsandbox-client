@@ -42,7 +42,7 @@ setuptools.setup(
     },
 
     # requirements
-    python_requires='>=3.6.*',
+    python_requires='>=3.7.*',
     install_requires=[
         'certifi >= 14.05.14',
         'click >= 7.1.2',
@@ -71,7 +71,6 @@ setuptools.setup(
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
