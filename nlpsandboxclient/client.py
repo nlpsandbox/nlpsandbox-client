@@ -698,9 +698,9 @@ def evaluate(tool_type: str, host: str, dataset_id: str, annotation_store_id: st
         'nlpsandbox:contact-annotator': evaluation.ContactEvaluation
     }
     evaluator = eval_mapping[tool_type]()
-    sys = list_annotations(host, dataset_id, annotation_store_id)
+    pred = list_annotations(host, dataset_id, annotation_store_id)
     gs = list_annotations(host, dataset_id=dataset_id, annotation_store_id="goldstandard")
     gs = list(gs)
-    sys = list(sys)
-    evaluator.convert_dict(sys=sys, gs=gs)
+    pred = list(pred)
+    evaluator.convert_dict(pred=pred, gs=gs)
     evaluator.eval()

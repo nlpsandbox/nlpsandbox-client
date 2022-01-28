@@ -42,19 +42,20 @@ class Evaluation(metaclass=ABCMeta):
         new_annotations = {self.col: all_annotations}
         return new_annotations
 
-    def convert_dict(self, sys_file=None, gs_file=None, sys=None, gs=None):
-        if sys_file is not None and gs_file is not None:
+    def convert_dict(self, sys_file=None, gs_file=None, pred=None, gs=None):
+        if gs_file is not None:
             with open(gs_file) as f:
                 gs = json.load(f)
+        if sys_file is not None:
             with open(sys_file) as f:
-                sys = json.load(f)
+                pred = json.load(f)
         gs = self.convert_annotations(gs)
         gs = gs[self.col]
-        sys = self.convert_annotations(sys)
-        sys = sys[self.col]
-        self.sys_dict_seq = self.json_dict_seq(sys)
+        pred = self.convert_annotations(pred)
+        pred = pred[self.col]
+        self.sys_dict_seq = self.json_dict_seq(pred)
         self.gs_dict_seq = self.json_dict_seq(gs)
-        self.sys_dict_token = self.json_dict_token(sys)
+        self.sys_dict_token = self.json_dict_token(pred)
         self.gs_dict_token = self.json_dict_token(gs)
 
     # load the json file and convert it to a untokenised dictionary
