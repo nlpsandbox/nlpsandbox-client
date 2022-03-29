@@ -286,3 +286,10 @@ class ContactEvaluation(Evaluation):
     annotation = "contactType"
     col = "contact_annotations"
     post_path = "textContactAnnotations"
+
+
+class CovidSymptomEvaluation(Evaluation):
+    evaluation_type = "covid-symptom"
+    annotation = "condition"
+    col = "covid_symptom_annotations"
+    post_path = "textCovidSymptomAnnotations"

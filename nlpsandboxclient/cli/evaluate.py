@@ -21,7 +21,8 @@ def cli():
                                  'nlpsandbox:person-name-annotator',
                                  'nlpsandbox:location-annotator',
                                  'nlpsandbox:id-annotator',
-                                 'nlpsandbox:contact-annotator'],
+                                 'nlpsandbox:contact-annotator',
+                                 'nlpsandbox:covid-symptom-annotator'],
                                 case_sensitive=False), required=True)
 def evaluate_prediction(pred_filepath, gold_filepath, output, tool_type):
     """Evaluate the performance of a prediction file. Example prediction and
@@ -33,8 +34,10 @@ def evaluate_prediction(pred_filepath, gold_filepath, output, tool_type):
         "nlpsandbox:person-name-annotator": evaluation.PersonNameEvaluation,
         "nlpsandbox:location-annotator": evaluation.LocationEvaluation,
         'nlpsandbox:id-annotator': evaluation.IdEvaluation,
-        'nlpsandbox:contact-annotator': evaluation.ContactEvaluation
+        'nlpsandbox:contact-annotator': evaluation.ContactEvaluation,
+        'nlpsandbox:covid-symptom-annotator': evaluation.CovidSymptomEvaluation
     }
+    print(f"eval_mapping: {eval_mapping}")
     evaluator = eval_mapping[tool_type]()
 
     evaluator.convert_dict(sys_file=pred_filepath, gs_file=gold_filepath)

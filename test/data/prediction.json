@@ -33,6 +33,7 @@
                 "locationType": "city"
             }
         ],
+        "textCovidSymptomAnnotations": [],
         "textIdAnnotations": [],
         "textContactAnnotations": []
     }, {
@@ -51,6 +52,7 @@
                 "dateFormat": "MM/DD/YYYY"
             }
         ],
+        "textCovidSymptomAnnotations": [],
         "textPersonNameAnnotations": [
             {
                 "start": 45,
@@ -98,6 +100,7 @@
         ],
         "textLocationAnnotations": [],
         "textIdAnnotations": [],
+        "textCovidSymptomAnnotations": [],
         "textContactAnnotations": []
     }, {
         "annotationSource": {
@@ -133,6 +136,7 @@
                 "locationType": "organization"
             }
         ],
+        "textCovidSymptomAnnotations": [],
         "textIdAnnotations": [],
         "textContactAnnotations": []
     }, {
@@ -154,6 +158,7 @@
             }
         ],
         "textIdAnnotations": [],
+        "textCovidSymptomAnnotations": [],
         "textContactAnnotations": []
     }, {
         "annotationSource": {
@@ -174,6 +179,7 @@
                 "idType": "ssn"
             }
         ],
+        "textCovidSymptomAnnotations": [],
         "textContactAnnotations": [
             {
                 "start": 25,
