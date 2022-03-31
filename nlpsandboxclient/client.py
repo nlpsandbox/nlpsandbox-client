@@ -697,8 +697,6 @@ def evaluate(tool_type: str, host: str, dataset_id: str, annotation_store_id: st
         'nlpsandbox:id-annotator': evaluation.IdEvaluation,
         'nlpsandbox:contact-annotator': evaluation.ContactEvaluation,
         'nlpsandbox:covid-symptom-annotator': evaluation.CovidSymptomEvaluation}
-
-    print(eval_mapping)
     evaluator = eval_mapping[tool_type]()
     pred = list_annotations(host, dataset_id, annotation_store_id)
     gs = list_annotations(host, dataset_id=dataset_id, annotation_store_id="goldstandard")
