@@ -57,6 +57,7 @@ docs/PatientCreateRequest.md
 docs/PatientCreateResponse.md
 docs/PatientId.md
 docs/PatientResourceName.md
+docs/ProgrammingLanguage.md
 docs/ResourceSource.md
 docs/ResponsePageMetadata.md
 docs/ResponsePageMetadataLinks.md
@@ -93,6 +94,7 @@ docs/TextPersonNameAnnotationResponse.md
 docs/Tool.md
 docs/ToolApi.md
 docs/ToolDependencies.md
+docs/ToolDependency.md
 docs/ToolType.md
 nlpsandbox/__init__.py
 nlpsandbox/api/__init__.py
@@ -167,6 +169,7 @@ nlpsandbox/model/patient_create_request.py
 nlpsandbox/model/patient_create_response.py
 nlpsandbox/model/patient_id.py
 nlpsandbox/model/patient_resource_name.py
+nlpsandbox/model/programming_language.py
 nlpsandbox/model/resource_source.py
 nlpsandbox/model/response_page_metadata.py
 nlpsandbox/model/response_page_metadata_links.py
@@ -196,8 +199,10 @@ nlpsandbox/model/text_person_name_annotation_request.py
 nlpsandbox/model/text_person_name_annotation_response.py
 nlpsandbox/model/tool.py
 nlpsandbox/model/tool_dependencies.py
+nlpsandbox/model/tool_dependency.py
 nlpsandbox/model/tool_type.py
 nlpsandbox/model_utils.py
 nlpsandbox/models/__init__.py
-nlpsandbox/rest.py
 test/__init__.py
+test/test_programming_language.py
+test/test_tool_dependency.py

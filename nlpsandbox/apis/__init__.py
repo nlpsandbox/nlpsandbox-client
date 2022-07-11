@@ -6,7 +6,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.annotation_api import AnnotationApi
+#   from nlpsandbox.api.annotation_api import AnnotationApi
 #
 # or import this package, but before doing it, use:
 #

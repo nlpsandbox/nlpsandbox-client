@@ -19,14 +19,12 @@ Create a note
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
 from nlpsandbox.api import note_api
-from nlpsandbox.model.note_id import NoteId
 from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
 from nlpsandbox.model.note_create_request import NoteCreateRequest
 from nlpsandbox.model.note_create_response import NoteCreateResponse
 from pprint import pprint
@@ -41,9 +39,9 @@ configuration = nlpsandbox.Configuration(
 with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = note_api.NoteApi(api_client)
-    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
-    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
-    note_id = NoteId("awesome-note") # NoteId | The ID of the note that is being created
+    dataset_id = DatasetId("awesome-dataset") # str | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # str | The ID of the FHIR store
+    note_id = NoteId("awesome-note") # str | The ID of the note that is being created
     note_create_request = NoteCreateRequest(
         text="On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.",
         type="loinc:LP29684-5",
@@ -73,9 +71,9 @@ with nlpsandbox.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **DatasetId**| The ID of the dataset |
- **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
- **note_id** | **NoteId**| The ID of the note that is being created |
+ **dataset_id** | **str**| The ID of the dataset |
+ **fhir_store_id** | **str**| The ID of the FHIR store |
+ **note_id** | **str**| The ID of the note that is being created |
  **note_create_request** | [**NoteCreateRequest**](NoteCreateRequest.md)|  | [optional]
 
 ### Return type
@@ -93,6 +91,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Success |  -  |
@@ -111,14 +110,12 @@ Deletes the note specified
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
 from nlpsandbox.api import note_api
-from nlpsandbox.model.note_id import NoteId
 from nlpsandbox.model.error import Error
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -131,9 +128,9 @@ configuration = nlpsandbox.Configuration(
 with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = note_api.NoteApi(api_client)
-    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
-    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
-    note_id = NoteId("awesome-note") # NoteId | The ID of the note
+    dataset_id = DatasetId("awesome-dataset") # str | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # str | The ID of the FHIR store
+    note_id = NoteId("awesome-note") # str | The ID of the note
 
     # example passing only required values which don't have defaults set
     try:
@@ -149,9 +146,9 @@ with nlpsandbox.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **DatasetId**| The ID of the dataset |
- **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
- **note_id** | **NoteId**| The ID of the note |
+ **dataset_id** | **str**| The ID of the dataset |
+ **fhir_store_id** | **str**| The ID of the FHIR store |
+ **note_id** | **str**| The ID of the note |
 
 ### Return type
 
@@ -168,6 +165,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -185,15 +183,13 @@ Returns the note specified
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
 from nlpsandbox.api import note_api
-from nlpsandbox.model.note_id import NoteId
 from nlpsandbox.model.error import Error
 from nlpsandbox.model.note import Note
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -206,9 +202,9 @@ configuration = nlpsandbox.Configuration(
 with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = note_api.NoteApi(api_client)
-    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
-    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
-    note_id = NoteId("awesome-note") # NoteId | The ID of the note
+    dataset_id = DatasetId("awesome-dataset") # str | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # str | The ID of the FHIR store
+    note_id = NoteId("awesome-note") # str | The ID of the note
 
     # example passing only required values which don't have defaults set
     try:
@@ -224,9 +220,9 @@ with nlpsandbox.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **DatasetId**| The ID of the dataset |
- **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
- **note_id** | **NoteId**| The ID of the note |
+ **dataset_id** | **str**| The ID of the dataset |
+ **fhir_store_id** | **str**| The ID of the FHIR store |
+ **note_id** | **str**| The ID of the note |
 
 ### Return type
 
@@ -243,6 +239,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
@@ -260,16 +257,13 @@ Returns the notes in a FHIR store
 
 ### Example
 
+
 ```python
 import time
 import nlpsandbox
 from nlpsandbox.api import note_api
 from nlpsandbox.model.page_of_notes import PageOfNotes
 from nlpsandbox.model.error import Error
-from nlpsandbox.model.page_limit import PageLimit
-from nlpsandbox.model.dataset_id import DatasetId
-from nlpsandbox.model.fhir_store_id import FhirStoreId
-from nlpsandbox.model.page_offset import PageOffset
 from pprint import pprint
 # Defining the host is optional and defaults to http://example.com/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -282,10 +276,10 @@ configuration = nlpsandbox.Configuration(
 with nlpsandbox.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = note_api.NoteApi(api_client)
-    dataset_id = DatasetId("awesome-dataset") # DatasetId | The ID of the dataset
-    fhir_store_id = FhirStoreId("awesome-fhir-store") # FhirStoreId | The ID of the FHIR store
-    limit = PageLimit(10) # PageLimit | Maximum number of results returned (optional)
-    offset = PageOffset(0) # PageOffset | Index of the first result that must be returned (optional)
+    dataset_id = DatasetId("awesome-dataset") # str | The ID of the dataset
+    fhir_store_id = FhirStoreId("awesome-fhir-store") # str | The ID of the FHIR store
+    limit = PageLimit(10) # int | Maximum number of results returned (optional) if omitted the server will use the default value of 10
+    offset = PageOffset(0) # int | Index of the first result that must be returned (optional) if omitted the server will use the default value of 0
 
     # example passing only required values which don't have defaults set
     try:
@@ -310,10 +304,10 @@ with nlpsandbox.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dataset_id** | **DatasetId**| The ID of the dataset |
- **fhir_store_id** | **FhirStoreId**| The ID of the FHIR store |
- **limit** | **PageLimit**| Maximum number of results returned | [optional]
- **offset** | **PageOffset**| Index of the first result that must be returned | [optional]
+ **dataset_id** | **str**| The ID of the dataset |
+ **fhir_store_id** | **str**| The ID of the FHIR store |
+ **limit** | **int**| Maximum number of results returned | [optional] if omitted the server will use the default value of 10
+ **offset** | **int**| Index of the first result that must be returned | [optional] if omitted the server will use the default value of 0
 
 ### Return type
 
@@ -330,6 +324,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
