@@ -22,16 +22,11 @@ from nlpsandbox.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
-from nlpsandbox.model.dataset_id import DatasetId
 from nlpsandbox.model.error import Error
-from nlpsandbox.model.fhir_store_id import FhirStoreId
-from nlpsandbox.model.page_limit import PageLimit
 from nlpsandbox.model.page_of_patients import PageOfPatients
-from nlpsandbox.model.page_offset import PageOffset
 from nlpsandbox.model.patient import Patient
 from nlpsandbox.model.patient_create_request import PatientCreateRequest
 from nlpsandbox.model.patient_create_response import PatientCreateResponse
-from nlpsandbox.model.patient_id import PatientId
 
 
 class PatientApi(object):
@@ -45,83 +40,7 @@ class PatientApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-
-        def __create_patient(
-            self,
-            dataset_id,
-            fhir_store_id,
-            patient_id,
-            **kwargs
-        ):
-            """Create a FHIR patient  # noqa: E501
-
-            Create a FHIR patient  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.create_patient(dataset_id, fhir_store_id, patient_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-                fhir_store_id (FhirStoreId): The ID of the FHIR store
-                patient_id (PatientId): The ID of the patient that is being created
-
-            Keyword Args:
-                patient_create_request (PatientCreateRequest): [optional]
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                PatientCreateResponse
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            kwargs['fhir_store_id'] = \
-                fhir_store_id
-            kwargs['patient_id'] = \
-                patient_id
-            return self.call_with_http_info(**kwargs)
-
-        self.create_patient = _Endpoint(
+        self.create_patient_endpoint = _Endpoint(
             settings={
                 'response_type': (PatientCreateResponse,),
                 'auth': [],
@@ -147,20 +66,44 @@ class PatientApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
+                    'fhir_store_id',
+                    'patient_id',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('fhir_store_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('patient_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                     'fhir_store_id':
-                        (FhirStoreId,),
+                        (str,),
                     'patient_id':
-                        (PatientId,),
+                        (str,),
                     'patient_create_request':
                         (PatientCreateRequest,),
                 },
@@ -186,85 +129,9 @@ class PatientApi(object):
                     'application/json'
                 ]
             },
-            api_client=api_client,
-            callable=__create_patient
+            api_client=api_client
         )
-
-        def __delete_patient(
-            self,
-            dataset_id,
-            fhir_store_id,
-            patient_id,
-            **kwargs
-        ):
-            """Delete a FHIR patient  # noqa: E501
-
-            Deletes the FHIR patient specified  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.delete_patient(dataset_id, fhir_store_id, patient_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-                fhir_store_id (FhirStoreId): The ID of the FHIR store
-                patient_id (PatientId): The ID of the FHIR patient
-
-            Keyword Args:
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            kwargs['fhir_store_id'] = \
-                fhir_store_id
-            kwargs['patient_id'] = \
-                patient_id
-            return self.call_with_http_info(**kwargs)
-
-        self.delete_patient = _Endpoint(
+        self.delete_patient_endpoint = _Endpoint(
             settings={
                 'response_type': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
                 'auth': [],
@@ -289,20 +156,44 @@ class PatientApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
+                    'fhir_store_id',
+                    'patient_id',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('fhir_store_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('patient_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                     'fhir_store_id':
-                        (FhirStoreId,),
+                        (str,),
                     'patient_id':
-                        (PatientId,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -323,85 +214,9 @@ class PatientApi(object):
                 ],
                 'content_type': [],
             },
-            api_client=api_client,
-            callable=__delete_patient
+            api_client=api_client
         )
-
-        def __get_patient(
-            self,
-            dataset_id,
-            fhir_store_id,
-            patient_id,
-            **kwargs
-        ):
-            """Get a FHIR patient  # noqa: E501
-
-            Returns the FHIR patient specified  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.get_patient(dataset_id, fhir_store_id, patient_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-                fhir_store_id (FhirStoreId): The ID of the FHIR store
-                patient_id (PatientId): The ID of the FHIR patient
-
-            Keyword Args:
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                Patient
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            kwargs['fhir_store_id'] = \
-                fhir_store_id
-            kwargs['patient_id'] = \
-                patient_id
-            return self.call_with_http_info(**kwargs)
-
-        self.get_patient = _Endpoint(
+        self.get_patient_endpoint = _Endpoint(
             settings={
                 'response_type': (Patient,),
                 'auth': [],
@@ -426,20 +241,44 @@ class PatientApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
+                    'fhir_store_id',
+                    'patient_id',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('fhir_store_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('patient_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                     'fhir_store_id':
-                        (FhirStoreId,),
+                        (str,),
                     'patient_id':
-                        (PatientId,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -460,83 +299,9 @@ class PatientApi(object):
                 ],
                 'content_type': [],
             },
-            api_client=api_client,
-            callable=__get_patient
+            api_client=api_client
         )
-
-        def __list_patients(
-            self,
-            dataset_id,
-            fhir_store_id,
-            **kwargs
-        ):
-            """List the Patients in a FHIR store  # noqa: E501
-
-            Returns the Patients in a FHIR store  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.list_patients(dataset_id, fhir_store_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-                fhir_store_id (FhirStoreId): The ID of the FHIR store
-
-            Keyword Args:
-                limit (PageLimit): Maximum number of results returned. [optional]
-                offset (PageOffset): Index of the first result that must be returned. [optional]
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                PageOfPatients
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            kwargs['fhir_store_id'] = \
-                fhir_store_id
-            return self.call_with_http_info(**kwargs)
-
-        self.list_patients = _Endpoint(
+        self.list_patients_endpoint = _Endpoint(
             settings={
                 'response_type': (PageOfPatients,),
                 'auth': [],
@@ -561,22 +326,49 @@ class PatientApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
+                    'fhir_store_id',
+                    'limit',
+                    'offset',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('fhir_store_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('limit',): {
+
+                        'inclusive_maximum': 100,
+                        'inclusive_minimum': 10,
+                    },
+                    ('offset',): {
+
+                        'inclusive_minimum': 0,
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                     'fhir_store_id':
-                        (FhirStoreId,),
+                        (str,),
                     'limit':
-                        (PageLimit,),
+                        (int,),
                     'offset':
-                        (PageOffset,),
+                        (int,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -599,6 +391,369 @@ class PatientApi(object):
                 ],
                 'content_type': [],
             },
-            api_client=api_client,
-            callable=__list_patients
+            api_client=api_client
         )
+
+    def create_patient(
+        self,
+        dataset_id,
+        fhir_store_id,
+        patient_id,
+        **kwargs
+    ):
+        """Create a FHIR patient  # noqa: E501
+
+        Create a FHIR patient  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_patient(dataset_id, fhir_store_id, patient_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+            fhir_store_id (str): The ID of the FHIR store
+            patient_id (str): The ID of the patient that is being created
+
+        Keyword Args:
+            patient_create_request (PatientCreateRequest): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            PatientCreateResponse
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        kwargs['fhir_store_id'] = \
+            fhir_store_id
+        kwargs['patient_id'] = \
+            patient_id
+        return self.create_patient_endpoint.call_with_http_info(**kwargs)
+
+    def delete_patient(
+        self,
+        dataset_id,
+        fhir_store_id,
+        patient_id,
+        **kwargs
+    ):
+        """Delete a FHIR patient  # noqa: E501
+
+        Deletes the FHIR patient specified  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_patient(dataset_id, fhir_store_id, patient_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+            fhir_store_id (str): The ID of the FHIR store
+            patient_id (str): The ID of the FHIR patient
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        kwargs['fhir_store_id'] = \
+            fhir_store_id
+        kwargs['patient_id'] = \
+            patient_id
+        return self.delete_patient_endpoint.call_with_http_info(**kwargs)
+
+    def get_patient(
+        self,
+        dataset_id,
+        fhir_store_id,
+        patient_id,
+        **kwargs
+    ):
+        """Get a FHIR patient  # noqa: E501
+
+        Returns the FHIR patient specified  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_patient(dataset_id, fhir_store_id, patient_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+            fhir_store_id (str): The ID of the FHIR store
+            patient_id (str): The ID of the FHIR patient
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            Patient
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        kwargs['fhir_store_id'] = \
+            fhir_store_id
+        kwargs['patient_id'] = \
+            patient_id
+        return self.get_patient_endpoint.call_with_http_info(**kwargs)
+
+    def list_patients(
+        self,
+        dataset_id,
+        fhir_store_id,
+        **kwargs
+    ):
+        """List the Patients in a FHIR store  # noqa: E501
+
+        Returns the Patients in a FHIR store  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_patients(dataset_id, fhir_store_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+            fhir_store_id (str): The ID of the FHIR store
+
+        Keyword Args:
+            limit (int): Maximum number of results returned. [optional] if omitted the server will use the default value of 10
+            offset (int): Index of the first result that must be returned. [optional] if omitted the server will use the default value of 0
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            PageOfPatients
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        kwargs['fhir_store_id'] = \
+            fhir_store_id
+        return self.list_patients_endpoint.call_with_http_info(**kwargs)
+

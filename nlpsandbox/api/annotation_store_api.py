@@ -24,12 +24,8 @@ from nlpsandbox.model_utils import (  # noqa: F401
 )
 from nlpsandbox.model.annotation_store import AnnotationStore
 from nlpsandbox.model.annotation_store_create_response import AnnotationStoreCreateResponse
-from nlpsandbox.model.annotation_store_id import AnnotationStoreId
-from nlpsandbox.model.dataset_id import DatasetId
 from nlpsandbox.model.error import Error
-from nlpsandbox.model.page_limit import PageLimit
 from nlpsandbox.model.page_of_annotation_stores import PageOfAnnotationStores
-from nlpsandbox.model.page_offset import PageOffset
 
 
 class AnnotationStoreApi(object):
@@ -43,79 +39,7 @@ class AnnotationStoreApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-
-        def __create_annotation_store(
-            self,
-            dataset_id,
-            annotation_store_id,
-            **kwargs
-        ):
-            """Create an annotation store  # noqa: E501
-
-            Create an annotation store with the ID specified  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.create_annotation_store(dataset_id, annotation_store_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-                annotation_store_id (AnnotationStoreId): The ID of the annotation store that is being created.
-
-            Keyword Args:
-                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                AnnotationStoreCreateResponse
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            kwargs['annotation_store_id'] = \
-                annotation_store_id
-            return self.call_with_http_info(**kwargs)
-
-        self.create_annotation_store = _Endpoint(
+        self.create_annotation_store_endpoint = _Endpoint(
             settings={
                 'response_type': (AnnotationStoreCreateResponse,),
                 'auth': [],
@@ -139,18 +63,34 @@ class AnnotationStoreApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
+                    'annotation_store_id',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('annotation_store_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                     'annotation_store_id':
-                        (AnnotationStoreId,),
+                        (str,),
                     'body':
                         ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
                 },
@@ -174,81 +114,9 @@ class AnnotationStoreApi(object):
                     'application/json'
                 ]
             },
-            api_client=api_client,
-            callable=__create_annotation_store
+            api_client=api_client
         )
-
-        def __delete_annotation_store(
-            self,
-            dataset_id,
-            annotation_store_id,
-            **kwargs
-        ):
-            """Delete an annotation store  # noqa: E501
-
-            Deletes the annotation store specified  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.delete_annotation_store(dataset_id, annotation_store_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-                annotation_store_id (AnnotationStoreId): The ID of the annotation store
-
-            Keyword Args:
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            kwargs['annotation_store_id'] = \
-                annotation_store_id
-            return self.call_with_http_info(**kwargs)
-
-        self.delete_annotation_store = _Endpoint(
+        self.delete_annotation_store_endpoint = _Endpoint(
             settings={
                 'response_type': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
                 'auth': [],
@@ -271,18 +139,34 @@ class AnnotationStoreApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
+                    'annotation_store_id',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('annotation_store_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                     'annotation_store_id':
-                        (AnnotationStoreId,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -301,81 +185,9 @@ class AnnotationStoreApi(object):
                 ],
                 'content_type': [],
             },
-            api_client=api_client,
-            callable=__delete_annotation_store
+            api_client=api_client
         )
-
-        def __get_annotation_store(
-            self,
-            dataset_id,
-            annotation_store_id,
-            **kwargs
-        ):
-            """Get an annotation store  # noqa: E501
-
-            Returns the annotation store specified  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.get_annotation_store(dataset_id, annotation_store_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-                annotation_store_id (AnnotationStoreId): The ID of the annotation store
-
-            Keyword Args:
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                AnnotationStore
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            kwargs['annotation_store_id'] = \
-                annotation_store_id
-            return self.call_with_http_info(**kwargs)
-
-        self.get_annotation_store = _Endpoint(
+        self.get_annotation_store_endpoint = _Endpoint(
             settings={
                 'response_type': (AnnotationStore,),
                 'auth': [],
@@ -398,18 +210,34 @@ class AnnotationStoreApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
+                    'annotation_store_id',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('annotation_store_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                     'annotation_store_id':
-                        (AnnotationStoreId,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -428,79 +256,9 @@ class AnnotationStoreApi(object):
                 ],
                 'content_type': [],
             },
-            api_client=api_client,
-            callable=__get_annotation_store
+            api_client=api_client
         )
-
-        def __list_annotation_stores(
-            self,
-            dataset_id,
-            **kwargs
-        ):
-            """List the annotation stores in a dataset  # noqa: E501
-
-            Returns the annotation stores  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.list_annotation_stores(dataset_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-
-            Keyword Args:
-                limit (PageLimit): Maximum number of results returned. [optional]
-                offset (PageOffset): Index of the first result that must be returned. [optional]
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                PageOfAnnotationStores
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            return self.call_with_http_info(**kwargs)
-
-        self.list_annotation_stores = _Endpoint(
+        self.list_annotation_stores_endpoint = _Endpoint(
             settings={
                 'response_type': (PageOfAnnotationStores,),
                 'auth': [],
@@ -523,20 +281,39 @@ class AnnotationStoreApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
+                    'limit',
+                    'offset',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
+                    ('limit',): {
+
+                        'inclusive_maximum': 100,
+                        'inclusive_minimum': 10,
+                    },
+                    ('offset',): {
+
+                        'inclusive_minimum': 0,
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                     'limit':
-                        (PageLimit,),
+                        (int,),
                     'offset':
-                        (PageOffset,),
+                        (int,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -557,6 +334,353 @@ class AnnotationStoreApi(object):
                 ],
                 'content_type': [],
             },
-            api_client=api_client,
-            callable=__list_annotation_stores
+            api_client=api_client
         )
+
+    def create_annotation_store(
+        self,
+        dataset_id,
+        annotation_store_id,
+        **kwargs
+    ):
+        """Create an annotation store  # noqa: E501
+
+        Create an annotation store with the ID specified  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_annotation_store(dataset_id, annotation_store_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+            annotation_store_id (str): The ID of the annotation store that is being created.
+
+        Keyword Args:
+            body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            AnnotationStoreCreateResponse
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        kwargs['annotation_store_id'] = \
+            annotation_store_id
+        return self.create_annotation_store_endpoint.call_with_http_info(**kwargs)
+
+    def delete_annotation_store(
+        self,
+        dataset_id,
+        annotation_store_id,
+        **kwargs
+    ):
+        """Delete an annotation store  # noqa: E501
+
+        Deletes the annotation store specified  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_annotation_store(dataset_id, annotation_store_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+            annotation_store_id (str): The ID of the annotation store
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        kwargs['annotation_store_id'] = \
+            annotation_store_id
+        return self.delete_annotation_store_endpoint.call_with_http_info(**kwargs)
+
+    def get_annotation_store(
+        self,
+        dataset_id,
+        annotation_store_id,
+        **kwargs
+    ):
+        """Get an annotation store  # noqa: E501
+
+        Returns the annotation store specified  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_annotation_store(dataset_id, annotation_store_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+            annotation_store_id (str): The ID of the annotation store
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            AnnotationStore
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        kwargs['annotation_store_id'] = \
+            annotation_store_id
+        return self.get_annotation_store_endpoint.call_with_http_info(**kwargs)
+
+    def list_annotation_stores(
+        self,
+        dataset_id,
+        **kwargs
+    ):
+        """List the annotation stores in a dataset  # noqa: E501
+
+        Returns the annotation stores  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_annotation_stores(dataset_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+
+        Keyword Args:
+            limit (int): Maximum number of results returned. [optional] if omitted the server will use the default value of 10
+            offset (int): Index of the first result that must be returned. [optional] if omitted the server will use the default value of 0
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            PageOfAnnotationStores
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        return self.list_annotation_stores_endpoint.call_with_http_info(**kwargs)
+

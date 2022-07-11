@@ -24,11 +24,8 @@ from nlpsandbox.model_utils import (  # noqa: F401
 )
 from nlpsandbox.model.dataset import Dataset
 from nlpsandbox.model.dataset_create_response import DatasetCreateResponse
-from nlpsandbox.model.dataset_id import DatasetId
 from nlpsandbox.model.error import Error
-from nlpsandbox.model.page_limit import PageLimit
 from nlpsandbox.model.page_of_datasets import PageOfDatasets
-from nlpsandbox.model.page_offset import PageOffset
 
 
 class DatasetApi(object):
@@ -42,75 +39,7 @@ class DatasetApi(object):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
-
-        def __create_dataset(
-            self,
-            dataset_id,
-            **kwargs
-        ):
-            """Create a dataset  # noqa: E501
-
-            Create a dataset with the name specified  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.create_dataset(dataset_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset that is being created
-
-            Keyword Args:
-                body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                DatasetCreateResponse
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            return self.call_with_http_info(**kwargs)
-
-        self.create_dataset = _Endpoint(
+        self.create_dataset_endpoint = _Endpoint(
             settings={
                 'response_type': (DatasetCreateResponse,),
                 'auth': [],
@@ -132,16 +61,24 @@ class DatasetApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                     'body':
                         ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
                 },
@@ -163,77 +100,9 @@ class DatasetApi(object):
                     'application/json'
                 ]
             },
-            api_client=api_client,
-            callable=__create_dataset
+            api_client=api_client
         )
-
-        def __delete_dataset(
-            self,
-            dataset_id,
-            **kwargs
-        ):
-            """Delete a dataset by ID  # noqa: E501
-
-            Deletes the dataset for a given ID  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.delete_dataset(dataset_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-
-            Keyword Args:
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            return self.call_with_http_info(**kwargs)
-
-        self.delete_dataset = _Endpoint(
+        self.delete_dataset_endpoint = _Endpoint(
             settings={
                 'response_type': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),
                 'auth': [],
@@ -254,16 +123,24 @@ class DatasetApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -280,77 +157,9 @@ class DatasetApi(object):
                 ],
                 'content_type': [],
             },
-            api_client=api_client,
-            callable=__delete_dataset
+            api_client=api_client
         )
-
-        def __get_dataset(
-            self,
-            dataset_id,
-            **kwargs
-        ):
-            """Get a dataset by ID  # noqa: E501
-
-            Returns the dataset for a given ID  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.get_dataset(dataset_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dataset_id (DatasetId): The ID of the dataset
-
-            Keyword Args:
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                Dataset
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dataset_id'] = \
-                dataset_id
-            return self.call_with_http_info(**kwargs)
-
-        self.get_dataset = _Endpoint(
+        self.get_dataset_endpoint = _Endpoint(
             settings={
                 'response_type': (Dataset,),
                 'auth': [],
@@ -371,16 +180,24 @@ class DatasetApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'dataset_id',
                 ]
             },
             root_map={
                 'validations': {
+                    ('dataset_id',): {
+                        'max_length': 60,
+                        'min_length': 3,
+                        'regex': {
+                            'pattern': r'^[a-z0-9]+(?:-[a-z0-9]+)*$',  # noqa: E501
+                        },
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'dataset_id':
-                        (DatasetId,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dataset_id': 'datasetId',
@@ -397,74 +214,9 @@ class DatasetApi(object):
                 ],
                 'content_type': [],
             },
-            api_client=api_client,
-            callable=__get_dataset
+            api_client=api_client
         )
-
-        def __list_datasets(
-            self,
-            **kwargs
-        ):
-            """Get all datasets  # noqa: E501
-
-            Returns the datasets  # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.list_datasets(async_req=True)
-            >>> result = thread.get()
-
-
-            Keyword Args:
-                limit (PageLimit): Maximum number of results returned. [optional]
-                offset (PageOffset): Index of the first result that must be returned. [optional]
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                PageOfDatasets
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            return self.call_with_http_info(**kwargs)
-
-        self.list_datasets = _Endpoint(
+        self.list_datasets_endpoint = _Endpoint(
             settings={
                 'response_type': (PageOfDatasets,),
                 'auth': [],
@@ -484,18 +236,29 @@ class DatasetApi(object):
                 'enum': [
                 ],
                 'validation': [
+                    'limit',
+                    'offset',
                 ]
             },
             root_map={
                 'validations': {
+                    ('limit',): {
+
+                        'inclusive_maximum': 100,
+                        'inclusive_minimum': 10,
+                    },
+                    ('offset',): {
+
+                        'inclusive_minimum': 0,
+                    },
                 },
                 'allowed_values': {
                 },
                 'openapi_types': {
                     'limit':
-                        (PageLimit,),
+                        (int,),
                     'offset':
-                        (PageOffset,),
+                        (int,),
                 },
                 'attribute_map': {
                     'limit': 'limit',
@@ -514,6 +277,336 @@ class DatasetApi(object):
                 ],
                 'content_type': [],
             },
-            api_client=api_client,
-            callable=__list_datasets
+            api_client=api_client
         )
+
+    def create_dataset(
+        self,
+        dataset_id,
+        **kwargs
+    ):
+        """Create a dataset  # noqa: E501
+
+        Create a dataset with the name specified  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_dataset(dataset_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset that is being created
+
+        Keyword Args:
+            body ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            DatasetCreateResponse
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        return self.create_dataset_endpoint.call_with_http_info(**kwargs)
+
+    def delete_dataset(
+        self,
+        dataset_id,
+        **kwargs
+    ):
+        """Delete a dataset by ID  # noqa: E501
+
+        Deletes the dataset for a given ID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_dataset(dataset_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            {str: (bool, date, datetime, dict, float, int, list, str, none_type)}
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        return self.delete_dataset_endpoint.call_with_http_info(**kwargs)
+
+    def get_dataset(
+        self,
+        dataset_id,
+        **kwargs
+    ):
+        """Get a dataset by ID  # noqa: E501
+
+        Returns the dataset for a given ID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_dataset(dataset_id, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dataset_id (str): The ID of the dataset
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            Dataset
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        kwargs['dataset_id'] = \
+            dataset_id
+        return self.get_dataset_endpoint.call_with_http_info(**kwargs)
+
+    def list_datasets(
+        self,
+        **kwargs
+    ):
+        """Get all datasets  # noqa: E501
+
+        Returns the datasets  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_datasets(async_req=True)
+        >>> result = thread.get()
+
+
+        Keyword Args:
+            limit (int): Maximum number of results returned. [optional] if omitted the server will use the default value of 10
+            offset (int): Index of the first result that must be returned. [optional] if omitted the server will use the default value of 0
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _spec_property_naming (bool): True if the variable names in the input data
+                are serialized names, as specified in the OpenAPI document.
+                False if the variable names in the input data
+                are pythonic names, e.g. snake case (default)
+            _content_type (str/None): force body content-type.
+                Default is None and content-type will be predicted by allowed
+                content-types and body.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            _request_auths (list): set to override the auth_settings for an a single
+                request; this effectively ignores the authentication
+                in the spec for a single request.
+                Default is None
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            PageOfDatasets
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_spec_property_naming'] = kwargs.get(
+            '_spec_property_naming', False
+        )
+        kwargs['_content_type'] = kwargs.get(
+            '_content_type')
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['_request_auths'] = kwargs.get('_request_auths', None)
+        return self.list_datasets_endpoint.call_with_http_info(**kwargs)
+
