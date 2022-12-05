@@ -50,8 +50,8 @@ nlp-cli tool check-url --url http://localhost:80/api/v1/ui
 
 nlp-cli tool annotate-note --annotator_host http://localhost:80/api/v1 \
                                --note_json example_note.json \
-                               --annotator_type date
+                               --tool_type nlpsandbox:date-annotator 
 
 nlp-cli evaluate-prediction --pred_filepath test/data/new_prediction.json \
                             --gold_filepath test/data/new_goldstandard.json \
-                            --eval_type person
+                            --tool_type nlpsandbox:person-name-annotator
